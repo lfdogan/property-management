@@ -1,0 +1,44 @@
+<div class="title"><h3>{{ bills.title }}</h3></div>
+
+
+<hr/>
+
+<div>
+    <div>
+
+
+
+        <table>
+            <tr>
+                <th style="text-align: left">bill number</th>
+                <th class="center">date</th>
+                <th class="center"><u>building/unit</u></th>
+                <th class="center">account</th>
+                <th class="center">description</th>                 
+                <th class="center">cost</th>
+            </tr>
+            
+            
+            <tr ng-repeat="task in all.allMessages" 
+                ng-style="{'text-decoration': all.getTextDeco(task.dateAdded, task.completed) }">
+                
+                <td> {{ task.value }} </td>
+                
+                <td class="center"> {{ task.priority | priority }} </td>
+                
+<!--            <td> {{ task.dateAdded | date: 'MMM d HH:mm:ss' }} </td>-->
+                
+                <td class="center"> {{ all.Message.calcDueDate(task.dateAdded) | date: 'MMM d HH:mm:ss' }} </td>
+                
+                <td class="center" ng-show="{{ task.completed }}"><span class="ion-checkmark"></span> </td>
+                <td class="center" ng-show="{{ !task.completed }}"></td>
+                
+<!--            <td class="center"> {{ all.Message.calcOverdue(all.Message.calcDueDate(task.dateAdded)) }} </td>-->
+                
+                <td class="center" ng-show="{{ !task.completed }}">
+                    <a ng-click="all.Message.checkOff(task)"><span class="ion-checkmark-circled"></span></a>
+                </td>
+                <td class="center" ng-show="{{ task.completed }}"></td>
+            </tr>
+        </table>
+    </div>
