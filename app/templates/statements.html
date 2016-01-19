@@ -1,0 +1,26 @@
+<div class="title"><h3>{{ statements.title }}</h3></div>
+
+
+
+<table>
+    <tr>
+        <th class="right">begin date</th>
+        <th class="right">end date</th>               
+        <th class="right">bills</th>
+    </tr>
+
+
+    <tr ng-repeat="item in statements.allStatements">
+        <td class="right"> {{ item.beginDate | date: 'MM/dd/yyyy' }} </td>
+        <td class="right"> {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
+        <td class="right">  </td>
+    </tr>
+</table>
+
+
+<div>
+    <input type="text" id="beginDate" placeholder="beginDate">
+    <input type="text" id="endDate" placeholder="endDate">
+
+    <button id="btnStatementsUpdate" class="btn btn-primary">Update</button>
+</div>
