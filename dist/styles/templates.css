@@ -1,0 +1,82 @@
+/*Main is for templates*/
+main {
+    padding-top: 30px; /*same as nav height*/
+}
+
+
+
+
+
+
+
+/*Page Title*/
+.title {
+    text-align: center;
+    color: #000000;
+    font-family: 'Basic', sans-serif;
+}
+.title h1 {
+    font-size: 26px;
+    margin-bottom: 0;
+}
+.title-dates {
+    font-size: 22px;
+}
+
+
+
+
+
+/*Dates Selection Section*/
+.date-selector{
+    color: white;
+    width: 340px;
+    background-color: #6896BB;
+    padding: 10px 0;
+    margin: auto;
+}
+.date-selector .cell {
+    display: inline;   
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+.date-selector .active {
+    background-color: #06538F;
+}
+
+
+
+
+
+
+
+
+
+/* Data Section */
+table {
+    background-color: white;
+    font-size: 16px;
+    margin: auto;
+}
+
+/*Body Subheading labels*/
+th {
+    border-bottom: 2px cornflowerblue solid;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+tr:nth-child(even){
+    background: lightgray;
+}
+
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+
+
+

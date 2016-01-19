@@ -1,26 +1,37 @@
-<div class="title"><h3>{{ statements.title }}</h3></div>
+<div class="title">
+    <h1>{{ statements.title }}</h1>
+    <div class="title-dates">from {{ statements.beginDate | date: 'MM/dd/yyyy' }} to {{ statements.endDate | date: 'MM/dd/yyyy'}}</div>
+</div>
 
 
+
+<p class="center">Select an option to change date range:</p>
+<div class="date-selector">
+    <div class="cell inactive">Last 30 Days</div>
+    <div class="cell inactive">Current Year</div>
+    <div class="cell active">Custom Dates</div>
+</div>
+
+<br/>
 
 <table>
     <tr>
-        <th class="right">begin date</th>
-        <th class="right">end date</th>               
+        <th class="center">statement period</th>               
         <th class="right">bills</th>
     </tr>
 
 
     <tr ng-repeat="item in statements.allStatements">
-        <td class="right"> {{ item.beginDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="right"> {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
+        <td class="center"> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
         <td class="right">  </td>
     </tr>
 </table>
 
 
+<!--
 <div>
     <input type="text" id="beginDate" placeholder="beginDate">
     <input type="text" id="endDate" placeholder="endDate">
 
     <button id="btnStatementsUpdate" class="btn btn-primary">Update</button>
-</div>
+</div>-->

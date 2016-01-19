@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Owner's Portal</title>
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/templates.css">
+    <link href='https://fonts.googleapis.com/css?family=Hind+Vadodara|Basic' rel='stylesheet' type='text/css'>
 </head>
 <body>
     
@@ -17,14 +19,17 @@
         <a ui-sref="statements">Statements</a>
         <a>My Account</a>
     </nav>
-
-        
-   <ui-view></ui-view> 
-
+    
+    <main>
+        <ui-view></ui-view>
+    </main>
     
     
     
-    
+    <footer>
+        <a>Link1</a>
+        <a>Link2</a>
+    </footer>
 
     
 
@@ -49,7 +54,7 @@
     <script src="/scripts/app.js"></script>
 
     <!--JS Services -->
-    <script src="/scripts/services/Bills.js"></script>
+    <script src="/scripts/services/Data.js"></script>
 <!--    <script src="/scripts/services/WorkOrders.js"></script>-->
 
 
