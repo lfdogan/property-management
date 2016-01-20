@@ -1,6 +1,6 @@
 /*Main is for templates*/
 main {
-    padding-top: 30px; /*same as nav height*/
+    padding: 30px 0; /* top/bottom match the nav/footer height */
 }
 
 
@@ -16,7 +16,7 @@ main {
     font-family: 'Basic', sans-serif;
 }
 .title h1 {
-    font-size: 26px;
+    font-size: 36px;
     margin-bottom: 0;
 }
 .title-dates {
@@ -30,9 +30,9 @@ main {
 /*Dates Selection Section*/
 .date-selector{
     color: white;
-    width: 340px;
+    width: 310px;
     background-color: #6896BB;
-    padding: 10px 0;
+    padding: 5px 0;
     margin: auto;
 }
 .date-selector .cell {
@@ -40,7 +40,7 @@ main {
     width: 100px;
     text-align: center;
     vertical-align: middle;
-    padding: 10px;
+    padding: 5px;
 }
 .date-selector .active {
     background-color: #06538F;

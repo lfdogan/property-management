@@ -1,9 +1,10 @@
+/* MAIN.CSS is for GLOBAL styles */
+
 html {
     font-family: 'Hind Vadodara', sans-serif;
     background-image: radial-gradient(80% 60%, #FFFFFF 10%, #06538F 98%);/* Page Background: */
-    min-height: 100%;
     min-width: 100%;
-
+    height: 100%; /* makes sure our html takes up 100% of the browser window */
 }
 
 /*Top Navigation Links*/
@@ -23,12 +24,6 @@ nav {
 
 
 
-
-
-
-
-
-
 /*Footer*/
 footer {
     font-size: 14px;
@@ -42,3 +37,21 @@ footer {
     height: 30px;
     border-top: 2px solid #06538F;
 }
+
+/* MEDIA QUERIES FOR RESPONSIVE BREAKPOINTS */
+/* 
+iPhone4/5 min-device-width: 320px
+Galaxy S3/4 device-width: 320px
+Galaxy S5 device-width: 360px
+HTC One device-width: 360px
+iPhone6 min-device-width: 375px
+iPhone6+ min-device-width: 414px
+
+Asus Nexus 7 device-width: 601px
+iPad mini, iPad1/2/3/4 min-device-width: 768px
+Galaxy Tab 10.1 min-device-width: 800px
+Kindle Fire HD 7 min-device-width: 800px
+Kindle Fire HD 8.9 min-device-width: 1200px
+
+*/
+/* 1 remRpxOOT EM = 16PX in most browsers */

@@ -31,7 +31,7 @@
         * 14516244 = 01/01/2016
         * new Date().getTime(); = TODAY
         */
-        var startRange = 14357268 * 100000; // multiply by 100000 for begin of day      
+        var startRange = 14331348 * 100000; // multiply by 100000 for begin of day      
         var endRange = 14396975 * 100000 + 99999; // multiply by 100000 for begin of day then add 99999 for end of day
 
         
@@ -112,8 +112,7 @@
                         text = "custom dates";
                         break;                        
                 };
-            console.log("change to "+text);
-            console.log("new range: "+startRange+" to "+endRange);
+            console.log("change to "+text+" new range: "+startRange+" to "+endRange);
             updateUI();
          };        
         
