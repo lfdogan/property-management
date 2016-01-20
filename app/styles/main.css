@@ -7,28 +7,19 @@ html {
     height: 100%; /* makes sure our html takes up 100% of the browser window */
 }
 
-/*Top Navigation Links*/
-nav {
+
+
+
+
+
+/*Footer*/
+/* Navigation Links*/
+footer {
     font-family: 'Basic', sans-serif;
     font-size: 16px;
     color: #000000;
     text-align: center;
     background-color: white;
-    position: fixed; /*fixed use left and top/bottom */
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 30px;
-    border-bottom: 2px solid #06538F;    
-}
-
-
-
-/*Footer*/
-footer {
-    font-size: 14px;
-    background-color: white;
-    color: #000000;
     /*position: absolute; /*absolute moves with scroll*/
     position: fixed; /*fixed use left and top/bottom */
     left: 0px;

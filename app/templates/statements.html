@@ -1,41 +1,23 @@
 <div class="title">
-    <h1>{{ statements.title }}</h1>
+    <!-- MOBILE -->
+    <h1>{{ statements.title }} {{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h1>
+    <!-- DESKTOP -->
+    <!--    <h1>{{ statements.title }}</h1>
     <div class="title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
+-->
 </div>
 
 
 
-<!--
-         <tr class="album-view-song-item" 
-             ng-mouseover="hovered = true" 
-             ng-mouseleave="hovered = false" 
-             ng-repeat="song in album.albumData.songs">
-             <td class="song-item-number">
-                  <span ng-show="!song.playing && !hovered"> {{$index+1}} </span>
-                  <a class="album-song-button" 
-                     ng-show="!song.playing && hovered" 
-                     ng-click="album.songPlayer.play(song)"><span class="ion-play"></span></a>
-                  <a class="album-song-button" 
-                     ng-show="song.playing" 
-                     ng-click="album.songPlayer.pause(song)"><span class="ion-pause"></span></a>
-             </td>
-             <td class="song-item-title"> {{song.name}} </td>
-             <td class="song-item-duration"> {{song.length | timecode}} </td>
-         </tr>
-
--->
-
-
-
-
-
-<p class="center">Select an option to change date range:</p>
+<!-- DESKTOP -->
+<!--<p class="center">Select an option to change date range:</p>-->
 <div class="date-selector">
     <div id="last30Days" class="cell inactive"
        ng-click="statements.Data.changeDateRange(30)">Last 30 Days</div>
     <div id="currentYear" class="cell inactive"
        ng-click="statements.Data.changeDateRange(365)">Current Year</div>
-    <div id="customDates" class="cell active">Custom Dates</div>
+    <div id="customDates" class="cell active"
+       ng-click="statements.Data.changeDateRange(1)">Custom Dates</div>
 </div>
 
 <br/>

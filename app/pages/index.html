@@ -10,15 +10,7 @@
 <body>
     
     
-    <nav>
-        <a>Logo</a>
-        <a ui-sref="overview">Overview</a>
-        <a ui-sref="cashflow">Cash Flow</a>
-        <a ui-sref="maintenance">Maintenance Work Orders</a>
-        <a ui-sref="bills">Bills</a>
-        <a ui-sref="statements">Statements</a>
-        <a>My Account</a>
-    </nav>
+
     
     <main>
         <ui-view></ui-view>
@@ -29,8 +21,11 @@
     
     <footer>
 
-            <a>Link1</a>
-            <a>Link2</a>            
+        <a ui-sref="overview">Overview</a>
+        <a ui-sref="cashflow">Cash Flow</a>
+        <a ui-sref="bills">Bills</a>
+        <a ui-sref="statements">Statements</a>
+        <a ui-sref="maintenance">Maintenance</a>
 
     </footer>
 

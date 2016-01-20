@@ -5,7 +5,10 @@
 (function() {
     function Data($firebaseArray) {//Inject dependencies and the additional services into the this service. B
 
-
+        // Firebase database references
+        var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
+        var billsRef = rootRef.child('bills');
+        var statementsRef = rootRef.child('statements');    
 
 
 
@@ -31,22 +34,23 @@
         * 14516244 = 01/01/2016
         * new Date().getTime(); = TODAY
         */
+        
+        //initial values of start and end date range
         var startRange = 14331348 * 100000; // multiply by 100000 for begin of day      
         var endRange = 14396975 * 100000 + 99999; // multiply by 100000 for begin of day then add 99999 for end of day
-
+        var filteredBillsByDateRef;
+        var filteredStatementsByDateRef;
         
-        // Firebase database references
-        var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
-        var billsRef = rootRef.child('bills');
-        var statementsRef = rootRef.child('statements');        
-        var filteredBillsByDateRef = billsRef
-            .startAt(startRange)
-            .endAt(endRange);
-        var filteredStatementsByDateRef = statementsRef
-            .startAt(startRange)
-            .endAt(endRange);        
+        var runNewDateFilterReferences = function(){
+            filteredBillsByDateRef = billsRef
+                .startAt(startRange)
+                .endAt(endRange);
+            filteredStatementsByDateRef = statementsRef
+                .startAt(startRange)
+                .endAt(endRange);
+        };
         
-
+        
 
             //in the controller, this service is renamed allMessages and html ng-repeat calls allMessages        
         var Data = {
@@ -64,22 +68,22 @@
             }
         };
         
-        
+        runNewDateFilterReferences();
 
         
-        var setDatesForControllers = function(){
+        var setDatesForHtml = function(){
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;            
         };
 
         
-        setDatesForControllers();
+        setDatesForHtml();
         
         
         //original text for updating the list but really it didn't actually do anything for my project
-        var tableOfData = document.getElementById('bills-data');
         var updateUI = function(){
-            setDatesForControllers();
+            runNewDateFilterReferences();
+            setDatesForHtml();
             filteredBillsByDateRef.on('value', function(snapshot){
                 snapshot.forEach(function(data) {
                      console.log("Key is " + data.key() + " for " + data.val().billNumber);
@@ -94,7 +98,11 @@
 
         
         
-        //ANGULARJS click
+        /*
+        * ANGULARJS ngClick on any of the date selection buttons
+        * takes in a number of days to determine what to change start/end dates to
+        * then runs updateUI() to set those dates
+        */
         Data.changeDateRange = function(numDays){
             var text;
                 switch(numDays){
@@ -110,6 +118,8 @@
                         break;
                     case 1:
                         text = "custom dates";
+                        startRange = 14331348 * 100000; // 06/01/2015
+                        endRange = 14396975 * 100000 + 99999; // 08/15/2015
                         break;                        
                 };
             console.log("change to "+text+" new range: "+startRange+" to "+endRange);
@@ -117,14 +127,6 @@
          };        
         
         
-        var btncurrentYear = document.getElementById('currentYear');
-        //HTML DOM addEventListener() Method
-        btncurrentYear.addEventListener('click', function(){
-            console.log("current Year");
-            endRange = new Date().getTime();
-            startRange = 1451624400000;//1451624400000 = 01/01/2016, at 00:00:00
-            updateUI();
-         });
         
         
         /* function selectBills() used on the html to filter out bill numbers
