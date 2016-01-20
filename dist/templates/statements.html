@@ -1,6 +1,6 @@
 <div class="title">
     <h1>{{ statements.title }}</h1>
-    <div class="title-dates">from {{ statements.beginDate | date: 'MM/dd/yyyy' }} to {{ statements.endDate | date: 'MM/dd/yyyy'}}</div>
+    <div class="title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
 </div>
 
 
@@ -31,8 +31,10 @@
 
 <p class="center">Select an option to change date range:</p>
 <div class="date-selector">
-    <div id="last30Days" class="cell inactive">Last 30 Days</div>
-    <div id="currentYear" class="cell inactive">Current Year</div>
+    <div id="last30Days" class="cell inactive"
+       ng-click="statements.Data.changeDateRange(30)">Last 30 Days</div>
+    <div id="currentYear" class="cell inactive"
+       ng-click="statements.Data.changeDateRange(365)">Current Year</div>
     <div id="customDates" class="cell active">Custom Dates</div>
 </div>
 
@@ -41,14 +43,15 @@
 <table>
     <tr>
         <th class="center">statement period</th>               
-        <th class="right">bills</th>
+        <th>bill numbers</th>
     </tr>
 
 
-    <tr ng-repeat="item in statements.allStatements">
+    <tr ng-repeat="item in statements.filteredStatements">
         <td class="center"> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
-<!--        <td class="right"><span ng-repeat="bill in statements.allBills | byRange('payDate', 1438689850000, 1439589859999)"> {{ bill.billNumber }} </span></td>-->
-        <td class="right"><span ng-repeat="bill in statements.allBills">  </span></td>
+        <td><span ng-repeat="bill in statements.filteredBills "> 
+                <span ng-show="statements.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">{{ bill.billNumber }}</span>
+            </span></td>
     </tr>
 </table>
 

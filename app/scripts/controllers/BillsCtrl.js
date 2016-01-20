@@ -5,12 +5,16 @@
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.title = "Bills";
 
-         this.beginDate = Data.beginDate;
-         this.endDate = Data.endDate;
-         this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
+         this.Data = Data;
+         this.beginDateRange = Data.beginDateRange;
+         this.endDateRange = Data.endDateRange;
+         
          this.allBills = Data.billNumber();
          this.filteredBills = Data.filteredBills();
-         this.Data = Data;
+
+         this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
+         
+
          
          
          

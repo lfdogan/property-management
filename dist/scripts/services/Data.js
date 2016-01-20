@@ -5,54 +5,52 @@
 (function() {
     function Data($firebaseArray) {//Inject dependencies and the additional services into the this service. B
 
-        // Firebase database references
-        var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
-        var billsRef = rootRef.child('bills');
-        var statementsRef = rootRef.child('statements');
+
 
 
 
         /* BEGINNING OF DAY DATES!
-        * 1420088400000 = 01/01/2015 at 00:00:00
-        * 1422766800000 = 02/01/2015
-        * 1425186000000 = 03/01/2015
-        * 1430456400000 = 05/01/2015
-        * 1433134800000 = 06/01/2015
-        * 1435726800000 = 07/01/2015
-        * 1438405200000 = 08/01/2015
-        * 1451624400000 = 01/01/2016
-        */
-        var billStartRange = 1438405200000;
-        
-        /* END OF DAY DATES!
-        * 1420088399999 = 12/31/2014 at 23:59:59
-        * 1422766799999 = 01/31/2015
-        * 1425185999999 = 02/28/2015
-        * 1427777999999 = 03/31/2015
-        * 1430369999999 = 04/30/2015
-        * 1433048399999 = 05/31/2015
-        * 1435640399999 = 06/30/2015
-        * 1438318799999 = 07/31/2015
-        * 1439614799999 = 08/15/2015
+        * 14200883 = 12/31/2014    
+        * 14200884 = 01/01/2015
+        * 14227667 = 01/31/2015
+        * 14227668 = 02/01/2015
+        * 14251859 = 02/28/2015
+        * 14251860 = 03/01/2015
+        * 14278607 = 03/31/2015
+        * 14304527 = 04/30/2015
+        * 14304564 = 05/01/2015
+        * 14331311 = 05/31/2015
+        * 14331348 = 06/01/2015
+        * 14357231 = 06/30/2015
+        * 14357268 = 07/01/2015
+        * 14370228 = 07/16/2015
+        * 14384015 = 07/31/2015
+        * 14384052 = 08/01/2015
+        * 14396975 = 08/15/2015
+        * 14397839 = 08/16/2015
+        * 14516244 = 01/01/2016
         * new Date().getTime(); = TODAY
-        */        
-        var billEndRange = 1439614799999;
-        
-        var filteredBillsByDateRef = billsRef
-            .startAt(billStartRange)
-            .endAt(billEndRange);
-        
-        
+        */
+        var startRange = 14357268 * 100000; // multiply by 100000 for begin of day      
+        var endRange = 14396975 * 100000 + 99999; // multiply by 100000 for begin of day then add 99999 for end of day
 
         
+        // Firebase database references
+        var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
+        var billsRef = rootRef.child('bills');
+        var statementsRef = rootRef.child('statements');        
+        var filteredBillsByDateRef = billsRef
+            .startAt(startRange)
+            .endAt(endRange);
+        var filteredStatementsByDateRef = statementsRef
+            .startAt(startRange)
+            .endAt(endRange);        
         
-        
-        
-            //get all bills from database
-            //'all' is ordered by default (index)
-            //in the controller Messages is renamed allMessages and html ng-repeat calls allMessages        
+
+
+            //in the controller, this service is renamed allMessages and html ng-repeat calls allMessages        
         var Data = {
-            billNumber: function() {
+            billNumber: function() {//get all bills from database
                 return $firebaseArray(billsRef.orderByChild("billNumber")); //order tasks by unique key (also dateAdded)
             },
             filteredBills: function(){
@@ -60,65 +58,62 @@
             },
             statementNumber: function() {
                 return $firebaseArray(statementsRef.orderByChild("endDate"));
+            },
+            filteredStatements: function(){
+                return $firebaseArray(filteredStatementsByDateRef.orderByChild("endDate"));                
             }
         };
         
         
 
         
+        var setDatesForControllers = function(){
+            Data.beginDateRange = startRange;
+            Data.endDateRange = endRange;            
+        };
+
         
-        Data.beginDate = billStartRange;
-        Data.endDate = billEndRange;
-        
-        
+        setDatesForControllers();
         
         
         //original text for updating the list but really it didn't actually do anything for my project
         var tableOfData = document.getElementById('bills-data');
         var updateUI = function(){
-            Data.beginDate = billStartRange;
-            Data.endDate = billEndRange;            
+            setDatesForControllers();
             filteredBillsByDateRef.on('value', function(snapshot){
                 snapshot.forEach(function(data) {
                      console.log("Key is " + data.key() + " for " + data.val().billNumber);
                  });
             });
+            filteredStatementsByDateRef.on('value', function(snapshot){
+                snapshot.forEach(function(data) {
+                     console.log("Key is " + data.key() + " for " + data.val().endDate);
+                 });
+            });            
         };
 
         
-        var btnlast30Days = document.getElementById('last30Days');
-        //HTML DOM addEventListener() Method
-//        btnlast30Days.addEventListener('click', function(){
-//            console.log("change to last 30 days");
-//            console.log("previous range: "+billStartRange+" to "+billEndRange);
-//            billEndRange = new Date().getTime();
-//            billStartRange = billEndRange - 2592000000;//minus 30 days
-//            console.log("new range: "+billStartRange+" to "+billEndRange);
-//            btnlast30Days.style.backgroundColor = "red";
-//            updateUI();
-//         });
         
         //ANGULARJS click
         Data.changeDateRange = function(numDays){
-            console.log("previous range: "+billStartRange+" to "+billEndRange);
             var text;
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
-                        billEndRange = new Date().getTime();
-                        billStartRange = billEndRange - 2592000000;//minus 30 days
+                        endRange = new Date().getTime();
+                        startRange = endRange - 2592000000;//minus 30 days
                         break;
                     case 365:
                         text = "current year";
-                        billEndRange = new Date().getTime();
-                        billStartRange = 1451624400000; // 01/01/2016
+                        endRange = new Date().getTime();
+                        startRange = 1451624400000; // 01/01/2016
                         break;
                     case 1:
                         text = "custom dates";
                         break;                        
                 };
             console.log("change to "+text);
-            console.log("new range: "+billStartRange+" to "+billEndRange);
+            console.log("new range: "+startRange+" to "+endRange);
             updateUI();
          };        
         
@@ -127,12 +122,24 @@
         //HTML DOM addEventListener() Method
         btncurrentYear.addEventListener('click', function(){
             console.log("current Year");
-            billEndRange = new Date().getTime();
-            billStartRange = 1451624400000;//1451624400000 = 01/01/2016, at 00:00:00
+            endRange = new Date().getTime();
+            startRange = 1451624400000;//1451624400000 = 01/01/2016, at 00:00:00
+            updateUI();
          });
         
         
-        
+        /* function selectBills() used on the html to filter out bill numbers
+        * arguments are all numbers of milliseconds. statementBegin is begin date of statement range, 
+        * statementEnd is end date of statement range. billPaydate is date a particular bill was paid
+        * function determines if the particular bill pay date occurred within the statement range
+        */
+        Data.selectBills = function(statementBegin, statementEnd, billPaydate){
+            if (statementBegin < billPaydate) {
+                if (billPaydate < statementEnd) {
+                    return true;
+                }
+            }
+        };
 
         
 
