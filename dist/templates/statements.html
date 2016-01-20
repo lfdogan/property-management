@@ -8,17 +8,9 @@
 </div>
 
 
+<ng-include src="'/templates/selectDateRange.html'"></ng-include>
 
-<!-- DESKTOP -->
-<!--<p class="center">Select an option to change date range:</p>-->
-<div class="date-selector">
-    <div id="last30Days" class="cell inactive"
-       ng-click="statements.Data.changeDateRange(30)">Last 30 Days</div>
-    <div id="currentYear" class="cell inactive"
-       ng-click="statements.Data.changeDateRange(365)">Current Year</div>
-    <div id="customDates" class="cell active"
-       ng-click="statements.Data.changeDateRange(1)">Custom Dates</div>
-</div>
+
 
 <br/>
 

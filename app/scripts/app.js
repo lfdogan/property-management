@@ -23,11 +23,11 @@
 //                 controller: 'CashflowCtrl as cashflow',
 //                 templateUrl: '/templates/cashflow.html'
 //             })
-//             .state('maintenance', {
-//                 url: '/maintenance',
-//                 controller: 'MaintenanceCtrl as maintenance',
-//                 templateUrl: '/templates/maintenance.html'
-//             })
+             .state('maintenance', {
+                 url: '/maintenance',
+                 controller: 'MaintenanceCtrl as maintenance',
+                 templateUrl: '/templates/maintenance.html'
+             })
              .state('statements', {
                  url: '/statements',
                  controller: 'StatementsCtrl as statements',
