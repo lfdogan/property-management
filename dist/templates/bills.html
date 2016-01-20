@@ -1,29 +1,51 @@
-<div class="title"><h1>{{ bills.title }}</h1></div>
+<div class="title">
+    <h1>{{ bills.title }}</h1>
+    <div class="title-dates">from {{ bills.beginDate | date: 'MM/dd/yyyy' }} to {{ bills.endDate | date: 'MM/dd/yyyy'}}</div>
+</div>
 
 
+
+<p class="center">Select an option to change date range:</p>
+<div class="date-selector">
+    <a id="last30Days" 
+       class="cell inactive"
+       ng-click="bills.Data.changeDateRange(30)">Last 30 Days</a>
+    <a id="currentYear" 
+       class="cell inactive"
+       ng-click="bills.Data.changeDateRange(365)">Current Year</a>
+    <a id="customDates" class="cell active">Custom Dates</a>
+</div>
+
+<br/>
 
 <table>
     <tr>
         <th class="right"><u>bill #</u></th>
-        <th class="right">bill date</th>
-        <th>building/unit</th>
-        <th>status</th>
-        <th class="right">due date</th>
+        <th>building</th>
         <th class="right">payment date</th>
-        <th class="right">amount</th>
         <th class="right">amount paid</th>
+        <th>account</th>
+        <th>description</th>
+<!--        <th class="right">bill date</th>-->
+<!--        <th>status</th>-->
+<!--        <th class="right">due date</th>-->        
+<!--        <th class="right">amount</th>-->        
     </tr>
 
+    
+    
 
-    <tr ng-repeat="item in bills.allBills">
+    <tr id="bills-data" ng-repeat="item in bills.filteredBills">
         <td class="right"> {{ item.billNumber }} </td>
-        <td class="right"> {{ item.billDate | date: 'MM/dd/yyyy' }} </td>
         <td> {{ item.building }} </td>
-        <td> {{ item.status }} </td>
-        <td class="right"> {{ item.dueDate | date: 'MM/dd/yyyy' }} </td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="right"> {{ item.cost | currency }} </td>
         <td class="right"> {{ item.amountPaid | currency }} </td>
+        <td> {{ item.account }} </td>
+        <td> {{ item.description }} </td>
+<!--        <td class="right"> {{ item.billDate | date: 'MM/dd/yyyy' }} </td>-->        
+<!--        <td> {{ item.status }} </td>-->
+<!--        <td class="right"> {{ item.dueDate | date: 'MM/dd/yyyy' }} </td>-->        
+<!--        <td class="right"> {{ item.cost | currency }} </td>-->        
     </tr>
 </table>
 

@@ -4,11 +4,13 @@
          
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.title = "Bills";
-         this.allBills = Data.billNumber(); // the ARRAY of objects from the Firebase database
-         //this.Data = Data; // allows html to access functions in Data service
 
-         
-
+         this.beginDate = Data.beginDate;
+         this.endDate = Data.endDate;
+         this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
+         this.allBills = Data.billNumber();
+         this.filteredBills = Data.filteredBills();
+         this.Data = Data;
          
          
          

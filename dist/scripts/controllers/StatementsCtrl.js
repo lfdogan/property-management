@@ -4,16 +4,16 @@
          
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.title = "Statements";
-         this.beginDate = 1420133167907;
-         this.endDate = 1439659567907;
          
          
-         
+         this.beginDate = Data.beginDate;
+         this.endDate = Data.endDate;
          this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
          this.allBills = Data.billNumber();
          //this.Data = Data; // allows html to access functions in Data service
 
-         
+
+
 
          
          

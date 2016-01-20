@@ -5,11 +5,35 @@
 
 
 
+<!--
+         <tr class="album-view-song-item" 
+             ng-mouseover="hovered = true" 
+             ng-mouseleave="hovered = false" 
+             ng-repeat="song in album.albumData.songs">
+             <td class="song-item-number">
+                  <span ng-show="!song.playing && !hovered"> {{$index+1}} </span>
+                  <a class="album-song-button" 
+                     ng-show="!song.playing && hovered" 
+                     ng-click="album.songPlayer.play(song)"><span class="ion-play"></span></a>
+                  <a class="album-song-button" 
+                     ng-show="song.playing" 
+                     ng-click="album.songPlayer.pause(song)"><span class="ion-pause"></span></a>
+             </td>
+             <td class="song-item-title"> {{song.name}} </td>
+             <td class="song-item-duration"> {{song.length | timecode}} </td>
+         </tr>
+
+-->
+
+
+
+
+
 <p class="center">Select an option to change date range:</p>
 <div class="date-selector">
-    <div class="cell inactive">Last 30 Days</div>
-    <div class="cell inactive">Current Year</div>
-    <div class="cell active">Custom Dates</div>
+    <div id="last30Days" class="cell inactive">Last 30 Days</div>
+    <div id="currentYear" class="cell inactive">Current Year</div>
+    <div id="customDates" class="cell active">Custom Dates</div>
 </div>
 
 <br/>
@@ -23,7 +47,8 @@
 
     <tr ng-repeat="item in statements.allStatements">
         <td class="center"> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="right">  </td>
+<!--        <td class="right"><span ng-repeat="bill in statements.allBills | byRange('payDate', 1438689850000, 1439589859999)"> {{ bill.billNumber }} </span></td>-->
+        <td class="right"><span ng-repeat="bill in statements.allBills">  </span></td>
     </tr>
 </table>
 
