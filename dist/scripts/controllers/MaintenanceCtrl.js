@@ -13,8 +13,15 @@
 
          this.allMaintenance = Data.workOrderNumber(); // the ARRAY of objects from the Firebase database
          this.filteredMaintenance = Data.filteredMaintenance();
-         
+         this.allPendingMaintenance = Data.allPendingMaintenance();
+         this.allOpenMaintenance = Data.allOpenMaintenance();
+         this.allClosedMaintenance = Data.allClosedMaintenance();
 
+
+         
+         
+         
+         
                  
           /******** FOR ADDING NEW DATA ********/
 /*
@@ -32,7 +39,7 @@
         var billsListing = document.getElementById('billsListing');
 
 
-        
+       
         
         
         var btnNewItemUpdate = document.getElementById('btnNewItemUpdate'); //update button for new bill

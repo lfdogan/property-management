@@ -10,7 +10,7 @@
 <body>
     
     
-
+<p class="center">today is 8/17/15</p>
     
     <main>
         <ui-view></ui-view>
@@ -20,13 +20,11 @@
     
     
     <footer>
-
         <a ui-sref="overview">Overview</a>
         <a ui-sref="cashflow">Cash Flow</a>
         <a ui-sref="bills">Bills</a>
         <a ui-sref="statements">Statements</a>
         <a ui-sref="maintenance">Maintenance</a>
-
     </footer>
 
     
@@ -43,10 +41,13 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
     <!--jQuery Main Library-->    
-    <!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
     <!--JS UI-Router Library-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 
+    
+
+    
 
     <!--JS Main-->
     <script src="/scripts/app.js"></script>
@@ -58,9 +59,8 @@
 
     <!--JS Controllers -->
     <script src="/scripts/controllers/BillsCtrl.js"></script>
-<!--
-    <script src="/sgruntcripts/controllers/CashflowCtrl.js"></script>
-    <script src="/scripts/controllers/MaintenanceCtrl.js"></script>-->
+    <script src="/scripts/controllers/CashFlowCtrl.js"></script>
+    <script src="/scripts/controllers/OverviewCtrl.js"></script>
     <script src="/scripts/controllers/MaintenanceCtrl.js"></script>
     <script src="/scripts/controllers/StatementsCtrl.js"></script>
     <script src="/scripts/controllers/SelectDateRangeCtrl.js"></script>
@@ -70,7 +70,7 @@
     <!--<script src="/scripts/directives/seekBar.js"></script>-->
 
     <!--JS Filters-->
-<!--    <script src="/scripts/filters/byRange.js"></script>-->
+    <script src="/scripts/filters/billNumber.js"></script>
 
 </body>
 </html>

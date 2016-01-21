@@ -1,0 +1,42 @@
+<div class="title">
+    <h1>Overview</h1>
+</div>
+
+
+
+<div class="white-box">
+    <a ui-sref="maintenance"><h2 class="center">Work Orders Needing Approval</h2></a>
+    <div ng-repeat="item in overview.allPendingMaintenance">
+        <span>WO#{{item.workOrderNumber}}
+            <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
+            <br/>Location: {{item.building}}
+            <br/>{{item.description}}    
+        </span>
+    </div>
+</div>
+
+
+
+<div class="white-box">
+    <a ui-sref="statements"><h2 class="center">Most Recent Statement</h2></a>
+    <div ng-repeat="item in overview.latestStatement" class="center">
+        <span> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</span>
+        <br/>
+        <span ng-repeat="bill in overview.allBills "> <a ui-sref="bills">
+                <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">{{ bill.billNumber | billNumber }}</span></a>
+            </span>
+    </div>
+</div>
+
+
+
+<div class="white-box">
+    <a ui-sref="cashflow"><h2 class="center">Latest Transactions</h2></a>
+    <table>
+        <tr ng-repeat="item in overview.latestTransactions">
+            <td> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a> {{ item.transactionType | limitTo:11 }}</td>
+            <td class="right"> {{ item.payDate | date: 'M/d' }}</td>
+            <td class="right"> {{ item.amountPaid | currency }} </td>
+        </tr>    
+    </table>
+</div>

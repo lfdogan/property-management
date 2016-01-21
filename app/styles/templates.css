@@ -52,7 +52,9 @@ main {
 
 
 
-
+.white-box {
+    background-color: white;
+}
 
 /* Data Section */
 table {

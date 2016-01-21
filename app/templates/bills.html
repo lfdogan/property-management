@@ -30,7 +30,7 @@
     
     
 
-    <tr id="bills-data" ng-repeat="item in bills.filteredBills">
+    <tr id="bills-data" ng-repeat="item in bills.filteredBills" ng-show="{{ item.billNumber }}">
         <td class="right"> {{ item.billNumber }} </td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
 <!--        <td> {{ item.account }} </td>-->
@@ -42,7 +42,10 @@
 <!--        <td class="right"> {{ item.dueDate | date: 'MM/dd/yyyy' }} </td>-->        
 <!--        <td class="right"> {{ item.cost | currency }} </td>-->        
     </tr>
+
 </table>
+
+
 
 
 <!--
