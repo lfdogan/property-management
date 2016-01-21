@@ -16,9 +16,6 @@
         //initial values of start and end date range
         var startRange = 14331348 * 100000;
         var endRange = 14396975 * 100000 + 99999;
-
-
-        
         var setHtmlDates = function(){            
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;    
@@ -148,7 +145,10 @@
                         startRange = 14331348 * 100000; // 06/01/2015
                         endRange = 14396975 * 100000 + 99999; // 08/15/2015
                         eleCD.classList.add("active");
-                        break;                        
+                        break;
+                    default: 
+                        console.log("error!");
+                        break;
                 };
         //original text for updating the list but really it didn't actually do anything for my project
             setHtmlDates();
@@ -166,7 +166,6 @@
          };    
 
 
-        
         
        
         
