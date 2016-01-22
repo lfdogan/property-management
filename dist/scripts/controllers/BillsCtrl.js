@@ -14,6 +14,7 @@
 
          this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
 
+
        
      }
  

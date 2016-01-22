@@ -42,6 +42,7 @@
     <div ng-repeat="item in maintenance.allOpenMaintenance">
         <span>WO#{{item.workOrderNumber}}
             <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
+            <br/>Started: {{ item.dateStarted | date: 'MM/dd/yyyy' }}
             <br/>Location: {{item.building}}
             <br/>{{item.description}} 
             <hr/>

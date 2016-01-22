@@ -15,8 +15,8 @@
 
         
         //initial values of start and end date range
-        var startRange = 14331348 * 100000;
-        var endRange = 14396975 * 100000 + 99999;
+        var startNegativeRange = -1439697599999; //negative numbers will order descending but start/end will need to switch
+        var endNegativeRange = -1433131200000; //negative 6/1/15
         var numDays = 1;
 
 
@@ -27,18 +27,18 @@
         var Data = {
             billNumber: function() {//get all bills from database
                 return $firebaseArray(billsRef
-                                      .orderByChild("billNumber")); //order tasks by unique key (also dateAdded)
+                                      .orderByPriority()); //order tasks by unique key (also dateAdded)
             },
             filteredBills: function(){
                 return $firebaseArray(billsRef
-                                      .startAt(startRange)
-                                      .endAt(endRange)
-                                      .orderByChild("payDate"));            
+                                      .startAt(startNegativeRange)
+                                      .endAt(endNegativeRange)
+                                      .orderByChild("orderDate"));            
             },
             latestTransactions: function(){
                 return $firebaseArray(billsRef
-                                      .orderByChild("payDate")
-                                      .limitToLast(5));    
+                                      .orderByChild("orderDate")
+                                      .limitToFirst(5));    
             },
             statementNumber: function() {
                 return $firebaseArray(statementsRef
@@ -46,9 +46,9 @@
             },
             filteredStatements: function(){
                 return $firebaseArray(statementsRef
-                                      .startAt(startRange)
-                                      .endAt(endRange)
-                                      .orderByChild("endDate"));
+                                      .startAt(startNegativeRange)
+                                      .endAt(endNegativeRange)
+                                      .orderByChild("endNegative"));
             },
             latestStatement: function(){
                 return $firebaseArray(statementsRef
@@ -61,8 +61,8 @@
             },
             filteredMaintenance: function(){
                 return $firebaseArray(maintenanceRef
-                                      .startAt(startRange)
-                                      .endAt(endRange)
+                                      .startAt(startNegativeRange)
+                                      .endAt(endNegativeRange)
                                       .orderByChild("dateCreated"));
             },
             allPendingMaintenance: function(){
@@ -84,28 +84,24 @@
         
 
     
-            Data.beginDateRange = startRange;
-            Data.endDateRange = endRange;
+
+        //transform negative values to positive and switch values    
+        Data.beginDateRange = endNegativeRange*-1;    
+        Data.endDateRange = startNegativeRange*-1;
 
         
+        
+ 
         /*
-        console.log("All PENDING Maintenance Work Orders:");
+        Firebase Query Methods:
+        firebaseRef.on(eventType, function(snapshot){}); listens for data changes at a particular location. Use "value", "child_added", "child_changed", "child_removed" or "child_moved" for eventType. Callback function is passed a data snapshot. Return value is the unmodified callback function.
+            eventType "value": Triggered once at beginning and again when data changes.
+            eventType "child_added": Triggered once for each initial child and again for each new child added.
+        
+         
+        //All PENDING Maintenance Work Orders
         maintenanceRef.orderByChild("approved").equalTo("Pending").on("child_added", function(snapshot) {
-                console.log(snapshot.key());
-            });
-        
-        console.log("All Open Maintenance Work Orders:");
-        maintenanceRef.orderByChild("status").equalTo("Open").on("child_added", function(snapshot) {
-                console.log(snapshot.key());
-            });
-        // lists all statements ordered by endDate from oldest to newest
-        statementsRef.orderByChild("endDate").on("child_added", function(snapshot) {
-            console.log(snapshot.key() + " is " + snapshot.val().endDate);
-            });
-        
-        // lists the newest statement
-        statementsRef.orderByChild("endDate").limitToLast(1).on("child_added", function(snapshot) {
-                console.log(snapshot.key(), snapshot.val().endDate);
+                console.log("Open Work Order #",snapshot.val().workOrderNumber, "/ key:",snapshot.key());
             });
             
             */
@@ -132,30 +128,32 @@
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
-                        //endRange = new Date().getTime();
-                        endRange = 1439823680000;
-                        startRange = endRange - 2592000000;//minus 30 days
+                        //endNegativeRange = new Date().getTime();
+                        //endNegativeRange = endNegativeRange*-1
+                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
+                        endNegativeRange = startNegativeRange - (2592000000*-1);//minus 30 days is 7/18/15 11:01:20
                         eleL30D.classList.add("active");
                         break;
                     case 365:
                         text = "current year";
-                        //endRange = new Date().getTime();
-                        endRange = 1439823680000; // 'current' date is 08/17/2015
-                        startRange = 1420088400000; // 01/01/2015
+                        //endNegativeRange = new Date().getTime();
+                        //endNegativeRange = endNegativeRange*-1
+                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
+                        endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         eleCY.classList.add("active");
                         break;
                     case 1:
                         text = "custom dates";
-                        startRange = 14331348 * 100000; // 06/01/2015
-                        endRange = 14396975 * 100000 + 99999; // 08/15/2015
+                        endNegativeRange = -1433131200000; // 06/01/2015
+                        startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
                         eleCD.classList.add("active");
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
-            Data.beginDateRange = startRange;
-            Data.endDateRange = endRange;
+            Data.beginDateRange = endNegativeRange*-1;
+            Data.endDateRange = startNegativeRange*-1;
             Data.globalNumDays = numDays;
             console.log("NEW value of numDays",numDays);
 //            filteredBillsByDateRef.on('value', function(snapshot){
@@ -220,7 +218,11 @@
                 if (yn == 1) {
                     curRef.update({"approved": "Yes"});
                     curRef.update({"status": "Open"});
-                } else curRef.update({"approved": "No"});
+                    alert("Work Order #"+item.workOrderNumber+" has been approved. You can now view it on the Maintenance page under Ongoing Work Orders.")
+                } else {
+                    curRef.update({"approved": "No"});
+                    alert("You have REJECTED work order #"+item.workOrderNumber+".");
+                }
             });
         };
         
