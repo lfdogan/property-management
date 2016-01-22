@@ -10,10 +10,11 @@
 <body>
     
     
-<p class="center">today is 8/17/15</p>
+
     
-    <!-- RESPONSIVE NAV -->
+    <!-- For Narrow Screens -->
     <a id="hamburger-menu" class="hamburger" href="#">&#9776;</a>
+    <!-- For Wide Screens -->
     <nav>
         <a>Logo</a>
         <a ui-sref="overview" class="page-overview">Overview</a>
@@ -22,9 +23,9 @@
         <a ui-sref="statements" class="page-statements">Statements</a>
         <a ui-sref="maintenance" class="page-maintenance">Maintenance</a>
         <a ui-sref="my-account">My Account</a>
-        <br/><p class="center">today is 8/17/15</p>
     </nav>
     
+    <p class="center">today is 8/17/15</p>
     
     <main>
         <ui-view></ui-view>

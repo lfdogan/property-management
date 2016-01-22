@@ -1,10 +1,9 @@
 <div class="title">
     <!-- MOBILE -->
-    <h1>{{ statements.title }} {{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h1>
+    <h1 class="narrow">{{ statements.title }} {{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h1>
     <!-- DESKTOP -->
-    <!--    <h1>{{ statements.title }}</h1>
-    <div class="title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
--->
+    <h1 class="wide">{{ statements.title }}</h1>
+    <div class="wide title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
 </div>
 
 

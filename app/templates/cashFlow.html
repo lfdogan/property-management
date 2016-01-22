@@ -1,10 +1,9 @@
 <div class="title">
     <!-- MOBILE -->
-    <h1>{{ cashflow.title }} {{ cashflow.beginDateRange | date: 'M/d/yy' }}-{{ cashflow.endDateRange | date: 'M/d/yy'}}</h1>
+    <h1 class="narrow">{{ cashflow.title }} {{ cashflow.beginDateRange | date: 'M/d/yy' }}-{{ cashflow.endDateRange | date: 'M/d/yy'}}</h1>
     <!-- DESKTOP -->
-    <!--    <h1>{{ cashflow.title }}</h1>
-    <div class="title-dates">from {{ cashflow.beginDateRange | date: 'MM/dd/yyyy' }} to {{ cashflow.endDateRange | date: 'MM/dd/yyyy'}}</div>
--->
+    <h1 class="wide">{{ cashflow.title }}</h1>
+    <div class="wide title-dates">from {{ cashflow.beginDateRange | date: 'MM/dd/yyyy' }} to {{ cashflow.endDateRange | date: 'MM/dd/yyyy'}}</div>
 </div>
 
 

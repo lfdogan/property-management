@@ -12,6 +12,9 @@
     font-size: 36px;
     margin-bottom: 0;
 }
+.title .wide {
+    display: none;
+}
 .title-dates {
     font-size: 22px;
 }
@@ -67,8 +70,13 @@ th {
     text-transform: uppercase;
     font-size: 14px;
 }
-tr:nth-child(even){
+/*tr:nth-child(even){
     background: lightgray;
+}
+*/
+tr {
+    /* Rectangle 29: */
+background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
 }
 
 .center {
@@ -76,4 +84,15 @@ tr:nth-child(even){
 }
 .right {
     text-align: right;
+}
+
+
+/* FOR DEVICES AT LEAST 692 PIXELS WIDE */
+@media (min-width: 692px) {
+    .title .wide {
+        display: block;
+    }    
+    .title .narrow {
+        display: none;
+    }
 }

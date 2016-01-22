@@ -71,6 +71,7 @@ we will have the left navigation menu fixed on screen */
     nav {
         display: block;
         font-family: 'Basic', sans-serif;
+        vertical-align: bottom;
         font-size: 16px;
         color: #000000;
         text-align: center;

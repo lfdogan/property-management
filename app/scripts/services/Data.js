@@ -17,7 +17,7 @@
         //initial values of start and end date range
         var startNegativeRange = -1439697599999; //negative numbers will order descending but start/end will need to switch
         var endNegativeRange = -1433131200000; //negative 6/1/15
-        var numDays = 1;
+        var numDays = 9999;
 
 
      
@@ -142,7 +142,7 @@
                         endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         eleCY.classList.add("active");
                         break;
-                    case 1:
+                    case 9999:
                         text = "custom dates";
                         endNegativeRange = -1433131200000; // 06/01/2015
                         startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
