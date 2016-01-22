@@ -18,7 +18,11 @@
          this.allClosedMaintenance = Data.allClosedMaintenance();
 
 
-         
+         document.querySelector("#nav-bills").classList.remove("active");
+         document.querySelector("#nav-cashflow").classList.remove("active");
+         document.querySelector("#nav-maintenance").classList.add("active");
+         document.querySelector("#nav-overview").classList.remove("active");
+         document.querySelector("#nav-statements").classList.remove("active");     
          
          
          

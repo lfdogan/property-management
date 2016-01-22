@@ -16,13 +16,19 @@
     <a id="hamburger-menu" class="hamburger" href="#">&#9776;</a>
     <!-- For Wide Screens -->
     <nav>
-        <a>Logo</a>
-        <a ui-sref="overview" class="page-overview">Overview</a>
-        <a ui-sref="cashflow" class="page-cashflow">Cash Flow</a>
-        <a ui-sref="bills" class="page-bills">Bills</a>
-        <a ui-sref="statements" class="page-statements">Statements</a>
-        <a ui-sref="maintenance" class="page-maintenance">Maintenance</a>
-        <a ui-sref="my-account">My Account</a>
+        <div class="left-third">
+            <a>Logo</a>
+        </div>
+        <div class="center-third">
+            <a ui-sref="overview" class="nav" id="nav-overview">Overview</a>
+            <a ui-sref="cashflow" class="nav" id="nav-cashflow">Cash Flow</a>
+            <a ui-sref="bills" class="nav" id="nav-bills">Bills</a>
+            <a ui-sref="statements" class="nav" id="nav-statements">Statements</a>
+            <a ui-sref="maintenance" class="nav" id="nav-maintenance">Maintenance</a>
+        </div>
+        <div class="right-third">
+            <a ui-sref="my-account">My Account</a>
+        </div>
     </nav>
     
     <p class="center">today is 8/17/15</p>

@@ -71,10 +71,9 @@ we will have the left navigation menu fixed on screen */
     nav {
         display: block;
         font-family: 'Basic', sans-serif;
-        vertical-align: bottom;
         font-size: 16px;
         color: #000000;
-        text-align: center;
+        text-align: center; /* aligns div elements and their contents to center */
         background-color: white;
         /*position: absolute; /*absolute moves with scroll*/
         position: fixed; /*fixed use left and top/bottom */
@@ -82,8 +81,44 @@ we will have the left navigation menu fixed on screen */
         top: 0px;
         width: 100%;
         height: 60px;
-        border-bottom: 2px solid #06538F;
+        border-bottom: 4px solid #06538F;
     }
+    nav .left-third {
+        display: inline-block;
+        position: relative;
+        left: 0;
+        width: 15%;
+        height: 100%;
+    }
+    nav .center-third {
+        display: inline-block;
+        width: 65%;
+        height: 100%;
+    }
+    nav .center-third a {
+        position: relative;
+        top: 20px;
+        margin: 0 10px;
+    }
+    nav .right-third {
+        display: inline-block;
+        width: 15%;
+        height: 100%;
+        font-size: 12px;
+    }
+    nav a {
+        text-decoration: none;
+        color: black;
+    }
+    nav a:active {/* when mouse button is down */
+        color: #06538F;
+    }
+    nav .active {
+        background-color: #06538F;
+        color: white;
+    }
+
+
     footer {
         font-family: 'Basic', sans-serif;
         font-size: 16px;

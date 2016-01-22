@@ -17,7 +17,11 @@
          this.Data = Data;
 
 
-
+         document.querySelector("#nav-bills").classList.remove("active");
+         document.querySelector("#nav-cashflow").classList.remove("active");
+         document.querySelector("#nav-maintenance").classList.remove("active");
+         document.querySelector("#nav-overview").classList.remove("active");
+         document.querySelector("#nav-statements").classList.add("active");
          
 
 

@@ -15,6 +15,12 @@
          this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
 
 
+         document.querySelector("#nav-bills").classList.add("active");
+         document.querySelector("#nav-cashflow").classList.remove("active");
+         document.querySelector("#nav-maintenance").classList.remove("active");
+         document.querySelector("#nav-overview").classList.remove("active");
+         document.querySelector("#nav-statements").classList.remove("active");
+                        
        
      }
  

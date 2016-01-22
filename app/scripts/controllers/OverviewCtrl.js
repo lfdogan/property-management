@@ -20,7 +20,12 @@
          this.latestStatement = Data.latestStatement();
          this.latestTransactions = Data.latestTransactions();
 
-              
+         document.querySelector("#nav-bills").classList.remove("active");
+         document.querySelector("#nav-cashflow").classList.remove("active");
+         document.querySelector("#nav-maintenance").classList.remove("active");
+         document.querySelector("#nav-overview").classList.add("active");
+         document.querySelector("#nav-statements").classList.remove("active");
+         
      }
  
      angular
