@@ -1,0 +1,13 @@
+<!-- DESKTOP -->
+<!--<p class="center">Select an option to change date range:</p>-->
+<div class="date-selector" ng-controller="SelectDateRangeCtrl as Ctrl">
+    <div id="last30Days" 
+         class="cell"
+         ng-click="Ctrl.Data.changeDateRange(30)">Last 30 Days</div>
+    <div id="currentYear" 
+         class="cell"
+         ng-click="Ctrl.Data.changeDateRange(365)">Current Year</div>
+    <div id="customDates" 
+         class="cell"
+         ng-click="Ctrl.Data.changeDateRange(1)">Custom Dates</div>
+</div>

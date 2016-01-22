@@ -8,26 +8,26 @@
                 requireBase: false/*unrelated to the hashbang issue, but is one way to avoid a common $location error.*/
          });
          $stateProvider
-//             .state('overview', {
-//                 url: '/',
-//                 controller: 'OverviewCtrl as overview',//in LandingCtrl.js refer to variables as this.title but in landing.html as landing.title
-//                 templateUrl: '/templates/overview.html'
-//             })
+             .state('overview', {
+                 url: '/',
+                 controller: 'OverviewCtrl as overview',//in LandingCtrl.js refer to variables as this.title but in landing.html as landing.title
+                 templateUrl: '/templates/overview.html'
+             })
              .state('bills', {
                  url: '/bills',
                  controller: 'BillsCtrl as bills',
                  templateUrl: '/templates/bills.html'  
              })         
-//             .state('cashflow', {
-//                 url: '/cashflow',
-//                 controller: 'CashflowCtrl as cashflow',
-//                 templateUrl: '/templates/cashflow.html'
-//             })
-//             .state('maintenance', {
-//                 url: '/maintenance',
-//                 controller: 'MaintenanceCtrl as maintenance',
-//                 templateUrl: '/templates/maintenance.html'
-//             })
+             .state('cashflow', {
+                 url: '/cashflow',
+                 controller: 'CashFlowCtrl as cashflow',
+                 templateUrl: '/templates/cashFlow.html'
+             })
+             .state('maintenance', {
+                 url: '/maintenance',
+                 controller: 'MaintenanceCtrl as maintenance',
+                 templateUrl: '/templates/maintenance.html'
+             })
              .state('statements', {
                  url: '/statements',
                  controller: 'StatementsCtrl as statements',

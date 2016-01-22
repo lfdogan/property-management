@@ -1,0 +1,108 @@
+<div class="title">
+    <!-- MOBILE -->
+    <h1>{{ cashflow.title }} {{ cashflow.beginDateRange | date: 'M/d/yy' }}-{{ cashflow.endDateRange | date: 'M/d/yy'}}</h1>
+    <!-- DESKTOP -->
+    <!--    <h1>{{ cashflow.title }}</h1>
+    <div class="title-dates">from {{ cashflow.beginDateRange | date: 'MM/dd/yyyy' }} to {{ cashflow.endDateRange | date: 'MM/dd/yyyy'}}</div>
+-->
+</div>
+
+
+<ng-include src="'/templates/selectDateRange.html'"></ng-include>
+
+
+<br/>
+
+<table>
+    <tr>
+        <th class="right"><u>date</u></th>
+        <th>building/unit</th>
+        <th>bill# / type</th>
+        <th>account</th>
+        <th>description</th>
+        <th class="right">amount</th>
+        <th class="right">balance</th>
+    </tr>
+    <tr><b>
+        <td class="right">{{ cashflow.beginDateRange | date: 'MM/dd/yyyy' }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Beginning</td>
+        <td></td>
+        <td></td></b>
+    </tr>
+    <tr id="data" ng-repeat="item in cashflow.filteredBills">
+        <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
+        <td> {{ item.building }} </td>
+        <td> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | limitTo:11 }} </td>
+        <td> {{ item.account | limitTo:27 }} </td>
+        <td> {{ item.description | limitTo:45 }} </td>
+        <td class="right"> {{ item.amountPaid | currency }} </td>
+        <td class="right">  </td>
+    </tr>
+    <tr><b>
+        <td class="right">{{ cashflow.endDateRange | date: 'MM/dd/yyyy' }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Ending</td>
+        <td></td>
+        <td></td></b>
+    </tr>
+</table>
+
+<!--
+<div>  
+    <select id="payDate" name="payDate">
+        <option value=1420118900000>01/01/2015 8:28:20</option>
+        <option value=1420813980000>01/09/2015 9:33:00 </option>
+        <option value=1421316618967>01/15/2015 5:10:18 </option>
+        <option value=1421323508967>01/15/2015 7:05:08 </option>
+        <option value=1421330508967>01/15/2015 9:01:48 </option>
+        <option value=1421330608967>01/15/2015 9:03:28 </option>
+        <option value=1421332380000>01/15/2015 9:33:00 </option>
+        <option value=1422797940000>02/01/2015 8:39:00 </option>
+        <option value=1423852608967>02/13/2015 13:36:48 </option>
+        <option value=1423852609000>02/13/2015 13:36:49 </option>
+        <option value=1424435220000>02/20/2015 7:27:00 </option>
+        <option value=1425216420000>03/01/2015 8:27:00 </option>
+        <option value=1425644820000>03/06/2015 7:27:00 </option>
+        <option value=1426252608967>03/13/2015 9:16:48 </option>
+        <option value=1426253580000>03/13/2015 9:33:00 </option>
+        <option value=1427293980000>03/25/2015 10:33:00 </option>
+        <option value=1428071580000>04/03/2015 10:33:00 </option>
+        <option value=1429131508967>04/15/2015 16:58:28 </option>
+        <option value=1429131509000>04/15/2015 16:58:29 </option>
+        <option value=1430487360000>05/01/2015 9:36:00 </option>
+        <option value=1431682608967>05/15/2015 5:36:48 </option>
+        <option value=1431682609000>05/15/2015 5:36:49 </option>
+        <option value=1433876678800>06/09/2015 15:04:38 </option>
+        <option value=1434037500000>06/11/2015 11:45:00 </option>
+        <option value=1434300480000>06/14/2015 12:48:00 </option>
+        <option value=1434395998800>06/15/2015 15:19:58 </option>
+        <option value=1434395999000>06/15/2015 15:19:59 </option>
+        <option value=1435617898800>06/29/2015 18:44:58 </option>
+        <option value=1435627998800>06/29/2015 21:33:18 </option>
+        <option value=1436811118800>07/13/2015 14:11:58 </option>
+        <option value=1436973108800>07/15/2015 11:11:48 </option>
+        <option value=1436974108800>07/15/2015 11:28:28 </option>
+        <option value=1436975108800>07/15/2015 11:45:08 </option>
+        <option value=1436976108800>07/15/2015 12:01:48 </option>
+        <option value=1438289848114>07/30/2015 16:57:28 </option>
+        <option value=1438289859114>07/30/2015 16:57:39 </option>
+        <option value=1438350840000>07/31/2015 9:54:00 </option>
+        <option value=1438783200000>08/05/2015 10:00:00 </option>
+        <option value=1438786980000>08/05/2015 11:03:00 </option>
+        <option value=1438800859114>08/05/2015 14:54:19 </option>
+        <option value=1439560250000>08/14/2015 9:50:50 </option>
+        <option value=1439560260000>08/14/2015 9:51:00 </option>
+        
+    </select>
+    <input type="text" id="transactionType" placeholder="transactionType">
+    <input type="text" id="account" placeholder="account">
+    <input type="text" id="description" placeholder="description">
+    <input type="text" id="amountPaid" placeholder="amountPaid">
+    <button id="btnNewItemUpdate" class="btn btn-primary">Update</button>
+</div>
+-->
