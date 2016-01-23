@@ -2,7 +2,7 @@
 
 
 
-/*Page Title*/
+/* Title */
 .title {
     text-align: center;
     color: #000000;
@@ -11,9 +11,6 @@
 .title h1 {
     font-size: 36px;
     margin-bottom: 0;
-}
-.title .wide {
-    display: none;
 }
 .title-dates {
     font-size: 22px;
@@ -27,32 +24,17 @@
 
 
 
-
-/*Dates Selection Section*/
-.date-selector{
-    color: white;
-    width: 310px;
-    background-color: #6896BB;
-    padding: 5px 0;
-    margin: auto;
-}
-.date-selector .cell {
-    display: inline;   
-    width: 100px;
+.center {
     text-align: center;
-    vertical-align: middle;
-    padding: 5px;
 }
-.date-selector .active {
-    background-color: #06538F;
+.right {
+    text-align: right;
 }
 
 
 
 
-
-
-
+/* section boxes for data */
 .white-box {
     background-color: white;
 }
@@ -75,15 +57,20 @@ th {
 }
 */
 tr {
-    /* Rectangle 29: */
-background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
+    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
 }
 
-.center {
-    text-align: center;
+
+
+
+
+
+/* FOR DEVICES LESS THAN 692 PIXELS WIDE */
+.title .wide {
+    display: none;
 }
-.right {
-    text-align: right;
+.priority3 {
+    display: none; 
 }
 
 
@@ -94,5 +81,8 @@ background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
     }    
     .title .narrow {
         display: none;
+    }
+    .priority3 {
+        display: table-cell;
     }
 }
