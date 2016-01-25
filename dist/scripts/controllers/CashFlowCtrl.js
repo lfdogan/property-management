@@ -4,7 +4,7 @@
 
          
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
-         this.title = "Cash Flow";
+         this.title = "Transactions";
 
          this.Data = Data;
          this.beginDateRange = Data.beginDateRange;

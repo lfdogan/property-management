@@ -1,22 +1,10 @@
 (function() {
-     function MyAccountCtrl() {
+     function MyAccountCtrl(Data) {
          
 
-         
-         
-         var maActive = false;
-                  
-         
-         this.toggleMyAccountDropdown = function(){
-             console.log("click on my account");
-             if (maActive){
-                 document.querySelector(".dropdown-content").classList.remove("ma-active");
-                 maActive = false;
-             } else {
-                 document.querySelector(".dropdown-content").classList.add("ma-active");
-                 maActive = true;
-             }
-         };
+         this.Data = Data;
+         this.toggleMyAccountDropdown = Data.toggleMyAccountDropdown();
+
 
 
 
@@ -25,5 +13,5 @@
  
      angular
          .module('propertyManagement')
-         .controller('MyAccountCtrl', MyAccountCtrl);
+         .controller('MyAccountCtrl', ['Data', MyAccountCtrl]);
  })();

@@ -245,6 +245,18 @@
         console.log("Running Data.js... inital value of numDays",numDays); // this runs just once on page refresh
        
         
+                 
+        var maActive = false;
+        Data.toggleMyAccountDropdown = function(){
+             if (maActive){
+                 document.querySelector(".dropdown-content").classList.remove("ma-active");
+                 maActive = false;
+             } else {
+                 document.querySelector(".dropdown-content").classList.add("ma-active");
+                 maActive = true;
+             }
+         };
+        
         
         
         return Data; // return the object for this factory service

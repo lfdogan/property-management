@@ -21,6 +21,10 @@
          document.querySelector("#nav-maintenance").classList.remove("active");
          document.querySelector("#nav-overview").classList.remove("active");
          document.querySelector("#nav-statements").classList.remove("active");
+         
+         
+         
+
                         
        
      }

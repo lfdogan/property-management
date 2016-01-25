@@ -33,13 +33,13 @@
         </div>
         <div class="center-third">
             <a ui-sref="overview" class="nav" id="nav-overview">Overview</a>
-            <a ui-sref="cashflow" class="nav" id="nav-cashflow">Cash Flow</a>
+            <a ui-sref="cashflow" class="nav" id="nav-cashflow">Transactions</a>
             <a ui-sref="bills" class="nav" id="nav-bills">Bills</a>
-            <a ui-sref="statements" class="nav" id="nav-statements">Statements</a>
+            <a ui-sref="statements" class="nav" id="nav-statements"></a>
             <a ui-sref="maintenance" class="nav" id="nav-maintenance">Maintenance</a>
         </div>
         <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
-            <a ng-click="myAcct.toggleMyAccountDropdown()" class="dropbtn">My Account</a>
+            <a ng-click="myAcct.Data.toggleMyAccountDropdown()" class="dropbtn">My Account</a>
             <div class="dropdown-content">
                 <a href="#">My Profile</a>
                 <a href="#">My Buildings</a>
@@ -63,9 +63,9 @@
     <footer>
         <div class="footer-narrow">
             <div class="link"><a ui-sref="overview" class="page-overview">Overview</a></div>
-            <div class="link"><a ui-sref="cashflow" class="page-cashflow">Cash Flow</a></div>
+            <div class="link"><a ui-sref="cashflow" class="page-cashflow">Transactions</a></div>
             <div class="link"><a ui-sref="bills" class="page-bills">Bills</a></div>
-            <div class="link"><a ui-sref="statements" class="page-statements">Statements</a></div>
+            <div class="link"><a ui-sref="statements" class="page-statements"></a></div>
             <div class="link"><a ui-sref="maintenance" class="page-maintenance">Maintenance</a></div>
         </div>
         <div class="footer-wide">
@@ -119,6 +119,7 @@
 
     <!--JS Filters-->
     <script src="/scripts/filters/billNumber.js"></script>
+    <script src="/scripts/filters/transactionType.js"></script>
 
 </body>
 </html>
