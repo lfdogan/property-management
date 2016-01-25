@@ -2,14 +2,16 @@
     <h2 class="center">Pending Work Orders</h2>
     <div ng-repeat="item in maintenance.allPendingMaintenance">
         <span>WO#{{item.workOrderNumber}}
+                        <div class="ion-ios-telephone"></div>
+            <div class="ion-email"></div>
             <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
             <br/>Location: {{item.building}}
+            <br/>
             <br/>{{item.description}}
             <br/>
             <div class="maintenance-button-approve" ng-click="overview.Data.decideWorkOrder(item,1)">Approve</div>
             <div class="maintenance-button-reject" ng-click="overview.Data.decideWorkOrder(item,0)">Reject</div>
-            <div class="maintenance-button-call">Call Property Manager</div>
-            <div class="maintenance-button-call">Send a Message</div>
+
             <hr/>
         </span>
     </div>
