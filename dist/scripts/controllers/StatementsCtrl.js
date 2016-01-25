@@ -8,10 +8,10 @@
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
 
-         this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
+         this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
          this.filteredStatements = Data.filteredStatements();
          
-         this.allBills = Data.billNumber();
+         this.allBills = Data.allBills();
          this.filteredBills = Data.filteredBills();         
          
          this.Data = Data;

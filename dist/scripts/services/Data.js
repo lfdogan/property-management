@@ -3,7 +3,7 @@
 
 
 (function() {
-    function Data($firebaseArray) {//Inject dependencies and the additional services into the this service. B
+    function Data($firebaseArray) {//Inject dependencies and the additional services into the this service. 
 
         //private variables, attributes, functions begin with "var"
         // Firebase database references
@@ -21,28 +21,38 @@
 
 
      
-
-
-            //in the controller, this service is renamed allMessages and html ng-repeat calls allMessages        
+// for a factory service: create an object, add properties to it, then return that same object. 
+        //var Data = $firebaseArray.$extend({// these methods exist on the prototype, so we can access the data using `this`
+      
         var Data = {
-            billNumber: function() {//get all bills from database
+            allBills: function() {//get all bills from database
                 return $firebaseArray(billsRef
-                                      .orderByPriority()); //order tasks by unique key (also dateAdded)
+                                      .orderByChild("billNumber"));
+            },
+            allStatements: function() {
+                return $firebaseArray(statementsRef
+                                      .orderByChild("endDate"));
+            },
+            allMaintenance: function() {
+                return $firebaseArray(maintenanceRef
+                                      .orderByChild("workOrderNumber"));
+            },
+            billsinPayRange: function() {
+                return $firebaseArray(billsRef
+                                     .startAt(1433131200000)
+                                     .endAt(1439697599999)
+                                     .orderByChild("payDate"));
             },
             filteredBills: function(){
                 return $firebaseArray(billsRef
                                       .startAt(startNegativeRange)
                                       .endAt(endNegativeRange)
-                                      .orderByChild("orderDate"));            
+                                      .orderByChild("orderDate")); // orderDate is the negative payDate
             },
             latestTransactions: function(){
                 return $firebaseArray(billsRef
                                       .orderByChild("orderDate")
-                                      .limitToFirst(5));    
-            },
-            statementNumber: function() {
-                return $firebaseArray(statementsRef
-                                      .orderByChild("endDate"));
+                                      .limitToFirst(5)); // orderDate is the negative payDate
             },
             filteredStatements: function(){
                 return $firebaseArray(statementsRef
@@ -54,10 +64,7 @@
                 return $firebaseArray(statementsRef
                                       .orderByChild("endDate")
                                       .limitToLast(1));                
-            },
-            workOrderNumber: function() {
-                return $firebaseArray(maintenanceRef
-                                      .orderByChild("workOrderNumber"));
+
             },
             filteredMaintenance: function(){
                 return $firebaseArray(maintenanceRef
@@ -80,15 +87,16 @@
                                       .orderByChild("status")
                                       .equalTo("Closed"));
             }
-        };
+
+         };   
+
         
 
     
-
-        //transform negative values to positive and switch values    
-        Data.beginDateRange = endNegativeRange*-1;    
+        // Public functions, variables, attributes begin with "Data." because they are part of the Data object that is passed to controllers    
+        Data.beginDateRange = endNegativeRange*-1;    //transform negative values to positive and switch values
         Data.endDateRange = startNegativeRange*-1;
-
+        Data.globalNumDays = numDays;
         
         
  
@@ -109,9 +117,7 @@
         
 
         
-        // Public functions, variables, attributes begin with "Data."
 
-        Data.globalNumDays = numDays;
         /*
         * ANGULARJS ngClick on any of the date selection buttons
         * takes in a number of days to determine what to change start/end dates to
@@ -152,21 +158,24 @@
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
+            
             Data.beginDateRange = endNegativeRange*-1;
             Data.endDateRange = startNegativeRange*-1;
             Data.globalNumDays = numDays;
-            console.log("NEW value of numDays",numDays);
-//            filteredBillsByDateRef.on('value', function(snapshot){
-//                snapshot.forEach(function(data) {
-//                     console.log("Key is " + data.key() + " for " + data.val().billNumber);
-//                 });
-//            });
-//
-//            filteredStatementsByDateRef.on('value', function(snapshot){
-//                snapshot.forEach(function(data) {
-//                     console.log("Key is " + data.key() + " for " + data.val().endDate);
-//                 });
-//            });
+            console.log("NEW value of numDays is "+numDays+"("+text+")");
+            // Attempts to update the dates/data in the view that don't work....
+            /*
+            Data.filteredBills(); // doesn't update view
+                        Data.filteredBills = function(){
+                return $firebaseArray(billsRef
+                          .startAt(startNegativeRange)
+                          .endAt(endNegativeRange)
+                          .orderByChild("orderDate")); // orderDate is the negative payDate
+            };
+            return Data; // doesn't update view
+            */
+            
+            
          };    
 
 
@@ -188,7 +197,6 @@
                 }
             }
         };
-        
         Data.showBills = function(maintenance, bill){
             //console.log("maintenance", maintenance);
             //console.log("bill", bill);
@@ -196,20 +204,19 @@
                 if (bill == maintenance) return true;
             } 
         };
-
+        Data.getOwnerDraw = function(statementBegin, statementEnd, billPaydate, transactionType){
+            console.log(transactionType);
+            if (transactionType == "Owner Draw"){
+                if (statementBegin < billPaydate) {
+                    if (billPaydate < statementEnd) {
+                        return true;
+                    }
+                }
+            }
+        };
         
 
-        /* function checkOff()
-        * @desc user clicks on a task and function marks task as complete (completed: true)
-        * first console.log prints the information for the task that was clicked on
-        * using startAt(), endAt(), and equalTo() allows us to choose arbitrary starting and ending points for our queries
-        * in our database, query all children whose dateAdded is equal to task.dateAdded
-        * print the unique ID (key)
-        * create a new reference to that specific task
-        * update the value of completed... i.e. change it from 'false' to 'true'
-        * print new value of completed
-        * this does NOT update the checkmark in the ALL TASKS view!!!
-        */
+
         Data.decideWorkOrder = function(item, yn){
             //console.log('CLICK TO APPROVE', item.dateCreated, item.approved, item.description, item.workOrderNumber);
             maintenanceRef.orderByChild("dateCreated").equalTo(item.dateCreated).on("child_added", function(snapshot) {
@@ -228,10 +235,15 @@
         
         
         
-
-        console.log("Running Data.js... inital value of numDays",numDays);
         
-        return Data;
+        
+
+        console.log("Running Data.js... inital value of numDays",numDays); // this runs just once on page refresh
+        
+        
+        
+        
+        return Data; // return the object for this factory service
         
 
         
@@ -244,3 +256,4 @@
         .module('propertyManagement')
         .factory('Data', Data);
 })();
+// When you’re using a Factory Service you create an object, add properties to it, then return that same object. When you pass this service into your controller, those properties on the object will now be available in that controller through your factory.

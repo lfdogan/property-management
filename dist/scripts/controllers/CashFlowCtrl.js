@@ -1,5 +1,6 @@
 (function() {
      function CashFlowCtrl(Data) { //services injected
+         
 
          
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
@@ -9,10 +10,10 @@
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
          
-         this.allBills = Data.billNumber();
+         this.allBills = Data.allBills();
          this.filteredBills = Data.filteredBills();
 
-         this.allStatements = Data.statementNumber(); // the ARRAY of objects from the Firebase database
+         this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
 
 
          document.querySelector("#nav-bills").classList.remove("active");

@@ -7,7 +7,10 @@ html {
     height: 100%; /* makes sure our html takes up 100% of the browser window */
 }
 
-
+a {
+    text-decoration: none;
+    color: #06538F;
+}
 
 
 /* FOR DEVICES LESS THAN 692 PIXELS WIDE
@@ -17,11 +20,18 @@ we will use a hamburger icon to click menu in/out */
     text-decoration: none; /* no underline */
 }
 main {
-    padding: 0 0; /* top/bottom match the nav/footer height */
+    padding-bottom: 30px; /* top/bottom match the nav/footer height */
 }
 nav {
     display: none;
-}    
+}
+
+
+
+
+
+
+
 /*Footer*/
 footer {
     font-family: 'Basic', sans-serif;
@@ -121,6 +131,50 @@ we will have the left navigation menu fixed on screen */
         background-color: #06538F;
         color: white;
     }
+    /* My Account Dropdown Link */
+    .dropbtn {
+        padding: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    /*My Account Dropdown button on hover & focus*/
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #06538F;
+        color: white;
+    }
+    /*My Account dropdown content (hidden by default) but displayed on hover */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #06538F;
+        min-width: 130px; 
+        /*width: 100%; /*width of the dropdown content to be as wide as the dropdown button and overflow:auto*/
+        overflow: auto; /*enable scroll on small screens*/
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /*instead of border*/
+
+    }
+    /* The container <div> needed to position the dropdown content*/
+    .ma-active {
+        /*position: relative; /* relative needed when we want the dropdown content to be placed right below the dropdown button*/
+        position: absolute;
+        right: 0;
+        top: 20px;
+        display: inline-block;
+
+    }
+    /*MyAccount dropdown links inside dropdown box*/
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    /*MyAccount dropdown - change color of dropdown links on hover */
+    .dropdown-content a:hover {
+        background-color: white;
+        color: #06538F;
+    }
+
 
 
     footer {

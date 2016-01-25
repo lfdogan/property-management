@@ -8,7 +8,7 @@
 -->
 </div>
 <div class="anchor-link"><a href="#maintenance-pending">Pending</a>
-    <a href="#maintenance-onging">Ongoing</a>
+    <a href="#maintenance-ongoing">Ongoing</a>
     <a href="#maintenance-completed">Completed</a>
 </div>
 
@@ -18,21 +18,9 @@
 <!--<ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
 
 
+<ng-include id="maintenance-pending" src="'/templates/maintenance-pending.html'"></ng-include>
 
 
-<div class="white-box" id="maintenance-pending">
-    <h2 class="center">Pending Work Orders</h2>
-    <div ng-repeat="item in maintenance.allPendingMaintenance">
-        <span>WO#{{item.workOrderNumber}}
-            <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
-            <br/>Location: {{item.building}}
-            <br/>{{item.description}}
-            <br/><button ng-click="maintenance.Data.decideWorkOrder(item,1)">APPROVE</button>
-                 <button ng-click="maintenance.Data.decideWorkOrder(item,0)">REJECT</button>
-            <hr/>
-        </span>
-    </div>
-</div>
 
 
 

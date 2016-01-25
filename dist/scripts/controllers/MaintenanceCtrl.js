@@ -9,9 +9,9 @@
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
          
-         this.allBills = Data.billNumber();
+         this.allBills = Data.allBills();
 
-         this.allMaintenance = Data.workOrderNumber(); // the ARRAY of objects from the Firebase database
+         this.allMaintenance = Data.allMaintenance(); // the ARRAY of objects from the Firebase database
          this.filteredMaintenance = Data.filteredMaintenance();
          this.allPendingMaintenance = Data.allPendingMaintenance();
          this.allOpenMaintenance = Data.allOpenMaintenance();

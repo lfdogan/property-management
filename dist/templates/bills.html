@@ -31,6 +31,7 @@
     
 
     <tr ng-repeat="item in bills.filteredBills" ng-show="{{ item.billNumber }}">
+<!--    <tr ng-repeat="item in bills.billsinPayRange | orderBy: -payDate" ng-show="{{ item.billNumber }}">-->
         <td class="right priority1"> {{ item.billNumber }} </td>
         <td class="right priority3"> {{ item.billDate | date: 'MM/dd/yyyy' }} </td>
         <td class="priority3"> {{ item.building }} </td>

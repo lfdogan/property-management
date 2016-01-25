@@ -27,8 +27,17 @@
             <a ui-sref="statements" class="nav" id="nav-statements">Statements</a>
             <a ui-sref="maintenance" class="nav" id="nav-maintenance">Maintenance</a>
         </div>
-        <div class="right-third">
-            <a ui-sref="my-account">My Account</a>
+        <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
+            <a ng-click="myAcct.toggleMyAccountDropdown()" class="dropbtn">My Account</a>
+            <div class="dropdown-content">
+                <a href="#">My Profile</a>
+                <a href="#">My Buildings</a>
+                <a href="#">Contacts List</a>
+                <a href="#">Tax Reports</a>
+                <a href="#">Contribution</a>
+                <a href="#">Documents</a>
+                <a href="#">Sign Out</a>
+            </div>
         </div>
     </nav>
     
@@ -92,6 +101,7 @@
     <script src="/scripts/controllers/MaintenanceCtrl.js"></script>
     <script src="/scripts/controllers/StatementsCtrl.js"></script>
     <script src="/scripts/controllers/SelectDateRangeCtrl.js"></script>
+    <script src="/scripts/controllers/MyAccountCtrl.js"></script>
 
 
     <!--JS Directive Templates-->
