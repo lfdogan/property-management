@@ -5,6 +5,10 @@
 (function() {
     function Data($firebaseArray) {//Inject dependencies and the additional services into the this service. 
 
+
+        
+        
+        
         //private variables, attributes, functions begin with "var"
         // Firebase database references
         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
@@ -239,7 +243,7 @@
         
 
         console.log("Running Data.js... inital value of numDays",numDays); // this runs just once on page refresh
-        
+       
         
         
         

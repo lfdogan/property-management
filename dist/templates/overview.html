@@ -34,6 +34,7 @@
     <table>
         <tr ng-repeat="item in overview.latestTransactions">
             <td> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a> {{ item.transactionType | limitTo:11 }}</td>
+            <td> {{ item.building }}</td>
             <td class="right"> {{ item.payDate | date: 'M/d' }}</td>
             <td class="right"> {{ item.amountPaid | currency }} </td>
         </tr>    

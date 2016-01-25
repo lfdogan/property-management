@@ -10,44 +10,49 @@
 <ng-include src="'/templates/selectDateRange.html'"></ng-include>
 
 
+
 <br/>
 
 <table>
     <tr>
         <th class="right priority1"><u>date</u></th>
-        <th class="priority3">building/unit</th>
+        <th class="priority1">building/unit</th>
         <th class="priority1">bill# / type</th>
-        <th class="priority3">account</th>
+        <th class="priority2">account</th>
         <th class="priority1">description</th>
         <th class="right priority1">amount</th>
-        <th class="right priority3">balance</th>
+        <th class="right priority2">balance</th>
     </tr>
     <tr>
-        <td class="right priority1">{{ cashflow.endDateRange | date: 'MM/dd/yyyy' }}</td>
-        <td class="priority3"></td>
+        <td class="right priority1">{{ cashflow.endDateRange | date: 'M/d/yy' }}</td>
         <td class="priority1"></td>
-        <td class="priority3"></td>
+        <td class="priority1"></td>
+        <td class="priority2"></td>
         <td class="priority1">Ending</td>
         <td class="priority1"></td>
-        <td class="priority3"></td>
+        <td class="priority2"></td>
     </tr>
     <tr ng-repeat="item in cashflow.filteredBills">
-        <td class="right priority1"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="priority3"> {{ item.building }} </td>
-        <td class="priority1"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | limitTo:11 }} </td>
-        <td class="priority3"> {{ item.account | limitTo:27 }} </td>
-        <td class="priority1"> {{ item.description | limitTo:45 }} </td>
-        <td class="right priority1"> {{ item.amountPaid | currency }} </td>
-        <td class="right priority3">  </td>
+        <td class="right priority1"> {{ item.payDate | date: 'M/d/yy' }} </td>
+        <td class="priority1"> {{ item.building }} </td>
+        <td class="narrow-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | limitTo:10 }} </td>
+        <td class="medium-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | limitTo:20 }} </td>
+        <td class="wide-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType }} </td>
+        <td class="priority2"> {{ item.account | limitTo:10 }} </td>
+        <td class="narrow-only"> {{ item.description | limitTo:30 }} </td>
+        <td class="medium-only"> {{ item.description | limitTo:50 }} </td>
+        <td class="wide-only"> {{ item.description }} </td>
+        <td class="right both"> {{ item.amountPaid | currency }} </td>
+        <td class="right priority2">  </td>
     </tr>
     <tr>
-        <td class="right priority1">{{ cashflow.beginDateRange | date: 'MM/dd/yyyy' }}</td>
-        <td class="priority3"></td>
+        <td class="right priority1">{{ cashflow.beginDateRange | date: 'M/d/yy' }}</td>
+        <td class="priority2"></td>
         <td class="priority1"></td>
-        <td class="priority3"></td>
+        <td class="priority2"></td>
         <td class="priority1">Beginning</td>
         <td class="priority1"></td>
-        <td class="priority3"></td>
+        <td class="priority2"></td>
     </tr>
 </table>
 

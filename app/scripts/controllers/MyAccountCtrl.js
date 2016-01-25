@@ -1,9 +1,11 @@
 (function() {
      function MyAccountCtrl() {
          
+
+         
+         
          var maActive = false;
-         
-         
+                  
          
          this.toggleMyAccountDropdown = function(){
              console.log("click on my account");

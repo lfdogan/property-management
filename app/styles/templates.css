@@ -97,7 +97,17 @@ tr {
 .title .wide {
     display: none;
 }
-.priority3 {
+.priority3,
+.priority2 {
+    display: none; 
+}
+.narrow-only {
+    display: table-cell; 
+}
+.medium-only {
+    display: none; 
+}
+.wide-only {
     display: none; 
 }
 
@@ -110,7 +120,32 @@ tr {
     .title .narrow {
         display: none;
     }
+    .priority2 {
+        display: table-cell;
+    }
+    .narrow-only {
+        display: none; 
+    }
+    .medium-only {
+        display: table-cell; 
+    }
+    .wide-only {
+        display: none; 
+    }
+}
+
+/* FOR DEVICES AT LEAST 1000 PIXELS WIDE */
+@media (min-width: 1000px) {
     .priority3 {
         display: table-cell;
+    }
+    .narrow-only {
+        display: none; 
+    }
+    .medium-only {
+        display: none; 
+    }
+    .wide-only {
+        display: table-cell; 
     }
 }
