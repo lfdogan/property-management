@@ -96,10 +96,6 @@ tr {
 .title .wide {
     display: none;
 }
-.priority3,
-.priority2 {
-    display: none; 
-}
 .narrow-only {
     display: table-cell; 
 }
@@ -119,9 +115,6 @@ tr {
     .title .narrow {
         display: none;
     }
-    .priority2 {
-        display: table-cell;
-    }
     .narrow-only {
         display: none; 
     }
@@ -135,9 +128,6 @@ tr {
 
 /* FOR DEVICES AT LEAST 1000 PIXELS WIDE */
 @media (min-width: 1000px) {
-    .priority3 {
-        display: table-cell;
-    }
     .narrow-only {
         display: none; 
     }

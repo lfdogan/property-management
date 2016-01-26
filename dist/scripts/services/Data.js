@@ -22,7 +22,7 @@
         var startNegativeRange = -1439697599999; //negative numbers will order descending but start/end will need to switch
         var endNegativeRange = -1433131200000; //negative 6/1/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
-        var thirtyDaysAgo = today - (2592000000);//minus 30 days is 7/18/15 11:01:20
+        var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 9999;
 
 
@@ -206,6 +206,7 @@
         * statementEnd is end date of statement range. billPaydate is date a particular bill was paid
         * function determines if the particular bill pay date occurred within the statement range
         */
+        //for overview.html page
         Data.selectBills = function(statementBegin, statementEnd, billPaydate){
             if (statementBegin < billPaydate) {
                 if (billPaydate < statementEnd) {
@@ -213,13 +214,7 @@
                 }
             }
         };
-        Data.showBills = function(maintenance, bill){
-            //console.log("maintenance", maintenance);
-            //console.log("bill", bill);
-            if (bill){
-                if (bill == maintenance) return true;
-            } 
-        };
+        //for overview.html page
         Data.getOwnerDraw = function(statementBegin, statementEnd, billPaydate, transactionType){
             console.log(transactionType);
             if (transactionType == "Owner Draw"){
@@ -230,15 +225,48 @@
                 }
             }
         };
+        /* function used on Overview.html to only get items from last 30 days
+        */
+        Data.getLast30Days = function(itemDate){
+            if((today-thirtyDays) < itemDate) {
+                if (itemDate < today) {
+                    return itemDate;
+                }
+            };
+            return;
+        };
         
+        //for maintenance.html page to get only bills from all transactions of the 'bills' reference
+        Data.showBills = function(maintenance_WONum, bill_WONum){
+            //console.log("maintenance_WONum", maintenance_WONum);
+            //console.log("bill_WONum", bill_WONum);
+            if (bill_WONum){
+                if (bill_WONum == maintenance_WONum) return true;
+            } 
+        };
 
-
-        Data.decideWorkOrder = function(item, yn){
+        //for bills.html to select bills from a specific date range
+        // ONLY WORKS WITH ONE PARAMETER INPUT!!!!!!
+        Data.showInDateRange = function(billNum){
+            if (billNum === undefined) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+        Data.trial = function(payDate){
+            console.log("payDate", payDate);
+            console.log("startNegativeRange", startNegativeRange);
+            console.log("endNegativeRange", endNegativeRange);
+            return true;
+        };
+        //for maintenance-pending.html template
+        Data.decideWorkOrder = function(item, yes_or_no){
             //console.log('CLICK TO APPROVE', item.dateCreated, item.approved, item.description, item.workOrderNumber);
             maintenanceRef.orderByChild("dateCreated").equalTo(item.dateCreated).on("child_added", function(snapshot) {
                 //console.log(snapshot.key());
                 var curRef = maintenanceRef.child(  snapshot.key() );
-                if (yn == 1) {
+                if (yes_or_no == 1) {
                     curRef.update({"approved": "Yes"});
                     curRef.update({"status": "Open"});
                     alert("Work Order #"+item.workOrderNumber+" has been approved. You can now view it on the Maintenance page under Ongoing Work Orders.")
@@ -249,15 +277,7 @@
             });
         };
         
-        /* function used on Overview.html to only get items from last 30 days
-        */
-        Data.getLast30Days = function(itemDate){
-            if(thirtyDaysAgo < itemDate) {
-                if (itemDate < today) {return itemDate;}
-            };
-            return;
-        };
-        
+
         
         
         

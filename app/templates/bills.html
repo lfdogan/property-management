@@ -17,25 +17,24 @@
 
 <table>
     <tr>
-        <th class="right priority1">bill #</th>
-        <th class="right priority1">date paid</th>
-        <th class="priority3">description</th>
-        <th class="right priority1">amount paid</th>
+        <th class="right">bill #</th>
+        <th class="right">date paid</th>
+        <th class="wide-only">description</th>
+        <th class="right">amount paid</th>
         
     </tr>
 
     
     
 
-    <tr ng-repeat="item in bills.filteredBills" ng-show="{{ item.billNumber }}">
+<!--    <tr ng-repeat="item in bills.filteredBills" ng-show="{{ item.billNumber }}">-->
 <!--    <tr ng-repeat="item in bills.billsinPayRange | orderBy: -payDate" ng-show="{{ item.billNumber }}">-->
-        <td class="right priority1"> {{ item.billNumber }} </td>
-        <td class="right priority1"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="priority3"> {{ item.account }}  {{ item.description }} </td>
-        <td class="right priority1"> {{ item.amountPaid | currency }} </td>
-        
-        
-              
+    <tr ng-repeat="item in bills.filteredBills" 
+        ng-show="bills.Data.showInDateRange( {{item.billNumber}}) && bills.Data.trial({{item.payDate}})">
+        <td class="right"> {{ item.billNumber }} </td>
+        <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
+        <td class="wide-only"> {{ item.account }}  {{ item.description }} </td>
+        <td class="right"> {{ item.amountPaid | currency }} </td>         
     </tr>
 
 </table>
