@@ -8,12 +8,14 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         
+        /* Attempt at setting up github gh-pages: https://www.npmjs.com/package/grunt-gh-pages
           'gh-pages': {
                 options: {
                   base: 'dist'
                 },
                 src: ['**']
               },
+              */
 
         watch: {
             hapi: {
@@ -79,10 +81,14 @@ module.exports = function(grunt) {
 
         clean: ['./dist']
     });
-
+    
+            
+    /* Attempt at setting up github gh-pages: https://www.npmjs.com/package/grunt-gh-pages
+    grunt.loadNpmTasks('grunt-gh-pages');*/
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-hapi');
+
 
 };
