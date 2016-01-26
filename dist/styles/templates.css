@@ -37,6 +37,8 @@
 /* section boxes for data */
 .white-box {
     background-color: white;
+    padding: 5px;
+    box-shadow: 5px 5px 5px gray;
 }
 
 /* Data Section */
@@ -59,12 +61,17 @@ th {
 tr {
     background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
 }
+.half-column {
+    display: inline-block;
+    width: 49%;
+}
+
 
 .maintenance-button-approve {
     background-color: #50b373;
     border: 2px #50b373 solid;
     color: white;
-        display: inline-block;
+    display: inline-block;
     text-align: center;
     padding: 4px;
     width: 80px;
@@ -81,15 +88,7 @@ tr {
     border-radius: 10px;
     text-transform: uppercase;
 }
-.maintenance-button-call {
-    color: #06538F;
-    border: 2px #06538F solid;
-    display: inline-block;
-    text-align: center;
-    padding: 4px;
-    border-radius: 10px;
-    text-transform: uppercase;
-}
+
 
 
 
