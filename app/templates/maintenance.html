@@ -17,16 +17,16 @@
 
 <!--<ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
 
-
+<h2 class="center">Pending Work Orders</h2>
 <ng-include id="maintenance-pending" src="'/templates/maintenance-pending.html'"></ng-include>
 
 
 
 
 
-
+<h2 class="center">Ongoing Work Orders</h2>
 <div class="white-box" id="maintenance-ongoing">
-    <h2 class="center">Ongoing Work Orders</h2>
+    
     <div ng-repeat="item in maintenance.allOpenMaintenance">
         <span>WO#{{item.workOrderNumber}}
             <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
@@ -40,9 +40,9 @@
 
 
 
-
+<h2 class="center">Completed Work Orders</h2>
 <div class="completed" id="maintenance-completed">
-    <h2 class="center">Completed Work Orders</h2>
+    
     <table>
         <tr>
             <th class="right"><u>work order #</u></th>

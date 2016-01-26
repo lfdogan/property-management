@@ -21,6 +21,8 @@
         //initial values of start and end date range
         var startNegativeRange = -1439697599999; //negative numbers will order descending but start/end will need to switch
         var endNegativeRange = -1433131200000; //negative 6/1/15
+        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+        var thirtyDaysAgo = today - (2592000000);//minus 30 days is 7/18/15 11:01:20
         var numDays = 9999;
 
 
@@ -46,6 +48,16 @@
                                      .startAt(1433131200000)
                                      .endAt(1439697599999)
                                      .orderByChild("payDate"));
+            },
+            billsOwnerDraw: function() {
+                return $firebaseArray(billsRef
+                                     .orderByChild("transactionType")
+                                     .equalTo("Owner Draw"));
+            },
+            billsRentIncome: function() {
+                return $firebaseArray(billsRef
+                                     .orderByChild("transactionType")
+                                     .equalTo("Rent"));
             },
             filteredBills: function(){
                 return $firebaseArray(billsRef
@@ -153,7 +165,7 @@
                         eleCY.classList.add("active");
                         break;
                     case 9999:
-                        text = "custom dates";
+                        text = "custom dates"; //For simplicity I've assigned the 'custom' dates
                         endNegativeRange = -1433131200000; // 06/01/2015
                         startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
                         eleCD.classList.add("active");
@@ -237,6 +249,14 @@
             });
         };
         
+        /* function used on Overview.html to only get items from last 30 days
+        */
+        Data.getLast30Days = function(itemDate){
+            if(thirtyDaysAgo < itemDate) {
+                if (itemDate < today) {return itemDate;}
+            };
+            return;
+        };
         
         
         

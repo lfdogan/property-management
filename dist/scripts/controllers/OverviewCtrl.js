@@ -10,6 +10,8 @@
          this.endDateRange = Data.endDateRange;
          
          this.allBills = Data.allBills();
+         this.billsOwnerDraw = Data.billsOwnerDraw();
+         this.billsRentIncome = Data.billsRentIncome();
 
          this.allMaintenance = Data.allMaintenance(); // the ARRAY of objects from the Firebase database
          this.filteredMaintenance = Data.filteredMaintenance();
