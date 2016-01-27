@@ -22,7 +22,9 @@
          document.querySelector("#nav-cashflow").classList.remove("active");
          document.querySelector("#nav-maintenance").classList.add("active");
          document.querySelector("#nav-overview").classList.remove("active");
-         document.querySelector("#nav-statements").classList.remove("active");     
+         document.querySelector("#nav-statements").classList.remove("active");    
+         
+         
          
          
          

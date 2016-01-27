@@ -19,12 +19,16 @@
 
         
         //initial values of start and end date range
-        var startNegativeRange = -1439697599999; //negative numbers will order descending but start/end will need to switch
-        var endNegativeRange = -1433131200000; //negative 6/1/15
+                //initial values of start and end date range
+//        var startNegativeRange = 1439697599999; //negative numbers will order descending but start/end will need to switch
+//        var endNegativeRange = 1433131200000; //negative 6/1/15
+        var startNegativeRange = 1433131200000; //negative numbers will order descending but start/end will need to switch
+        var endNegativeRange = 1439697599999; //negative 6/1/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 9999;
 
+        var onDateRangeChangeHandlers = [];
 
      
 // for a factory service: create an object, add properties to it, then return that same object. 
@@ -59,11 +63,11 @@
                                      .orderByChild("transactionType")
                                      .equalTo("Rent"));
             },
-            filteredBills: function(){
+            filteredBills: function(start, end){
                 return $firebaseArray(billsRef
-                                      .startAt(startNegativeRange)
-                                      .endAt(endNegativeRange)
-                                      .orderByChild("orderDate")); // orderDate is the negative payDate
+                                      //.startAt(startNegativeRange)
+                                      //.endAt(endNegativeRange)
+                                      .orderByChild("payDate")); // orderDate is the negative payDate
             },
             latestTransactions: function(){
                 return $firebaseArray(billsRef
@@ -139,7 +143,7 @@
         * takes in a number of days to determine what to change start/end dates to
         * then runs updateUI() to set those dates
         */
-        Data.changeDateRange = function(numDays){
+        Data.changeDateRange = function(numDays, scope){
             var text;    
             var eleL30D = document.querySelector("#last30Days");
             var eleCY = document.querySelector("#currentYear");
@@ -179,6 +183,11 @@
             Data.endDateRange = startNegativeRange*-1;
             Data.globalNumDays = numDays;
             console.log("NEW value of numDays is "+numDays+"("+text+")");
+            
+            for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
+                onDateRangeChangeHandlers[i]();
+            }
+            
             // Attempts to update the dates/data in the view that don't work....
             /*
             Data.filteredBills(); // doesn't update view
@@ -196,7 +205,9 @@
 
 
         
-       
+       Data.onDateRangeChange = function (handler) {
+           onDateRangeChangeHandlers.push(handler);
+       };
         
         
         
@@ -234,6 +245,10 @@
                 }
             };
             return;
+        };
+        
+        Data.getWorkOrderNumber = function (bill) {
+          return bill.workOrderNumber || "";  
         };
         
         //for maintenance.html page to get only bills from all transactions of the 'bills' reference

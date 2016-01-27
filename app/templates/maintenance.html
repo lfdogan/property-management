@@ -56,7 +56,7 @@
             <td> {{ item.description }} </td>
             <td><span ng-repeat="bill in maintenance.allBills "> <a ui-sref="bills">
                 <span ng-show="{{bill.workOrderNumber}}">
-                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , {{ bill.workOrderNumber }} )">{{ bill.billNumber }} {{bill.cost | currency }}</span>
+                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">{{ bill.billNumber }} {{bill.cost | currency }}</span>
                 </a></span></td>
     </tr>
     </table>

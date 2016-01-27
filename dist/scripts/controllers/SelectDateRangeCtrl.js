@@ -11,6 +11,9 @@
          Data.changeDateRange(setRange);
          
 
+        this.changeDateRange = function (days) {
+            Data.changeDateRange(days, $scope);
+        };
      }
  
      angular

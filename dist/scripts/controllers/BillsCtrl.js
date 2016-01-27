@@ -23,9 +23,13 @@
          document.querySelector("#nav-statements").classList.remove("active");
          
          
+        var BillsCtrl = this;
+        Data.onDateRangeChange(function () {
+            BillsCtrl.filteredBills = Data.filteredBills();
+            BillsCtrl.beginDateRange = Data.beginDateRange;
+            BillsCtrl.endDateRange = Data.endDateRange;
          
-
-                        
+        }); 
        
      }
  

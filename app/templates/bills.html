@@ -27,10 +27,10 @@
     
     
 
-<!--    <tr ng-repeat="item in bills.filteredBills" ng-show="{{ item.billNumber }}">-->
+    <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">
 <!--    <tr ng-repeat="item in bills.billsinPayRange | orderBy: -payDate" ng-show="{{ item.billNumber }}">-->
-    <tr ng-repeat="item in bills.filteredBills" 
-        ng-show="bills.Data.showInDateRange( {{item.billNumber}}) && bills.Data.trial({{item.payDate}})">
+<!--    <tr ng-repeat="item in bills.filteredBills" -->
+<!--        ng-show="bills.Data.showInDateRange( {{item.billNumber}}) && bills.Data.trial({{item.payDate}})">-->
         <td class="right"> {{ item.billNumber }} </td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <td class="wide-only"> {{ item.account }}  {{ item.description }} </td>
