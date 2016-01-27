@@ -5,13 +5,13 @@
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.Data = Data;
 
-         
          var setRange = Data.globalNumDays;
          console.log("Running SelectDateRangeCtrl.js... setRange", setRange);
          Data.changeDateRange(setRange);
          
 
-        this.changeDateRange = function (days) {
+         this.changeDateRange = function (days) {
+            console.log("Running SelectDateRangeCtrl.js... changeDateRange()");
             Data.changeDateRange(days, $scope);
         };
      }

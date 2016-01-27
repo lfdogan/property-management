@@ -17,11 +17,20 @@
          this.Data = Data;
 
 
+         //sets navigation link styling on page load
          document.querySelector("#nav-bills").classList.remove("active");
          document.querySelector("#nav-cashflow").classList.remove("active");
          document.querySelector("#nav-maintenance").classList.remove("active");
          document.querySelector("#nav-overview").classList.remove("active");
          document.querySelector("#nav-statements").classList.add("active");
+         
+         //will update data when user clicks on a date range selection
+         var StatementsCtrl = this;
+         Data.onDateRangeChange(function () {
+            StatementsCtrl.filteredStatements = Data.filteredStatements();
+            StatementsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+            StatementsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+         }); 
          
 
 

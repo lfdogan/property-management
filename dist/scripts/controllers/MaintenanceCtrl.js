@@ -18,6 +18,7 @@
          this.allClosedMaintenance = Data.allClosedMaintenance();
 
 
+         //sets navigation link styling on page load
          document.querySelector("#nav-bills").classList.remove("active");
          document.querySelector("#nav-cashflow").classList.remove("active");
          document.querySelector("#nav-maintenance").classList.add("active");

@@ -22,12 +22,13 @@
                 //initial values of start and end date range
 //        var startNegativeRange = 1439697599999; //negative numbers will order descending but start/end will need to switch
 //        var endNegativeRange = 1433131200000; //negative 6/1/15
-        var startNegativeRange = 1433131200000; //negative numbers will order descending but start/end will need to switch
-        var endNegativeRange = 1439697599999; //negative 6/1/15
+        var startRange = 1433131200000; // custom start date is 6/1/15
+        var endRange = 1439697599999; // custom end date is 8/15/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 9999;
 
+        // array used for changeDateRange()
         var onDateRangeChangeHandlers = [];
 
      
@@ -47,12 +48,6 @@
                 return $firebaseArray(maintenanceRef
                                       .orderByChild("workOrderNumber"));
             },
-            billsinPayRange: function() {
-                return $firebaseArray(billsRef
-                                     .startAt(1433131200000)
-                                     .endAt(1439697599999)
-                                     .orderByChild("payDate"));
-            },
             billsOwnerDraw: function() {
                 return $firebaseArray(billsRef
                                      .orderByChild("transactionType")
@@ -63,11 +58,17 @@
                                      .orderByChild("transactionType")
                                      .equalTo("Rent"));
             },
-            filteredBills: function(start, end){
+//            filteredBills: function(start, end){
+//                return $firebaseArray(billsRef
+//                                      //.startAt(startRange)
+//                                      //.endAt(endRange)
+//                                      .orderByChild("payDate"));
+//            },
+            filteredBills: function(){
                 return $firebaseArray(billsRef
-                                      //.startAt(startNegativeRange)
-                                      //.endAt(endNegativeRange)
-                                      .orderByChild("payDate")); // orderDate is the negative payDate
+                                      .startAt(startRange)
+                                      .endAt(endRange)
+                                      .orderByChild("payDate"));
             },
             latestTransactions: function(){
                 return $firebaseArray(billsRef
@@ -76,9 +77,9 @@
             },
             filteredStatements: function(){
                 return $firebaseArray(statementsRef
-                                      .startAt(startNegativeRange)
-                                      .endAt(endNegativeRange)
-                                      .orderByChild("endNegative"));
+                                      .startAt(startRange)
+                                      .endAt(endRange)
+                                      .orderByChild("endDate"));
             },
             latestStatement: function(){
                 return $firebaseArray(statementsRef
@@ -88,8 +89,8 @@
             },
             filteredMaintenance: function(){
                 return $firebaseArray(maintenanceRef
-                                      .startAt(startNegativeRange)
-                                      .endAt(endNegativeRange)
+                                      .startAt(startRange)
+                                      .endAt(endRange)
                                       .orderByChild("dateCreated"));
             },
             allPendingMaintenance: function(){
@@ -114,9 +115,13 @@
 
     
         // Public functions, variables, attributes begin with "Data." because they are part of the Data object that is passed to controllers    
-        Data.beginDateRange = endNegativeRange*-1;    //transform negative values to positive and switch values
-        Data.endDateRange = startNegativeRange*-1;
+//            Data.beginDateRange = endNegativeRange*-1; // use negative values when filtering by orderDate
+//            Data.endDateRange = startNegativeRange*-1; // use negative values when filtering by orderDate
+        Data.beginDateRange = startRange;
+        Data.endDateRange = endRange;
         Data.globalNumDays = numDays;
+
+        
         
         
  
@@ -156,50 +161,44 @@
                         text = "last 30 days";
                         //endNegativeRange = new Date().getTime();
                         //endNegativeRange = endNegativeRange*-1
-                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-                        endNegativeRange = startNegativeRange - (2592000000*-1);//minus 30 days is 7/18/15 11:01:20
+//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
+//                        endNegativeRange = startNegativeRange - (thirtyDays*-1);//minus 30 days is 7/18/15 11:01:20
+                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+                        startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
                         eleL30D.classList.add("active");
                         break;
                     case 365:
                         text = "current year";
                         //endNegativeRange = new Date().getTime();
                         //endNegativeRange = endNegativeRange*-1
-                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-                        endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
+//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
+//                        endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
+                        startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
+                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
                         eleCY.classList.add("active");
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
-                        endNegativeRange = -1433131200000; // 06/01/2015
-                        startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
+//                        endNegativeRange = -1433131200000; // 06/01/2015
+//                        startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
+                        startRange = 1433131200000; // custom start date is 6/1/15
+                        endRange = 1439697599999; // custom end date is 8/15/15
                         eleCD.classList.add("active");
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
-            
-            Data.beginDateRange = endNegativeRange*-1;
-            Data.endDateRange = startNegativeRange*-1;
+//            Data.beginDateRange = endNegativeRange*-1; // use negative values when filtering by orderDate
+//            Data.endDateRange = startNegativeRange*-1; // use negative values when filtering by orderDate
+            Data.beginDateRange = startRange;
+            Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
             console.log("NEW value of numDays is "+numDays+"("+text+")");
-            
+            // onDateRangeChangeHandlers initialized as empty array 
             for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
                 onDateRangeChangeHandlers[i]();
-            }
-            
-            // Attempts to update the dates/data in the view that don't work....
-            /*
-            Data.filteredBills(); // doesn't update view
-                        Data.filteredBills = function(){
-                return $firebaseArray(billsRef
-                          .startAt(startNegativeRange)
-                          .endAt(endNegativeRange)
-                          .orderByChild("orderDate")); // orderDate is the negative payDate
-            };
-            return Data; // doesn't update view
-            */
-            
+            }       
             
          };    
 
@@ -246,20 +245,6 @@
             };
             return;
         };
-        
-        Data.getWorkOrderNumber = function (bill) {
-          return bill.workOrderNumber || "";  
-        };
-        
-        //for maintenance.html page to get only bills from all transactions of the 'bills' reference
-        Data.showBills = function(maintenance_WONum, bill_WONum){
-            //console.log("maintenance_WONum", maintenance_WONum);
-            //console.log("bill_WONum", bill_WONum);
-            if (bill_WONum){
-                if (bill_WONum == maintenance_WONum) return true;
-            } 
-        };
-
         //for bills.html to select bills from a specific date range
         // ONLY WORKS WITH ONE PARAMETER INPUT!!!!!!
         Data.showInDateRange = function(billNum){
@@ -269,11 +254,30 @@
                 return true;
             }
         };
+        //for bills.html an additional query limit
         Data.trial = function(payDate){
             console.log("payDate", payDate);
-            console.log("startNegativeRange", startNegativeRange);
-            console.log("endNegativeRange", endNegativeRange);
+//            console.log("startNegativeRange", startNegativeRange);
+//            console.log("endNegativeRange", endNegativeRange);
+            console.log("startRange", startRange);
+            console.log("endRange", endRange);
             return true;
+        };
+        /* for maintenance.html page. 
+        * It takes in the transaction item and return the work order number 
+        * if there is one or an empty string if no work order number
+        * This is used to prevent errors when showBills() runs on bills without work order numbers
+        */
+        Data.getWorkOrderNumber = function (bill) {
+          return bill.workOrderNumber || "";  
+        };
+        //for maintenance.html page to get only bills from all transactions of the 'bills' reference
+        Data.showBills = function(maintenance_WONum, bill_WONum){
+            //console.log("maintenance_WONum", maintenance_WONum);
+            //console.log("bill_WONum", bill_WONum);
+            if (bill_WONum){
+                if (bill_WONum == maintenance_WONum) return true;
+            } 
         };
         //for maintenance-pending.html template
         Data.decideWorkOrder = function(item, yes_or_no){

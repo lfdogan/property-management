@@ -16,12 +16,20 @@
          this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
 
 
+         //sets navigation link styling on page load
          document.querySelector("#nav-bills").classList.remove("active");
          document.querySelector("#nav-cashflow").classList.add("active");
          document.querySelector("#nav-maintenance").classList.remove("active");
          document.querySelector("#nav-overview").classList.remove("active");
          document.querySelector("#nav-statements").classList.remove("active");
          
+         //will update data when user clicks on a date range selection
+         var CashFlowCtrl = this;
+         Data.onDateRangeChange(function () {
+            CashFlowCtrl.filteredBills = Data.filteredBills();
+            CashFlowCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+            CashFlowCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+         }); 
 
          
          

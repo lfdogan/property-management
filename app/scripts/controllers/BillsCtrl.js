@@ -11,11 +11,12 @@
          
          this.allBills = Data.allBills();
          this.filteredBills = Data.filteredBills();
-         this.billsinPayRange = Data.billsinPayRange();
+
 
          this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
 
 
+         //sets navigation link styling on page load
          document.querySelector("#nav-bills").classList.add("active");
          document.querySelector("#nav-cashflow").classList.remove("active");
          document.querySelector("#nav-maintenance").classList.remove("active");
@@ -23,14 +24,15 @@
          document.querySelector("#nav-statements").classList.remove("active");
          
          
-        var BillsCtrl = this;
-        Data.onDateRangeChange(function () {
+         //will update data when user clicks on a date range selection
+         var BillsCtrl = this;
+         Data.onDateRangeChange(function () {
             BillsCtrl.filteredBills = Data.filteredBills();
-            BillsCtrl.beginDateRange = Data.beginDateRange;
-            BillsCtrl.endDateRange = Data.endDateRange;
-         
-        }); 
+            BillsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+            BillsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+         }); 
        
+     
      }
  
      angular

@@ -20,7 +20,7 @@
     </tr>
 
 
-    <tr ng-repeat="item in statements.filteredStatements">
+    <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
         <td class="center"> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
         <td><span ng-repeat="bill in statements.allBills "> <a ui-sref="bills">
                 <span ng-show="statements.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
