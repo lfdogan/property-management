@@ -39,7 +39,17 @@
                  controller: function($scope, $stateParams) {
                      $scope.billNumber = $stateParams.billNumber;
                  }
-            });
+             })
+             .state('profile', {
+                 url: '/profile',
+                 controller: 'MyAccountCtrl as profile',
+                 templateUrl: '/templates/profile.html'
+         })
+             .state('contribution', {
+                 url: '/contribution',
+                 controller: 'MyAccountCtrl as contribution',
+                 templateUrl: '/templates/contribution.html'
+         });
      }
 //define a module with angular.module:
 //The first argument passed, blocJams, is the prescribed name of the module. The array, passed as the second argument, injects dependencies into an application.

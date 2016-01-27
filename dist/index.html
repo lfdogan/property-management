@@ -18,13 +18,9 @@
     <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
         <a id="hamburger-menu" class="hamburger dropbtn" ng-click="myAcct.Data.toggleMyAccountDropdown()">&#9776;</a>        
         <div class="dropdown-content">
-            <a href="#">My Profile</a>
-            <a href="#">My Buildings</a>
-            <a href="#">Contacts List</a>
-            <a href="#">Tax Reports</a>
-            <a href="#">Contribution</a>
-            <a href="#">Documents</a>
-            <a ui-sref="statements" id="nav-statements">Statements</a>
+            <a ui-sref="profile">My Profile</a>
+            <a ui-sref="contribution">Bank Transfer</a>
+            <a ui-sref="statements" id="nav-statements">Documents</a>
             <a href="#">Sign Out</a>
         </div>
     </div>
@@ -44,14 +40,10 @@
         <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
             <a ng-click="myAcct.Data.toggleMyAccountDropdown()" class="dropbtn">My Account</a>
             <div class="dropdown-content">
-                <a href="#">My Profile</a>
-                <a href="#">My Buildings</a>
-                <a href="#">Contacts List</a>
-                <a href="#">Tax Reports</a>
-                <a href="#">Contribution</a>
-                <a href="#">Documents</a>
-                <a ui-sref="statements">Statements</a>
-                <a href="#">Sign Out</a>
+            <a ui-sref="profile">My Profile</a>
+            <a ui-sref="contribution">Bank Transfer</a>
+            <a ui-sref="statements" id="nav-statements">Documents</a>
+            <a href="#">Sign Out</a>
             </div>
         </div>
     </nav>

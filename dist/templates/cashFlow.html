@@ -33,7 +33,7 @@
         
         <td class="narrow-only"> {{ item.billNumber | billNumber }} {{ item.transactionType | transactionType | limitTo:10 }} - {{ item.account | limitTo:10 }} {{ item.description | limitTo:30 }}</td>
         
-        <td class="medium-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:20 }} - {{ item.account | limitTo:10 }}</td>
+        <td class="medium-only"> <a ui-sref="bill( {billNumber: {{ item.billNumber }} } )">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:20 }} - {{ item.account | limitTo:10 }}</td>
         <td class="medium-only"> {{ item.description | limitTo:50 }} </td>
         
         <td class="wide-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType }} - {{ item.account | transactionType | limitTo:10 }}</td>

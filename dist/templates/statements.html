@@ -1,8 +1,12 @@
+<h1 class="center">Documents</h1>
+
+
+<section clss="statements">
 <div class="title">
     <!-- MOBILE -->
-    <h1 class="narrow">{{ statements.title }} {{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h1>
+    <h2 class="narrow">Monthly Statements {{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h2>
     <!-- DESKTOP -->
-    <h1 class="wide">{{ statements.title }}</h1>
+    <h2 class="wide">Monthly Profit & Loss Statements</h2>
     <div class="wide title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
 </div>
 
@@ -21,7 +25,7 @@
 
 
     <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
-        <td class="center"> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} </td>
+        <td class="center"><a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a></td>
         <td><span ng-repeat="bill in statements.allBills "> 
                 <span ng-show="statements.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
                     <a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a></span>
@@ -39,3 +43,147 @@
     <input type="text" id="endDate" placeholder="endDate">
     <button id="btnStatementsUpdate" class="btn btn-primary">Update</button>
 </div>-->
+    
+    </section>
+
+<section class="lease">
+    <div class="title">
+        <h2>Lease Documents</h2>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Uploaded</th>
+                <th>Size</th>
+                <th>Uploaded By</th>
+            </tr>
+            <tr>
+                <td><a>Maroney Lease.pdf</a></td>
+                <td>08/05/2015</td>
+                <td>13140k</td>
+                <td>amiller</td>
+            </tr>
+            <tr>
+                <td><a>Moss-Green Lease.pdf</a></td>
+                <td>06/02/2014</td>
+                <td>10471k</td>
+                <td>dwilliams</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section class="Inspection">
+    <div class="title">
+        <h2>Inspection Documents</h2>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Uploaded</th>
+                <th>Size</th>
+                <th>Uploaded By</th>
+            </tr>
+            <tr>
+                <td><a>Inspection_216554THSTREE_(07/31/2015).pdf</a></td>
+                <td>08/05/2015</td>
+                <td>129k</td>
+                <td>System</td>
+            </tr>
+            <tr>
+                <td><a>Inspection_216554THSTREE_(06/30/2015).pdf</a></td>
+                <td>06/04/2015</td>
+                <td>295k</td>
+                <td>System</td>
+            </tr>
+            <tr>
+                <td><a>Inspection_216554THSTREE_(05/21/2015).pdf</a></td>
+                <td>05/21/2015</td>
+                <td>312k</td>
+                <td>System</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section class="Tax">
+    <div class="title">
+        <h2>Tax Reports</h2>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Portfolio</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Clark Kent</td>
+                <td>Income Statement Standard</td>
+                <td><a>P & L Style Income Statement By Account</a></td>
+            </tr>
+            <tr>
+                <td>Clark Kent</td>
+                <td>Schedule E</td>
+                <td><a>Net Income grouped by Property in Schedule E Format</a></td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+
+<section class="Utility">
+    <div class="title">
+        <h2>Utility Bills</h2>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Uploaded</th>
+                <th>Size</th>
+                <th>Uploaded By</th>
+            </tr>
+            <tr>
+                <td><a>WSA_2015-06-18_for_2165_54th_St.pdf</a></td>
+                <td>06/29/2015</td>
+                <td>375k</td>
+                <td>dwilliams</td>
+            </tr>
+            <tr>
+                <td><a>WSA_2015-05-18_for_2165_54th_St.pdf</a></td>
+                <td>05/22/2015</td>
+                <td>387k</td>
+                <td>dwilliams</td>
+            </tr>
+            <tr>
+                <td><a>WSA_2015-02-17_for_2165_54th_St.pdf</a></td>
+                <td>02/26/2015</td>
+                <td>377k</td>
+                <td>ejohnson</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section class="Agreement">
+    <div class="title">
+        <h2>Owner Agreement</h2>
+    </div>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Uploaded</th>
+            <th>Size</th>
+            <th>Uploaded By</th>
+        </tr>
+        <tr>
+            <td><a>Owner Agreement 2165 54th St.pdf</a></td>
+            <td>12/10/2014</td>
+            <td>3387k</td>
+            <td>ejohnson</td>
+        </tr>
+    </table>
+</section>

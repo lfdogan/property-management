@@ -3,7 +3,7 @@
 
          
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
-         this.title = "Statements";
+
 
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
