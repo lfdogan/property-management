@@ -14,20 +14,23 @@
     
 
     
-    <!-- For Narrow Screens -->
+    <!-- Hamburger For Narrow Screens -->
     <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
-        <a id="hamburger-menu" class="hamburger dropbtn" ng-click="myAcct.toggleMyAccountDropdown()">&#9776;</a>        
+        <a id="hamburger-menu" class="hamburger dropbtn" ng-click="myAcct.Data.toggleMyAccountDropdown()">&#9776;</a>        
         <div class="dropdown-content">
-                <a href="#">My Profile</a>
-                <a href="#">My Buildings</a>
-                <a href="#">Contacts List</a>
-                <a href="#">Tax Reports</a>
-                <a href="#">Contribution</a>
-                <a href="#">Documents</a>
-                <a href="#">Sign Out</a>
-            </div>
+            <a href="#">My Profile</a>
+            <a href="#">My Buildings</a>
+            <a href="#">Contacts List</a>
+            <a href="#">Tax Reports</a>
+            <a href="#">Contribution</a>
+            <a href="#">Documents</a>
+            <a ui-sref="statements" id="nav-statements">Statements</a>
+            <a href="#">Sign Out</a>
+        </div>
     </div>
-    <!-- For Wide Screens -->
+
+    
+    <!-- Nav Links For Wide Screens -->
     <nav>
         <div class="left-third">
             <a>Logo</a>
@@ -36,7 +39,6 @@
             <a ui-sref="overview" class="nav" id="nav-overview">Overview</a>
             <a ui-sref="cashflow" class="nav" id="nav-cashflow">Transactions</a>
             <a ui-sref="bills" class="nav" id="nav-bills">Bills</a>
-            <a ui-sref="statements" class="nav" id="nav-statements"></a>
             <a ui-sref="maintenance" class="nav" id="nav-maintenance">Maintenance</a>
         </div>
         <div class="right-third dropdown" ng-controller="MyAccountCtrl as myAcct">
@@ -48,6 +50,7 @@
                 <a href="#">Tax Reports</a>
                 <a href="#">Contribution</a>
                 <a href="#">Documents</a>
+                <a ui-sref="statements">Statements</a>
                 <a href="#">Sign Out</a>
             </div>
         </div>
@@ -66,7 +69,6 @@
             <div class="link"><a ui-sref="overview" class="page-overview">Overview</a></div>
             <div class="link"><a ui-sref="cashflow" class="page-cashflow">Transactions</a></div>
             <div class="link"><a ui-sref="bills" class="page-bills">Bills</a></div>
-            <div class="link"><a ui-sref="statements" class="page-statements"></a></div>
             <div class="link"><a ui-sref="maintenance" class="page-maintenance">Maintenance</a></div>
         </div>
         <div class="footer-wide">
@@ -113,6 +115,7 @@
     <script src="/scripts/controllers/StatementsCtrl.js"></script>
     <script src="/scripts/controllers/SelectDateRangeCtrl.js"></script>
     <script src="/scripts/controllers/MyAccountCtrl.js"></script>
+    <script src="/scripts/controllers/MaintenancePendingCtrl.js"></script>
 
 
     <!--JS Directive Templates-->

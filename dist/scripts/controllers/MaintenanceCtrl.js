@@ -17,15 +17,10 @@
          this.allOpenMaintenance = Data.allOpenMaintenance();
          this.allClosedMaintenance = Data.allClosedMaintenance();
 
+         Data.followMyAccountLink();
 
-         //sets navigation link styling on page load
-         document.querySelector("#nav-bills").classList.remove("active");
-         document.querySelector("#nav-cashflow").classList.remove("active");
-         document.querySelector("#nav-maintenance").classList.add("active");
-         document.querySelector("#nav-overview").classList.remove("active");
-         document.querySelector("#nav-statements").classList.remove("active");    
-         
-         
+         //sets top navigation link styling on page load
+         Data.setNavLinkStyling("maintenance");
          
          
          

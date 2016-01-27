@@ -22,12 +22,13 @@
          this.latestStatement = Data.latestStatement();
          this.latestTransactions = Data.latestTransactions();
 
-         //sets navigation link styling on page load
-         document.querySelector("#nav-bills").classList.remove("active");
-         document.querySelector("#nav-cashflow").classList.remove("active");
-         document.querySelector("#nav-maintenance").classList.remove("active");
-         document.querySelector("#nav-overview").classList.add("active");
-         document.querySelector("#nav-statements").classList.remove("active");
+         Data.followMyAccountLink();
+         
+
+         
+         //sets top navigation link styling on page load
+         Data.setNavLinkStyling("overview");
+
          
      }
  

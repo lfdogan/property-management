@@ -4,6 +4,7 @@
 
          this.Data = Data;
          this.toggleMyAccountDropdown = Data.toggleMyAccountDropdown();
+         this.followMyAccountLink = Data.followMyAccountLink();
 
 
 

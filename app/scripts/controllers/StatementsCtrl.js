@@ -15,14 +15,12 @@
          this.filteredBills = Data.filteredBills();         
          
          this.Data = Data;
+         
+         Data.followMyAccountLink();
 
 
-         //sets navigation link styling on page load
-         document.querySelector("#nav-bills").classList.remove("active");
-         document.querySelector("#nav-cashflow").classList.remove("active");
-         document.querySelector("#nav-maintenance").classList.remove("active");
-         document.querySelector("#nav-overview").classList.remove("active");
-         document.querySelector("#nav-statements").classList.add("active");
+         //sets top navigation link styling on page load
+         Data.setNavLinkStyling("statements");
          
          //will update data when user clicks on a date range selection
          var StatementsCtrl = this;

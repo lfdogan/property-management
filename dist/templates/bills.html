@@ -24,7 +24,10 @@
         
     </tr>
 
-    
+<!--
+    If you need to pass a parameter into the state, you can do the following:
+    <a ui-sref="blog.edit-post({id: item.id})"></a>
+-->
     
 
     <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">

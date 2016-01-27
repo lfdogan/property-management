@@ -6,12 +6,10 @@
          this.Data = Data;
 
          var setRange = Data.globalNumDays;
-         console.log("Running SelectDateRangeCtrl.js... setRange", setRange);
          Data.changeDateRange(setRange);
          
 
          this.changeDateRange = function (days) {
-            console.log("Running SelectDateRangeCtrl.js... changeDateRange()");
             Data.changeDateRange(days, $scope);
         };
      }

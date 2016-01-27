@@ -28,7 +28,8 @@ a {
     display: none;
     position: absolute;
     background-color: #06538F;
-    min-width: 130px; 
+    min-width: 130px;
+    z-index: 100;
     /*width: 100%; /*width of the dropdown content to be as wide as the dropdown button and overflow:auto*/
     overflow: auto; /*enable scroll on small screens*/
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /*instead of border*/
@@ -57,7 +58,7 @@ a {
 }
 
 footer .link {
-    width: 19%;
+    width: 24%;
     display: inline-block;
 }
 footer a {

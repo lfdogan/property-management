@@ -194,7 +194,6 @@
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
-            console.log("NEW value of numDays is "+numDays+"("+text+")");
             // onDateRangeChangeHandlers initialized as empty array 
             for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
                 onDateRangeChangeHandlers[i]();
@@ -298,23 +297,38 @@
         
 
         
-        
-        
 
-        console.log("Running Data.js... inital value of numDays",numDays); // this runs just once on page refresh
-       
-        
                  
+        // functions used for the MY ACCOUNT drop-down menus
         var maActive = false;
+        Data.followMyAccountLink = function() {
+            document.querySelector(".dropdown-content").classList.remove("ma-active");
+            maActive = false;
+        };
         Data.toggleMyAccountDropdown = function(){
              if (maActive){
-                 document.querySelector(".dropdown-content").classList.remove("ma-active");
-                 maActive = false;
+                document.querySelector(".dropdown-content").classList.remove("ma-active");
+                maActive = false;
              } else {
                  document.querySelector(".dropdown-content").classList.add("ma-active");
                  maActive = true;
              }
          };
+
+        
+        /* function setNavLinkStyling() on each state controller
+        * sets top navigation link styling on page load
+        * paramenter page is a string matching the $state
+        * removes the "active" classs from each nav link element and adds "active" to current page
+        */
+         //sets top navigation link styling on page load
+        Data.setNavLinkStyling = function(page){
+            document.querySelector("#nav-bills").classList.remove("active");
+            document.querySelector("#nav-cashflow").classList.remove("active");
+            document.querySelector("#nav-maintenance").classList.remove("active");
+            document.querySelector("#nav-overview").classList.remove("active");
+            document.querySelector("#nav-"+page).classList.add("active");
+        };
         
         
         
