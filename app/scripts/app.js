@@ -31,8 +31,15 @@
              .state('statements', {
                  url: '/statements',
                  controller: 'StatementsCtrl as statements',
-                 templateUrl: '/templates/statements.html'                    
-         });
+                 templateUrl: '/templates/statements.html'
+             })
+             .state('bill', {
+                 url: '/bill/:billNumber',
+                 templateUrl: '/templates/bill.html',
+                 controller: function($scope, $stateParams) {
+                     $scope.billNumber = $stateParams.billNumber;
+                 }
+            });
      }
 //define a module with angular.module:
 //The first argument passed, blocJams, is the prescribed name of the module. The array, passed as the second argument, injects dependencies into an application.

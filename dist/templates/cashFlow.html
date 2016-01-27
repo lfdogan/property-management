@@ -31,7 +31,7 @@
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: '-payDate'">
         <td class="right"> {{ item.payDate | date: 'M/d/yy' }} </td>
         
-        <td class="narrow-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:10 }} - {{ item.account | limitTo:10 }} {{ item.description | limitTo:30 }}</td>
+        <td class="narrow-only"> {{ item.billNumber | billNumber }} {{ item.transactionType | transactionType | limitTo:10 }} - {{ item.account | limitTo:10 }} {{ item.description | limitTo:30 }}</td>
         
         <td class="medium-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:20 }} - {{ item.account | limitTo:10 }}</td>
         <td class="medium-only"> {{ item.description | limitTo:50 }} </td>

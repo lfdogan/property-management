@@ -27,13 +27,13 @@
 <!--
     If you need to pass a parameter into the state, you can do the following:
     <a ui-sref="blog.edit-post({id: item.id})"></a>
+<a ui-sref="new-qs({ portfolioId: 1 })">New (query string)</a>
 -->
     
 
     <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">
-<!--    <tr ng-repeat="item in bills.filteredBills" -->
-<!--        ng-show="bills.Data.showInDateRange( {{item.billNumber}}) && bills.Data.trial({{item.payDate}})">-->
-        <td class="right"> {{ item.billNumber }} </td>
+<!--        <td class="right"> {{ item.billNumber }} </td>-->
+        <td class="right"><a ui-sref="bill( {billNumber: {{ item.billNumber }} } )"> {{ item.billNumber }} </a></td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <td class="wide-only"> {{ item.account }}  {{ item.description }} </td>
         <td class="right"> {{ item.amountPaid | currency }} </td>         

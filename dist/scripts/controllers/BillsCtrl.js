@@ -19,6 +19,10 @@
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("bills");
          
+         this.getSingleBill = function(billnum, item){
+             if (billnum == item.billNumber) return true;
+         };
+         
          
          //will update data when user clicks on a date range selection
          var BillsCtrl = this;

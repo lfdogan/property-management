@@ -1,0 +1,22 @@
+<h2 class="center">Bill #{{billNumber}}</h2>
+
+
+
+<div ng-controller="BillsCtrl as ctrl">
+    <div ng-repeat="item in ctrl.allBills">
+        <div class="white-box" ng-show="ctrl.getSingleBill( {{billNumber}}, {{item}} )">
+            
+            <h4>Bill {{ item.billNumber }} Information</h4>
+            <p>Bill Date: {{ item.billDate | date: 'MM/dd/yyyy' }}</p>
+            <p>Building/Unit: {{ item.building }}</p>
+            <p>Bill Type: {{ item.account }}</p>
+            <p>Description: {{ item.description }} </p>        
+            <p>Due Date: {{ item.dueDate | date: 'MM/dd/yyyy' }} </p>
+            <p>Paid Status:  {{ item.status }} </p>
+            <p>Date Paid: {{ item.payDate | date: 'MM/dd/yyyy' }} </p>
+            <p>Amount Paid: {{ item.amountPaid | currency }} </p>
+            <p ng-show="{{item.vendor}}">Vendor:  {{ item.vendor }} </p>
+            <p ng-show="{{item.workOrderNumber}}">Associated with WO#{{ item.workOrderNumber }} </p>
+        </div>
+    </div>
+</div>
