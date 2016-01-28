@@ -22,6 +22,9 @@
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("maintenance");
          
+         this.getSingleWorkOrder = function(wonum, item){
+             if (wonum == item.workOrderNumber) return true;
+         };
          
          
                  

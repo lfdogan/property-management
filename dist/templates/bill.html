@@ -5,18 +5,24 @@
 <div ng-controller="BillsCtrl as ctrl">
     <div ng-repeat="item in ctrl.allBills">
         <div class="white-box" ng-show="ctrl.getSingleBill( {{billNumber}}, {{item}} )">
+                        
+            <table>
+                <tr><td>Bill</td><td>{{ item.billNumber }}</td></tr>
             
-            <h4>Bill {{ item.billNumber }} Information</h4>
-            <p>Bill Date: {{ item.billDate | date: 'MM/dd/yyyy' }}</p>
-            <p>Building/Unit: {{ item.building }}</p>
-            <p>Bill Type: {{ item.account }}</p>
-            <p>Description: {{ item.description }} </p>        
-            <p>Due Date: {{ item.dueDate | date: 'MM/dd/yyyy' }} </p>
-            <p>Paid Status:  {{ item.status }} </p>
-            <p>Date Paid: {{ item.payDate | date: 'MM/dd/yyyy' }} </p>
-            <p>Amount Paid: {{ item.amountPaid | currency }} </p>
-            <p ng-show="{{item.vendor}}">Vendor:  {{ item.vendor }} </p>
-            <p ng-show="{{item.workOrderNumber}}">Associated with WO#{{ item.workOrderNumber }} </p>
+            
+            
+            <tr><td>Bill Date</td><td>{{ item.billDate | date: 'MM/dd/yyyy' }}</td></tr>
+            <tr><td>Building/Unit</td><td>{{ item.building }}</td></tr>
+            <tr><td>Bill Type</td><td>{{ item.account }}</td></tr>
+            <tr><td>Description</td><td>{{ item.description }} </td></tr>        
+            <tr><td>Due Date</td><td>{{ item.dueDate | date: 'MM/dd/yyyy' }} </td></tr>
+            <tr><td>Paid Status</td><td> {{ item.status }} </td></tr>
+            <tr><td>Date Paid</td><td>{{ item.payDate | date: 'MM/dd/yyyy' }} </td></tr>
+            <tr><td>Amount Paid</td><td>{{ item.amountPaid | currency }} </td></tr>
+            <tr ng-show="{{item.vendor}}"><td>Vendor</td><td>{{ item.vendor }} </td></tr>
+            <tr ng-show="{{item.workOrderNumber}}"><td>Associated with</td><td><a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }}</a> </td></tr>
+        
+        </table>
         </div>
     </div>
 </div>

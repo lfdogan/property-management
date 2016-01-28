@@ -18,7 +18,7 @@
          Data.followMyAccountLink();
 
          //sets top navigation link styling on page load
-         Data.setNavLinkStyling("cashflow");
+         Data.setNavLinkStyling("transactions");
          
          //will update data when user clicks on a date range selection
          var CashFlowCtrl = this;

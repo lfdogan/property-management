@@ -266,14 +266,13 @@
         * It takes in the transaction item and return the work order number 
         * if there is one or an empty string if no work order number
         * This is used to prevent errors when showBills() runs on bills without work order numbers
+        * <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">{{ bill.billNumber }} {{bill.cost | currency }}</span>
         */
         Data.getWorkOrderNumber = function (bill) {
           return bill.workOrderNumber || "";  
         };
         //for maintenance.html page to get only bills from all transactions of the 'bills' reference
         Data.showBills = function(maintenance_WONum, bill_WONum){
-            //console.log("maintenance_WONum", maintenance_WONum);
-            //console.log("bill_WONum", bill_WONum);
             if (bill_WONum){
                 if (bill_WONum == maintenance_WONum) return true;
             } 
@@ -324,7 +323,7 @@
          //sets top navigation link styling on page load
         Data.setNavLinkStyling = function(page){
             document.querySelector("#nav-bills").classList.remove("active");
-            document.querySelector("#nav-cashflow").classList.remove("active");
+            document.querySelector("#nav-transactions").classList.remove("active");
             document.querySelector("#nav-maintenance").classList.remove("active");
             document.querySelector("#nav-overview").classList.remove("active");
             document.querySelector("#nav-"+page).classList.add("active");

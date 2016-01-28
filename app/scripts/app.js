@@ -18,8 +18,8 @@
                  controller: 'BillsCtrl as bills',
                  templateUrl: '/templates/bills.html'  
              })         
-             .state('cashflow', {
-                 url: '/cashflow',
+             .state('transactions', {
+                 url: '/transactions',
                  controller: 'CashFlowCtrl as cashflow',
                  templateUrl: '/templates/cashFlow.html'
              })
@@ -28,8 +28,8 @@
                  controller: 'MaintenanceCtrl as maintenance',
                  templateUrl: '/templates/maintenance.html'
              })
-             .state('statements', {
-                 url: '/statements',
+             .state('documents', {
+                 url: '/documents',
                  controller: 'StatementsCtrl as statements',
                  templateUrl: '/templates/statements.html'
              })
@@ -40,6 +40,13 @@
                      $scope.billNumber = $stateParams.billNumber;
                  }
              })
+             .state('workorder', {
+                 url: '/workorder/:workOrderNumber',
+                 templateUrl: '/templates/workOrder.html',
+                 controller: function($scope, $stateParams) {
+                     $scope.workOrderNumber = $stateParams.workOrderNumber;
+                 }
+         })
              .state('profile', {
                  url: '/profile',
                  controller: 'MyAccountCtrl as profile',

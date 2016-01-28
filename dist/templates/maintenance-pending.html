@@ -8,7 +8,7 @@
                 <br/>Location: {{ item.building }}
             </div>
             <div class="half-column">
-                WO#{{ item.workOrderNumber }}
+                <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }}</a>
                 <br/><a class="ion-ios-telephone"></a>
                 <span>&nbsp;</span>
                 <a class="ion-email"></a>

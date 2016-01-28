@@ -20,7 +20,7 @@
 
 
          //sets top navigation link styling on page load
-         Data.setNavLinkStyling("statements");
+         Data.setNavLinkStyling("documents");
          
          //will update data when user clicks on a date range selection
          var StatementsCtrl = this;

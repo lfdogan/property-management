@@ -21,12 +21,11 @@
         <br/>Owner Draw: <!--<span ng-repeat="bill in overview.allBills ">
             <span ng-show="overview.Data.getOwnerDraw( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}}, {{bill.transactionType}} )">{{ bill.amountPaid | currency}}</span>
         </span>-->
-        <br/>
-
-        <span ng-repeat="bill in overview.allBills ">
-            <a ui-sref="bills">
-                <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">{{ bill.billNumber | billNumber }}</span>
-            </a>
+        <br/>Bills: 
+        <span ng-repeat="bill in overview.allBills ">    
+            <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
+                    <a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a>
+            </span>
         </span>
     </div>
 </div>
@@ -35,7 +34,7 @@
 
 
 
-<a ui-sref="cashflow"><h2 class="center">My Status</h2></a>
+<a ui-sref="cashflow"><h2 class="center">Income Status</h2></a>
 <div class="white-box">
     
     <div class="center">

@@ -3,6 +3,9 @@
 html {
     font-family: 'Hind Vadodara', sans-serif;
     background-image: radial-gradient(80% 60%, #FFFFFF 10%, #06538F 98%);/* Page Background: */
+    background-repeat: no-repeat; /* repeat-y will repeat a background image only vertically. */
+    background-attachment: fixed;
+    background-position: top;
     min-width: 100%;
     height: 100%; /* makes sure our html takes up 100% of the browser window */
 }
@@ -23,25 +26,25 @@ a {
     background-color: #06538F;
     color: white;
 }
-/*My Account dropdown content (hidden by default) but displayed on hover */
+/*My Account dropdown content (hidden by default)
+ * on click run toggleMyAccountDropdown() to change display to add class .ma-active */
 .dropdown-content {
     display: none;
-    position: absolute;
-    background-color: #06538F;
-    min-width: 130px;
-    z-index: 100;
-    /*width: 100%; /*width of the dropdown content to be as wide as the dropdown button and overflow:auto*/
-    overflow: auto; /*enable scroll on small screens*/
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /*instead of border*/
-
 }
 /* The container <div> needed to position the dropdown content*/
 .ma-active {
     /*position: relative; /* relative needed when we want the dropdown content to be placed right below the dropdown button*/
-    position: absolute;
+    /*position: absolute; /*absolute moves with scroll*/
+    position: fixed; /*fixed use left/right and top/bottom */
     right: 0;
-    top: 20px;
+    top: 40px;
+    z-index: 100;
     display: inline-block;
+    background-color: #06538F;
+    min-width: 100px;
+    /*width: 100%; /*width of the dropdown content to be as wide as the dropdown button and overflow:auto*/
+    overflow: auto; /*enable scroll on small screens*/
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /*instead of border*/
 
 }
 /*MyAccount dropdown links inside dropdown box*/
@@ -88,7 +91,10 @@ we will use a hamburger icon to click menu in/out */
 .hamburger {
     color: white;
     text-decoration: none; /* no underline */
-    text-align: right;
+    position: fixed; /*fixed use left/right and top/bottom */
+    right: 0;
+    top: 0;
+    z-index: 100;
 }
 main {
     padding-bottom: 30px; /* top/bottom match the nav/footer height */
@@ -113,6 +119,9 @@ footer {
 }
 .footer-wide {
     display: none;    
+}
+footer div {
+    padding-top: 4px;
 }
 
 
