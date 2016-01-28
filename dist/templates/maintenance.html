@@ -28,7 +28,7 @@
 <div class="white-box" id="maintenance-ongoing">
     
     <div ng-repeat="item in maintenance.allOpenMaintenance">
-        <span><a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{item.workOrderNumber}}</a>
+        <span><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{item.workOrderNumber}}</a>
             <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
             <br/>Started: {{ item.dateStarted | date: 'MM/dd/yyyy' }}
             <br/>Location: {{item.building}}
@@ -56,7 +56,7 @@
             <td> {{ item.description }} </td>
             <td><span ng-repeat="bill in maintenance.allBills "> 
                 <span ng-show="{{bill.workOrderNumber}}">
-                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
+                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
                 </span>
                 </span>
             </td>

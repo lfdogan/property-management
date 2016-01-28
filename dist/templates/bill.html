@@ -8,20 +8,20 @@
                         
             <table>
                 <tr><td>Bill</td><td>{{ item.billNumber }}</td></tr>
-            
-            
-            
-            <tr><td>Bill Date</td><td>{{ item.billDate | date: 'MM/dd/yyyy' }}</td></tr>
-            <tr><td>Building/Unit</td><td>{{ item.building }}</td></tr>
-            <tr><td>Bill Type</td><td>{{ item.account }}</td></tr>
-            <tr><td>Description</td><td>{{ item.description }} </td></tr>        
-            <tr><td>Due Date</td><td>{{ item.dueDate | date: 'MM/dd/yyyy' }} </td></tr>
-            <tr><td>Paid Status</td><td> {{ item.status }} </td></tr>
-            <tr><td>Date Paid</td><td>{{ item.payDate | date: 'MM/dd/yyyy' }} </td></tr>
-            <tr><td>Amount Paid</td><td>{{ item.amountPaid | currency }} </td></tr>
-            <tr ng-show="{{item.vendor}}"><td>Vendor</td><td>{{ item.vendor }} </td></tr>
-            <tr ng-show="{{item.workOrderNumber}}"><td>Associated with</td><td><a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }}</a> </td></tr>
-        
+                <tr><td>Bill Date</td><td>{{ item.billDate | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><td>Building/Unit</td><td>{{ item.building }}</td></tr>
+                <tr><td>Bill Type</td><td>{{ item.account }}</td></tr>
+                <tr><td>Description</td><td>{{ item.description }} </td></tr>        
+                <tr><td>Due Date</td><td>{{ item.dueDate | date: 'MM/dd/yyyy' }} </td></tr>
+                <tr><td>Paid Status</td><td> {{ item.status }} </td></tr>
+                <tr><td>Date Paid</td><td>{{ item.payDate | date: 'MM/dd/yyyy' }} </td></tr>
+                <tr><td>Amount Paid</td><td>{{ item.amountPaid | currency }} </td></tr>
+                <tr><td>Vendor</td><td>{{ item.vendor }} </td></tr>
+                <tr>
+                    <td>Associated with</td>
+                    <td><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{ item.workOrderNumber }}</a>
+                    </td>
+                </tr>
         </table>
         </div>
     </div>

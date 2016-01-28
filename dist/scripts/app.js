@@ -34,14 +34,14 @@
                  templateUrl: '/templates/statements.html'
              })
              .state('bill', {
-                 url: '/bill/:billNumber',
+                 url: '/bills/:billNumber',
                  templateUrl: '/templates/bill.html',
                  controller: function($scope, $stateParams) {
                      $scope.billNumber = $stateParams.billNumber;
                  }
              })
              .state('workorder', {
-                 url: '/workorder/:workOrderNumber',
+                 url: '/maintenance/:workOrderNumber',
                  templateUrl: '/templates/workOrder.html',
                  controller: function($scope, $stateParams) {
                      $scope.workOrderNumber = $stateParams.workOrderNumber;

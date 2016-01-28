@@ -20,7 +20,6 @@
          this.allClosedMaintenance = Data.allClosedMaintenance();
          
          this.latestStatement = Data.latestStatement();
-         this.latestTransactions = Data.latestTransactions();
 
          Data.followMyAccountLink();
          

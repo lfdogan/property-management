@@ -19,9 +19,17 @@
 
          Data.followMyAccountLink();
 
+         
+         
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("maintenance");
          
+         
+         /* for the workOrder.html page to show only the information for specified work order
+         * ng-show="ctrl.getSingleWorkOrder( {{workOrderNumber}}, {{item}} )
+         * {{workOrderNumber}} was passed from previous page when user clicks on a workOrderNumber
+         * item is each of the object elements from the allMaintenance array
+         */
          this.getSingleWorkOrder = function(wonum, item){
              if (wonum == item.workOrderNumber) return true;
          };

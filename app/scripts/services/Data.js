@@ -10,6 +10,8 @@
         
         
         //private variables, attributes, functions begin with "var"
+        
+        
         // Firebase database references
         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
         var billsRef = rootRef.child('bills');
@@ -17,16 +19,12 @@
         var maintenanceRef = rootRef.child('maintenance');
 
 
-        
         //initial values of start and end date range
-                //initial values of start and end date range
-//        var startNegativeRange = 1439697599999; //negative numbers will order descending but start/end will need to switch
-//        var endNegativeRange = 1433131200000; //negative 6/1/15
         var startRange = 1433131200000; // custom start date is 6/1/15
         var endRange = 1439697599999; // custom end date is 8/15/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
-        var numDays = 9999;
+        var numDays = 9999; // used for switching date selection range
 
         // array used for changeDateRange()
         var onDateRangeChangeHandlers = [];
@@ -36,24 +34,17 @@
         //var Data = $firebaseArray.$extend({// these methods exist on the prototype, so we can access the data using `this`
       
         var Data = {
-            allBills: function() {//get all bills from database
+            //Bills / Cash Flow / Transactions References
+            allBills: function() {//get all bills from database, order by bill number (also date created) 
                 return $firebaseArray(billsRef
                                       .orderByChild("billNumber"));
             },
-            allStatements: function() {
-                return $firebaseArray(statementsRef
-                                      .orderByChild("endDate"));
-            },
-            allMaintenance: function() {
-                return $firebaseArray(maintenanceRef
-                                      .orderByChild("workOrderNumber"));
-            },
-            billsOwnerDraw: function() {
+            billsOwnerDraw: function() {//for the overview page, selects only transactions that are owner draw
                 return $firebaseArray(billsRef
                                      .orderByChild("transactionType")
                                      .equalTo("Owner Draw"));
             },
-            billsRentIncome: function() {
+            billsRentIncome: function() {//for the overview page, selects only transactions that are rent income
                 return $firebaseArray(billsRef
                                      .orderByChild("transactionType")
                                      .equalTo("Rent"));
@@ -70,10 +61,11 @@
                                       .endAt(endRange)
                                       .orderByChild("payDate"));
             },
-            latestTransactions: function(){
-                return $firebaseArray(billsRef
-                                      .orderByChild("orderDate")
-                                      .limitToFirst(5)); // orderDate is the negative payDate
+            
+            //Statements References
+            allStatements: function() {
+                return $firebaseArray(statementsRef
+                                      .orderByChild("endDate"));
             },
             filteredStatements: function(){
                 return $firebaseArray(statementsRef
@@ -86,6 +78,12 @@
                                       .orderByChild("endDate")
                                       .limitToLast(1));                
 
+            },
+            
+            //Maintenance / Work Order References
+            allMaintenance: function() {
+                return $firebaseArray(maintenanceRef
+                                      .orderByChild("workOrderNumber"));
             },
             filteredMaintenance: function(){
                 return $firebaseArray(maintenanceRef
@@ -107,7 +105,7 @@
                 return $firebaseArray(maintenanceRef
                                       .orderByChild("status")
                                       .equalTo("Closed"));
-            }
+            },
 
          };   
 

@@ -24,7 +24,7 @@
         <br/>Bills: 
         <span ng-repeat="bill in overview.allBills ">    
             <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
-                    <a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a>
+                    <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a>
             </span>
         </span>
     </div>

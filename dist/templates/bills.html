@@ -33,7 +33,7 @@
 
     <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">
 <!--        <td class="right"> {{ item.billNumber }} </td>-->
-        <td class="right"><a ui-sref="bill( {billNumber: {{ item.billNumber }} } )"> {{ item.billNumber }} </a></td>
+        <td class="right"><a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )"> {{ item.billNumber }} </a></td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <td class="wide-only"> {{ item.account }}  {{ item.description }} </td>
         <td class="right"> {{ item.amountPaid | currency }} </td>         

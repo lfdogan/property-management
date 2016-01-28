@@ -11,29 +11,29 @@
                 <tr><td>Work Order</td><td>{{ item.workOrderNumber }}</td></tr>
                 <tr><td>Date Created</td><td>{{ item.dateCreated | date: 'MM/dd/yyyy' }}</td></tr>
                 <tr><td>Building/Unit</td><td>{{ item.building }}</td></tr>
+                <tr><td>Managed By</td><td> {{ item.managedBy }}</td></tr>
                 <tr><td>Description</td><td>{{ item.description }}</td></tr>
                 <tr><td>Estimated Cost</td><td>{{ item.estimatedCost | currency }}</td></tr>
+                <tr><td>Specific Location</td><td>{{ item.specificLocation }}</td></tr>
                 <tr><td>Approved</td><td>{{ item.approved }}</td></tr>
-                <tr ng-show="{{item.dateStarted}}">
-                    <td>Date Started</td><td>{{ item.dateStarted | date: 'MM/dd/yyyy' }}</td></tr>
-                <tr ng-show="{{item.status}}">
-                    <td>Status</td><td>{{ item.status }}</td></tr>
-                <tr ng-show="{{item.closingComments}}">
-                    <td>Closing Comments</td><td> {{ item.closingComments }}</td></tr>
-                <tr ng-show="{{item.dateCompleted}}">
-                    <td>Date Completed</td><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><td>Date Started</td><td>{{ item.dateStarted | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><td>Status</td><td>{{ item.status }}</td></tr>
+                <tr><td>Closing Comments</td><td> {{ item.closingComments }}</td></tr>
+                <tr><td>Date Completed</td><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
                 <tr>
-                    <td>Bills</td><td>
-                    <span ng-repeat="bill in ctrl.allBills "> 
+                    <td>Bills</td>
+                    <td><span ng-repeat="bill in ctrl.allBills ">
                         <span ng-show="{{bill.workOrderNumber}}">
-                            <p ng-show="ctrl.Data.showBills( {{item.workOrderNumber}} , ctrl.Data.getWorkOrderNumber(bill) )">
-                                <a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a> 
-                                {{ bill.cost | currency }} 
-                                {{ bill.description }}
-                            </p>
-                        </span>
-                    </span>
-                </td></tr>
+                        <p ng-show="ctrl.Data.showBills( {{item.workOrderNumber}} , ctrl.Data.getWorkOrderNumber(bill) )">
+                            <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )"> {{ bill.billNumber }}</a>
+                            {{ bill.billNumber }}
+                            {{ bill.cost | currency }} 
+                                {{ bill.payDate | date: 'MM/dd/yyyy' }}
+                                {{ bill.description }} 
+                                {{ bill.vendor }}
+                        </p></span></span>
+                    </td>
+                </tr>
             </table>
             
 

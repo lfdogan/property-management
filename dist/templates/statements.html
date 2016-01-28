@@ -19,16 +19,19 @@
 
 <table>
     <tr>
-        <th class="center">statement period</th>               
+        <th class="center">statement period</th>
         <th>bill numbers</th>
     </tr>
 
 
     <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
-        <td class="center"><a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a></td>
+        <td class="center">
+            <a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a>
+            <a class="ion-ios-download-outline"></a>
+        </td>
         <td><span ng-repeat="bill in statements.allBills "> 
                 <span ng-show="statements.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
-                    <a ui-sref="bill( {billNumber: {{ bill.billNumber }} } )">{{ bill.billNumber }}</a></span>
+                    <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a></span>
 <!--                    <a>{{bill.billNumber}}</a></span>-->
             </span></td>
     </tr>
