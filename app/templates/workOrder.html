@@ -22,16 +22,37 @@
                 <tr><td>Date Completed</td><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
                 <tr>
                     <td>Bills</td>
+<!--
                     <td><span ng-repeat="bill in ctrl.allBills ">
                         <span ng-show="{{bill.workOrderNumber}}">
                         <p ng-show="ctrl.Data.showBills( {{item.workOrderNumber}} , ctrl.Data.getWorkOrderNumber(bill) )">
                             <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )"> {{ bill.billNumber }}</a>
-                            {{ bill.billNumber }}
                             {{ bill.cost | currency }} 
                                 {{ bill.payDate | date: 'MM/dd/yyyy' }}
                                 {{ bill.description }} 
                                 {{ bill.vendor }}
                         </p></span></span>
+                    </td>
+-->
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Bill #</th>
+                                <th>cost</th>
+                                <th>pay date</th>
+                                <th>description</th>
+                                <th>vendor</th>
+                            </tr>
+                            <tr ng-repeat="bill in ctrl.allBills "  ng-show="ctrl.Data.showBills( {{item.workOrderNumber}} , ctrl.Data.getWorkOrderNumber(bill) )">
+                                <td><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )"> {{ bill.billNumber }}</a></td>
+                                <td>{{ bill.cost | currency }}</td>
+                                <td>{{ bill.payDate | date: 'MM/dd/yyyy' }}</td>
+                                <td>{{ bill.description }} </td>
+                                <td>{{ bill.vendor }}</td>
+
+                            </tr>
+                                
+                        </table>
                     </td>
                 </tr>
             </table>
