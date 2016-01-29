@@ -2,7 +2,7 @@
 <div class="title"><p class="wide">Select an option to change date range:</p></div>
 
 <!--ALL SCREEN WIDTHS-->
-<div class="date-selector" ng-controller="SelectDateRangeCtrl as Ctrl">
+<div id="date-selector" ng-controller="SelectDateRangeCtrl as Ctrl">
     <div id="last30Days" 
          class="cell"
          ng-click="Ctrl.Data.changeDateRange(30)">Last 30 Days</div>
@@ -11,5 +11,5 @@
          ng-click="Ctrl.Data.changeDateRange(365)">Current Year</div>
     <div id="customDates" 
          class="cell"
-         ng-click="Ctrl.Data.changeDateRange(9999)">Custom Dates</div>
+         ng-click="Ctrl.Data.changeDateRange(9999)">6/1/15-8/15/15</div>
 </div>

@@ -112,9 +112,7 @@
         
 
     
-        // Public functions, variables, attributes begin with "Data." because they are part of the Data object that is passed to controllers    
-//            Data.beginDateRange = endNegativeRange*-1; // use negative values when filtering by orderDate
-//            Data.endDateRange = startNegativeRange*-1; // use negative values when filtering by orderDate
+        // Public functions, variables, attributes begin with "Data." because they are part of the Data object that is passed to controllers
         Data.beginDateRange = startRange;
         Data.endDateRange = endRange;
         Data.globalNumDays = numDays;
@@ -145,8 +143,10 @@
         * ANGULARJS ngClick on any of the date selection buttons
         * takes in a number of days to determine what to change start/end dates to
         * then runs updateUI() to set those dates
+        * inital load parameters are inital value of numDays and scope
         */
-        Data.changeDateRange = function(numDays, scope){
+//        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
+        Data.changeDateRange = function(numDays){
             var text;    
             var eleL30D = document.querySelector("#last30Days");
             var eleCY = document.querySelector("#currentYear");
@@ -157,28 +157,20 @@
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
-                        //endNegativeRange = new Date().getTime();
-                        //endNegativeRange = endNegativeRange*-1
-//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-//                        endNegativeRange = startNegativeRange - (thirtyDays*-1);//minus 30 days is 7/18/15 11:01:20
-                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+                        endRange = today;
+                        //endRange = new Date().getTime();
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
                         eleL30D.classList.add("active");
                         break;
                     case 365:
                         text = "current year";
-                        //endNegativeRange = new Date().getTime();
-                        //endNegativeRange = endNegativeRange*-1
-//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-//                        endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
-                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+                        endRange = today;
+                        //endRange = new Date().getTime();
                         eleCY.classList.add("active");
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
-//                        endNegativeRange = -1433131200000; // 06/01/2015
-//                        startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
                         eleCD.classList.add("active");
@@ -187,20 +179,17 @@
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
-//            Data.beginDateRange = endNegativeRange*-1; // use negative values when filtering by orderDate
-//            Data.endDateRange = startNegativeRange*-1; // use negative values when filtering by orderDate
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
-            // onDateRangeChangeHandlers initialized as empty array 
+            // onDateRangeChangeHandlers initialized as empty array
             for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
                 onDateRangeChangeHandlers[i]();
-            }       
-            
-         };    
-
-
-        
+            }
+         };
+        /* function passes 'handler' which is a function from the page controller's function 'onDateRangeChange()'
+        * it pushes 'handler' to 0 index of 'onDateRangeChangeHandlersarray
+        */
        Data.onDateRangeChange = function (handler) {
            onDateRangeChangeHandlers.push(handler);
        };

@@ -5,13 +5,20 @@
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.Data = Data;
 
+         //initial value for setRange is on page load and it is not updated on page
          var setRange = Data.globalNumDays;
+
+         /* works on page load to highlight active cell of date selection bar. 
+         * title dates and data are correct without this statement
+         */
          Data.changeDateRange(setRange);
          
 
-         this.changeDateRange = function (days) {
-            Data.changeDateRange(days, $scope);
-        };
+         //This function is never called and not needed
+//         this.changeDateRange = function(days) {
+//             Data.changeDateRange(days, $scope);
+//        };
+         
      }
  
      angular

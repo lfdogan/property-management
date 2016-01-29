@@ -1,20 +1,20 @@
 
 /*Dates Selection Section*/
-.date-selector{
+#date-selector{
     color: white;
-    width: 310px;
+    width: 340px; /* if left blank it will do full page width*/
     background-color: #6896BB;
-    padding: 5px 0;
-    margin: auto;
+    padding: 0; /*space outside selected tab*/
+    margin: auto;/*center on page*/
 }
-.date-selector .cell {
-    display: inline;   
-    width: 100px;
+#date-selector .cell {
+    display: inline-block;   
+    width: 31%; /* width of each cell (85+10)*3=285 */
     text-align: center;
     vertical-align: middle;
-    padding: 5px;
+    padding: 5px 0;
 }
-.date-selector .active {
+#date-selector .active {
     background-color: #06538F;
 }
 
