@@ -12,33 +12,24 @@
 
 <br/>
 <table>
-    <tr><th>Building: 2165 54th St</th></tr>
+    <tr><th>Building/unit: <select><option value="216554THSTREE">2165 54th St</option></select></th></tr>
 </table>
 
 <table>
     <tr>
         <th class="right">bill #</th>
         <th class="right">date paid</th>
-        <th class="wide-only">description</th>
+        <th class="td-wide-only">type</th>
+        <th class="td-medium-plus">description</th>
         <th class="right">amount paid</th>
-        
     </tr>
-
-<!--
-    If you need to pass a parameter into the state, you can do the following:
-    <a ui-sref="blog.edit-post({id: item.id})"></a>
-<a ui-sref="new-qs({ portfolioId: 1 })">New (query string)</a>
--->
-    
-
     <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">
-<!--        <td class="right"> {{ item.billNumber }} </td>-->
         <td class="right"><a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )"> {{ item.billNumber }} </a></td>
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <td class="wide-only"> {{ item.account }}  {{ item.description }} </td>
+        <td class="td-medium-plus"> {{ item.account }}</td>
+        <td class="td-wide-only"> {{ item.description }} </td>
         <td class="right"> {{ item.amountPaid | currency }} </td>         
     </tr>
-
 </table>
 
 

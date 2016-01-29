@@ -14,32 +14,32 @@
 <br/>
 
 <table>
-    <tr><td>Building: 2165 54th St</td></tr>
+    <tr><th>Building/unit: <select><option value="216554THSTREE">2165 54th St</option></select></th></tr>
 <!--    {{ item.building }}-->
 </table>
 <table>
     <tr>
         <th class="right"><u>date</u></th>
-        <th class="narrow-only">description</th>
-        <th class="medium-only">bill# / type</th>
-        <th class="wide-only">bill# / type</th>
-        <th class="medium-only">description</th>
-        <th class="wide-only">description</th>
+        <th class="td-narrow-only">description</th>
+        <th class="td-medium-only">bill# / type</th>
+        <th class="td-wide-only">bill# / type</th>
+        <th class="td-medium-only">description</th>
+        <th class="td-wide-only">description</th>
         <th class="right">amount</th>
     </tr>
 
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: '-payDate'">
         <td class="right"> {{ item.payDate | date: 'M/d/yy' }} </td>
         
-        <td class="narrow-only"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a> {{ item.transactionType | transactionType | limitTo:10 }} - {{ item.account | limitTo:10 }} {{ item.description | limitTo:30 }}</td>
+        <td class="td-narrow-only"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a> {{ item.transactionType | transactionType | limitTo:10 }} - {{ item.account | limitTo:10 }} {{ item.description | limitTo:30 }}</td>
         
 <!--        <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">{{ bill.billNumber }} {{bill.cost | currency }}</span>-->
         
-        <td class="medium-only"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:20 }} - {{ item.account | limitTo:10 }}</td>
-        <td class="medium-only"> {{ item.description | limitTo:50 }} </td>
+        <td class="td-medium-only"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a>{{ item.transactionType | transactionType | limitTo:20 }} - {{ item.account | limitTo:10 }}</td>
+        <td class="td-medium-only"> {{ item.description | limitTo:50 }} </td>
         
-        <td class="wide-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType }} - {{ item.account | transactionType | limitTo:10 }}</td>
-        <td class="wide-only"> {{ item.description }} </td>
+        <td class="td-wide-only"> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a>{{ item.transactionType }} - {{ item.account | transactionType | limitTo:10 }}</td>
+        <td class="td-wide-only"> {{ item.description }} </td>
         
         <td class="right"> {{ item.amountPaid | currency }} </td>
     </tr>

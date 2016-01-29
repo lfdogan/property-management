@@ -18,8 +18,8 @@
             <br/>{{ item.description }}
             <br/>
             <span class="center">
-                <div class="maintenance-button-approve" ng-click="overview.Data.decideWorkOrder(item,1)">Approve</div>
-                <div class="maintenance-button-reject" ng-click="overview.Data.decideWorkOrder(item,0)">Reject</div>
+                <div class="maintenance-button-approve" ng-click="overview.Data.decideWorkOrder(item,true)">Approve</div>
+                <div class="maintenance-button-reject" ng-click="overview.Data.decideWorkOrder(item,false)">Reject</div>
             </span>
         </div>
 

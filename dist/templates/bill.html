@@ -16,8 +16,8 @@
                 <tr><td>Paid Status</td><td> {{ item.status }} </td></tr>
                 <tr><td>Date Paid</td><td>{{ item.payDate | date: 'MM/dd/yyyy' }} </td></tr>
                 <tr><td>Amount Paid</td><td>{{ item.amountPaid | currency }} </td></tr>
-                <tr><td>Vendor</td><td>{{ item.vendor }} </td></tr>
-                <tr>
+                <tr ng-show="'{{ item.vendor }}'"><td>Vendor</td><td>{{ item.vendor }} </td></tr>
+                <tr ng-show="'{{ item.workOrderNumber }}'">
                     <td>Associated with</td>
                     <td><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{ item.workOrderNumber }}</a>
                     </td>

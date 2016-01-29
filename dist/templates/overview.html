@@ -45,14 +45,7 @@
             Deposit submitted {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid*-1 | currency }} (Download statement <a class="ion-ios-download-outline"></a> )
         </div>
     </div>
-<!--
-    <table>
-        <tr ng-repeat="item in overview.latestTransactions">
-            <td> <a ui-sref="bills">{{ item.billNumber | billNumber }}</a> {{ item.transactionType | limitTo:11 }}</td>
-            <td> {{ item.building }}</td>
-            <td class="right"> {{ item.payDate | date: 'M/d' }}</td>
-            <td class="right"> {{ item.amountPaid | currency }} </td>
-        </tr>    
-    </table>
--->
+
+
+
 </div>

@@ -42,19 +42,44 @@
 
 <h2 class="center">Completed Work Orders</h2>
 <div class="completed" id="maintenance-completed">
-    
     <table>
+        <tr><th>Location: <select><option value="216554THSTREE">2165 54th St</option></select></th></tr>
+    </table>
+    
+        <!--Wide Screens-->
+    <table class="wide">
         <tr>
             <th class="right">work order #</th>
             <th class="right"><u>date completed</u></th>
             <th>description</th>
             <th>bill # / cost</th>
-        </tr>            
+        </tr>
         <tr ng-repeat="item in maintenance.allClosedMaintenance  | orderBy: '-dateCompleted'">
             <td class="right"> <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }} </a></td>
             <td class="right"> {{ item.dateCompleted | date: 'MM/dd/yyyy' }} </td>
             <td> {{ item.description }} </td>
             <td><span ng-repeat="bill in maintenance.allBills "> 
+                <span ng-show="{{bill.workOrderNumber}}">
+                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
+                </span>
+                </span>
+            </td>
+        </tr>
+    </table>
+            
+            
+        <!--Narrow Screens-->
+    <table class="narrow">
+        <tr>
+            <th><u>date completed</u>&nbsp; work order #
+                <br/>description
+                <br/>bill # / cost</th>
+        </tr>
+        <tr class="narrow" ng-repeat="item in maintenance.allClosedMaintenance  | orderBy: '-dateCompleted'">
+            <td>
+                {{ item.dateCompleted | date: 'MM/dd/yyyy' }} &nbsp; <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }} </a>
+                <br/>{{ item.description }} 
+                <br/><span ng-repeat="bill in maintenance.allBills "> 
                 <span ng-show="{{bill.workOrderNumber}}">
                     <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
                 </span>

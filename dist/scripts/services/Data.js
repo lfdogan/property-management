@@ -208,12 +208,12 @@
         
         
         
-        /* function selectBills() used on the html to filter out bill numbers
+        /* for overview.html page
+        * function selectBills() used on the html to filter out bill numbers
         * arguments are all numbers of milliseconds. statementBegin is begin date of statement range, 
         * statementEnd is end date of statement range. billPaydate is date a particular bill was paid
         * function determines if the particular bill pay date occurred within the statement range
         */
-        //for overview.html page
         Data.selectBills = function(statementBegin, statementEnd, billPaydate){
             if (statementBegin < billPaydate) {
                 if (billPaydate < statementEnd) {
@@ -221,7 +221,7 @@
                 }
             }
         };
-        //for overview.html page
+        //for overview.html page... currently commented because it was in statements section and was trial
         Data.getOwnerDraw = function(statementBegin, statementEnd, billPaydate, transactionType){
             console.log(transactionType);
             if (transactionType == "Owner Draw"){
@@ -233,33 +233,24 @@
             }
         };
         /* function used on Overview.html to only get items from last 30 days
+        * <div ng-repeat="item in overview.billsRentIncome"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
+        * <div ng-repeat="item in overview.billsOwnerDraw"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
+        * searches the array of only rental incomed and array of only owner draws 
+        * for all transactions that were in last 30 days
+        * parameter is the array element's payDate
+        * calculates the date/time of 30 days ago and checks if it is less than the payDate
+        * if true then it checks to see if payDate is less than today
+        * if both true it returns the item payDate or else returns nothing
         */
-        Data.getLast30Days = function(itemDate){
-            if((today-thirtyDays) < itemDate) {
-                if (itemDate < today) {
-                    return itemDate;
+        Data.getLast30Days = function(itemPayDate){
+            if((today-thirtyDays) < itemPayDate) {
+                if (itemPayDate < today) {
+                    return itemPayDate;
                 }
             };
             return;
         };
-        //for bills.html to select bills from a specific date range
-        // ONLY WORKS WITH ONE PARAMETER INPUT!!!!!!
-        Data.showInDateRange = function(billNum){
-            if (billNum === undefined) {
-                return false;
-            } else {
-                return true;
-            }
-        };
-        //for bills.html an additional query limit
-        Data.trial = function(payDate){
-            console.log("payDate", payDate);
-//            console.log("startNegativeRange", startNegativeRange);
-//            console.log("endNegativeRange", endNegativeRange);
-            console.log("startRange", startRange);
-            console.log("endRange", endRange);
-            return true;
-        };
+
         /* for maintenance.html page. 
         * It takes in the transaction item and return the work order number 
         * if there is one or an empty string if no work order number
@@ -276,12 +267,19 @@
             } 
         };
         //for maintenance-pending.html template
-        Data.decideWorkOrder = function(item, yes_or_no){
+        /* input parameters are the array item element and true (approve) or false (reject)
+        * creates a new maintenance array of all work orders with the dateCreated equal to the current work order
+        * and if user clicked the approve button (true) it will add to that array element 'approved=yes' and 'status=open'
+        * it will alert user of change.
+        * if user clicked the reject (false) button it will add to that array element 'approved=no' and
+        * alert user of change.
+        */
+        Data.decideWorkOrder = function(item, true_or_false){
             //console.log('CLICK TO APPROVE', item.dateCreated, item.approved, item.description, item.workOrderNumber);
             maintenanceRef.orderByChild("dateCreated").equalTo(item.dateCreated).on("child_added", function(snapshot) {
                 //console.log(snapshot.key());
                 var curRef = maintenanceRef.child(  snapshot.key() );
-                if (yes_or_no == 1) {
+                if (true_or_false) {
                     curRef.update({"approved": "Yes"});
                     curRef.update({"status": "Open"});
                     alert("Work Order #"+item.workOrderNumber+" has been approved. You can now view it on the Maintenance page under Ongoing Work Orders.")
@@ -296,7 +294,14 @@
         
 
                  
-        // functions used for the MY ACCOUNT drop-down menus
+        /* functions used for the MY ACCOUNT drop-down menus. 
+        * followMyAccountLink() function called on each page controller
+        * selects the dropdown element and removes the 'ma-active' class so that it disappears and
+        * it sets private variable 'maActive' to false
+        * toggleMyAccountDropdown() function called on index.html page when user clicks on 'My Account' or hamburger
+        * when private variable 'maActive' is true it does same as followMyAccountLink() to close dropdown
+        * when 'maActive' is false it will add the 'ma-active' class to open menu and set 'maActive' variable to true
+        */
         var maActive = false;
         Data.followMyAccountLink = function() {
             document.querySelector(".dropdown-content").classList.remove("ma-active");
@@ -318,7 +323,6 @@
         * paramenter page is a string matching the $state
         * removes the "active" classs from each nav link element and adds "active" to current page
         */
-         //sets top navigation link styling on page load
         Data.setNavLinkStyling = function(page){
             document.querySelector("#nav-bills").classList.remove("active");
             document.querySelector("#nav-transactions").classList.remove("active");
