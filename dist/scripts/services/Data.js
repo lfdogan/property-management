@@ -141,41 +141,39 @@
 
         
 
-        /*
+        
+       /*
         * ANGULARJS ngClick on any of the date selection buttons
         * takes in a number of days to determine what to change start/end dates to
         * then runs updateUI() to set those dates
+        * inital load parameters are inital value of numDays and scope
         */
-        Data.changeDateRange = function(numDays, scope){
-            console.log("run changeDateRange()");
+//        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
+        Data.changeDateRange = function(numDays){
             var text;
             var element;
-//            eleL30D.classList.remove("active");
-//            eleCY.classList.remove("active");
-//            eleCD.classList.remove("active");
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
                         element = document.querySelector("#last30Days");
+                        endRange = today;
                         //endRange = new Date().getTime();
-                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
-//                        eleL30D.classList.add("active"); //for div element
                         break;
                     case 365:
                         text = "current year";
                         element = document.querySelector("#currentYear");
-                        //endRange = new Date().getTime();
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
-                        endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
-//                        eleCY.classList.add("active"); //for div element
+                        endRange = today;
+                        //endRange = new Date().getTime();
+                        eleCY.classList.add("active");
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
                         element = document.querySelector("#customDates");
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
-//                        eleCD.classList.add("active"); //for div element
+                        eleCD.classList.add("active");
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");
@@ -185,16 +183,15 @@
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
-            // onDateRangeChangeHandlers initialized as empty array 
+            // onDateRangeChangeHandlers initialized as empty array
             for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
                 onDateRangeChangeHandlers[i]();
-            } 
+            }
          };
-        /* runs on page load, 
-        * 'handler' is a function called 'Data.onDateRangeChange(function () {...})' on each page controller
+        /* function passes 'handler' which is a function from the page controller's function 'onDateRangeChange()'
+        * it pushes 'handler' to 0 index of 'onDateRangeChangeHandlersarray
         */
-        Data.onDateRangeChange = function (handler) {
-           console.log("run onDateRangeChange()");
+       Data.onDateRangeChange = function (handler) {
            onDateRangeChangeHandlers.push(handler);
        };
         
