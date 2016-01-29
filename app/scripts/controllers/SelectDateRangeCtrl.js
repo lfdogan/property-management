@@ -6,7 +6,6 @@
          this.Data = Data;
 
          var setRange = Data.globalNumDays;
-         this.setRange = setRange;
          Data.changeDateRange(setRange);
          
 
