@@ -45,19 +45,18 @@ table {
     margin: auto;
     border-collapse: collapse; /* single rather than double interior borders */
 }
-
+td, th {
+    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
+    padding: 0 5px;
+    border:  1px white solid;
+}
 /*Body Subheading labels*/
 th {
-    background-color: #06538F;
-    color: white;
+    border-bottom: 2px #06538F solid;
     text-transform: uppercase;
     font-size: 14px;
 }
-td, th {
-/*    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);*/
-    padding: 0 5px;
-    border:  1px #06538F solid;
-}
+
 .half-column {
     display: inline-block;
     width: 49%;
