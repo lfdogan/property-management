@@ -147,61 +147,54 @@
         * then runs updateUI() to set those dates
         */
         Data.changeDateRange = function(numDays, scope){
-            var text;    
-            var eleL30D = document.querySelector("#last30Days");
-            var eleCY = document.querySelector("#currentYear");
-            var eleCD = document.querySelector("#customDates");
-            eleL30D.classList.remove("active");
-            eleCY.classList.remove("active");
-            eleCD.classList.remove("active");
+            console.log("run changeDateRange()");
+            var text;
+            var element;
+//            eleL30D.classList.remove("active");
+//            eleCY.classList.remove("active");
+//            eleCD.classList.remove("active");
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
-                        //endNegativeRange = new Date().getTime();
-                        //endNegativeRange = endNegativeRange*-1
-//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-//                        endNegativeRange = startNegativeRange - (thirtyDays*-1);//minus 30 days is 7/18/15 11:01:20
+                        element = document.querySelector("#last30Days");
+                        //endRange = new Date().getTime();
                         endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
-                        eleL30D.classList.add("active");
+//                        eleL30D.classList.add("active"); //for div element
                         break;
                     case 365:
                         text = "current year";
-                        //endNegativeRange = new Date().getTime();
-                        //endNegativeRange = endNegativeRange*-1
-//                        startNegativeRange = -1439823680000; // 'current' date is 08/17/2015 11:01:20
-//                        endNegativeRange = -1420088400000; // 'current' year begin 01/01/2015 0:00:00
+                        element = document.querySelector("#currentYear");
+                        //endRange = new Date().getTime();
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = 1439823680000; // 'current' date is 08/17/2015 11:01:20
-                        eleCY.classList.add("active");
+//                        eleCY.classList.add("active"); //for div element
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
-//                        endNegativeRange = -1433131200000; // 06/01/2015
-//                        startNegativeRange = -1439697599999; // 'current' date is 08/17/2015 11:01:20
+                        element = document.querySelector("#customDates");
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
-                        eleCD.classList.add("active");
+//                        eleCD.classList.add("active"); //for div element
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
-//            Data.beginDateRange = endNegativeRange*-1; // use negative values when filtering by orderDate
-//            Data.endDateRange = startNegativeRange*-1; // use negative values when filtering by orderDate
+            element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
             // onDateRangeChangeHandlers initialized as empty array 
             for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
                 onDateRangeChangeHandlers[i]();
-            }       
-            
-         };    
-
-
-        
-       Data.onDateRangeChange = function (handler) {
+            } 
+         };
+        /* runs on page load, 
+        * 'handler' is a function called 'Data.onDateRangeChange(function () {...})' on each page controller
+        */
+        Data.onDateRangeChange = function (handler) {
+           console.log("run onDateRangeChange()");
            onDateRangeChangeHandlers.push(handler);
        };
         

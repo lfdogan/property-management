@@ -9,9 +9,11 @@
          Data.changeDateRange(setRange);
          
 
-         this.changeDateRange = function (days) {
-            Data.changeDateRange(days, $scope);
-        };
+         this.changeDateRange = function(days) {
+             console.log("running SelectDateRangeCtrl.... changeDateRange()");
+             Data.changeDateRange(days, $scope);
+         };
+     
      }
  
      angular

@@ -62,10 +62,6 @@ td, th {
     display: inline-block;
     width: 49%;
 }
-.third {
-    display: inline-block;
-    width: 32%;
-}
 
 
 .maintenance-button-approve {
@@ -109,6 +105,9 @@ td, th {
 .td-wide-only {
     display: none; 
 }
+.third {
+    display: block;
+}
 
 
 /* FOR DEVICES AT LEAST 692 PIXELS WIDE */
@@ -130,6 +129,10 @@ td, th {
     }
     .td-wide-only {
         display: none; 
+    }
+    .third {
+        display: inline-block;
+        width: 32%;
     }
 }
 
