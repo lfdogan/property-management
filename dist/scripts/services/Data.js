@@ -24,7 +24,7 @@
         var endRange = 1439697599999; // custom end date is 8/15/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
-        var numDays = 9999; // used for switching date selection range
+        var numDays = 30; // used for switching date selection range
 
         // array used for changeDateRange()
         var onDateRangeChangeHandlers = [];
