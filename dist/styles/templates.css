@@ -43,20 +43,28 @@ table {
     background-color: white;
     font-size: 16px;
     margin: auto;
+    border-collapse: collapse; /* single rather than double interior borders */
 }
 
 /*Body Subheading labels*/
 th {
-    border-bottom: 2px #06538F solid;
+    background-color: #06538F;
+    color: white;
     text-transform: uppercase;
     font-size: 14px;
 }
-tr {
-    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);
+td, th {
+/*    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);*/
+    padding: 0 5px;
+    border:  1px #06538F solid;
 }
 .half-column {
     display: inline-block;
     width: 49%;
+}
+.third {
+    display: inline-block;
+    width: 32%;
 }
 
 
