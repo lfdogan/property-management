@@ -152,6 +152,7 @@
         Data.changeDateRange = function(numDays){
             var text;
             var element;
+            console.log("changeDateRange() to ",numDays);
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
@@ -166,14 +167,12 @@
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = today;
                         //endRange = new Date().getTime();
-                        eleCY.classList.add("active");
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
                         element = document.querySelector("#customDates");
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
-                        eleCD.classList.add("active");
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");

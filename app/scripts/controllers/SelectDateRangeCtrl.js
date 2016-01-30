@@ -7,12 +7,17 @@
 
          //initial value for setRange is on page load and it is not updated on page
          var setRange = Data.globalNumDays;
+         console.log("setRange from SelectDateRangeCtrl:",setRange);
 
          /* works on page load to highlight active cell of date selection bar. 
          * title dates and data are correct without this statement
          */
-         Data.changeDateRange(setRange);
-         
+         //Data.changeDateRange(setRange);
+ 
+         this.changeDateRange = function(value) {
+             console.log("runs");
+             console.log(value);
+         };
 
          //This function is never called and not needed
 //         this.changeDateRange = function(days) {
