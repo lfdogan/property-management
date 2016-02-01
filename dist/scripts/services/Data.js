@@ -150,50 +150,34 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-<<<<<<< HEAD
-            var text;    
-            var eleL30D = document.querySelector("#last30Days");
-            var eleCY = document.querySelector("#currentYear");
-            var eleCD = document.querySelector("#customDates");
-            eleL30D.classList.remove("active");
-            eleCY.classList.remove("active");
-            eleCD.classList.remove("active");
-                switch(numDays){
-                    case 30: 
-                        text = "last 30 days";
-=======
             var text;
             var element;
             console.log("changeDateRange() to ",numDays);
+//            var eleL30D = document.querySelector("#last30Days");
+//            var eleCY = document.querySelector("#currentYear");
+//            var eleCD = document.querySelector("#customDates");
+//            eleL30D.classList.remove("active");
+//            eleCY.classList.remove("active");
+//            eleCD.classList.remove("active");
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
                         element = document.querySelector("#last30Days");
->>>>>>> move-select-date-range
                         endRange = today;
                         //endRange = new Date().getTime();
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
                         break;
                     case 365:
                         text = "current year";
-<<<<<<< HEAD
-                        startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
-                        endRange = today;
-                        //endRange = new Date().getTime();
-                        eleCY.classList.add("active");
-                        break;
-                    case 9999:
-                        text = "custom dates"; //For simplicity I've assigned the 'custom' dates
-=======
                         element = document.querySelector("#currentYear");
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = today;
                         //endRange = new Date().getTime();
+//                        eleCY.classList.add("active"); 
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
                         element = document.querySelector("#customDates");
->>>>>>> move-select-date-range
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
                         break;
@@ -201,10 +185,7 @@
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
-<<<<<<< HEAD
-=======
             element.setAttribute("selected","selected"); //for <option>'s <select> element
->>>>>>> move-select-date-range
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
