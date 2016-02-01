@@ -1,6 +1,11 @@
 
 /*Dates Selection Section*/
+<<<<<<< HEAD
 #date-selector{
+=======
+/*
+.date-selector{
+>>>>>>> move-select-date-range
     color: white;
     width: 340px; /* if left blank it will do full page width*/
     background-color: #6896BB;
@@ -18,3 +23,4 @@
     background-color: #06538F;
 }
 
+*/

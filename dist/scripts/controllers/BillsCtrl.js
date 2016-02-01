@@ -27,11 +27,14 @@
          //will update data when user clicks on a date range selection
          var BillsCtrl = this;
          Data.onDateRangeChange(function () {
+             console.log("run onDateRangeChange() from BillsCtrl");
             BillsCtrl.filteredBills = Data.filteredBills();
             BillsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
             BillsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
          }); 
        
+         
+
      
      }
  

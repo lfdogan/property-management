@@ -17,6 +17,8 @@
         var billsRef = rootRef.child('bills');
         var statementsRef = rootRef.child('statements');    
         var maintenanceRef = rootRef.child('maintenance');
+        var buildingsRef = rootRef.child('buildings');
+        var portfoliosRef = rootRef.child('portfolios');
 
 
         //initial values of start and end date range
@@ -24,7 +26,7 @@
         var endRange = 1439697599999; // custom end date is 8/15/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
-        var numDays = 30; // used for switching date selection range
+        var numDays = 365; // used for switching date selection range
 
         // array used for changeDateRange()
         var onDateRangeChangeHandlers = [];
@@ -105,7 +107,7 @@
                 return $firebaseArray(maintenanceRef
                                       .orderByChild("status")
                                       .equalTo("Closed"));
-            },
+            }
 
          };   
 
@@ -139,7 +141,8 @@
 
         
 
-        /*
+        
+       /*
         * ANGULARJS ngClick on any of the date selection buttons
         * takes in a number of days to determine what to change start/end dates to
         * then runs updateUI() to set those dates
@@ -147,38 +150,42 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-            var text;    
-            var eleL30D = document.querySelector("#last30Days");
-            var eleCY = document.querySelector("#currentYear");
-            var eleCD = document.querySelector("#customDates");
-            eleL30D.classList.remove("active");
-            eleCY.classList.remove("active");
-            eleCD.classList.remove("active");
+            var text;
+            var element;
+            console.log("changeDateRange() to ",numDays);
+//            var eleL30D = document.querySelector("#last30Days");
+//            var eleCY = document.querySelector("#currentYear");
+//            var eleCD = document.querySelector("#customDates");
+//            eleL30D.classList.remove("active");
+//            eleCY.classList.remove("active");
+//            eleCD.classList.remove("active");
                 switch(numDays){
                     case 30: 
                         text = "last 30 days";
+                        element = document.querySelector("#last30Days");
                         endRange = today;
                         //endRange = new Date().getTime();
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
-                        eleL30D.classList.add("active");
                         break;
                     case 365:
                         text = "current year";
+                        element = document.querySelector("#currentYear");
                         startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = today;
                         //endRange = new Date().getTime();
-                        eleCY.classList.add("active");
+//                        eleCY.classList.add("active"); 
                         break;
                     case 9999:
                         text = "custom dates"; //For simplicity I've assigned the 'custom' dates
+                        element = document.querySelector("#customDates");
                         startRange = 1433131200000; // custom start date is 6/1/15
                         endRange = 1439697599999; // custom end date is 8/15/15
-                        eleCD.classList.add("active");
                         break;
                     default: 
                         console.log("error! changeDateRange() did not receive correct input!");
                         break;
                 };
+            element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;

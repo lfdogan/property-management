@@ -23,11 +23,16 @@
          //will update data when user clicks on a date range selection
          var CashFlowCtrl = this;
          Data.onDateRangeChange(function () {
+             console.log("run onDateRangeChange() from CashFlowCtrl");
             CashFlowCtrl.filteredBills = Data.filteredBills();
             CashFlowCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
             CashFlowCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
          }); 
 
+         
+                  
+
+         
          
          
          /************************** FOR ADDING NEW DATA **************************/
