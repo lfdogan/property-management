@@ -107,6 +107,12 @@
                 return $firebaseArray(maintenanceRef
                                       .orderByChild("status")
                                       .equalTo("Closed"));
+            },
+            myPortfolio: function(){
+                return $firebaseArray(portfoliosRef);
+            },
+            myBuildings: function(){
+                return $firebaseArray(buildingsRef);
             }
 
          };   

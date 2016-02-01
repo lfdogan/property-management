@@ -5,6 +5,11 @@
          this.Data = Data;
          this.toggleMyAccountDropdown = Data.toggleMyAccountDropdown();
          this.followMyAccountLink = Data.followMyAccountLink();
+         this.myPortfolio = Data.myPortfolio();
+         this.myBuildings = Data.myBuildings();
+
+         
+
          
          Data.followMyAccountLink();
 
