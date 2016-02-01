@@ -1,5 +1,5 @@
 
-/*Dates Selection Section*/
+/*Dates Selection Section for ORIGINAL BAR STYLES */
 /*
 .date-selector{
     color: white;
@@ -19,3 +19,7 @@
     background-color: #06538F;
 }
 */
+
+.date-selector .active {
+    text-decoration: underline;
+}
