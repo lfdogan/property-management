@@ -61,6 +61,15 @@ td, th {
     padding: 5px;
     border:  1px #06538F solid;
 }
+th.payDate {
+    min-width: 100px;
+}
+th.billNumber {
+    min-width: 40px;
+}
+th.amountPaid {
+    min-width: 50px;
+}
 .half-column {
     display: inline-block;
     width: 49%;

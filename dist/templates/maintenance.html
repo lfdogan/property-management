@@ -32,11 +32,24 @@
             <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
             <br/>Started: {{ item.dateStarted | date: 'MM/dd/yyyy' }}
             <br/>Location: {{item.building}}
-            <br/>{{item.description}} 
+            <br/>{{item.description}}
+            <br/><span ng-repeat="bill in maintenance.allBills "> 
+                    <span ng-show="{{bill.workOrderNumber}}">
+                        <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">
+                            <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">
+                                {{ bill.billNumber  |billNumber}}</a>
+                            {{bill.cost | currency }} &nbsp;
+                        </span>
+                    </span>
+                </span>
             <hr/>
         </span>
     </div>
 </div>
+
+
+
+
 
 
 
@@ -48,46 +61,53 @@
     
         <!--Wide Screens-->
     <table class="wide">
-        <tr>
-            <th class="right">work order #</th>
-            <th class="right"><u>date completed</u></th>
-            <th>description</th>
-            <th>bill # / cost</th>
+        <tr>     
+            <th ng-click="maintenance.order('dateCompleted')">date completed
+                <span class="sortorder" 
+                  ng-show="maintenance.setColumnSort === 'dateCompleted'" 
+                  ng-class="{reverse:maintenance.reverse}"></span>
+                <!--<ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
+            </th>     
+            <th ng-click="maintenance.order('workOrderNumber')">work order #
+                <span class="sortorder" 
+                  ng-show="maintenance.setColumnSort === 'workOrderNumber'" 
+                  ng-class="{reverse:maintenance.reverse}"></span>
+            </th>
+            <th class="td-wide-only" ng-click="maintenance.order('dateStarted')">date started
+                <span class="sortorder" 
+                  ng-show="maintenance.setColumnSort === 'dateStarted'" 
+                  ng-class="{reverse:maintenance.reverse}"></span>
+                <!--<ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
+            </th>
+            <th ng-click="maintenance.order('description')">description
+                <span class="sortorder" 
+                  ng-show="maintenance.setColumnSort === 'description'" 
+                  ng-class="{reverse:maintenance.reverse}"></span>
+            </th>
         </tr>
-        <tr ng-repeat="item in maintenance.allClosedMaintenance  | orderBy: '-dateCompleted'">
-            <td class="right"> <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }} </a></td>
+        
+        <!--<tr ng-repeat="item in bills.filteredBills | orderBy: bills.setColumnSort: bills.reverse" ng-show="{{ item.billNumber }}">-->
+        
+        <tr ng-repeat="item in maintenance.allClosedMaintenance  | orderBy: maintenance.setColumnSort: maintenance.reverse">
             <td class="right"> {{ item.dateCompleted | date: 'MM/dd/yyyy' }} </td>
-            <td> {{ item.description }} </td>
-            <td><span ng-repeat="bill in maintenance.allBills "> 
-                <span ng-show="{{bill.workOrderNumber}}">
-                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
-                </span>
+            <td class="right"> <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }} </a></td>
+            <td class="right td-wide-only"> {{ item.dateStarted | date: 'MM/dd/yyyy' }} </td>
+            <td> {{ item.description }} <br/>
+                <span ng-repeat="bill in maintenance.allBills "> 
+                    <span ng-show="{{bill.workOrderNumber}}">
+                        <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">
+                            <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">
+                                {{ bill.billNumber  |billNumber}}</a>
+                            {{bill.cost | currency }} &nbsp;
+                        </span>
+                    </span>
                 </span>
             </td>
         </tr>
     </table>
             
             
-        <!--Narrow Screens-->
-    <table class="narrow">
-        <tr>
-            <th><u>date completed</u>&nbsp; work order #
-                <br/>description
-                <br/>bill # / cost</th>
-        </tr>
-        <tr class="narrow" ng-repeat="item in maintenance.allClosedMaintenance  | orderBy: '-dateCompleted'">
-            <td>
-                {{ item.dateCompleted | date: 'MM/dd/yyyy' }} &nbsp; <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }} </a>
-                <br/>{{ item.description }} 
-                <br/><span ng-repeat="bill in maintenance.allBills "> 
-                <span ng-show="{{bill.workOrderNumber}}">
-                    <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )"><a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a> {{bill.cost | currency }}</span>
-                </span>
-                </span>
-            </td>
-    </tr>
-    </table>
-</div>
+
 
 
 

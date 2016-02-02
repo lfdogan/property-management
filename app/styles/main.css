@@ -126,10 +126,10 @@ footer div {
 
 
 
-/* FOR DEVICES AT LEAST 414 PIXELS WIDE
+/* FOR DEVICES AT LEAST 700 PIXELS WIDE
 we will NOT use the hamburger icon to click left navigation menu in/out 
 we will have the left navigation menu fixed on screen */
-@media (min-width: 414px) {
+@media (min-width: 700px) {
   .hamburger { /* hide hamburger icon since left navigation is displayed */
      display:none;
     }
@@ -184,6 +184,9 @@ we will have the left navigation menu fixed on screen */
     nav .active {
         background-color: #06538F;
         color: white;
+        padding: 7px 7px 23px 7px; /* TRBL */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
     }
     footer {
         font-family: 'Basic', sans-serif;

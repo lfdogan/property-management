@@ -24,18 +24,18 @@
 
 <table>
     <tr>
-        <!-- 1 payDate--><th ng-click="cashflow.order('payDate')">pay Date
+        <!-- 1 payDate--><th class="payDate" ng-click="cashflow.order('payDate')">pay Date
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'payDate'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
             <ng-include src="'/templates/selectDateRange.html'"></ng-include>
         </th>
-        <!-- 2 billNumber--><th ng-click="cashflow.order('billNumber')">bill #
+        <!-- 7 amountPaid--><th class="amountPaid" ng-click="cashflow.order('amountPaid')">amount Paid
             <span class="sortorder" 
-                  ng-show="cashflow.setColumnSort === 'billNumber'" 
+                  ng-show="cashflow.setColumnSort === 'amountPaid'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
-        <!-- 4 description--><th class="td-medium-plus" ng-click="cashflow.order('description')">description
+        <!-- 4 description--><th class="td-wide-only" ng-click="cashflow.order('description')">description
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'description'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
@@ -45,18 +45,18 @@
                   ng-show="cashflow.setColumnSort === 'account'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
-        <!-- 7 amountPaid--><th ng-click="cashflow.order('amountPaid')">amount Paid
+        <!-- 2 billNumber--><th class="td-medium-plus billNumber" ng-click="cashflow.order('billNumber')">bill #
             <span class="sortorder" 
-                  ng-show="cashflow.setColumnSort === 'amountPaid'" 
+                  ng-show="cashflow.setColumnSort === 'billNumber'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
     </tr>
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.setColumnSort: cashflow.reverse">
         <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <!-- 2 billNumber --><td> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a></td>
-        <!-- 4 description--><td class="td-medium-plus"> {{ item.description | limitTo:50 }} </td>
-        <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
         <!-- 7 amountPaid--><td class="right"> {{ item.amountPaid | currency }} </td>
+        <!-- 4 description--><td class="td-wide-only"> {{ item.description | limitTo:50 }} </td>
+        <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
+        <!-- 2 billNumber --><td class="td-medium-plus"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a></td>
     </tr>
 </table>
 

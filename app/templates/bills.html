@@ -24,7 +24,7 @@
 
 <table>
     <tr>
-        <th ng-click="bills.order('payDate')">pay date
+        <th class="payDate" ng-click="bills.order('payDate')">pay date
             <span class="sortorder" ng-show="bills.setColumnSort === 'payDate'" ng-class="{reverse:bills.reverse}"></span>
             <ng-include src="'/templates/selectDateRange.html'"></ng-include>
         </th>
@@ -34,10 +34,10 @@
         <th ng-click="bills.order('description')" class="td-medium-plus">description
             <span class="sortorder" ng-show="bills.setColumnSort === 'description'" ng-class="{reverse:bills.reverse}"></span>
         </th>
-        <th class="right" ng-click="bills.order('amountPaid')">amount
+        <th class="right amountPaid" ng-click="bills.order('amountPaid')">amount
             <span class="sortorder" ng-show="bills.setColumnSort === 'amountPaid'" ng-class="{reverse:bills.reverse}"></span>
         </th>
-        <th class="right" ng-click="bills.order('billNumber')">bill #
+        <th class="right billNumber" ng-click="bills.order('billNumber')">bill #
             <span class="sortorder" ng-show="bills.setColumnSort === 'billNumber'" ng-class="{reverse:bills.reverse}"></span>
         </th>
     </tr>
