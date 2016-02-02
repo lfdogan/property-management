@@ -43,12 +43,18 @@
          } );
 
          
+         /* new variables setColumnSort and reverse are used to sort table data by column
+         * setColumnSort gets information from Data.js inital value is 'payDate'
+         * reverse will sort descending for reverse=true, ascending for reverse=false
+         * function order() checks if user clicks on same column heading: if true reverse will switch order
+         * if false user clicked on different column so set order to descending
+         */
          this.setColumnSort = Data.globalcolumnToSortBy;
-         this.reverse = true; //sort descending for reverse=true, ascending for reverse=false
+         this.reverse = true;
          this.order = function(setColumnSort) {
-                 if (this.setColumnSort === setColumnSort) { // if user clicks on same column heading, switch order
+             if (this.setColumnSort === setColumnSort) { 
                      this.reverse = !this.reverse;
-                 } else this.reverse = true; // else user clicked on different column, set order to descending
+                 } else this.reverse = true;
              this.setColumnSort = setColumnSort;
          };
 

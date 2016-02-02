@@ -22,17 +22,32 @@
          
          //will update data when user clicks on a date range selection
          var CashFlowCtrl = this;
-         Data.onDateRangeChange(function () {
-             console.log("run onDateRangeChange() from CashFlowCtrl");
-            CashFlowCtrl.filteredBills = Data.filteredBills();
-            CashFlowCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
-            CashFlowCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
-         }); 
+         Data.onTableViewChange(function () {
+             console.log("run CashFlowCtrl.onTableViewChange()");
+             CashFlowCtrl.filteredBills = Data.filteredBills();
+             CashFlowCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+             CashFlowCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+             CashFlowCtrl.setRange = Data.globalNumDays;
+             CashFlowCtrl.setColumnSort = Data.globalcolumnToSortBy;
+         } );
 
          
                   
 
-         
+         /* new variables setColumnSort and reverse are used to sort table data by column
+         * setColumnSort gets information from Data.js inital value is 'payDate'
+         * reverse will sort descending for reverse=true, ascending for reverse=false
+         * function order() checks if user clicks on same column heading: if true reverse will switch order
+         * if false user clicked on different column so set order to descending
+         */
+         this.setColumnSort = Data.globalcolumnToSortBy;
+         this.reverse = true;
+         this.order = function(setColumnSort) {    
+             if (this.setColumnSort === setColumnSort) { 
+                     this.reverse = !this.reverse;
+                 } else this.reverse = true;
+             this.setColumnSort = setColumnSort;
+         };
          
          
          /************************** FOR ADDING NEW DATA **************************/
