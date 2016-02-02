@@ -103,7 +103,7 @@ th.amountPaid {
 
 /* FOR DEVICES LESS THAN 414 PIXELS WIDE */
 .wide {
-    display: none;
+    display: none; /**/
 }
 .td-narrow-only {
     display: table-cell; 
@@ -120,9 +120,8 @@ th.amountPaid {
 .third {
     display: block;
 }
-#overview-first,
-#overview-second,
-#overview-third {
+#overview-main,
+.overview-right {
     display: block;
     width: 100%;
 }
@@ -167,19 +166,26 @@ th.amountPaid {
     .td-wide-only {
         display: table-cell; 
     }
-    #overview-first {
+    #overview-main {
         /*display: inline-block; /* 2 blocks in row, 1 below */
-        /*display: inline; /* one block per line, full width*/
-        position: relative; /* one block per row, correct width, scrolls over header nav */
+        /*display: inline; /* does not start on a new line and only takes up as much width as necessary. */
+        /*display: block; /* always starts on a new line and takes up the full width available */
+        /*display: none; /* hidden, and the page will be displayed as if the element is not there */
+        /*visibility:hidden; /* hides an element but still takes up the same space as before affecting the layout*/
+        /*position: relative; /* one block per row, correct width, scrolls over header nav */
+        float: left;
         width: 65%;
         padding: 0 1%;
     }
-    #overview-second,
-    #overview-third {
+    .overview-right {
         /*display: inline-block; /* 2 blocks in row, 1 below */
         /*display: inline; /* one block per line, full width*/
-        position: relative; /* one block per row, correct width, scrolls over header nav */
+        /*position: relative; /* one block per row, correct width, scrolls over header nav */
+        float: right;
         width: 30%;
         padding: 0 1%;
+    }
+    .clearLeft {
+        clear: left;
     }
 }

@@ -20,9 +20,30 @@
 }
 */
 
+
+
+
+/* HTML ELEMENTS:
+* the <div> container: .date-selector 
+* div1: #last30days .cell
+* div2: #currentYear .cell
+* div3: #customDates .cell
+*/
+
 .date-selector .active {
     text-decoration: underline;
 }
+
+        /*display: inline-block; /* 2 blocks in row, 1 below */
+        /*display: inline; /* does not start on a new line and only takes up as much width as necessary. */
+        /*display: block; /* always starts on a new line and takes up the full width available */
+        /*display: none; /* hidden, and the page will be displayed as if the element is not there */
+        /*visibility:hidden; /* hides an element but still takes up the same space as before affecting the layout*/
+
+
+
+
+
 
 /* for table header rows */
 .sortorder:after {

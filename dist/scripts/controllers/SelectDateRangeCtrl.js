@@ -14,8 +14,7 @@
          * title dates and data are correct without this statement
          */
          Data.changeDateRange(setNumDays);
-         //Data.changeSortColumn(setSortColumn);
-         //console.log("setRange from SelectDateRangeCtrl:",setRange);
+         //console.log("setNumDays from SelectDateRangeCtrl:",setNumDays);
 
          
          
