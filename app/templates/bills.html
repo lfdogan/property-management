@@ -20,18 +20,28 @@
 
 
 
-<br/>
 
 
 <table>
     <tr>
-        <th><ng-include src="'/templates/selectDateRange.html'"></ng-include></th>
-        <th class="td-wide-only">type</th>
-        <th class="td-medium-plus">description</th>
-        <th class="right">amount</th>
-        <th class="right">bill #</th>
+        <th ng-click="bills.order('payDate')">pay date
+            <span class="sortorder" ng-show="bills.setColumnSort === 'payDate'" ng-class="{reverse:bills.reverse}"></span>
+            <ng-include src="'/templates/selectDateRange.html'"></ng-include>
+        </th>
+        <th ng-click="bills.order('account')" class="td-wide-only">type
+            <span class="sortorder" ng-show="bills.setColumnSort === 'account'" ng-class="{reverse:bills.reverse}"></span>
+        </th>
+        <th ng-click="bills.order('description')" class="td-medium-plus">description
+            <span class="sortorder" ng-show="bills.setColumnSort === 'description'" ng-class="{reverse:bills.reverse}"></span>
+        </th>
+        <th class="right" ng-click="bills.order('amountPaid')">amount
+            <span class="sortorder" ng-show="bills.setColumnSort === 'amountPaid'" ng-class="{reverse:bills.reverse}"></span>
+        </th>
+        <th class="right" ng-click="bills.order('billNumber')">bill #
+            <span class="sortorder" ng-show="bills.setColumnSort === 'billNumber'" ng-class="{reverse:bills.reverse}"></span>
+        </th>
     </tr>
-    <tr ng-repeat="item in bills.filteredBills | orderBy: '-payDate'" ng-show="{{ item.billNumber }}">
+    <tr ng-repeat="item in bills.filteredBills | orderBy: bills.predicate: bills.reverse" ng-show="{{ item.billNumber }}">
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <td class="td-medium-plus"> {{ item.account | accountType }}</td>
         <td class="td-wide-only"> {{ item.description }} </td>
@@ -39,6 +49,8 @@
         <td class="right"><a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )"> {{ item.billNumber }} </a></td>
     </tr>
 </table>
+
+<hr/>
 
 
 

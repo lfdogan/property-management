@@ -55,7 +55,7 @@ th {
 }
 td, th {
 /*    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);*/
-    padding: 0 5px;
+    padding: 5px;
     border:  1px #06538F solid;
 }
 .half-column {

@@ -8,32 +8,49 @@
          this.Data = Data;
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
+         this.setRange = Data.globalNumDays;
+         this.setColumnSort = Data.globalcolumnToSortBy;
          
          this.allBills = Data.allBills();
          this.filteredBills = Data.filteredBills();
 
          this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
 
+         //hides My Account dropdown menu on page load
          Data.followMyAccountLink();
 
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("bills");
          
+         //used in bill.html to show data only for selected billNumber 
          this.getSingleBill = function(billnum, item){
              if (billnum == item.billNumber) return true;
          };
          
+
+
+         
          
          //will update data when user clicks on a date range selection
          var BillsCtrl = this;
-         Data.onDateRangeChange(function () {
-             console.log("run onDateRangeChange() from BillsCtrl");
-            BillsCtrl.filteredBills = Data.filteredBills();
-            BillsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
-            BillsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
-         }); 
-       
+         Data.onTableViewChange(function () {
+             console.log("run BillsCtrl.onTableViewChange()");
+             BillsCtrl.filteredBills = Data.filteredBills();
+             BillsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+             BillsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+             BillsCtrl.setRange = Data.globalNumDays;
+             BillsCtrl.setColumnSort = Data.globalcolumnToSortBy;
+         } );
+
          
+         this.setColumnSort = Data.globalcolumnToSortBy;
+         this.reverse = true; //sort descending for reverse=true, ascending for reverse=false
+         this.order = function(setColumnSort) {
+                 if (this.setColumnSort === setColumnSort) { // if user clicks on same column heading, switch order
+                     this.reverse = !this.reverse;
+                 } else this.reverse = true; // else user clicked on different column, set order to descending
+             this.setColumnSort = setColumnSort;
+         };
 
      
      }

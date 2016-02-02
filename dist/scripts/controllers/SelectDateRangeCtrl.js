@@ -6,13 +6,15 @@
          this.Data = Data;
 
          //initial value for setRange is on page load and it is not updated on page
-         var setRange = Data.globalNumDays;
+         var setNumDays = Data.globalNumDays;
+         //var setSortColumn = Data.globalcolumnToSortBy;
          
 
          /* works on page load to highlight active cell of date selection bar. 
          * title dates and data are correct without this statement
          */
-         Data.changeDateRange(setRange);
+         Data.changeDateRange(setNumDays);
+         //Data.changeSortColumn(setSortColumn);
          //console.log("setRange from SelectDateRangeCtrl:",setRange);
 
          
@@ -20,9 +22,9 @@
          /* Attempts to run new version!
          * Doesn't work for onclick="Ctrl.changeDateRange(365)"
          */
-         this.changeDateRange = function(value) {
-             console.log("runs", value);
-         };
+//         this.changeDateRange = function(value) {
+//             console.log("runs", value);
+//         };
 
          //This function is never called and not needed
 //         this.changeDateRange = function(days) {

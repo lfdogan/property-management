@@ -23,3 +23,11 @@
 .date-selector .active {
     text-decoration: underline;
 }
+
+/* for table header rows */
+.sortorder:after {
+  content: '\25b2'; /* triangle depicting ascending order - smallest at top */
+}
+.sortorder.reverse:after {
+  content: '\25bc'; /* upside-down triangle depicting descending order - largest at top */
+}

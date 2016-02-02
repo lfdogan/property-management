@@ -27,9 +27,10 @@
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range
+        var columnToSortBy = "payDate"; //used for switching which column of table data to order
 
         // array used for changeDateRange()
-        var onDateRangeChangeHandlers = [];
+        var onTableViewChangeHandlers = [];
 
      
 // for a factory service: create an object, add properties to it, then return that same object. 
@@ -124,6 +125,7 @@
         Data.beginDateRange = startRange;
         Data.endDateRange = endRange;
         Data.globalNumDays = numDays;
+        Data.globalcolumnToSortBy = columnToSortBy;
 
         
         
@@ -158,7 +160,7 @@
         Data.changeDateRange = function(numDays){
             var text;
             var element;
-            console.log("changeDateRange() to ",numDays);
+            console.log("run Data.changeDateRange()", numDays, columnToSortBy);
             document.querySelector("#last30Days").classList.remove("active");
             document.querySelector("#currentYear").classList.remove("active");
             document.querySelector("#customDates").classList.remove("active");
@@ -187,25 +189,35 @@
                         endRange = 1439697599999; // custom end date is 8/15/15
                         break;
                     default: 
-                        console.log("error! changeDateRange() did not receive correct input!");
+                        console.log("error! Data.changeDateRange() did not receive correct 'numDays' input!");
                         break;
                 };
-            console.log(text);
             element.classList.add("active");
-            element.setAttribute("selected","selected"); //for <option>'s <select> element
+            //element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;
             // onDateRangeChangeHandlers initialized as empty array
-            for (var i = 0; i < onDateRangeChangeHandlers.length; i++) {
-                onDateRangeChangeHandlers[i]();
+            for (var i = 0; i < onTableViewChangeHandlers.length; i++) {
+                onTableViewChangeHandlers[i]();
             }
+            console.log("End Data.changeDateRange()", startRange, endRange, numDays);
          };
+
+        Data.changeSortColumn = function(column){
+            console.log("running Data.changeSortColumn()", startRange, endRange, column);
+            columnToSortBy = column;
+            Data.globalcolumnToSortBy = columnToSortBy;
+            for (var i = 0; i < onTableViewChangeHandlers.length; i++) {
+                onTableViewChangeHandlers[i]();
+            }            
+        };
         /* function passes 'handler' which is a function from the page controller's function 'onDateRangeChange()'
-        * it pushes 'handler' to 0 index of 'onDateRangeChangeHandlersarray
+        * it pushes 'handler' to 0 index of 'onTableViewChangeHandlers' array
         */
-       Data.onDateRangeChange = function (handler) {
-           onDateRangeChangeHandlers.push(handler);
+        Data.onTableViewChange = function (handler) {
+           onTableViewChangeHandlers.push(handler);
+           console.log("run Data.onTableViewChange()");
        };
         
         
