@@ -44,13 +44,13 @@
             },
             billsOwnerDraw: function() {//for the overview page, selects only transactions that are owner draw
                 return $firebaseArray(billsRef
-                                     .orderByChild("transactionType")
-                                     .equalTo("Owner Draw"));
+                                     .orderByChild("account")
+                                     .equalTo(1000));
             },
             billsRentIncome: function() {//for the overview page, selects only transactions that are rent income
                 return $firebaseArray(billsRef
-                                     .orderByChild("transactionType")
-                                     .equalTo("Rent"));
+                                     .orderByChild("account")
+                                     .equalTo(4000));
             },
 //            filteredBills: function(start, end){
 //                return $firebaseArray(billsRef

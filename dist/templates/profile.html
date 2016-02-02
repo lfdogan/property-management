@@ -1,14 +1,15 @@
 <h1 class="center">My Profile</h1>
 
-<section class="white-box">
+
 
         
 
-    <div>
+    <section>
         <h2 class="center">My Property Management Team</h2>
         <p class="center">53 Harvey St, My City ST 13000
             <br/>(231) 555-5531 / (888) 555-5531</p>
-        <table class="wide">
+        <div  class="wide">
+        <table>
             <tr>
                 <th>Name</th>
                 <th>Role</th>
@@ -45,8 +46,8 @@
                 <td>(231) 555-5531, 121</td>
                 <td>mwatson@pm.com</td>
             </tr>
-        </table>
-        <table class="narrow">
+        </table></div>
+        <div class="narrow"><table>
             <tr>
                 <th>Name, Role
                     <br/>Phone
@@ -78,11 +79,17 @@
                     <br/>(231) 555-5531, 121
                     <br/>mwatson@pm.com</td>
             </tr>
-        </table>
-    </div>
+        </table></div>
+    </section>
     
 
-    <div>
+
+
+
+
+
+
+    <section>
         <span ng-repeat="me in profile.myPortfolio">
             <h2 class="center">{{me.name}}'s Contact Information</h2>
                 Home Phone: {{me.homePhone}}<br/>
@@ -92,47 +99,54 @@
                 Second Contact: {{me.name2}}<br/>
                 <a>Edit</a>
         </span>
-    </div>
+    </section>
     
-    <div>
+
+
+
+
+
+
+    <section>
         <h2 class="center">My Buildings</h2>
-        <table class="wide">
-            <tr>
-                <th>Building Abbreviation</th>
-                <th>Building Name</th>
-                <th>Building Address</th>
-                <th>Unit</th>
-                <th>sqft</th>
-                <th>Beds</th>
-                <th>Baths</th>
-                <th>Nickname</th>
-            </tr>
-            <tr ng-repeat="location in profile.myBuildings">
-                <td>{{location.$id}}</td>
-                <td>{{location.building_name}}</td>
-                <td>{{location.street_address}}, {{location.city}} {{location.state}} {{location.zipcode}}</td>
-                <td>{{location.unit}}</td>
-                <td>{{location.sqft}}</td>
-                <td>{{location.bedrooms}}</td>
-                <td>{{location.bathrooms}}</td>
-                <td>{{location.nickname}} <a>Edit</a></td>
-            </tr>
-        </table>
-        <table class="narrow">
-            <tr>
-                <th>Building Name,
-                <br/>Building Abbreviation,
-                <br/>Unit,
-                <br/>Nickname</th>
-            </tr>
-            <tr ng-repeat="location in profile.myBuildings">
-                <td>{{location.building_name}},
-                <br/>{{location.$id}},
-                <br/>{{location.unit}},
-                <br/>{{location.nickname}}<a>Edit</a></td>
-            </tr>
-        </table>
-    </div>
+        <div class="wide">
+            <table>
+                <tr>
+                    <th>Building Abbreviation</th>
+                    <th>Building Name</th>
+                    <th class="td-medium-plus">Building Address</th>
+                    <th>Unit</th>
+                    <th class="td-wide-only">sqft</th>
+                    <th class="td-wide-only">Beds</th>
+                    <th class="td-wide-only">Baths</th>
+                    <th>Nickname</th>
+                </tr>
+                <tr ng-repeat="location in profile.myBuildings">
+                    <td>{{location.$id}}</td>
+                    <td>{{location.building_name}}</td>
+                    <td class="td-medium-plus">{{location.street_address}}, {{location.city}} {{location.state}} {{location.zipcode}}</td>
+                    <td>{{location.unit}}</td>
+                    <td class="td-wide-only">{{location.sqft}}</td>
+                    <td class="td-wide-only">{{location.bedrooms}}</td>
+                    <td class="td-wide-only">{{location.bathrooms}}</td>
+                    <td>{{location.nickname}} <a>Edit</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="narrow">
+            <table>
+                <tr>
+                    <th>Building Abbreviation,
+                    <br/>Building Name / Unit,
+                    <br/>Nickname</th>
+                </tr>
+                <tr ng-repeat="location in profile.myBuildings">
+                    <td>{{location.$id}},
+                        <br/>{{location.building_name}} <span ng-show="{{location.unit}}">Unit {{location.unit}}</span>,
+                    <br/>{{location.nickname}} <a>Edit</a></td>
+                </tr>
+            </table>
+        </div>
 
 
 

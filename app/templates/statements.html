@@ -3,46 +3,22 @@
 
 <section clss="statements">
     <div class="title">
-        <!-- MOBILE --><h2 class="narrow">Monthly Statements</h2>
-        <!-- DESKTOP --><h2 class="wide">Monthly Profit & Loss Statements</h2>
+        <!-- MOBILE -->
+        <h2 class="narrow">Monthly Statements
+            <br/>{{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h2>
+        
+        <!-- DESKTOP -->
+        <h2 class="wide">Monthly Profit & Loss Statements
+            <br/>from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</h2>
     </div>
 
-    <div class="white-box">
-        <div class="title">
-            <!-- MOBILE -->
-            <h2 class="narrow">{{ statements.beginDateRange | date: 'M/d/yy' }}-{{ statements.endDateRange | date: 'M/d/yy'}}</h2>
-            <!-- DESKTOP -->
-            <div class="wide title-dates">from {{ statements.beginDateRange | date: 'MM/dd/yyyy' }} to {{ statements.endDateRange | date: 'MM/dd/yyyy'}}</div>
-        </div>
 
-
-
-
-        <ng-include src="'/templates/selectDateRange.html'"></ng-include>
-        <br/>
-
-        <table class="narrow">
+    <div class="table">
+        <table>
             <tr>
                 <th class="center">statement period
-                    <br/>& bill numbers</th>
-            </tr>
-            <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
-                <td class="center">
-                    <a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a>
-                    <a class="ion-ios-download-outline"></a>
-                <br/>
-                    <span ng-repeat="bill in statements.allBills "> 
-                        <span ng-show="statements.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
-                            <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a>
-                        </span>
-                    </span>
-                </td>
-            </tr>
-        </table>
-
-        <table class="wide">
-            <tr>
-                <th class="center">statement period</th>
+                    <ng-include src="'/templates/selectDateRange.html'"></ng-include>
+                </th>
                 <th>bill numbers</th>
             </tr>
             <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
@@ -77,7 +53,7 @@
     <div class="title">
         <h2>Lease Documents</h2>
     </div>
-    <div>
+    <div class="table">
         <table>
             <tr>
                 <th>File Name</th>

@@ -24,13 +24,14 @@
          
          //will update data when user clicks on a date range selection
          var StatementsCtrl = this;
-         Data.onDateRangeChange(function () {
-             console.log("run onDateRangeChange() from StatementsCtrl");
-            StatementsCtrl.filteredStatements = Data.filteredStatements();
-            StatementsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
-            StatementsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
-         }); 
-         
+         Data.onTableViewChange(function () {
+             //console.log("run StatementsCtrl.onTableViewChange()");
+             StatementsCtrl.filteredStatements = Data.filteredStatements();
+             StatementsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
+             StatementsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
+             StatementsCtrl.setRange = Data.globalNumDays;
+             StatementsCtrl.setColumnSort = Data.globalcolumnToSortBy;
+         } );
 
 
      }
