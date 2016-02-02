@@ -34,7 +34,7 @@
          //will update data when user clicks on a date range selection
          var BillsCtrl = this;
          Data.onTableViewChange(function () {
-             console.log("run BillsCtrl.onTableViewChange()");
+             //console.log("run BillsCtrl.onTableViewChange()");
              BillsCtrl.filteredBills = Data.filteredBills();
              BillsCtrl.beginDateRange = Data.beginDateRange; //updates begin date on html after changing selection
              BillsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection

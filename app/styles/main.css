@@ -126,10 +126,10 @@ footer div {
 
 
 
-/* FOR DEVICES AT LEAST 692 PIXELS WIDE
+/* FOR DEVICES AT LEAST 414 PIXELS WIDE
 we will NOT use the hamburger icon to click left navigation menu in/out 
 we will have the left navigation menu fixed on screen */
-@media (min-width: 692px) {
+@media (min-width: 414px) {
   .hamburger { /* hide hamburger icon since left navigation is displayed */
      display:none;
     }

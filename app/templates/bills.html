@@ -41,7 +41,7 @@
             <span class="sortorder" ng-show="bills.setColumnSort === 'billNumber'" ng-class="{reverse:bills.reverse}"></span>
         </th>
     </tr>
-    <tr ng-repeat="item in bills.filteredBills | orderBy: bills.predicate: bills.reverse" ng-show="{{ item.billNumber }}">
+    <tr ng-repeat="item in bills.filteredBills | orderBy: bills.setColumnSort: bills.reverse" ng-show="{{ item.billNumber }}">
         <td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <td class="td-medium-plus"> {{ item.account | accountType }}</td>
         <td class="td-wide-only"> {{ item.description }} </td>

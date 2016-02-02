@@ -160,7 +160,7 @@
         Data.changeDateRange = function(numDays){
             var text;
             var element;
-            console.log("run Data.changeDateRange()", numDays, columnToSortBy);
+            //console.log("run Data.changeDateRange()", numDays, columnToSortBy);
             document.querySelector("#last30Days").classList.remove("active");
             document.querySelector("#currentYear").classList.remove("active");
             document.querySelector("#customDates").classList.remove("active");
@@ -201,11 +201,11 @@
             for (var i = 0; i < onTableViewChangeHandlers.length; i++) {
                 onTableViewChangeHandlers[i]();
             }
-            console.log("End Data.changeDateRange()", startRange, endRange, numDays);
+            //console.log("End Data.changeDateRange()", startRange, endRange, numDays);
          };
 
         Data.changeSortColumn = function(column){
-            console.log("running Data.changeSortColumn()", startRange, endRange, column);
+            //console.log("running Data.changeSortColumn()", startRange, endRange, column);
             columnToSortBy = column;
             Data.globalcolumnToSortBy = columnToSortBy;
             for (var i = 0; i < onTableViewChangeHandlers.length; i++) {
@@ -217,7 +217,7 @@
         */
         Data.onTableViewChange = function (handler) {
            onTableViewChangeHandlers.push(handler);
-           console.log("run Data.onTableViewChange()");
+           //console.log("run Data.onTableViewChange()");
        };
         
         

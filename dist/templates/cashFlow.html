@@ -51,7 +51,7 @@
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
     </tr>
-    <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.predicate: cashflow.reverse">
+    <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.setColumnSort: cashflow.reverse">
         <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <!-- 2 billNumber --><td> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a></td>
         <!-- 4 description--><td class="td-medium-plus"> {{ item.description | limitTo:50 }} </td>

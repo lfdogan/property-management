@@ -36,6 +36,8 @@
     background-color: white;
     padding: 5px;
     box-shadow: 5px 5px 5px gray;
+    max-width: 1200px; /* will not grow past 1200px wide */
+    margin: auto;
 }
 
 /* Data Section */
@@ -44,6 +46,7 @@ table {
     font-size: 16px;
     margin: auto;
     border-collapse: collapse; /* single rather than double interior borders */
+    max-width: 1200px; /* will not grow past 1200px wide */
 }
 
 /*Body Subheading labels*/
@@ -89,7 +92,7 @@ td, th {
 
 
 
-/* FOR DEVICES LESS THAN 692 PIXELS WIDE */
+/* FOR DEVICES LESS THAN 414 PIXELS WIDE */
 .wide {
     display: none;
 }
@@ -116,8 +119,8 @@ td, th {
 }
 
 
-/* FOR DEVICES AT LEAST 692 PIXELS WIDE */
-@media (min-width: 692px) {
+/* FOR DEVICES AT LEAST 415 PIXELS WIDE */
+@media (min-width: 415px) {
     .wide {
         display: block;
     }    
@@ -144,8 +147,8 @@ td, th {
 
 }
 
-/* FOR DEVICES AT LEAST 1000 PIXELS WIDE */
-@media (min-width: 1000px) {
+/* FOR DEVICES AT LEAST 770 PIXELS WIDE */
+@media (min-width: 770px) {
     .td-narrow-only {
         display: none; 
     }
