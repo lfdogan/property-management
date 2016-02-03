@@ -79,7 +79,7 @@ class="td-medium-plus"
         <option value=4003>Leasing Fee Collected from Tenant</option>
         <option value=4680>Utility Charge</option>
     </select>
-    <input type="text" id="amountPaid" placeholder="amountPaid">
+    <input type="number" id="amountPaid" placeholder="amountPaid">
     <select id="billDate" name="billDate">
         <option value=1420118900000>01/01/2015 8:28:20</option>
         <option value=1420813980000>01/09/2015 9:33:00 </option>
@@ -125,8 +125,10 @@ class="td-medium-plus"
         <option value=1439560260000>08/14/2015 9:51:00 </option>
     </select>
     <input type="text" id="billNumber" placeholder="billNumber">
-    <input type="text" id="building" placeholder="2165 54th St">
-    <input type="text" id="cost" placeholder="cost">
+    <select id="building" name="building">
+        <option value="216554THSTREE">2165 54th St</option>
+    </select>
+    <input type="number" id="cost" placeholder="cost">
     <input type="text" id="description" placeholder="description">
     <select id="dueDate" name="dueDate">
         <option value=1420118900000>01/01/2015 8:28:20</option>
@@ -221,7 +223,7 @@ class="td-medium-plus"
         <option value="Unpaid">Unpaid</option>
     </select>
     <input type="text" id="vendor" placeholder="vendor">
-    <input type="text" id="workOrderNumber" placeholder="workOrderNumber">
+    <input type="number" id="workOrderNumber" placeholder="workOrderNumber">
     <button id="btnNewItemUpdate" class="btn btn-primary">Update</button>
 </div>
 -->

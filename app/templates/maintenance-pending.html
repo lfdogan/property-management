@@ -5,7 +5,7 @@
         <div>
             <div class="half-column">
                 Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
-                <br/>Location: {{ item.building }}
+                <br/>Location: {{ item.building | buildingNickname  }}
             </div>
             <div class="half-column">
                 <a ui-sref="workorder( {workOrderNumber: {{ item.workOrderNumber }} } )">WO#{{ item.workOrderNumber }}</a>

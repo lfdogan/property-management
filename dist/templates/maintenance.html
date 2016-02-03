@@ -27,7 +27,7 @@
             <span><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{item.workOrderNumber}}</a>
                 <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
                 <br/>Started: {{ item.dateStarted | date: 'MM/dd/yyyy' }}
-                <br/>Location: {{item.building}}
+                <br/>Location: {{item.building | buildingNickname }}
                 <br/>{{item.description}}
                 <br/><span ng-repeat="bill in maintenance.allBills "> 
                         <span ng-show="{{bill.workOrderNumber}}">
@@ -111,18 +111,35 @@
 
 <!--
 <div>
-    <input type="text" id="workOrderNumber" placeholder="workOrderNumber">
-    <input type="text" id="approved" placeholder="approved">
-    <input type="text" id="status" placeholder="Closed">
-    <input type="text" id="building" placeholder="2165 54th St">
+    <input type="number" id="workOrderNumber" placeholder="workOrderNumber">
+    <select id="status" name="status">
+        <option value="Open">Open</option>
+        <option value="Closed">Closed</option>
+        <option value="Pending Approval">Pending Approval</option>
+    </select>
+    <select id="approved" name="approved">
+        <option value="Pending">Pending</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <select id="building" name="building">
+        <option value="216554THSTREE">2165 54th St</option>
+    </select>
     <input type="text" id="description" placeholder="description">
-    <input type="text" id="dateCreated" placeholder="dateCreated">
-    <input type="text" id="dateStarted" placeholder="dateStarted">
-    <input type="text" id="dateCompleted" placeholder="dateCompleted">
-    <input type="text" id="estimatedCost" placeholder="estimatedCost">
-    <input type="text" id="invoicedCost" placeholder="invoicedCost">
+    <select id="dateCreated" name="dateCreated">
+        <option value=1439560250000>08/14/2015 9:50:50 </option>
+        <option value=1439560260000>08/14/2015 9:51:00 </option>
+    </select>
+    <select id="dateStarted" name="dateStarted">
+        <option value=1439560250000>08/14/2015 9:50:50 </option>
+        <option value=1439560260000>08/14/2015 9:51:00 </option>
+    </select>
+    <select id="dateCompleted" name="dateCompleted">
+        <option value=1439560250000>08/14/2015 9:50:50 </option>
+        <option value=1439560260000>08/14/2015 9:51:00 </option>
+    </select>
+    <input type="number" id="estimatedCost" placeholder="estimatedCost">
     <input type="text" id="closingComments" placeholder="closingComments">
-    <input type="text" id="billsListing" placeholder="billsListing">
     <button id="btnNewItemUpdate" class="btn btn-primary">Update</button>
 </div>
 -->

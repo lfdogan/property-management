@@ -300,6 +300,7 @@
                     alert("Work Order #"+item.workOrderNumber+" has been approved. You can now view it on the Maintenance page under Ongoing Work Orders.")
                 } else {
                     curRef.update({"approved": "No"});
+                    curRef.update({"status": "Closed"});
                     alert("You have REJECTED work order #"+item.workOrderNumber+".");
                 }
             });
