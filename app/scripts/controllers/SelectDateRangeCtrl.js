@@ -16,6 +16,7 @@
          Data.changeDateRange(setNumDays);
          //console.log("setNumDays from SelectDateRangeCtrl:",setNumDays);
 
+
          
          
          /* Attempts to run new version!
@@ -24,7 +25,17 @@
 //         this.changeDateRange = function(value) {
 //             console.log("runs", value);
 //         };
+//         this.changeDateRange = Data.changeDateRange();
 
+         this.my_change = function(){
+//             var my_change = function(){
+             console.log("my change");
+             console.log("from date-selector:",document.getElementById('date-selector').value);
+         };
+         
+         
+         
+         
          //This function is never called and not needed
 //         this.changeDateRange = function(days) {
 //             Data.changeDateRange(days, $scope);

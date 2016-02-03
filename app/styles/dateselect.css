@@ -30,7 +30,7 @@
 * div3: #customDates .cell
 */
 
-.date-selector .active {
+#date-selector .active {
     text-decoration: underline;
 }
 

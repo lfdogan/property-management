@@ -34,10 +34,10 @@
 /* section boxes for data */
 .white-box {
     background-color: white;
-    padding: 5px;
+    padding: 5px; /* space between text and box edge */
     box-shadow: 5px 5px 5px gray;
     max-width: 1200px; /* will not grow past 1200px wide */
-    margin: auto;
+    margin: auto; /* center on page */
 }
 
 /* Data Section */
@@ -97,6 +97,9 @@ th.amountPaid {
     border-radius: 10px;
     text-transform: uppercase;
 }
+#maintenance-page #maintenance-completed h2 {
+    padding-top: 50px; /* space above Completed Work Orders h2 text */
+}
 
 
 
@@ -120,7 +123,7 @@ th.amountPaid {
 .third {
     display: block;
 }
-#overview-main,
+.overview-main,
 .overview-right {
     display: block;
     width: 100%;
@@ -166,7 +169,7 @@ th.amountPaid {
     .td-wide-only {
         display: table-cell; 
     }
-    #overview-main {
+    .overview-main {
         /*display: inline-block; /* 2 blocks in row, 1 below */
         /*display: inline; /* does not start on a new line and only takes up as much width as necessary. */
         /*display: block; /* always starts on a new line and takes up the full width available */
@@ -186,6 +189,6 @@ th.amountPaid {
         padding: 0 1%;
     }
     .clearLeft {
-        clear: left;
+        clear: both;
     }
 }

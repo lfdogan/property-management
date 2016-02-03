@@ -158,6 +158,8 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
+            console.log("from date-selector:",document.getElementById('date-selector').value);
+            console.log("from passed variable numDays",numDays);
             var text;
             var element;
             //console.log("run Data.changeDateRange()", numDays, columnToSortBy);
@@ -297,6 +299,7 @@
                 if (true_or_false) {
                     curRef.update({"approved": "Yes"});
                     curRef.update({"status": "Open"});
+                    curRef.update({"dateStarted": today}); // 'current' date is 08/17/2015 11:01:20});
                     alert("Work Order #"+item.workOrderNumber+" has been approved. You can now view it on the Maintenance page under Ongoing Work Orders.")
                 } else {
                     curRef.update({"approved": "No"});

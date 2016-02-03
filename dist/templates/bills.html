@@ -24,8 +24,10 @@
 
 <table>
     <tr>
-        <th class="payDate" ng-click="bills.order('payDate')">pay date
-            <span class="sortorder" ng-show="bills.setColumnSort === 'payDate'" ng-class="{reverse:bills.reverse}"></span>
+        <th><span class="payDate" ng-click="bills.order('payDate')">pay Date
+            <span class="sortorder" 
+                  ng-show="bills.setColumnSort === 'payDate'" 
+                  ng-class="{reverse:cashflow.reverse}"></span></span>
             <ng-include src="'/templates/selectDateRange.html'"></ng-include>
         </th>
         <th ng-click="bills.order('account')" class="td-wide-only">type

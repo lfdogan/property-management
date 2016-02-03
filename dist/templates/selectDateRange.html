@@ -1,51 +1,64 @@
+<!--Nothing happens-->
 <!--
-<div ng-controller="SelectDateRangeCtrl as Ctrl">
-Date 
-<select class="date-selector">
-    <option id="last30Days" value="30" onselect="Ctrl.changeDateRange(30)">Last 30 Days</option>
-    <option id="currentYear" value="365" onselect="Ctrl.changeDateRange(365)">Current Year</option>
-    <option id="customDates" value="9999" onselect="Ctrl.changeDateRange(9999)">6/1/15-8/15/15</option>
-</select>
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+    <select id="date-selector">
+        <option id="last30Days" value="30" onselect="Ctrl.changeDateRange(30)">Last 30 Days</option>
+        <option id="currentYear" value="365" onselect="Ctrl.changeDateRange(365)">Current Year</option>
+        <option id="customDates" value="9999" onselect="Ctrl.changeDateRange(9999)">6/1/15-8/15/15</option>
+    </select>
 </div>
 -->
 
+<!--Nothing happens-->
 <!--
 <div ng-controller="SelectDateRangeCtrl as Ctrl">
-    Date 
-    <select onChange="Ctrl.Data.changeDateRange(value)">
+    <select id="date-selector">
+        <option id="last30Days" value="30" onclick="Ctrl.Data.changeDateRange(30)">Last 30 Days</option>
+        <option id="currentYear" value="365" onclick="Ctrl.Data.changeDateRange(365)">Current Year</option>
+        <option id="customDates" value="9999" onclick="Ctrl.Data.changeDateRange(9999)">6/1/15-8/15/15</option>
+    </select>
+</div>
+-->
+
+<!-- Uncaught ReferenceError: Ctrl is not defined -->
+<!--
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+    <select id="date-selector" onChange="Ctrl.Data.changeDateRange(value)">
         <option id="last30Days" value="30">Last 30 Days</option>
         <option id="currentYear" value="365">Current Year</option>
         <option id="customDates" value="9999">6/1/15-8/15/15</option>
     </select>
 </div>
 -->
+
+
+
+<!--Uncaught ReferenceError: Ctrl is not defined-->
 <!--
 <div ng-controller="SelectDateRangeCtrl as Ctrl">
-Date 
-<select class="date-selector">
-    <option id="last30Days" value="30" onclick="Ctrl.changeDateRange(30)">Last 30 Days</option>
-    <option id="currentYear" value="365" onclick="Ctrl.changeDateRange(365)">Current Year</option>
-    <option id="customDates" value="9999" onclick="Ctrl.changeDateRange(9999)">6/1/15-8/15/15</option>
-</select>
-</div>
--->
-<!--
-<div ng-controller="SelectDateRangeCtrl as Ctrl">
-Date 
-<select class="date-selector">
-    <option id="last30Days" value="30" ng-click="Ctrl.Data.changeDateRange(30)">Last 30 Days</option>
-    <option id="currentYear" value="365" ng-click="Ctrl.Data.changeDateRange(365)">Current Year</option>
-    <option id="customDates" value="9999" ng-click="Ctrl.Data.changeDateRange(9999)">6/1/15-8/15/15</option>
-</select>
+    <select id="date-selector" name="date-selector" onchange="Ctrl.Data.changeDateRange()">
+        <option id="last30Days" value=30>Last 30 Days</option>
+        <option id="currentYear" value=365>Current Year</option>
+        <option id="customDates" value=9999>6/1/15-8/15/15</option>
+    </select>
 </div>
 -->
 
 
+<!-- Uncaught ReferenceError: Ctrl is not defined -->
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+    <select id="date-selector" onchange="my_change()">
+        <option id="last30Days" value=30>Last 30 Days</option>
+        <option id="currentYear" value=365>Current Year</option>
+        <option id="customDates" value=9999>6/1/15-8/15/15</option>
+    </select>
+</div>
 
 
 
 <!-- ORIGINAL BAR VERSION-->
 <!--<div class="title"><p class="wide">Select an option to change date range:</p></div>-->
+<!--
 
 <div class="date-selector" ng-controller="SelectDateRangeCtrl as Ctrl">
     <div id="last30Days" 
@@ -58,3 +71,4 @@ Date
          class="cell"
          ng-click="Ctrl.Data.changeDateRange(9999)">6/1/15-8/15/15</div>
 </div>
+-->
