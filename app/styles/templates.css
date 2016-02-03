@@ -55,10 +55,11 @@ th {
     color: white;
     text-transform: uppercase;
     font-size: 14px;
+    cursor: pointer;
 }
 td, th {
 /*    background-image: linear-gradient(-180deg, #FFFFFF 0%, #D8D8D8 100%);*/
-    padding: 5px;
+    padding: 2px 5px;
     border:  1px #06538F solid;
 }
 th.payDate {

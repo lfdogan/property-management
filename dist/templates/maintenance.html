@@ -27,7 +27,6 @@
 <div class="overview-right"  id="maintenance-ongoing">
     <h2 class="center">Ongoing Work Orders</h2>
     <div class="white-box">
-
         <div ng-repeat="item in maintenance.allOpenMaintenance">
             <span><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{item.workOrderNumber}}</a>
                 <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}

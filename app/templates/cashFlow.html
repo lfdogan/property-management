@@ -24,11 +24,11 @@
 
 <table>
     <tr>
-        <!-- 1 payDate--><th><span class="payDate" ng-click="cashflow.order('payDate')">pay Date
+        <!-- 1 payDate--><th class="payDate"><span ng-click="cashflow.order('payDate')">pay Date
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'payDate'" 
                   ng-class="{reverse:cashflow.reverse}"></span></span>
-<!--            <ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
+            <ng-include src="'/templates/selectDateRange.html'"></ng-include>
 
         </th>
         <!-- 7 amountPaid--><th class="amountPaid" ng-click="cashflow.order('amountPaid')">amount Paid

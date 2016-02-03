@@ -60,18 +60,18 @@ a {
     color: #06538F;
 }
 
-footer .link {
+.footer-narrow .link {
     width: 24%;
     display: inline-block;
 }
-footer a {
+.footer-narrow a {
     text-decoration: none;
 }
-footer a:visited {
+.footer-narrow a:visited {
     color: white;
 }
-footer a:active,
-footer a:hover {
+.footer-narrow a:active,
+.footer-narrow a:hover {
     background: white;
     color: #06538F;
     padding: 5px;
@@ -95,7 +95,7 @@ we will use a hamburger icon to click menu in/out */
     z-index: 2;
 }
 main {
-    padding-bottom: 30px; /* top/bottom match the nav/footer height */
+    padding-bottom: 50px; /* doesn't do anything for the wide screen */
 }
 nav {
     display: none;
@@ -103,26 +103,27 @@ nav {
 }
 
 /*Footer*/
-footer {
+.footer-narrow {
     font-family: 'Basic', sans-serif;
     font-size: 16px;
     color: white;
     text-align: center;
     background-color: #06538F;
     /*position: absolute; /*absolute moves with scroll*/
-    position: fixed; /*fixed use left and top/bottom */
+    position: fixed; /*fixed use left(right) and top(bottom) */
     left: 0px;
     bottom: 0px;
     width: 100%;
-    height: 30px;
+    min-height: 30px;
     z-index: 1;
 }
-.footer-wide {
-    display: none;    
-}
-footer div {
+.footer-narrow div {
     padding-top: 4px;
 }
+.footer-wide {
+    display: none;
+}
+
 
 
 
@@ -184,29 +185,36 @@ we will have the left navigation menu fixed on screen */
     nav .active {
         background-color: #06538F;
         color: white;
-        padding: 7px 7px 23px 7px; /* TRBL */
+        padding: 7px 7px 15px 7px; /* TRBL */
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    footer {
+    .footer-narrow {
+        display: none;
+    }
+    .footer-wide {
+        clear: both;
+        display: block; /* element always starts on a new line and takes up the full width available  */
+        /*position: absolute;left: 0;bottom:0;/* stuck in location on page load and scrolls with page */
+        /*position: fixed;left:0;bottom:0; /*fixed to a spot on page, doesn't move with scroll */
+        /*position: static; /*not full width. Static positioned elements are not affected by the top, bottom, left, and right properties.*/
+        /*position: relative;left: 0;bottom:0; /*not full width*/
+        width: 100%;
         font-family: 'Basic', sans-serif;
-        font-size: 16px;
+        font-size: 12px;
         color: #000000;
         text-align: center;
         background-color: white;
-        /*position: absolute; /*absolute moves with scroll*/
-        position: fixed; /*fixed use left and top/bottom */
-        left: 0px;
-        bottom: 0px;
-        width: 100%;
-        height: 30px;
+        padding-top: 5px;
         border-top: 2px solid #06538F;
-    }    
-    .footer-wide {
-        display: block;
     }
-    .footer-narrow {
-        display: none;
+    footer .one-half {
+        width: 50%;
+        display: inline-block;
+    }
+    footer .one-quarter {
+        width: 20%;
+        display: inline-block;
     }
 }
 

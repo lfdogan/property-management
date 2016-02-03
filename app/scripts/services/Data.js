@@ -158,8 +158,8 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-            console.log("from date-selector:",document.getElementById('date-selector').value);
-            console.log("from passed variable numDays",numDays);
+            //console.log("from date-selector:",document.getElementById('date-selector').value);
+            //console.log("from passed variable numDays",numDays);
             var text;
             var element;
             //console.log("run Data.changeDateRange()", numDays, columnToSortBy);

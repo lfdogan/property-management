@@ -27,11 +27,11 @@
 //         };
 //         this.changeDateRange = Data.changeDateRange();
 
-         this.my_change = function(){
-//             var my_change = function(){
-             console.log("my change");
-             console.log("from date-selector:",document.getElementById('date-selector').value);
-         };
+//         this.my_change = function(){
+////             var my_change = function(){
+//             console.log("my change");
+//             console.log("from date-selector:",document.getElementById('date-selector').value);
+//         };
          
          
          
