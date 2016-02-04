@@ -1,24 +1,66 @@
 <h1 class="center">Bank Transfer</h1>
 
 <section class="white-box">
-    <div>
-        <h2>New Bank Transfer to property management company</h2>
+    
+    <h2>New Bank Transfer to property management company</h2>
+    
+    <div class="half-column">
+        <h3>Payment Amount</h3>
         Portfolio <select><option value="Clark Kent">Clark Kent</option></select><br/>
         Amount <input type="text" placeholder="$0.00"><br/>
         Comments <input type="text">
     </div>
 
-    <div>
-        <h2>Payment Account</h2>
+    <div class="half-column">
+        <h3>Payment Account</h3>
         Payment Method <select><option value="eCheck">E-Check</option></select><br/>
         Bank Name <select><option value="RLBank">R&L Bank</option></select><br/>
         Account Type <select><option value="Checking">Checking</option></select>
     </div>
-    <span class="center">
-        <div class="maintenance-button-approve" >Save</div>
-        <div class="maintenance-button-reject" >Cancel</div>
-    </span>
+
+
+        <span class="center">
+            <div class="maintenance-button-approve" >Save</div>
+            <div class="maintenance-button-reject" >Cancel</div>
+        </span>
+
+
+
+
 
     <p>Please take into consideration that the settlement of your payment will take 3 to 4 business days. In months where the payments date is a weekend or holiday, your payment will be initiated the next business day. To avoid a non-sufficient funds fee, please be sure that your bank account has the sufficient funds to cover your payment.</p>
     
 </section>
+
+<div><br/></div>
+
+<table>
+    <tr>
+        <!-- 1 payDate--><th class="payDate"><span ng-click="contribution.order('payDate')">Transfer Date
+            <span class="sortorder" 
+                  ng-show="contribution.setColumnSort === 'payDate'" 
+                  ng-class="{reverse:contribution.reverse}"></span></span>
+        </th>
+        <!-- 7 amountPaid--><th class="amountPaid" ng-click="contribution.order('amountPaid')">amount
+            <span class="sortorder" 
+                  ng-show="contribution.setColumnSort === 'amountPaid'" 
+                  ng-class="{reverse:contribution.reverse}"></span>
+        </th>
+        <!-- 5 account --><th ng-click="contribution.order('account')">type
+            <span class="sortorder" 
+                  ng-show="contribution.setColumnSort === 'account'" 
+                  ng-class="{reverse:contribution.reverse}"></span>
+        </th>
+        <!-- 2 referenceNumber--><th class="td-medium-plus billNumber" ng-click="contribution.order('referenceNumber')">reference #
+            <span class="sortorder" 
+                  ng-show="contribution.setColumnSort === 'referenceNumber'" 
+                  ng-class="{reverse:contribution.reverse}"></span>
+        </th>
+    </tr>
+    <tr ng-repeat="item in contribution.billsOwnerDraw | orderBy: contribution.setColumnSort: contribution.reverse">
+        <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
+        <!-- 7 amountPaid--><td class="right"> {{ item.amountPaid | currency }} </td>
+        <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
+        <!-- 2 referenceNumber --><td class="td-medium-plus"> {{ item.referenceNumber }}</td>
+    </tr>
+</table>

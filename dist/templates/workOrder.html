@@ -71,12 +71,18 @@
                             </tr>
                                 
                         </table>
-                    </td>
-                </tr>
+                    </td></tr>
             </table>
-            
-
-          
         </div>
+
     </div>
+                <div id="anchorSendMessage" ng-repeat="item in ctrl.allMaintenance">
+                <div ng-show="ctrl.getSingleWorkOrder( {{workOrderNumber}}, {{item}} )">
+                    <br/>
+                    <p>Work Order #{{ item.workOrderNumber }}</p>
+                    <p>Call GPRES <a class="ion-ios-telephone"></a></p>
+                    <label>Send Message to Property Management Team</label>
+                    <input type="text" id="messageText" placeholder="message" size="60">
+                    <button id="btnNewMessage" class="btn btn-primary">Send</button>
+                </div> </div>
 </div>

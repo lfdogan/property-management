@@ -21,9 +21,16 @@
          return function(number) {
              for (var i = 0; i < accountNum.length; i++){
                  if (Number(number) == Number(accountNum[i].$id)) {
-                     if (accountNum[i].$value == "Owner Draw") {
-                         return "Deposit to "; //{{item.portfolio}} is owner's name
-                     } else return accountNum[i].$value;
+                     switch(Number(number)){
+                         case 1000: 
+                            return "Deposit to "; //{{item.portfolio}} is owner's name
+                            break;
+                         case 1050:
+                            return "Transfer from "; //{{item.portfolio}} is owner's name
+                            break;
+                         default:
+                             return accountNum[i].$value;
+                     }
                  }
              };
 

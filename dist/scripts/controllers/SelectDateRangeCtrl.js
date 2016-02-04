@@ -7,22 +7,30 @@
 
          //initial value for setRange is on page load and it is not updated on page
          var setNumDays = Data.globalNumDays;
-         console.log("initial value of setNumDays on SelectDateRangeCtrl:",setNumDays);
+//         console.log("initial value of setNumDays on SelectDateRangeCtrl:",setNumDays);
          
 
-         /* works on page load to highlight active cell of date selection bar. 
+         /* runs changeDateRange() in Data.js service on page load
+         * it is needed to highlight active cell of date selection bar. 
          * title dates and data are correct without this statement
          */
          Data.changeDateRange(setNumDays);
-         //console.log("setNumDays from SelectDateRangeCtrl:",setNumDays);
 
 
-         
-         
+         /*The ngOptions attribute can be used to dynamically generate a list of <option> elements for the <select> element using the array or object obtained by evaluating the ngOptions comprehension expression. In many cases, ngRepeat can be used on <option> elements instead of ngOptions to achieve a similar result. */
+//         this.dateOptions = {
+//             availableOptions: [
+//                 {id: '30', name: 'Last 30 Days'},
+//                 {id: '365', name: 'Current Year'},
+//                 {id: '9999', name: '6/1/15-8/15/15'}
+//             ],
+//             selectedOption: {id: '30', name: 'Last 30 Days'}
+//         };
+    
 
          this.my_change = function(){
              var newNumDays = document.getElementById('date-selector').value;
-             console.log("my change from date-selector:",newNumDays);
+//             console.log("my_change() from date-selector:",newNumDays);
              Data.changeDateRange(newNumDays);
          };
          

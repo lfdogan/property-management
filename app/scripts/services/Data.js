@@ -42,10 +42,11 @@
                 return $firebaseArray(billsRef
                                       .orderByChild("billNumber"));
             },
-            billsOwnerDraw: function() {//for the overview page, selects only transactions that are owner draw
+            billsOwnerDraw: function() {//for the overview & contributions pages, selects only transactions that are owner draw/contribution
                 return $firebaseArray(billsRef
-                                     .orderByChild("account")
-                                     .equalTo(1000));
+                                      .startAt(1000)
+                                      .endAt(1050)
+                                     .orderByChild("account"));
             },
             billsRentIncome: function() {//for the overview page, selects only transactions that are rent income
                 return $firebaseArray(billsRef
@@ -151,19 +152,25 @@
 
         
        /*
-        * ANGULARJS ngClick on any of the date selection buttons
-        * takes in a number of days to determine what to change start/end dates to
-        * then runs updateUI() to set those dates
+        * ANGULARJS ngClick on any of the date selection buttons (ORIGINAL VERSION)
+        * ANGULARJS ngChange on any of the date select options
+        * passed in a number of days to determine what to change start/end dates to
+        * removes 'active' class from all <div> for original version
+        * removes 'selected' attribute from all for option version
+        * sets begin/end dates based on numDays and passes those to global variables
+        * sets the selected <div>/<option> to 'active'/'selected' to display on page as current data view
         * inital load parameters are inital value of numDays and scope
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-            console.log("running Data.changeDateRange(",numDays,")");
+//            console.log("running Data.changeDateRange(",numDays,")");
             var text;
             var element;
-            document.querySelector("#last30Days").classList.remove("active");
-            document.querySelector("#currentYear").classList.remove("active");
-            document.querySelector("#customDates").classList.remove("active");
+             //for original selection bar version
+//            document.querySelector("#last30Days").classList.remove("active");
+//            document.querySelector("#currentYear").classList.remove("active");
+//            document.querySelector("#customDates").classList.remove("active");
+             //for <option>'s <select> element
             document.querySelector("#last30Days").removeAttribute("selected");
             document.querySelector("#currentYear").removeAttribute("selected");
             document.querySelector("#customDates").removeAttribute("selected");
@@ -192,7 +199,7 @@
                         console.log("error! Data.changeDateRange() did not receive correct 'numDays' input!");
                         break;
                 };
-            element.classList.add("active");
+//            element.classList.add("active"); //for original selection bar version
             element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
@@ -203,15 +210,6 @@
             }
             //console.log("End Data.changeDateRange()", startRange, endRange, numDays);
          };
-
-        Data.changeSortColumn = function(column){
-            //console.log("running Data.changeSortColumn()", startRange, endRange, column);
-            columnToSortBy = column;
-            Data.globalcolumnToSortBy = columnToSortBy;
-            for (var i = 0; i < onTableViewChangeHandlers.length; i++) {
-                onTableViewChangeHandlers[i]();
-            }            
-        };
         /* function passes 'handler' which is a function from the page controller's function 'onDateRangeChange()'
         * it pushes 'handler' to 0 index of 'onTableViewChangeHandlers' array
         */

@@ -1,12 +1,3 @@
-<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
-    <select id="date-selector" name="date-selector" ng-model="Ctrl.data.setNumDays" ng-change="Ctrl.my_change()">
-        <option id="last30Days" value=30>Last 30 Days</option>
-        <option id="currentYear" value=365>Current Year</option>
-        <option id="customDates" value=9999>6/1/15-8/15/15</option>
-    </select>
-</div>
-
-
 <!-- ORIGINAL BAR VERSION-->
 <!--<div class="title"><p class="wide">Select an option to change date range:</p></div>-->
 
@@ -25,3 +16,27 @@
 </div>
 -->
 
+
+<!--but in your select, the 'onchange' is actually a DOM event, not an angular event.  When this event fires, the event dispatcher is looking for something called Ctrl on the window object, which is undefined because that's something handled and defined by Angular.  You'll want to look into using ng-change. 
+ng-selected="selected" where "selected" is an expression and refers to the ng-model="selected"
+-->
+
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+    <select id="date-selector" name="date-selector" ng-model="Ctrl.setNumDays" ng-change="Ctrl.my_change()">
+        <option id="last30Days" ng-selected="Ctrl.setNumDays" value=30>Last 30 Days</option>
+        <option id="currentYear" value=365>Current Year</option>
+        <option id="customDates" value=9999>6/1/15-8/15/15</option>
+    </select>
+</div>
+
+
+<!--Use ngOptions to pull options from a list in the controller-->
+<!--
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+    <select id="date-selector" 
+            name="date-selector" 
+            ng-model="Ctrl.setNumDays" 
+            ng-change="Ctrl.my_change()"
+            ng-options="option.name for option in Ctrl.dateOptions.availableOptions track by option.id">
+    </select>
+</div>-->

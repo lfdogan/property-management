@@ -36,17 +36,17 @@
                   ng-show="cashflow.setColumnSort === 'amountPaid'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
-        <!-- 4 description--><th class="td-wide-only" ng-click="cashflow.order('description')">description
-            <span class="sortorder" 
-                  ng-show="cashflow.setColumnSort === 'description'" 
-                  ng-class="{reverse:cashflow.reverse}"></span>
-        </th>
         <!-- 5 account --><th ng-click="cashflow.order('account')">type
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'account'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
-        <!-- 2 billNumber--><th class="td-medium-plus billNumber" ng-click="cashflow.order('billNumber')">bill #
+        <!-- 4 description--><th class="td-wide-only" ng-click="cashflow.order('description')">description
+            <span class="sortorder" 
+                  ng-show="cashflow.setColumnSort === 'description'" 
+                  ng-class="{reverse:cashflow.reverse}"></span>
+        </th>
+        <!-- 2 billNumber--><th class="td-medium-plus billNumber" ng-click="cashflow.order('billNumber')">bill / Transfer Ref #
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'billNumber'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
@@ -55,9 +55,9 @@
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.setColumnSort: cashflow.reverse">
         <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <!-- 7 amountPaid--><td class="right"> {{ item.amountPaid | currency }} </td>
-        <!-- 4 description--><td class="td-wide-only"> {{ item.description | limitTo:50 }} </td>
         <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
-        <!-- 2 billNumber --><td class="td-medium-plus"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a></td>
+        <!-- 4 description--><td class="td-wide-only"> {{ item.description | limitTo:50 }} </td>
+        <!-- 2 billNumber --><td class="td-medium-plus"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a> {{ item.referenceNumber }}</td>
     </tr>
 </table>
 
