@@ -18,14 +18,11 @@
 
 
          /*The ngOptions attribute can be used to dynamically generate a list of <option> elements for the <select> element using the array or object obtained by evaluating the ngOptions comprehension expression. In many cases, ngRepeat can be used on <option> elements instead of ngOptions to achieve a similar result. */
-//         this.dateOptions = {
-//             availableOptions: [
-//                 {id: '30', name: 'Last 30 Days'},
-//                 {id: '365', name: 'Current Year'},
-//                 {id: '9999', name: '6/1/15-8/15/15'}
-//             ],
-//             selectedOption: {id: '30', name: 'Last 30 Days'}
-//         };
+         this.select_ngRepeat =  [
+                 {id: '30', name: 'Last 30 Days'},
+                 {id: '365', name: 'Current Year'},
+                 {id: '9999', name: '6/1/15-8/15/15'}
+             ];
     
 
          this.my_change = function(){

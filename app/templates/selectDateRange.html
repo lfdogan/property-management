@@ -23,11 +23,13 @@ ng-selected="selected" where "selected" is an expression and refers to the ng-mo
 
 <div ng-controller="SelectDateRangeCtrl as Ctrl"> 
     <select id="date-selector" name="date-selector" ng-model="Ctrl.setNumDays" ng-change="Ctrl.my_change()">
-        <option id="last30Days" ng-selected="Ctrl.setNumDays" value=30>Last 30 Days</option>
+        <option id="last30Days" value=30>Last 30 Days</option>
         <option id="currentYear" value=365>Current Year</option>
         <option id="customDates" value=9999>6/1/15-8/15/15</option>
     </select>
 </div>
+
+
 
 
 <!--Use ngOptions to pull options from a list in the controller-->
@@ -37,6 +39,20 @@ ng-selected="selected" where "selected" is an expression and refers to the ng-mo
             name="date-selector" 
             ng-model="Ctrl.setNumDays" 
             ng-change="Ctrl.my_change()"
-            ng-options="option.name for option in Ctrl.dateOptions.availableOptions track by option.id">
+            ng-options="option.name for option in Ctrl.availableOptions track by option.id">
     </select>
-</div>-->
+</div>
+-->
+
+
+
+<!--
+<div ng-controller="SelectDateRangeCtrl as Ctrl"> 
+  <form name="myForm">
+    <select name="repeatSelect" id="repeatSelect" ng-model="Ctrl.select_ngRepeat.repeatSelect">
+      <option ng-repeat="option in Ctrl.select_ngRepeat" value="{{option.id}}">{{option.name}}</option>
+    </select>
+  </form>
+</div>
+-->
+

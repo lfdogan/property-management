@@ -32,7 +32,7 @@
                 {{item.building | buildingNickname }} rent received on {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid | currency }}
             </div>
             <div ng-repeat="item in overview.billsOwnerDraw"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
-                Net Deposit submitted {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid*-1 | currency }} (Download statement <a class="ion-ios-download-outline"></a> )
+                Monthly Profit Deposit {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid | currency }} (Download statement <a class="ion-ios-download-outline"></a> )
             </div>
         </div>
     </div>
