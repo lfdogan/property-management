@@ -158,18 +158,16 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-            //console.log("from date-selector:",document.getElementById('date-selector').value);
-            //console.log("from passed variable numDays",numDays);
+            console.log("running Data.changeDateRange(",numDays,")");
             var text;
             var element;
-            //console.log("run Data.changeDateRange()", numDays, columnToSortBy);
             document.querySelector("#last30Days").classList.remove("active");
             document.querySelector("#currentYear").classList.remove("active");
             document.querySelector("#customDates").classList.remove("active");
-//            document.querySelector("#last30Days").removeAttribute("selected");
-//            document.querySelector("#currentYear").removeAttribute("selected");
-//            document.querySelector("#customDates").removeAttribute("selected");
-                switch(numDays){
+            document.querySelector("#last30Days").removeAttribute("selected");
+            document.querySelector("#currentYear").removeAttribute("selected");
+            document.querySelector("#customDates").removeAttribute("selected");
+                switch(Number(numDays)){
                     case 30: 
                         text = "last 30 days";
                         element = document.querySelector("#last30Days");
@@ -195,7 +193,7 @@
                         break;
                 };
             element.classList.add("active");
-            //element.setAttribute("selected","selected"); //for <option>'s <select> element
+            element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;

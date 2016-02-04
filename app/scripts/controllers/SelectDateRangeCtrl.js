@@ -7,7 +7,7 @@
 
          //initial value for setRange is on page load and it is not updated on page
          var setNumDays = Data.globalNumDays;
-         //var setSortColumn = Data.globalcolumnToSortBy;
+         console.log("initial value of setNumDays on SelectDateRangeCtrl:",setNumDays);
          
 
          /* works on page load to highlight active cell of date selection bar. 
@@ -19,19 +19,11 @@
 
          
          
-         /* Attempts to run new version!
-         * Doesn't work for onclick="Ctrl.changeDateRange(365)"
-         */
-//         this.changeDateRange = function(value) {
-//             console.log("runs", value);
-//         };
-//         this.changeDateRange = Data.changeDateRange();
 
-//         this.my_change = function(){
-             var my_change = function(){
-                 debugger;
-             console.log("my change");
-             console.log("from date-selector:",document.getElementById('date-selector').value);
+         this.my_change = function(){
+             var newNumDays = document.getElementById('date-selector').value;
+             console.log("my change from date-selector:",newNumDays);
+             Data.changeDateRange(newNumDays);
          };
          
          
@@ -39,6 +31,7 @@
          
          //This function is never called and not needed
 //         this.changeDateRange = function(days) {
+//             console.log("running this.changeDateRange() on SelectDateRangeCtrl");
 //             Data.changeDateRange(days, $scope);
 //        };
          
