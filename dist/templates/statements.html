@@ -84,6 +84,11 @@
             </tr>
         </table>
     </div>
+    
+
+
+
+    
 </section>
 
 <section class="Inspection">
@@ -93,28 +98,97 @@
     <div>
         <table>
             <tr>
-                <th>File Name</th>
-                <th class="td-medium-plus">Document Date</th>
-                <th class="td-wide-only">Uploaded By</th>
+                <th></th><td>Most Recent Inspection</td><td>Previous Inspection</td>
             </tr>
             <tr>
-                <td><a>Inspection_216554THSTREE_(07/31/2015).pdf</a></td>
-                <td class="td-medium-plus">08/05/2015</td>
-                <td class="td-wide-only">System</td>
+                <th>Inspection Date</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{item.inspectionDate | date: 'MM/dd/yyyy'}}</td>                
             </tr>
             <tr>
-                <td><a>Inspection_216554THSTREE_(06/30/2015).pdf</a></td>
-                <td class="td-medium-plus">06/04/2015</td>
-                <td class="td-wide-only">System</td>
+                <th>Inspection #</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{item.$id}}</td>
             </tr>
             <tr>
-                <td><a>Inspection_216554THSTREE_(05/21/2015).pdf</a></td>
-                <td class="td-medium-plus">05/21/2015</td>
-                <td class="td-wide-only">System</td>
+                <th>Inspection Type</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{item.inspectionType}}</td>
+            </tr>
+            <tr>
+                <th>Location</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{item.propertyAddress | buildingNickname }}</td>
+            </tr>
+            <tr>
+                <th>Download PDF</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'"><a>{{item.documentName }}</a></td>
+            </tr>
+            <tr>
+                <th>Entry</th>
+<!--                <td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{ item.Entry }}</td>-->
+                <td>Good</td>
+                <td>Door Locks / Knobs (Needs Repair):<br/>Ceiling / Walls (Needs Repair): <br/>Flooring (Needs Repair): Exterior needs cleaned up</td>
+            </tr>
+            <tr>
+                <th>Living Room</th>
+                <td>Drapes / Blinds / Shutters (Fair): Blind broken but does not come with the house. Owner won't replace<br/>Flooring (Good): Scratches on flooring.</td>
+                <td>Lights / Ceiling Fans (Needs Repair): Dirty<br/>Flooring (Needs Repair): Scratch on flooring</td>
+            </tr>
+            <tr>
+            <tr>
+                <th>Hallway</th>
+                <td>Ceiling / Walls (Fair): Small marks on walls.<br/>Flooring (Fair): Carpeting worn</td>
+                <td>Flooring (Needs Repair): Needs repaired</td>
+            </tr>
+                <th>Bedroom #1</th>
+                <td>Drapes / Blinds / Shutters (Fair): </td>
+                <td>Windows / Screens (Needs Repair): Window fogged<br/>Doors / Door Stops (Needs Repair): Closet door keeps falling off</td>
+<!--                <td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{ item.Bedroom1 }}</td>-->
+            </tr>
+            <tr>
+                <th>Bedroom #2</th>
+<!--                <td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{ item.Bedroom2 }}</td>-->
+                <td>Good</td>
+                <td>Good</td>
+            </tr>
+            <tr>
+                <th>Bedroom #3</th>
+                <td>Flooring (Fair): Stain on carpeting.<br/>Doors / Door Stops (Needs Repair): Hand rail coming loose.</td>
+                <td>Good</td>
+            </tr>
+            <tr>
+                <th>Bathroom #1</th>
+                <td>Tub / Shower / Faucets (Fair): Tub finish is scratched.<br/>Doors / Door Stops (Fair): Window won't close.<br/>Flooring (Good): New</td>
+                <td>Tub / Shower / Faucets (Good): Tub needs caulked<br/>Toilet / Lid / Seat / Paper Holder (Needs Repair): Need new toilet seat</td>
+            </tr>
+            <tr>
+                <th>Kitchen / Breakfast</th>
+                <td>Flooring (Good): New<br/>Drawers / Handles (Fair): Cabinet paint chipped</td>
+                <td>Flooring (Fair): Floor dirty/scratched<br/>Drawers / Handles (Needs Repair): Bottom drawer off of track<br/>Oven - Light Cover / Bulb (Needs Repair): Light under microwave burnt out.</td>
+            </tr>
+            <tr>
+                <th>Utility Room</th>
+                <td>Good</td>
+                <td>Ceiling / Walls (Needs Repair): Needs cleaned out</td>
             </tr>
         </table>
+    <h4 class="center" id="inspection-reports-label" ng-click="statements.show_hide('inspection-reports-table')">
+        Click to view all inspection documents
+    </h4>
+    <table id="inspection-reports-table">
+        <tr>
+            <th>location</th>
+            <th>inspection document name</th>
+            <th>date</th>
+        </tr>
+        <tr ng-repeat="item in statements.allInspections | orderBy: '-inspectionDate'">
+            <td>{{item.propertyAddress | buildingNickname }}</td>
+            <td><a>{{item.documentName }}</a></td>
+            <td>{{item.inspectionDate | date: 'MM/dd/yyyy' }}</td>
+        </tr>
+    </table>
+
     </div>
+    
 </section>
+
+
+
+
+
+
 
 <section class="Tax">
     <div class="title">

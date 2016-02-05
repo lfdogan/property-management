@@ -19,6 +19,7 @@
         var maintenanceRef = rootRef.child('maintenance');
         var buildingsRef = rootRef.child('buildings');
         var portfoliosRef = rootRef.child('portfolios');
+        var inspectionsRef = rootRef.child('inspections');
 
 
         //initial values of start and end date range
@@ -46,7 +47,7 @@
                 return $firebaseArray(billsRef
                                       .startAt(1000)
                                       .endAt(1050)
-                                     .orderByChild("account"));
+                                      .orderByChild("account"));
             },
             billsRentIncome: function() {//for the overview page, selects only transactions that are rent income
                 return $firebaseArray(billsRef
@@ -80,8 +81,15 @@
             latestStatement: function(){
                 return $firebaseArray(statementsRef
                                       .orderByChild("endDate")
-                                      .limitToLast(1));                
-
+                                      .limitToLast(1));
+            },    
+            inspections_two: function() {
+                    return $firebaseArray(inspectionsRef
+                                      .orderByChild("inspectionDate")
+                                      .limitToLast(2));
+            },
+            allInspections: function() {
+                return $firebaseArray(inspectionsRef);
             },
             
             //Maintenance / Work Order References
@@ -163,7 +171,7 @@
         */
 //        Data.changeDateRange = function(numDays, scope){//scope not needed since SelectDateRangeCtrl function not run!
         Data.changeDateRange = function(numDays){
-//            console.log("running Data.changeDateRange(",numDays,")");
+            console.log("running Data.changeDateRange(",numDays,")");
             var text;
             var element;
              //for original selection bar version
@@ -216,7 +224,7 @@
         Data.onTableViewChange = function (handler) {
            onTableViewChangeHandlers.push(handler);
            //console.log("run Data.onTableViewChange()");
-       };
+        };
         
         
         
@@ -347,6 +355,8 @@
         };
         
         
+                 
+
         
         return Data; // return the object for this factory service
         

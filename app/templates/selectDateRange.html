@@ -19,6 +19,11 @@
 
 <!--but in your select, the 'onchange' is actually a DOM event, not an angular event.  When this event fires, the event dispatcher is looking for something called Ctrl on the window object, which is undefined because that's something handled and defined by Angular.  You'll want to look into using ng-change. 
 ng-selected="selected" where "selected" is an expression and refers to the ng-model="selected"
+If you want to get rid of the auto-inserted empty option just select an initial value in your controller, something like: 
+     $scope.form.type = $scope.typeOptions[0].value;
+
+setting ng-model="Ctrl.setNumDays" doesn't set initial selected value
+
 -->
 
 <div ng-controller="SelectDateRangeCtrl as Ctrl"> 
@@ -32,27 +37,35 @@ ng-selected="selected" where "selected" is an expression and refers to the ng-mo
 
 
 
+
+
 <!--Use ngOptions to pull options from a list in the controller-->
+<!--ng-model is the name of the property which will reference the selected option. ng-options is the directive which fills the dropdown. It deserves a bit more attention.-->
+<!-- Shows empty line as selected. when click on a new line all options disappear -->
 <!--
 <div ng-controller="SelectDateRangeCtrl as Ctrl"> 
     <select id="date-selector" 
             name="date-selector" 
-            ng-model="Ctrl.setNumDays" 
+            ng-model="Ctrl.select_ngRepeat" 
             ng-change="Ctrl.my_change()"
-            ng-options="option.name for option in Ctrl.availableOptions track by option.id">
+            ng-options="value.numDays as value.text for value in Ctrl.select_ngRepeat ">
     </select>
 </div>
 -->
 
 
 
+
+
+
+<!--no initial options-->
 <!--
 <div ng-controller="SelectDateRangeCtrl as Ctrl"> 
-  <form name="myForm">
-    <select name="repeatSelect" id="repeatSelect" ng-model="Ctrl.select_ngRepeat.repeatSelect">
+    <select name="repeatSelect" id="repeatSelect" ng-model="Ctrl.select_ngRepeat">
       <option ng-repeat="option in Ctrl.select_ngRepeat" value="{{option.id}}">{{option.name}}</option>
     </select>
-  </form>
 </div>
 -->
+
+
 

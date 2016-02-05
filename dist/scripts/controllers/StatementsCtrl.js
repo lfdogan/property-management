@@ -12,7 +12,10 @@
          this.filteredStatements = Data.filteredStatements();
          
          this.allBills = Data.allBills();
-         this.filteredBills = Data.filteredBills();         
+         this.filteredBills = Data.filteredBills();
+         
+         this.inspections_two = Data.inspections_two();
+         this.allInspections = Data.allInspections();
          
          this.Data = Data;
          
@@ -32,6 +35,19 @@
              StatementsCtrl.setRange = Data.globalNumDays;
              StatementsCtrl.setColumnSort = Data.globalcolumnToSortBy;
          } );
+         
+         var label = document.getElementById("inspection-reports-label");
+         var table = document.getElementById("inspection-reports-table");
+         table.style.display = "none";
+        
+         this.show_hide = function(id){
+             var toggle = document.getElementById(id);
+             console.log("toggle", id);
+             if (toggle.style.display == "table"){
+                 toggle.style.display = "none";
+             } else toggle.style.display = "table";
+         };
+
 
 
      }

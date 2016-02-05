@@ -20,6 +20,10 @@
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("transactions");
          
+         
+
+         
+         
          //will update data when user clicks on a date range selection
          var CashFlowCtrl = this;
          Data.onTableViewChange(function () {
