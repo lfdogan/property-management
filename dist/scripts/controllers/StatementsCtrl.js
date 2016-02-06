@@ -36,9 +36,10 @@
              StatementsCtrl.setColumnSort = Data.globalcolumnToSortBy;
          } );
          
-         var label = document.getElementById("inspection-reports-label");
-         var table = document.getElementById("inspection-reports-table");
-         table.style.display = "none";
+         var tenants = document.getElementById("former-tenants-table");
+         tenants.style.display = "none";
+         var inspection = document.getElementById("inspection-reports-table");
+         inspection.style.display = "none";
         
          this.show_hide = function(id){
              var toggle = document.getElementById(id);

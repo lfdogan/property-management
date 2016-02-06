@@ -172,8 +172,7 @@ we will have the left navigation menu fixed on screen */
     }
     nav .center-third a {
         position: relative;
-/*        vertical-align: middle;*/
-/*        top: 20px;*/
+        bottom: 15px;
         margin: 0 10px;
     }
     nav .right-third {
@@ -189,6 +188,11 @@ we will have the left navigation menu fixed on screen */
     }
     nav a:active {/* when mouse button is down */
         color: #06538F;
+    }
+    nav a:hover {/* when mouse button is down */
+        background-color: #06538F;
+        color: white;
+        padding: 5px 0;
     }
     nav .active {
 /*        background-color: #06538F;*/

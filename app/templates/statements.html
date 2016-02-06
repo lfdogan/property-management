@@ -60,28 +60,44 @@
 
 <section class="lease">
     <div class="title">
-        <h2>Lease Documents</h2>
+        <h2>Lease Information</h2>
     </div>
     <div class="table">
+        <h4 class="center">Current Tenant(s)</h4>
         <table>
             <tr>
-                <th>File Name</th>
+                <th>Tenant Name(s)</th>
                 <th>Building/Unit</th>
-                <th>Document Date</th>
-                <th class="td-medium-plus">Uploaded By</th>
+                <th>Lease Begin</th>
+                <th>Rent</th>
+                <th>Lease Document File Name</th>
             </tr>
             <tr>
+                <td>Matthew Maroney & Julie Miller</td>
+                <td>2165 54th St</td>
+                <td>07/15/2015</td>
+                <td>$1,375</td>
                 <td><a>Maroney Lease.pdf</a></td>
-                <td>2165 54th St</td>
-                <td>08/05/2015</td>
-                <td class="td-medium-plus"><a ui-sref="profile({'#': 'myteam'})">amiller</a></td>
             </tr>
-            <tr>
-                <td><a>Moss-Green Lease.pdf</a></td>
-                <td>2165 54th St</td>
-                <td>06/02/2014</td>
-                <td class="td-medium-plus"><a ui-sref="profile({'#': 'myteam'})">dwilliams</a></td>
-            </tr>
+        </table>
+    <h4 class="center" ng-click="statements.show_hide('former-tenants-table')">
+        Click to view former tenants
+    </h4>
+    <table id="former-tenants-table">
+        <tr>
+            <th>Tenant Name(s)</th>
+            <th>Building/Unit</th>
+            <th>Lease End</th>
+            <th>Rent</th>
+            <th>Lease Document File Name</th>
+        </tr>
+        <tr>
+            <td>Amy Moss & Adam Green</td>
+            <td>2165 54th St</td>
+            <td>05/31/2015</td>
+            <td>$1,250</td>
+            <td><a>Moss-Green Lease.pdf</a></td>
+        </tr>
         </table>
     </div>
     
@@ -164,7 +180,7 @@
                 <td>Ceiling / Walls (Needs Repair): Needs cleaned out</td>
             </tr>
         </table>
-    <h4 class="center" id="inspection-reports-label" ng-click="statements.show_hide('inspection-reports-table')">
+    <h4 class="center" ng-click="statements.show_hide('inspection-reports-table')">
         Click to view all inspection documents
     </h4>
     <table id="inspection-reports-table">
