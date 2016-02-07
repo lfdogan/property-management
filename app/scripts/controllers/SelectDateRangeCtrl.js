@@ -6,7 +6,7 @@
          this.Data = Data;
 
          //initial value for setRange is on page load and it is not updated on page
-//         var setNumDays = Data.globalNumDays;
+         var setNumDays = Data.globalNumDays;
          this.setNumDays = Data.globalNumDays;
 //         console.log("initial value of setNumDays on SelectDateRangeCtrl:",setNumDays);
          
@@ -15,7 +15,7 @@
          * it is needed to highlight active cell of date selection bar. 
          * title dates and data are correct without this statement
          */
-//         Data.changeDateRange(setNumDays);
+         Data.changeDateRange(setNumDays);
          
          //still adds empty option
 //         var initial_date_selection = document.querySelector("#last30Days");
