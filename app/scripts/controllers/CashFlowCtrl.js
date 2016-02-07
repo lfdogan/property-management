@@ -54,6 +54,35 @@
          };
          
          
+         
+         this.getSum = function(transType){
+             var sum = 0;
+             for (var i=0; i < this.filteredBills.length; i++ ){
+                 var transaction = this.filteredBills[i];
+                 if (transType == 'I'){
+                     if (transaction.account >= '4000' && transaction.account < '5000') {
+                         sum = sum + transaction.amountPaid;
+                         //console.log("current income sum:",sum);
+                     }
+                 }
+                 if (transType == 'E'){
+                     if (transaction.account >= '5000') {
+                         sum = sum + transaction.amountPaid;
+                         //console.log("current income sum:",sum);
+                     }
+                 }
+                 if (transType == 'P'){
+                     if (transaction.account <= '2000') {
+                         sum = sum + transaction.amountPaid;
+                         //console.log("current income sum:",sum);
+                     }
+                 }
+             }
+             //console.log("total:", sum);
+             return sum;
+         };
+
+         
          /************************** FOR ADDING NEW DATA **************************/
          /*
         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");

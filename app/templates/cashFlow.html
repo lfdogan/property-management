@@ -16,11 +16,20 @@
         </table>
     </div>
 </div>
+<!--
 
-
+ <td ng-init="itemTotal = product.price * product.quantity; controller.Total = controller.Total + itemTotal">{{itemTotal}} €</td>
+    </tr>
+-->
 
 <br/>
+<table>
+    <tr><th>Total Income</th><td class="right" style="color:green">{{cashflow.getSum('I') | currency}} </td></tr>
+    <tr><th>Total Expenses</th><td class="right" style="color:red"> {{cashflow.getSum('E') | currency}} </td></tr>
+    <tr><th>Net Profit</th><td class="right" style="color:blue"> {{cashflow.getSum('P') | currency}} </td></tr>
+</table>
 
+<br/>
 
 <table>
     <tr>
