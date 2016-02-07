@@ -53,12 +53,16 @@
     </tr>
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.setColumnSort: cashflow.reverse">
         <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
-        <!-- 7 amountPaid--><td class="right"> {{ item.amountPaid | currency }} </td>
+        <!-- 7 amountPaid expense red --><td class="right" ng-show="{{item.account}} >= '5000'" style="color: red"> {{ item.amountPaid | currency }} </td>
+        <!-- 7 amountPaid income green--><td class="right" ng-show="{{item.account}} >= '4000' && {{item.account}} < '5000'" style="color: green"> {{ item.amountPaid | currency }} </td>
+        <!-- 7 amountPaid owner draw blue--><td class="right" ng-show="{{item.account}} <= '2000'" style="color: blue"> {{ item.amountPaid | currency }} </td>
         <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
         <!-- 4 description--><td class="td-wide-only"> {{ item.description | limitTo:50 }} </td>
         <!-- 2 billNumber --><td class="td-medium-plus"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a> {{ item.referenceNumber }}</td>
     </tr>
 </table>
+
+
 
 <!--
 class="td-narrow-only" 
