@@ -49,7 +49,23 @@
                      this.reverse = !this.reverse;
                  } else this.reverse = true;
              this.setColumnSort = setColumnSort;
-         };         
+         };
+         
+
+         this.getSum = function(workOrderNumber){
+             var sum = 0;
+             for (var i=0; i < this.allBills.length; i++ ){
+                 var bill = this.allBills[i];
+                 var billWorkOrder = bill.workOrderNumber || "";
+//                 console.log(bill.workOrderNumber);
+                     if (billWorkOrder == workOrderNumber) {
+                         sum = sum + bill.amountPaid;
+                         //console.log("current sum:",sum);
+                     }
+                 }
+             //console.log("total:", sum);
+             return sum;
+         };
                  
           /******** FOR ADDING NEW DATA ********/
 /*

@@ -53,8 +53,7 @@
              this.setColumnSort = setColumnSort;
          };
          
-         
-         
+
          this.getSum = function(transType){
              var sum = 0;
              for (var i=0; i < this.filteredBills.length; i++ ){
@@ -62,7 +61,7 @@
                  if (transType == 'I'){
                      if (transaction.account >= '4000' && transaction.account < '5000') {
                          sum = sum + transaction.amountPaid;
-                         //console.log("current income sum:",sum);
+//                         console.log("current income sum:",sum);
                      }
                  }
                  if (transType == 'E'){
@@ -78,9 +77,13 @@
                      }
                  }
              }
-             //console.log("total:", sum);
+//             console.log("total:", sum);
              return sum;
          };
+         
+         
+         
+
 
          
          /************************** FOR ADDING NEW DATA **************************/

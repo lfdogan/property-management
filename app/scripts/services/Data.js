@@ -197,18 +197,58 @@
                         endRange = today;
                         //endRange = new Date().getTime();
                         break;
+                    case 1418750767907:
+                        startRange = 1418750767907;
+                        endRange = 1421342767907;
+                        text = "12/16/2014-1/15/15";
+                        break;
+                    case 1421342767908:
+                        text = "1/15/15-2/13/15";
+                        startRange = 1421342767908;
+                        endRange = 1423852608970;
+                        break;
+                    case 1423852608971:
+                        startRange = 1423852608971;
+                        endRange = 1426252608970;
+                        text = "2/13/15-3/13/15";
+                        break;
+                    case 1426252608971:
+                        startRange = 1426252608971;
+                        endRange = 1429131508997;
+                        text = "3/13/15-4/15/15";
+                        break;
+                    case 1429131508998:
+                        startRange = 1429131508998;
+                        endRange = 1431710767907;
+                        text = "4/15/15-5/15/15";
+                        break;
+                    case 1431710767908:
+                        startRange = 1431710767908;
+                        endRange = 1434389167907;
+                        text = "5/15/15-6/15/15";
+                        break;
+                    case 1434389167908:
+                        startRange = 1434389167908;
+                        endRange = 1436981167907;
+                        text = "6/15/15-7/15/15";
+                        break;
+                    case 1436981167908:
+                        startRange = 1436981167908;
+                        endRange = 1439560250008;
+                        text = "7/15/15-8/14/15";
+                        break;
                     case 9999:
-                        text = "custom dates"; //For simplicity I've assigned the 'custom' dates
+                        text = "8/14/15-today"; //For simplicity I've assigned the 'custom' dates
                         element = document.querySelector("#customDates");
-                        startRange = 1433131200000; // custom start date is 6/1/15
-                        endRange = 1439697599999; // custom end date is 8/15/15
+                        startRange = 1439560250009; // 1 ms after last range
+                        endRange = today;
                         break;
                     default: 
                         console.log("error! Data.changeDateRange() did not receive correct 'numDays' input!");
                         break;
                 };
 //            element.classList.add("active"); //for original selection bar version
-            element.setAttribute("selected","selected"); //for <option>'s <select> element
+//            element.setAttribute("selected","selected"); //for <option>'s <select> element
             Data.beginDateRange = startRange;
             Data.endDateRange = endRange;
             Data.globalNumDays = numDays;

@@ -8,14 +8,14 @@
             
 
             <table>
-                <tr><td>Work Order #</td><td>{{ item.workOrderNumber }}</td></tr>
-                <tr><td>Date Created</td><td>{{ item.dateCreated | date: 'MM/dd/yyyy' }}</td></tr>
-                <tr><td>Building/Unit</td><td>{{ item.building | buildingNickname }}</td></tr>
-                <tr ng-show="'{{ item.managedBy }}'"><td>Managed By</td><td> {{ item.managedBy }}</td></tr>
-                <tr><td>Description</td><td>{{ item.description }}</td></tr>
-                <tr><td>Estimated Cost</td><td>{{ item.estimatedCost | currency }}</td></tr>
-                <tr><td>Specific Location</td><td>{{ item.specificLocation }}</td></tr>
-                <tr><td>Approved</td><td>{{ item.approved }}
+                <tr><th>Work Order #</th><td>{{ item.workOrderNumber }}</td></tr>
+                <tr><th>Date Created</th><td>{{ item.dateCreated | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><th>Building/Unit</th><td>{{ item.building | buildingNickname }}</td></tr>
+                <tr ng-show="'{{ item.managedBy }}'"><th>Managed By</th><td> {{ item.managedBy }}</td></tr>
+                <tr><th>Description</th><td>{{ item.description }}</td></tr>
+                <tr><th>Estimated Cost</th><td>{{ item.estimatedCost | currency }}</td></tr>
+                <tr><th>Specific Location</th><td>{{ item.specificLocation }}</td></tr>
+                <tr><th>Approved</th><td>{{ item.approved }}
                         <span class="center" ng-show=" '{{ item.approved }}'=='Pending' ">
                             <div class="maintenance-button-approve" 
                                  ng-click="ctrl.Data.decideWorkOrder(item,true)">Approve</div>
@@ -23,12 +23,13 @@
                                  ng-click="ctrl.Data.decideWorkOrder(item,false)">Reject</div>
                         </span>
                     </td></tr>
-                <tr><td>Date Started</td><td>{{ item.dateStarted | date: 'MM/dd/yyyy' }}</td></tr>
-                <tr><td>Status</td><td>{{ item.status }}</td></tr>
-                <tr ng-show="'{{ item.closingComments }}'"><td>Closing Comments</td><td> {{ item.closingComments }}</td></tr>
-                <tr><td>Date Completed</td><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><th>Date Started</th><td>{{ item.dateStarted | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr><th>Status</th><td>{{ item.status }}</td></tr>
+                <tr ng-show="'{{ item.closingComments }}'"><th>Closing Comments</th><td> {{ item.closingComments }}</td></tr>
+                <tr><th>Date Completed</th><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
+<!--                <tr><th>Total Cost</th><td>{{ ctrl.getSum( '{{workOrderNumber}}' ) | currency }}</td></td></tr>-->
                 <tr>
-                    <td>Bills</td>
+                    <th>Bills</th>
 
                     <td class="td-narrow-only">
                         <span ng-repeat="bill in ctrl.allBills ">
@@ -76,8 +77,9 @@
         </div>
 
     </div>
-                <div id="anchorSendMessage" ng-repeat="item in ctrl.allMaintenance">
-                <div ng-show="ctrl.getSingleWorkOrder( {{workOrderNumber}}, {{item}} )">
+                
+<div id="anchorSendMessage" ng-repeat="item in ctrl.allMaintenance">            
+    <div ng-show="ctrl.getSingleWorkOrder( {{workOrderNumber}}, {{item}} )">
                     <br/>
                     <p>Work Order #{{ item.workOrderNumber }}</p>
                     <p>Call GPRES <a class="ion-ios-telephone"></a></p>

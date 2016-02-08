@@ -43,12 +43,45 @@
         
          this.show_hide = function(id){
              var toggle = document.getElementById(id);
-             console.log("toggle", id);
+             //console.log("toggle", id);
              if (toggle.style.display == "table"){
                  toggle.style.display = "none";
-             } else toggle.style.display = "table";
+             } else {
+                 toggle.style.display = "table";
+             }
          };
 
+
+              
+                  /* Create a chart using CanvasJS Library
+         * chartData creates an array of the data
+         * addColorSet determines each color for dataset
+         * new CanvasJS.Chart creates the new chart with colorSet, title, and data
+         * chart.render() displays the chart on the page
+         */
+         var chartData = function(){
+             var dataPoints = [];
+             dataPoints.push({label: "income", y: 11251.89});
+             dataPoints.push({label: "expenses", y: 2788.01});
+             dataPoints.push({label: "profit", y: 9151.38});
+             return dataPoints;
+         };
+         CanvasJS.addColorSet("inc-exp-pro",
+                [//colorSet Array
+                "blue",
+                "red",
+                "green"               
+                ]);
+         var chart = new CanvasJS.Chart("chartContainer", {
+             colorSet: "inc-exp-pro",
+             title: {text: "Profit"},
+             data: [{
+                 type: "bar",
+                 dataPoints: chartData()
+             }]
+         });
+
+         chart.render();
 
 
      }

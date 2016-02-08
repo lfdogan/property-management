@@ -23,11 +23,15 @@
 -->
 
 <br/>
-<table>
-    <tr><th>Total Income</th><td class="right" style="color:green">{{cashflow.getSum('I') | currency}} </td></tr>
-    <tr><th>Total Expenses</th><td class="right" style="color:red"> {{cashflow.getSum('E') | currency}} </td></tr>
-    <tr><th>Net Profit</th><td class="right" style="color:blue"> {{cashflow.getSum('P') | currency}} </td></tr>
-</table>
+<div>
+
+    <table>
+        <tr><th>Total Income</th><td class="right" style="color:blue">{{cashflow.getSum('I') | currency}} </td></tr>
+        <tr><th>Total Expenses</th><td class="right" style="color:red"> {{cashflow.getSum('E') | currency}} </td></tr>
+        <tr style="font-size: 30px"><th>Net Profit</th><td class="right" style="color:green"> {{cashflow.getSum('P') | currency}} </td></tr>
+    </table>
+
+</div>
 
 <br/>
 
@@ -44,7 +48,7 @@
                   ng-show="cashflow.setColumnSort === 'amountPaid'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
         </th>
-        <!-- 5 account --><th ng-click="cashflow.order('account')">type
+        <!-- 5 account type --><th ng-click="cashflow.order('account')">type
             <span class="sortorder" 
                   ng-show="cashflow.setColumnSort === 'account'" 
                   ng-class="{reverse:cashflow.reverse}"></span>
@@ -63,9 +67,11 @@
     <tr ng-repeat="item in cashflow.filteredBills | orderBy: cashflow.setColumnSort: cashflow.reverse">
         <!-- 1 payDate--><td class="right"> {{ item.payDate | date: 'MM/dd/yyyy' }} </td>
         <!-- 7 amountPaid expense red --><td class="right" ng-show="{{item.account}} >= '5000'" style="color: red"> {{ item.amountPaid | currency }} </td>
-        <!-- 7 amountPaid income green--><td class="right" ng-show="{{item.account}} >= '4000' && {{item.account}} < '5000'" style="color: green"> {{ item.amountPaid | currency }} </td>
-        <!-- 7 amountPaid owner draw blue--><td class="right" ng-show="{{item.account}} <= '2000'" style="color: blue"> {{ item.amountPaid | currency }} </td>
-        <!-- 5 account --><td> {{ item.account | accountType }} {{item.portfolio}}</td>
+        <!-- 7 amountPaid income blue--><td class="right" ng-show="{{item.account}} >= '4000' && {{item.account}} < '5000'" style="color: blue"> {{ item.amountPaid | currency }} </td>
+        <!-- 7 amountPaid owner draw green--><td class="right" ng-show="{{item.account}} <= '2000'" style="color: green"> {{ item.amountPaid | currency }} </td>
+        <!-- 5 account type --><td> {{ item.account | accountType }} {{item.portfolio}}
+        <span ng-show="{{item.account == '1000'}}"><a class="ion-ios-download-outline"></a></span>
+        </td>
         <!-- 4 description--><td class="td-wide-only"> {{ item.description | limitTo:50 }} </td>
         <!-- 2 billNumber --><td class="td-medium-plus"> <a ui-sref="bill( {billNumber: '{{ item.billNumber }}' } )">{{ item.billNumber | billNumber }}</a> {{ item.referenceNumber }}</td>
     </tr>

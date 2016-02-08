@@ -13,7 +13,8 @@
     </div>
 
 
-    <div class="table">
+    <div class="half-column">
+        <div class="table">
         <table>
             <tr>
                 <th class="center">statement period
@@ -35,6 +36,10 @@
                 </td>
             </tr>
         </table>
+        </div></div>
+    <div class="half-column">
+        <div id="chartContainer" style="height: 200px; width: 99%;"></div>
+    </div>
 
 
 <!-- Add new statements-->
@@ -80,24 +85,22 @@
                 <td><a>Maroney Lease.pdf</a></td>
             </tr>
         </table>
-    <h4 class="center" ng-click="statements.show_hide('former-tenants-table')">
-        Click to view former tenants
-    </h4>
-    <table id="former-tenants-table">
-        <tr>
-            <th>Tenant Name(s)</th>
-            <th>Building/Unit</th>
-            <th>Lease End</th>
-            <th>Rent</th>
-            <th>Lease Document File Name</th>
-        </tr>
-        <tr>
-            <td>Amy Moss & Adam Green</td>
-            <td>2165 54th St</td>
-            <td>05/31/2015</td>
-            <td>$1,250</td>
-            <td><a>Moss-Green Lease.pdf</a></td>
-        </tr>
+        <h4 class="center" ng-click="statements.show_hide('former-tenants-table')">Click to view former tenants</h4>
+        <table id="former-tenants-table">
+            <tr>
+                <th>Tenant Name(s)</th>
+                <th>Building/Unit</th>
+                <th>Lease End</th>
+                <th>Rent</th>
+                <th>Lease Document File Name</th>
+            </tr>
+            <tr>
+                <td>Amy Moss & Adam Green</td>
+                <td>2165 54th St</td>
+                <td>05/31/2015</td>
+                <td>$1,250</td>
+                <td><a>Moss-Green Lease.pdf</a></td>
+            </tr>
         </table>
     </div>
     
