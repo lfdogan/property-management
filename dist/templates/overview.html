@@ -24,17 +24,21 @@
 
 
 <div class="overview-right">
-    <a ui-sref="cashflow"><h2 class="center">Overview</h2></a>
+    <a ui-sref="cashflow"><h2 class="center">Income Overview</h2></a>
     <div class="white-box">
-
-        <div class="center">
-            <div ng-repeat="item in overview.billsRentIncome"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
-                {{item.building | buildingNickname }} rent received on {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid | currency }}
-            </div>
-            <div ng-repeat="item in overview.billsOwnerDraw"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
-                Monthly Profit Deposit {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid | currency }} (Download statement <a class="ion-ios-download-outline"></a> )
-            </div>
-        </div>
+        <div id="chartContainer" style="height: 170px; width: 99%;"></div>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            <tr ng-repeat="item in overview.billsRentIncome"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
+                <td>{{item.building | buildingNickname }}</td>
+                <td>{{ item.payDate | date: 'M/d' }}</td>
+                <td class="right">{{ item.amountPaid | currency }}</td>
+            </tr>
+        </table>
     </div>
 </div>
     
@@ -42,17 +46,37 @@
     
     
     <div class="overview-right">
-    <a ui-sref="statements"><h2 class="center">Most Recent Statement</h2></a>
+    <a ui-sref="statements"><h2 class="center">Most Recent Profit Statement</h2></a>
     <div class="white-box">
+                
+        <div class="center">
+            <div ng-repeat="item in overview.billsOwnerDraw"  ng-show="overview.Data.getLast30Days( {{ item.payDate }} )">
+                Deposit to CLARKKENT {{ item.payDate | date: 'M/d' }} for {{ item.amountPaid | currency }}
+            </div>
 
-        <div ng-repeat="item in overview.latestStatement" class="center">
-            <span> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</span>
-            <br/>Bills: 
-            <span ng-repeat="bill in overview.allBills ">    
-                <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
-                        <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a>
+            <div ng-repeat="item in overview.latestStatement" class="center">
+                <span> {{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }} <a class="ion-ios-download-outline"></a></span>
+                <br/>Bills: 
+                <span ng-repeat="bill in overview.allBills ">    
+                    <span ng-show="overview.Data.selectBills( {{item.beginDate}}, {{item.endDate}}, {{ bill.payDate}} )">
+                            <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">{{ bill.billNumber }}</a>
+                    </span>
                 </span>
-            </span>
+            </div>
+    </div>
+</div>
+    </div>
+    
+    <div class="overview-right">
+    <a ui-sref="statements"><h2 class="center">Current Leases</h2></a>
+    <div class="white-box">
+        <div>
+            <span style="background-color: #06538F; color: white">2165 54th St</span>
+            <br/>Matthew Maroney
+            <br/>Julie Miller
+            <br/>Lease: 07/15/2015 to 07/31/2016
+            <br/>Rent: $1,375 (Monthly)
+
         </div>
     </div>
 </div>

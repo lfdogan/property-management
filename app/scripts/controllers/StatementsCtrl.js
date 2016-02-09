@@ -53,7 +53,8 @@
 
 
               
-                  /* Create a chart using CanvasJS Library
+                  
+         /* Create a chart using CanvasJS Library
          * chartData creates an array of the data
          * addColorSet determines each color for dataset
          * new CanvasJS.Chart creates the new chart with colorSet, title, and data
@@ -118,44 +119,40 @@
              }]
          });
          */
-        var chart = new CanvasJS.Chart("chartContainer",
-	{
-	colorSet: "inc-exp-pro",	
-      title:{
-			text: "2015 Profit Overview"
-		},
-		axisY:{
-          //title:"Coal (bn tonnes)",
-          //valueFormatString: "#0.#,.",
-          valueFormatString: "$#,###,###",
-		},
-		data: [
-		{
-			type: "column",
-			legendText: "Income",
-			showInLegend: "true",
-            yValueFormatString: "Income $#,###,###.##",
-			dataPoints: chartIncomeData()
-		},
-          {
-			type: "column",
-			legendText: "Expenses",
-			showInLegend: "true",
-			yValueFormatString: "Expenses $#,###,###.##",
-            dataPoints: chartExpenseData()
-		},  
-          {
-			type: "column",
-			legendText: "Profit",
-			showInLegend: "true",
-			//indexLabel: "#total",
-			yValueFormatString: "Profit $#,###,###.##",
-			//indexLabelPlacement: "outside",
-			dataPoints: chartProfitData()
-		}
-		]
-	});
-	chart.render();
+        var chart = new CanvasJS.Chart("chartContainer", {
+            colorSet: "inc-exp-pro",
+            title:{	text: "2015 Profit Overview"		},
+            axisY:{
+                //title:"Coal (bn tonnes)",
+                valueFormatString: "$#,###,###",
+            },
+            data: [
+                {
+                    type: "column",
+                    legendText: "Income",
+                    showInLegend: "true",
+                    yValueFormatString: "Income $#,###,###.##",
+                    dataPoints: chartIncomeData()
+                },
+                {
+                    type: "column",
+                    legendText: "Expenses",
+                    showInLegend: "true",
+                    yValueFormatString: "Expenses $#,###,###.##",
+                    dataPoints: chartExpenseData()
+                },  
+                {
+                    type: "column",
+                    legendText: "Profit",
+                    showInLegend: "true",
+                    //indexLabel: "#total",
+                    yValueFormatString: "Profit $#,###,###.##",
+                    //indexLabelPlacement: "outside",
+                    dataPoints: chartProfitData()
+                }
+            ]
+        });
+         chart.render();
 
 
      }
