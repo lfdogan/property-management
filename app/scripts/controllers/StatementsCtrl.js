@@ -66,22 +66,96 @@
              dataPoints.push({label: "profit", y: 9151.38});
              return dataPoints;
          };
+         var chartIncomeData = function(){
+             var dataPoints = [];
+                dataPoints.unshift({  y: 3378.95 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                dataPoints.unshift({  y: 0, label: "7/15/15" });
+                dataPoints.unshift({  y: 1272.97, label: "6/15/15" });
+                dataPoints.unshift({  y: 1312.18, label: "5/15/15" });
+                dataPoints.unshift({  y: 1328.04, label: "4/15/15"});
+                dataPoints.unshift({  y: 1386.42, label: "3/13/15"});
+                dataPoints.unshift({  y: 1250, label: "2/13/15"});
+                dataPoints.unshift({  y: 1323.33, label: "1/15/15"});
+             return dataPoints;
+         };
+         var chartExpenseData = function(){
+             var dataPoints = [];
+                dataPoints.unshift({  y: 1322.50 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                dataPoints.unshift({  y: 538.10, label: "7/15/15" });
+                dataPoints.unshift({  y: 261.45, label: "6/15/15" });
+                dataPoints.unshift({  y: 100, label: "5/15/15" });
+                dataPoints.unshift({  y: 100, label: "4/15/15"});
+                dataPoints.unshift({  y: 100, label: "3/13/15"});
+                dataPoints.unshift({  y: 100, label: "2/13/15"});
+                dataPoints.unshift({  y: 265.96, label: "1/15/15"});
+             return dataPoints;
+         };
+         var chartProfitData = function(){ //.push adds to end of array, .unshift adds to beginning
+             var dataPoints = [];
+                dataPoints.unshift({  y: 2205.85 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                dataPoints.unshift({  y: 0, label: "7/15/15" });
+                dataPoints.unshift({  y: 1011.52, label: "6/15/15" });
+                dataPoints.unshift({  y: 1212.18, label: "5/15/15" });
+                dataPoints.unshift({  y: 1228.04, label: "4/15/15"});
+                dataPoints.unshift({  y: 1286.42, label: "3/13/15"});
+                dataPoints.unshift({  y: 1150.00, label: "2/13/15"});
+                dataPoints.unshift({  y: 1057.37, label: "1/15/15"});
+             return dataPoints;
+         };
          CanvasJS.addColorSet("inc-exp-pro",
                 [//colorSet Array
                 "blue",
                 "red",
                 "green"               
                 ]);
+         /*
          var chart = new CanvasJS.Chart("chartContainer", {
              colorSet: "inc-exp-pro",
-             title: {text: "Profit"},
+             title: {text: "Profit Overview"},
              data: [{
                  type: "bar",
                  dataPoints: chartData()
              }]
          });
-
-         chart.render();
+         */
+        var chart = new CanvasJS.Chart("chartContainer",
+	{
+	colorSet: "inc-exp-pro",	
+      title:{
+			text: "2015 Profit Overview"
+		},
+		axisY:{
+          //title:"Coal (bn tonnes)",
+          //valueFormatString: "#0.#,.",
+          valueFormatString: "$#,###,###",
+		},
+		data: [
+		{
+			type: "column",
+			legendText: "Income",
+			showInLegend: "true",
+            yValueFormatString: "Income $#,###,###.##",
+			dataPoints: chartIncomeData()
+		},
+          {
+			type: "column",
+			legendText: "Expenses",
+			showInLegend: "true",
+			yValueFormatString: "Expenses $#,###,###.##",
+            dataPoints: chartExpenseData()
+		},  
+          {
+			type: "column",
+			legendText: "Profit",
+			showInLegend: "true",
+			//indexLabel: "#total",
+			yValueFormatString: "Profit $#,###,###.##",
+			//indexLabelPlacement: "outside",
+			dataPoints: chartProfitData()
+		}
+		]
+	});
+	chart.render();
 
 
      }

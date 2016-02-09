@@ -18,11 +18,11 @@
         <table>
             <tr>
                 <th class="center">statement period
-                    <ng-include src="'/templates/selectDateRange.html'"></ng-include>
+<!--                    <ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
                 </th>
                 <th>bill numbers</th>
             </tr>
-            <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
+            <tr ng-repeat="item in statements.allStatements | orderBy: '-endDate'">
                 <td class="center">
                     <a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a>
                     <a class="ion-ios-download-outline"></a>
@@ -38,7 +38,7 @@
         </table>
         </div></div>
     <div class="half-column">
-        <div id="chartContainer" style="height: 200px; width: 99%;"></div>
+        <div id="chartContainer" style="height: 260px; width: 99%;"></div>
     </div>
 
 
