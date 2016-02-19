@@ -28,7 +28,9 @@
 }
 
 
-
+.ion-ios-download-outline {
+    cursor: pointer;
+}
 
 
 /* section boxes for data */
@@ -86,6 +88,7 @@ th.amountPaid {
     width: 80px;
     border-radius: 10px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .maintenance-button-reject {
     color: #e51b2d;
@@ -96,6 +99,7 @@ th.amountPaid {
     width: 80px;
     border-radius: 10px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 #maintenance-page #maintenance-completed h2 {
     padding-top: 50px; /* space above Completed Work Orders h2 text */
