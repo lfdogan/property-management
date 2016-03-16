@@ -30,6 +30,7 @@ setting ng-model="Ctrl.setNumDays" doesn't set initial selected value
     <select id="date-selector" name="date-selector" ng-model="Ctrl.setNumDays" ng-change="Ctrl.my_change()">
         <option id="last30Days" value=30>Last 30 Days</option>
         <option id="currentYear" value=365>Current Year</option>
+        <option value=1420088400000>01/01/15-Today</option>
         <option id="customDates" value=9999>8/14/15-Today</option>
         <option value=1436981167908>7/15/15-8/14/15</option>
         <option value=1434389167908>6/15/15-7/15/15</option>
@@ -45,7 +46,7 @@ setting ng-model="Ctrl.setNumDays" doesn't set initial selected value
 <!--
 01/01/14 1388552400000
 12/31/14 1420088399999
-01/01/15 1451624400000
+01/01/15 1420088400000
 12/31/15 1451624399999
 01/01/16 1451624400000
 12/31/16 1483246799999

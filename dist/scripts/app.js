@@ -9,7 +9,7 @@
          });
          $stateProvider
              .state('overview', {
-                 url: '/',
+                 url: '/dashboard',
                  controller: 'OverviewCtrl as overview',//in LandingCtrl.js refer to variables as this.title but in landing.html as landing.title
                  templateUrl: '/templates/overview.html'
              })
@@ -38,8 +38,8 @@
                  templateUrl: '/templates/bill.html',
                  controller: function($scope, $stateParams) {
                      $scope.billNumber = $stateParams.billNumber;
-                 }
-             })
+                 }    
+         })
              .state('workorder', {
                  url: '/maintenance/:workOrderNumber',
                  templateUrl: '/templates/workOrder.html',
@@ -55,7 +55,12 @@
              .state('contribution', {
                  url: '/contribution',
                  controller: 'MyAccountCtrl as contribution',
-                 templateUrl: '/templates/contribution.html'
+                 templateUrl: '/templates/contribution.html'    
+         })
+             .state('ownerlogin', {
+                 url: '/',
+                 controller: 'OwnerLoginCtrl as owners',
+                 templateUrl: '/templates/owners.html'
          });
      }
 //define a module with angular.module:

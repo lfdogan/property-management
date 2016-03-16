@@ -44,26 +44,105 @@
 
 <!-- Add new statements-->
 <!--
-<div>
-    <select id="beginDate" name="beginDate">
-        <option value=1439560250000>08/14/2015 9:50:50 </option>
-        <option value=1439560260000>08/14/2015 9:51:00 </option>
-    </select>
-    <select id="endDate" name="endDate">
-        <option value=1439560250000>08/14/2015 9:50:50 </option>
-        <option value=1439560260000>08/14/2015 9:51:00 </option>
-    </select>
-    <select id="portfolio" name="portfolio">
-        <option value="CLARKKENT">Clark Kent</option>
-    </select>
-    <button id="btnStatementsUpdate" class="btn btn-primary">Update</button>
-</div>-->
-    </div>
+<br/>
+<table>
+    <tr>
+        <th>Begin Date (Last month)</th>
+        <th>End Date (Today)</th>
+        <th>Portfolio</th>
+        <th>Click to Create</th>
+    </tr>
+    <tr>
+        <td>
+            <select id="prevEndDate" name="prevEndDate">
+                <option ng-repeat="date in statements.latestStatement" value={{date.endDate}}>{{date.endDate | date: 'MM/dd/yyyy' }}</option>
+            </select>
+        </td>
+        <td>
+            <select id="monthED" name="monthED">
+                <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                </select>
+            <input type="number" id="dayED" placeholder="day (1-31)">
+            <input type="number" id="yearED" placeholder="year">
+            <br/>
+            <input type="number" id="hourED" placeholder="hour (0-24)">
+            <input type="number" id="minuteED" placeholder="minute (0-59)">
+        </td>
+        <td>
+            <select id="portfolio" name="portfolio">
+                <option value="CLARKKENT">Clark Kent</option>
+            </select>
+        </td>
+
+        <td><button id="btnNewStatement" class="btn btn-primary">New Statement</button></td>
+    </tr>
+</table>
+    <br/>
+
+    <!-- END Add new statements-->
+    
+    
+
 </section>
 
 
 
 <section class="lease">
+    
+<!-- Add a New Tenant! -->
+    <!-- 
+    <br/>
+    <table>
+        <tr>
+            <th style="text-align: right">Add a new:</th>
+            <th><button id="btnNewTenant" class="btn btn-primary">Tenant</button></th>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" id="tenantName" ></td>
+        </tr>
+<tr>
+            <td>dob:</td>
+            <td>
+                <select id="date_month" name="date_month">
+                    <option value="January">1 - Jan</option>
+                    <option value="February">2 - Feb</option>
+                    <option value="March">3 - Mar</option>
+                    <option value="April">4 - Apr</option>
+                    <option value="May">5 - May</option>
+                    <option value="June">6 - Jun</option>
+                    <option value="July">7 - Jul</option>
+                    <option value="August">8 - Aug</option>
+                    <option value="September">9 - Sep</option>
+                    <option value="October">10 - Oct</option>
+                    <option value="November">11 - Nov</option>
+                    <option value="December">12 - Dec</option>
+                </select>
+                <input type="number" id="date_day" placeholder="day">
+                <input type="number" id="date_year" placeholder="year">
+            </td>
+        </tr>
+        <tr>
+            <td>Application Date:</td>
+            <td>
+                <select id="applicationDate" name="applicationDate">
+                    <option ng-repeat="date in statements.datesInMS" value={{date.value}}>{{date.label}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Building:</td>
+            <td>
+                <select id="building" name="building">
+                    <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br/>
+<!-- END Add a New Tenant! -->
+
+    
     <div class="title">
         <h2>Lease Information</h2>
     </div>

@@ -14,6 +14,7 @@
          this.filteredBills = Data.filteredBills();
 
          this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
+         
 
          Data.followMyAccountLink();
 
@@ -82,32 +83,46 @@
          };
          
          
-         
-
 
          
          /************************** FOR ADDING NEW DATA **************************/
          /*
-        var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
-        var billsRef = rootRef.child('bills');
-        var statementsRef = rootRef.child('statements');    
-        var maintenanceRef = rootRef.child('maintenance');
+         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
+         var billsRef = rootRef.child('bills');
+         var statementsRef = rootRef.child('statements');    
+         var maintenanceRef = rootRef.child('maintenance');
+        
+         this.accountLabels = Data.accountLabels();
+         this.allTenants = Data.allTenants();
+         this.myBuildings = Data.myBuildings();
+
+
+
+
+
+
          
-         
-        var account = document.getElementById('account'); 
-        var amountPaid = document.getElementById('amountPaid');
-        var billDate = document.getElementById('billDate');
-        var billNumber = document.getElementById('billNumber');
-         var transactionType = document.getElementById('transactionType');
+         var account = document.getElementById('account'); 
+         var amountPaid = document.getElementById('amountPaid');
+         var billDate = document.getElementById('billDate');
+         var billNumber = document.getElementById('billNumber');
+         //var transactionType = document.getElementById('transactionType');
          var building = document.getElementById('building');
          var cost = document.getElementById('cost');
          var description = document.getElementById('description');
-         var dueDate = document.getElementById('dueDate');
+         var date_month_dueDate = document.getElementById('date_month_dueDate');
+         var date_day_dueDate = document.getElementById('date_day_dueDate');
+         var date_year_dueDate = document.getElementById('date_year_dueDate');
          var payDate = document.getElementById('payDate');
+         var portfolio = document.getElementById('portfolio');
+         var referenceNum = document.getElementById('referenceNum');
          var status = document.getElementById('status');
          var vendor = document.getElementById('vendor');
          var workOrderNumber = document.getElementById('workOrderNumber');
-        var btnNewItemUpdate = document.getElementById('btnNewItemUpdate'); //update button for new bill
+         var btnNewItemUpdate = document.getElementById('btnNewItemUpdate'); //update button for new bill
+         var btnNewOwnerDraw = document.getElementById('btnNewOwnerDraw'); //update button for new owner draw
+         var btnNewIncome = document.getElementById('btnNewIncome'); //add button for new income (rent, utilities, etc.)
+         
     
          
          
@@ -119,29 +134,60 @@
          var postID;
          var newPostRef;
          btnNewItemUpdate.addEventListener('click', function(){
-             console.log("UPDATE");
+             console.log("New Bill");
+             var dueDate = new Date(date_month_dueDate.value +" "+ date_day_dueDate.value +" "+ date_year_dueDate.value +" 12:00:00:000");
              newPostRef = billsRef.push();
              //newPostRef = maintenanceRef.push();
              //newPostRef = statementsRef.push();
-             newPostRef.set({
-                 account: account.value, //entered by user
-                 amountPaid: amountPaid.value, //entered by user
-                 //billDate: billDate.value, //entered by user
-                 //billNumber: billNumber.value, //entered by user
-                 transactionType: transactionType.value, //entered by user
-                 building: "2165 54th St", //entered by user
-                 //cost: cost.value, //entered by user
-                 description: description.value, //entered by user
-                 //dueDate: dueDate.value, //entered by user
-                 payDate: payDate.value, //entered by user
-                 //status: "Closed",
-                 //vendor: vendor.value, //entered by user
-                 //workOrderNumber: workOrderNumber.value, //entered by user
+             newPostRef.set({//entered by user
+                 account: Number(account.value), 
+                 amountPaid: Number(amountPaid.value),
+                 billDate: Number(billDate.value),
+                 billNumber: Number(billNumber.value),
+                 //transactionType: transactionType.value,
+                 building: building.value,
+                 cost: Number(cost.value),
+                 description: description.value,
+                 dueDate: dueDate.getTime(),//calculate ms from text date
+                 payDate: Number(payDate.value),
+                 status: status.value, //Paid or Unpaid
+                 vendor: vendor.value,
+                 workOrderNumber: Number(workOrderNumber.value),
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
              postID = newPostRef.key();
          });
-*/
+         btnNewOwnerDraw.addEventListener('click', function(){
+             console.log("Add new Owner Draw");
+             newPostRef = billsRef.push();
+             newPostRef.set({//entered by user
+                 account: Number(account.value), // "Owner Draw" is 1000
+                 amountPaid: Number(amountPaid.value),
+                 description: description.value,
+                 dueDate: Number(dueDate.value),
+                 payDate: Number(payDate.value),
+                 portfolio: portfolio.value, //for owner draw only
+                 referenceNum: referenceNum.value, //for owner draw only
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+             });
+             postID = newPostRef.key();
+         });
+         btnNewIncome.addEventListener('click', function(){
+             console.log("New Income");
+             newPostRef = billsRef.push();
+             //newPostRef = maintenanceRef.push();
+             //newPostRef = statementsRef.push();
+             newPostRef.set({//entered by user
+                 account: Number(account.value), 
+                 amountPaid: Number(amountPaid.value),
+                 building: building.value,
+                 description: description.value,
+                 dueDate: Number(dueDate.value),
+                 payDate: Number(payDate.value),
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+             });
+             postID = newPostRef.key();
+         });
          /* ************************************************************* */
          
          

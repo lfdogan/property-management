@@ -17,6 +17,7 @@
          this.inspections_two = Data.inspections_two();
          this.allInspections = Data.allInspections();
          
+         
          this.Data = Data;
          
          Data.followMyAccountLink();
@@ -50,7 +51,6 @@
                  toggle.style.display = "table";
              }
          };
-
 
               
                   
@@ -153,8 +153,93 @@
             ]
         });
          chart.render();
+         
 
 
+/************************** FOR ADDING NEW STATEMENTS **************************/
+         /*
+         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
+         var statementsRef = rootRef.child('statements');    
+         this.latestStatement = Data.latestStatement();
+         this.months = Data.months;
+         var prevEndDate = document.getElementById('prevEndDate');     
+         var monthED = document.getElementById('monthED');
+         var dayED = document.getElementById('dayED');
+         var yearED = document.getElementById('yearED');
+         var hourED = document.getElementById('hourED');
+         var minuteED = document.getElementById('minuteED');
+         var portfolio = document.getElementById('portfolio');
+         var btnNewStatement = document.getElementById('btnNewStatement'); //add button for NewStatement
+         var postID;
+         var newPostRef;
+         
+         btnNewStatement.addEventListener('click', function(){
+             var beginDate = Number(prevEndDate.value) + 1; // begindate is the exact time as previous statement end date so add 1
+             var range = "";
+             // Takes a date in milliseconds and converts it to m/d/yy format, adds that to "range" variable
+             var stripMS = function(ms){
+                 var string = new Date(ms); // converts milliseconds to string object
+                 var month = string.getMonth() + 1; // gets month index# then add 1
+                 var day = string.getDate(); // gets day of month
+                 var year = string.getFullYear(); // gets day of month
+                 if (year > 2000) { //strips first 2 digits from year
+                     year = year-2000;
+                 } else year = year-1900;
+                 range = range + month+"/"+day+"/"+year;
+             }
+             stripMS(beginDate);
+             range = range + " - ";
+             var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":000"); //format is Jan 17 2016 09:51:201
+             endDate = stringED.valueOf(); // Return the primitive value of a Date object (in milliseconds)
+             stripMS(endDate);
+             newPostRef = statementsRef.push();
+             newPostRef.set({//entered by user
+                 beginDate: Number(beginDate), 
+                 endDate: Number(endDate),
+                 portfolio: portfolio.value, //for owner draw only
+                 range: range,
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+             });
+             postID = newPostRef.key();
+         });
+         
+/* ************************************************************* */
+
+         
+/************************** FOR ADDING NEW TENANTS **************************/
+         /*
+         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
+         var tenantsRef = rootRef.child('tenants');   
+         this.myBuildings = Data.myBuildings();
+         
+         var date_month = document.getElementById('date_month');
+         var date_day = document.getElementById('date_day');
+         var date_year = document.getElementById('date_year');
+         
+         var tenantName = document.getElementById('tenantName'); 
+         var applicationDate = document.getElementById('applicationDate');
+         var building = document.getElementById('building');
+         var btnNewTenant = document.getElementById('btnNewTenant'); //add button for NewStatement
+         var postID;
+         var newPostRef;
+         btnNewTenant.addEventListener('click', function(){
+             console.log("New Tenant: " + tenantName.value);
+             var dob = new Date(date_month.value +" "+ date_day.value +" "+ date_year.value +" 12:00:00:000");
+             newPostRef = tenantsRef.push();
+             newPostRef.set({//entered by user
+                 tenantName: tenantName.value,
+                 dob: dob.getTime(), //convert text date to ms
+                 applicationDate: Number(applicationDate.value),
+                 building: building.value, //for owner draw only
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+             });
+             postID = newPostRef.key();
+             tenantName.value = '';
+         });
+         
+/* ************************************************************* */
+         
+         
      }
  
      angular

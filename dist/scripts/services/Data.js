@@ -20,12 +20,15 @@
         var buildingsRef = rootRef.child('buildings');
         var portfoliosRef = rootRef.child('portfolios');
         var inspectionsRef = rootRef.child('inspections');
+        var accountsRef = rootRef.child('accounts');
+        var tenantsRef = rootRef.child('tenants');
 
 
         //initial values of start and end date range
         var startRange = 1433131200000; // custom start date is 6/1/15
         var endRange = 1439697599999; // custom end date is 8/15/15
         var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+//        var today = new Date().getTime();
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range
         var columnToSortBy = "payDate"; //used for switching which column of table data to order
@@ -123,6 +126,15 @@
             },
             myBuildings: function(){
                 return $firebaseArray(buildingsRef);
+            },
+            accountLabels: function(){
+                return $firebaseArray(accountsRef
+                                     .orderByValue());
+            },
+            allTenants: function(){
+                return $firebaseArray(tenantsRef
+                              //       .orderByValue()
+                                     );
             }
 
          };   
@@ -236,6 +248,11 @@
                         startRange = 1436981167908;
                         endRange = 1439560250008;
                         text = "7/15/15-8/14/15";
+                        break;
+                    case 1420088400000:
+                        startRange = 1420088400000;
+                        endRange = today;
+                        text = "01/01/15-Today";
                         break;
                     case 9999:
                         text = "8/14/15-today"; //For simplicity I've assigned the 'custom' dates
@@ -395,7 +412,21 @@
         };
         
         
-                 
+              
+        Data.months = [
+            {'key': 'January', 'label': '1 - Jan'},
+            {'key': 'February', 'label': '2 - Feb'},
+            {'key': 'March', 'label': '3 - Mar'},
+            {'key': 'April', 'label': '4 - Apr'},
+            {'key': 'May', 'label': '5 - May'},
+            {'key': 'June', 'label': '6 - Jun'},
+            {'key': 'July', 'label': '7 - Jul'},
+            {'key': 'August', 'label': '8 - Aug'},
+            {'key': 'September', 'label': '9 - Sep'},
+            {'key': 'October', 'label': '10 - Oct'},
+            {'key': 'November', 'label': '11 - Nov'},
+            {'key': 'December', 'label': '12 - Dec'}
+        ];
 
         
         return Data; // return the object for this factory service

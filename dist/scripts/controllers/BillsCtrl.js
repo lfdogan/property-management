@@ -15,6 +15,9 @@
          this.filteredBills = Data.filteredBills();
 
          this.allStatements = Data.allStatements(); // the ARRAY of objects from the Firebase database
+         
+         
+
 
          //hides My Account dropdown menu on page load
          Data.followMyAccountLink();
