@@ -3,6 +3,9 @@
 .center {
     text-align: center;
 }
+.click-text {
+    cursor: pointer;
+}
 .right {
     text-align: right;
 }

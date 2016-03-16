@@ -22,6 +22,7 @@
         var inspectionsRef = rootRef.child('inspections');
         var accountsRef = rootRef.child('accounts');
         var tenantsRef = rootRef.child('tenants');
+        var leases216554THSTREERef = buildingsRef.child('leases');
 
 
         //initial values of start and end date range
@@ -126,6 +127,15 @@
             },
             myBuildings: function(){
                 return $firebaseArray(buildingsRef);
+            },
+            leases216554THSTREE: function(){
+                return $firebaseArray(leases216554THSTREERef);
+            },
+            leases216554THSTREECurrent: function(){
+                return $firebaseArray(leases216554THSTREERef
+                                      .orderByChild("moveOut")
+                                      .equalTo("No")
+                                     );
             },
             accountLabels: function(){
                 return $firebaseArray(accountsRef
@@ -427,6 +437,7 @@
             {'key': 'November', 'label': '11 - Nov'},
             {'key': 'December', 'label': '12 - Dec'}
         ];
+        
 
         
         return Data; // return the object for this factory service

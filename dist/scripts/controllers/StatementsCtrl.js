@@ -16,9 +16,14 @@
          
          this.inspections_two = Data.inspections_two();
          this.allInspections = Data.allInspections();
-         
+         this.latestStatement = Data.latestStatement();
+         this.leases216554THSTREE = Data.leases216554THSTREE();
+         this.leases216554THSTREECurrent = Data.leases216554THSTREECurrent();
          
          this.Data = Data;
+         this.months = Data.months;
+
+         this.myBuildings = Data.myBuildings();
          
          Data.followMyAccountLink();
 
@@ -158,10 +163,8 @@
 
 /************************** FOR ADDING NEW STATEMENTS **************************/
          /*
-         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
-         var statementsRef = rootRef.child('statements');    
-         this.latestStatement = Data.latestStatement();
-         this.months = Data.months;
+         var statementsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/statements");
+         
          var prevEndDate = document.getElementById('prevEndDate');     
          var monthED = document.getElementById('monthED');
          var dayED = document.getElementById('dayED');
@@ -170,8 +173,8 @@
          var minuteED = document.getElementById('minuteED');
          var portfolio = document.getElementById('portfolio');
          var btnNewStatement = document.getElementById('btnNewStatement'); //add button for NewStatement
-         var postID;
-         var newPostRef;
+         var postStatementID;
+         var newPostStatementRef;
          
          btnNewStatement.addEventListener('click', function(){
              var beginDate = Number(prevEndDate.value) + 1; // begindate is the exact time as previous statement end date so add 1
@@ -192,52 +195,103 @@
              var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":000"); //format is Jan 17 2016 09:51:201
              endDate = stringED.valueOf(); // Return the primitive value of a Date object (in milliseconds)
              stripMS(endDate);
-             newPostRef = statementsRef.push();
-             newPostRef.set({//entered by user
+             newPostStatementRef = statementsRef.push();
+             newPostStatementRef.set({//entered by user
                  beginDate: Number(beginDate), 
                  endDate: Number(endDate),
                  portfolio: portfolio.value, //for owner draw only
                  range: range,
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
-             postID = newPostRef.key();
+             postStatementID = newPostStatementRef.key();
          });
          
-/* ************************************************************* */
+/************************** END - FOR ADDING NEW STATEMENTS **************************/
 
-         
-/************************** FOR ADDING NEW TENANTS **************************/
+/************************** FOR ADDING NEW TENANTS TO 2165 54TH STREET **************************/
          /*
-         var rootRef = new Firebase("https://property-management-lfdogan.firebaseio.com/");
-         var tenantsRef = rootRef.child('tenants');   
-         this.myBuildings = Data.myBuildings();
+
+         var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/leases");
+         
+         var tenantName = document.getElementById('tenantName');
+         var building = document.getElementById('building');
+         var monthLB = document.getElementById('monthLB');
+         var dayLB = document.getElementById('dayLB');
+         var yearLB = document.getElementById('yearLB');
+         var monthLE = document.getElementById('monthLE');
+         var dayLE = document.getElementById('dayLE');
+         var yearLE = document.getElementById('yearLE');
+         var rent = document.getElementById('rent');
+         var moveIn = document.getElementById('moveIn');
+         var moveOut = document.getElementById('moveOut');
+         
+         var btnNewTenant = document.getElementById('btnNewTenant'); //add button for NewStatement
+         var postTenantID;
+         var newPostTenantRef;
+         btnNewTenant.addEventListener('click', function(){
+             console.log("Add New Tenant: " + tenantName.value);
+             
+             var convertDateInputs = function(monthString, day, year, timeofday) {
+                 var dateString = "";
+                 if (timeofday == "begin") {
+                      dateString = monthString +" "+ day +" "+ year +" 00:00:001";
+                 } else dateString = monthString +" "+ day +" "+ year +" 23:59:999";
+                 var dateObj = new Date(dateString); // formats text string into date object
+                 return dateObj.valueOf(); // Return the primitive value of a Date object (in milliseconds)
+             };
+             var leaseBegin = convertDateInputs(monthLB.value, dayLB.value, yearLB.value, "begin");
+             var leaseEnd = convertDateInputs(monthLE.value, dayLE.value, yearLE.value, "end");
+             if (building.value == "216554THSTREE") {
+                 newPostTenantRef = leases216554THSTREERef.push();
+             }
+             newPostTenantRef.set({//entered by user
+                 tenantName: tenantName.value,
+                 building: building.value,
+                 moveIn: moveIn.value,
+                 moveOut: moveOut.value,
+                 leaseBegin: Number(leaseBegin), 
+                 leaseEnd: Number(leaseEnd), 
+                 rent: Number(rent.value),
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+             });
+             postTenantID = newPostTenantRef.key();
+             tenantName.value = '';
+         });
+         
+/************************** END - FOR ADDING NEW TENANTS TO 2165 54TH STREET **************************/       
+         
+         
+/************************** FOR ADDING NEW APPLICANTS **************************/
+         /*
+         var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/tenants");
+         
          
          var date_month = document.getElementById('date_month');
          var date_day = document.getElementById('date_day');
          var date_year = document.getElementById('date_year');
          
-         var tenantName = document.getElementById('tenantName'); 
+         var applicantName = document.getElementById('applicantName'); 
          var applicationDate = document.getElementById('applicationDate');
          var building = document.getElementById('building');
-         var btnNewTenant = document.getElementById('btnNewTenant'); //add button for NewStatement
-         var postID;
-         var newPostRef;
-         btnNewTenant.addEventListener('click', function(){
+         var btnNewApplicant = document.getElementById('btnNewApplicant'); //add button
+         var postApplicantID;
+         var newPostApplicantRef;
+         btnNewApplicant.addEventListener('click', function(){
              console.log("New Tenant: " + tenantName.value);
              var dob = new Date(date_month.value +" "+ date_day.value +" "+ date_year.value +" 12:00:00:000");
-             newPostRef = tenantsRef.push();
-             newPostRef.set({//entered by user
-                 tenantName: tenantName.value,
+             newPostApplicantRef = applicantsRef.push();
+             newPostApplicantRef.set({//entered by user
+                 applicantName: applicantName.value,
                  dob: dob.getTime(), //convert text date to ms
                  applicationDate: Number(applicationDate.value),
                  building: building.value, //for owner draw only
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
-             postID = newPostRef.key();
-             tenantName.value = '';
+             postApplicantID = newPostApplicantRef.key();
+             applicantName.value = '';
          });
          
-/* ************************************************************* */
+/************************** END - FOR ADDING NEW APPLICANTS **************************/
          
          
      }
