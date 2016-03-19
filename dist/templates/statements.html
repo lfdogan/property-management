@@ -18,11 +18,11 @@
         <table>
             <tr>
                 <th class="center">statement period
-<!--                    <ng-include src="'/templates/selectDateRange.html'"></ng-include>-->
+                    <ng-include src="'/templates/selectDateRange.html'"></ng-include>
                 </th>
                 <th>bill numbers</th>
             </tr>
-            <tr ng-repeat="item in statements.allStatements | orderBy: '-endDate'">
+            <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
                 <td class="center">
                     <a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a>
                     <a class="ion-ios-download-outline"></a>
@@ -73,10 +73,12 @@
                 <option value="CLARKKENT">Clark Kent</option>
             </select>
         </td>
+
         <td><button id="btnNewStatement" class="btn btn-primary">New Statement</button></td>
     </tr>
 </table>
     <br/>
+
     <!-- END Add new statements-->
     
     
@@ -99,11 +101,40 @@
             <td><input type="text" id="tenantName" ></td>
         </tr>
         <tr>
+            <td>Tenant1:</td>
+            <td><select id="tenant1" name="tenant1">
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Tenant2:</td>
+            <td><select id="tenant2" name="tenant1">
+                <option value="">n/a</option>
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Tenant3:</td>
+            <td><select id="tenant3" name="tenant1">
+                <option value="">n/a</option>
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
             <td>Building/Unit:</td>
             <td><select id="building" name="building">
                 <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
                 </select>
             </td>
+        </tr>
+        <tr>
+            <td>Deposits:</td>
+            <td>security:<input type="number" id="securityDep" placeholder="$">
+                pet: <input type="number" id="petDep" placeholder="$"></td>
+        </tr>
+        <tr>
+            <td>Monthly Rent:</td>
+            <td><input type="number" id="rent" placeholder="$" >1st month:<input type="number" id="rent1mo" placeholder="$" ></td>
         </tr>
         <tr>
             <td>lease begin:</td>
@@ -113,6 +144,16 @@
                 </select>
                 <input type="number" id="dayLB" placeholder="day (1-31)">
                 <input type="number" id="yearLB" placeholder="2016">
+            </td>
+        </tr>
+        <tr>
+            <td>lease end:</td>
+            <td>
+                <select id="monthLE" name="monthLE">
+                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                </select>
+                <input type="number" id="dayLE" placeholder="day (1-31)">
+                <input type="number" id="yearLE" placeholder="2016">
             </td>
         </tr>
         <tr>
@@ -132,51 +173,46 @@
             </td>
         </tr>
         <tr>
-            <td>lease end:</td>
+            <td>early termination:</td>
             <td>
-                <select id="monthLE" name="monthLE">
+                <select id="monthET" name="monthET">
                     <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
                 </select>
-                <input type="number" id="dayLE" placeholder="day (1-31)">
-                <input type="number" id="yearLE" placeholder="2016">
+                <input type="number" id="dayET" placeholder="day (1-31)">
+                <input type="number" id="yearET" placeholder="2016">
             </td>
         </tr>
         <tr>
-            <td>Rent:</td>
-            <td><input type="number" id="rent" ><button id="btnNewTenant" class="btn btn-primary">Add Lease</button></td>
+            <td>comments:</td>
+            <td><input type="text" id="comments" ></td>
         </tr>
+        <tr>
+            <th></th>
+            <th><button id="btnNewTenant" class="btn btn-primary">Add Lease</button></th>
+        </tr>
+
+
     </table>
     <br/>
 <!-- END FOR ADDING NEW TENANTS TO 2165 54TH STREET! -->
     
 <!-- Add a New Applicant! -->
-    <!-- 
+    <!--
     <br/>
     <table>
         <tr>
-            <th style="text-align: right">Add a new:</th>
-            <th><button id="btnNewApplicant" class="btn btn-primary">Applicant</button></th>
+            <th></th>
+            <th style="text-align: left">Add a new Applicant</th>
         </tr>
         <tr>
             <td>Name:</td>
             <td><input type="text" id="applicantName" ></td>
         </tr>
 <tr>
-            <td>dob:</td>
+            <td>Birth Date:</td>
             <td>
                 <select id="date_month" name="date_month">
-                    <option value="January">1 - Jan</option>
-                    <option value="February">2 - Feb</option>
-                    <option value="March">3 - Mar</option>
-                    <option value="April">4 - Apr</option>
-                    <option value="May">5 - May</option>
-                    <option value="June">6 - Jun</option>
-                    <option value="July">7 - Jul</option>
-                    <option value="August">8 - Aug</option>
-                    <option value="September">9 - Sep</option>
-                    <option value="October">10 - Oct</option>
-                    <option value="November">11 - Nov</option>
-                    <option value="December">12 - Dec</option>
+                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
                 </select>
                 <input type="number" id="date_day" placeholder="day">
                 <input type="number" id="date_year" placeholder="year">
@@ -185,9 +221,11 @@
         <tr>
             <td>Application Date:</td>
             <td>
-                <select id="applicationDate" name="applicationDate">
-                    <option ng-repeat="date in statements.datesInMS" value={{date.value}}>{{date.label}}</option>
+                <select id="applyMonth" name="applyMonth">
+                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
                 </select>
+                <input type="number" id="applyDay" placeholder="day">
+                <input type="number" id="applyYear" placeholder="year">
             </td>
         </tr>
         <tr>
@@ -196,6 +234,7 @@
                 <select id="building" name="building">
                     <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
                 </select>
+            <button id="btnNewApplicant" class="btn btn-primary">ADD NEW APPLICANT</button>
             </td>
         </tr>
     </table>
@@ -224,7 +263,6 @@
                 <td><i class="fa fa-file-pdf-o"></i></td>
             </tr>
         </table>
-        
         <h4 class="center click-text" ng-click="statements.show_hide('former-tenants-table')">Click to view Former Tenants</h4>
         <table id="former-tenants-table">
             <tr>
@@ -381,7 +419,7 @@
 
 <section>
     <div class="title">
-        <h2>Utility Bills</h2>
+        <h2>Utility Bills for Tenant Reimbursement</h2>
     </div>
     <div>
         <table>
@@ -389,21 +427,25 @@
                 <th>File Name</th>
                 <th>Document Date</th>
                 <th>Building/Unit</th>
+                <th>Cost</th>
             </tr>
             <tr>
                 <td><a>WSA_2015-06-18_for_2165_54th_St.pdf</a></td>
                 <td>06/29/2015</td>
                 <td>2165 54th St</td>
+                <td>$34.53</td>
             </tr>
             <tr>
                 <td><a>WSA_2015-05-18_for_2165_54th_St.pdf</a></td>
                 <td>05/22/2015</td>
                 <td>2165 54th St</td>
+                <td>$52.18</td>
             </tr>
             <tr>
                 <td><a>WSA_2015-02-17_for_2165_54th_St.pdf</a></td>
                 <td>02/26/2015</td>
                 <td>2165 54th St</td>
+                <td>$34.53</td>
             </tr>
         </table>
     </div>
@@ -411,7 +453,7 @@
 
 <section class="Agreement">
     <div class="title">
-        <h2>Owner Agreement</h2>
+        <h2>Owner Agreement with Property Management</h2>
     </div>
     <table>
         <tr>
