@@ -57,7 +57,34 @@
              }
          };
 
-              
+        
+         var getMonthText = function (milliseconds) {
+            var dateObject = new Date(milliseconds);
+            var monthNumber = dateObject.getMonth() + 1;
+            for (var i = 0; i < Data.months.length; i++) {
+                if (monthNumber == Data.months[i].number) return Data.months[i].key; 
+            };
+        };
+         
+         var beginMilliseconds = this.beginDateRange;
+         var endMilliseconds = this.endDateRange;
+         
+         var mdyy = function (milliseconds) {
+             var dateObject = new Date(milliseconds);
+             var monthIndex = dateObject.getMonth();
+             var monthNum = monthIndex+1;
+             var day = dateObject.getDate();
+             var fullYear = dateObject.getFullYear();
+             var year = fullYear;
+             if (fullYear > 2000) {
+                 year = year-2000;
+             } else year = year-1900;
+             if (year < 10) {
+                 return monthNum+"/"+day+"/0"+year;
+             } else return monthNum+"/"+day+"/"+year;
+//             var todayMonthText = getMonthText(this.today);
+             
+         };
                   
          /* Create a chart using CanvasJS Library
          * chartData creates an array of the data

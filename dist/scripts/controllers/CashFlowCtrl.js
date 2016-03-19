@@ -20,6 +20,8 @@
 
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("transactions");
+         
+         
 
          
          
@@ -93,12 +95,6 @@
          this.accountLabels = Data.accountLabels();
          this.allTenants = Data.allTenants();
          this.myBuildings = Data.myBuildings();
-
-
-
-
-
-
          
          var account = document.getElementById('account'); 
          var amountPaid = document.getElementById('amountPaid');

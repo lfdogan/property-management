@@ -212,18 +212,19 @@
             <tr>
                 <th>Tenant Name(s)</th>
                 <th>Building/Unit</th>
-                <th>Leasing Dates</th>
                 <th>Rent</th>
+                <th>Leasing Dates</th>
                 <th>Download PDF Document</th>
             </tr>
             <tr ng-repeat="tenant in statements.leases216554THSTREE" ng-show="tenant.moveOut === 'No'" >
                 <td> {{tenant.tenantName}} </td>
                 <td> {{tenant.building | buildingNickname}} </td>
-                <td> {{tenant.leaseBegin | date: 'MM/dd/yyyy'}}-{{tenant.leaseEnd | date: 'MM/dd/yyyy'}} </td>
                 <td> {{tenant.rent | currency}} </td>
+                <td> {{tenant.leaseBegin | date: 'MM/dd/yyyy'}}-{{tenant.leaseEnd | date: 'MM/dd/yyyy'}} </td>
                 <td><i class="fa fa-file-pdf-o"></i></td>
             </tr>
         </table>
+        
         <h4 class="center click-text" ng-click="statements.show_hide('former-tenants-table')">Click to view Former Tenants</h4>
         <table id="former-tenants-table">
             <tr>
@@ -231,14 +232,16 @@
                 <th>Building/Unit</th>
                 <th>Lease End</th>
                 <th>Rent</th>
+                <th>Early Termination</th>
                 <th>Move Out Comments</th>
                 <th>Download PDF Document</th>
             </tr>
-            <tr ng-repeat="tenant in statements.leases216554THSTREE" ng-show="tenant.moveOut === 'Yes'" >
+            <tr ng-repeat="tenant in statements.leases216554THSTREE | orderBy: '-leaseEnd'" ng-show="tenant.moveOut === 'Yes'" >
                 <td> {{tenant.tenantName}} </td>
                 <td> {{tenant.building | buildingNickname}} </td>
-                <td> {{tenant.leaseEnd | date: 'MM/dd/yyyy'}} </td>
                 <td> {{tenant.rent | currency}} </td>
+                <td> {{tenant.leaseBegin | date: 'MM/dd/yyyy'}}-{{tenant.leaseEnd | date: 'MM/dd/yyyy'}} </td>
+                <td> {{tenant.earlyTermination | date: 'MM/dd/yyyy'}} </td>
                 <td> {{tenant.comments}} </td>
                 <td><i class="fa fa-file-pdf-o"></i></td>
             </tr>
@@ -324,7 +327,7 @@
                 <td>Ceiling / Walls (Needs Repair): Needs cleaned out</td>
             </tr>
         </table>
-    <h4 class="center" ng-click="statements.show_hide('inspection-reports-table')">
+    <h4 class="center click-text" ng-click="statements.show_hide('inspection-reports-table')">
         Click to view all inspection documents
     </h4>
     <table id="inspection-reports-table">

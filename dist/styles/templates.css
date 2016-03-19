@@ -33,14 +33,12 @@
 
 
 
-
-
 /* section boxes for data */
 .white-box {
     background-color: white;
     padding: 5px; /* space between text and box edge */
 /*    box-shadow: 5px 5px 5px gray;*/
-    max-width: 900px; /* will not grow past 1200px wide */
+    max-width: 1200px; /* will not grow past 1200px wide */
     margin: auto; /* center on page */
 }
 

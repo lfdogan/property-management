@@ -21,8 +21,9 @@
         var portfoliosRef = rootRef.child('portfolios');
         var inspectionsRef = rootRef.child('inspections');
         var accountsRef = rootRef.child('accounts');
-        var tenantsRef = rootRef.child('tenants');
-        var leases216554THSTREERef = buildingsRef.child('leases');
+        //var applicantsRef = rootRef.child('applicants');
+        //var leases216554THSTREERef = buildingsRef.child('leases');
+        var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases');
 
 
         //initial values of start and end date range
@@ -140,11 +141,6 @@
             accountLabels: function(){
                 return $firebaseArray(accountsRef
                                      .orderByValue());
-            },
-            allTenants: function(){
-                return $firebaseArray(tenantsRef
-                              //       .orderByValue()
-                                     );
             }
 
          };   
