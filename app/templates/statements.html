@@ -97,10 +97,6 @@
             <th></th>
         </tr>
         <tr>
-            <td>Name(s):</td>
-            <td><input type="text" id="tenantName" ></td>
-        </tr>
-        <tr>
             <td>Tenant1:</td>
             <td><select id="tenant1" name="tenant1">
                 <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
@@ -119,6 +115,10 @@
                 <option value="">n/a</option>
                 <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
                 </select></td>
+        </tr>
+        <tr>
+            <td>Name(s):</td>
+            <td><input type="text" id="tenantName" ></td>
         </tr>
         <tr>
             <td>Building/Unit:</td>
@@ -140,7 +140,7 @@
             <td>lease begin:</td>
             <td>
                 <select id="monthLB" name="monthLB">
-                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
                 <input type="number" id="dayLB" placeholder="day (1-31)">
                 <input type="number" id="yearLB" placeholder="2016">
@@ -150,7 +150,7 @@
             <td>lease end:</td>
             <td>
                 <select id="monthLE" name="monthLE">
-                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
                 <input type="number" id="dayLE" placeholder="day (1-31)">
                 <input type="number" id="yearLE" placeholder="2016">
@@ -176,7 +176,8 @@
             <td>early termination:</td>
             <td>
                 <select id="monthET" name="monthET">
-                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                    <option value="">n/a</option>
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
                 <input type="number" id="dayET" placeholder="day (1-31)">
                 <input type="number" id="yearET" placeholder="2016">
@@ -212,21 +213,31 @@
 <tr>
             <td>Birth Date:</td>
             <td>
-                <select id="date_month" name="date_month">
-                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                <select id="dobMonth" name="dobMonth">
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
-                <input type="number" id="date_day" placeholder="day">
-                <input type="number" id="date_year" placeholder="year">
+                <input type="number" id="dobDay" placeholder="day (1-31)">
+                <input type="number" id="dobYear" placeholder="year">
             </td>
         </tr>
         <tr>
             <td>Application Date:</td>
             <td>
                 <select id="applyMonth" name="applyMonth">
-                    <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
                 <input type="number" id="applyDay" placeholder="day">
                 <input type="number" id="applyYear" placeholder="year">
+            </td>
+        </tr>
+        <tr>
+            <td>Background Check Date:</td>
+            <td>
+                <select id="backgroundMonth" name="backgroundMonth">
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" id="backgroundDay" placeholder="day">
+                <input type="number" id="backgroundYear" placeholder="year">
             </td>
         </tr>
         <tr>
@@ -235,8 +246,11 @@
                 <select id="building" name="building">
                     <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
                 </select>
-            <button id="btnNewApplicant" class="btn btn-primary">ADD NEW APPLICANT</button>
             </td>
+        </tr>
+        <tr>
+            <th></th>
+            <th style="text-align: left"><button id="btnNewApplicant" class="btn btn-primary">ADD NEW APPLICANT</button></th>
         </tr>
     </table>
     <br/>

@@ -19,7 +19,7 @@
          this.latestStatement = Data.latestStatement();
          this.leases216554THSTREE = Data.leases216554THSTREE();
          this.leases216554THSTREECurrent = Data.leases216554THSTREECurrent();
-         //this.allApplicants = Data.allApplicants();
+         this.allApplicants = Data.allApplicants();
          
          this.Data = Data;
          this.months = Data.months;
@@ -162,7 +162,7 @@
                  chartProfitData.unshift({  y: 1057.37, label: "1/15/15"});
                  */
                  callback && callback();
-             }, 500 ); //do_a() gathers data. wait # of milliseconds to begin do_b() (creating chart from gathered data)
+             }, 1000 ); //do_a() gathers data. wait # of milliseconds to begin do_b() (creating chart from gathered data)
          }
  /********************** END function do_a *******************************/        
          
@@ -278,66 +278,96 @@
          
 /************************** END - FOR ADDING NEW STATEMENTS **************************/
 
-/************************** FOR ADDING NEW TENANTS TO 2165 54TH STREET **************************/
-         /*
-         var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/leases");
+
+/************************** FOR ADDING NEW TENANT LEASES TO 2165 54TH STREET **************************/
+        
+/*
+         var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases");
          
          var tenantName = document.getElementById('tenantName');
+         var tenant1 = document.getElementById('tenant1');
+         var tenant2 = document.getElementById('tenant2');
+         var tenant3 = document.getElementById('tenant3');
          var building = document.getElementById('building');
+         var rent1mo = document.getElementById('rent1mo');
+         var rent = document.getElementById('rent');
+         var securityDep = document.getElementById('securityDep');
+         var petDep = document.getElementById('petDep');
+         var moveIn = document.getElementById('moveIn');
+         var moveOut = document.getElementById('moveOut');
+         var comments = document.getElementById('comments');
+         //lease begin
          var monthLB = document.getElementById('monthLB');
          var dayLB = document.getElementById('dayLB');
          var yearLB = document.getElementById('yearLB');
+         //lease end
          var monthLE = document.getElementById('monthLE');
          var dayLE = document.getElementById('dayLE');
          var yearLE = document.getElementById('yearLE');
-         var rent = document.getElementById('rent');
-         var moveIn = document.getElementById('moveIn');
-         var moveOut = document.getElementById('moveOut');
+         //Early Termination
+         var monthET = document.getElementById('monthET');
+         var dayET = document.getElementById('dayET');
+         var yearET = document.getElementById('yearET');
          
          var btnNewTenant = document.getElementById('btnNewTenant'); //add button for NewStatement
          var postTenantID;
          var newPostTenantRef;
          btnNewTenant.addEventListener('click', function(){
-             console.log("Add New Tenant: " + tenantName.value);
-             
-             var convertDateInputs = function(monthString, day, year, timeofday) {
-                 var dateString = "";
-                 if (timeofday == "begin") {
-                      dateString = monthString +" "+ day +" "+ year +" 00:00:001";
-                 } else dateString = monthString +" "+ day +" "+ year +" 23:59:999";
-                 var dateObj = new Date(dateString); // formats text string into date object
-                 return dateObj.valueOf(); // Return the primitive value of a Date object (in milliseconds)
-             };
-             var leaseBegin = convertDateInputs(monthLB.value, dayLB.value, yearLB.value, "begin");
-             var leaseEnd = convertDateInputs(monthLE.value, dayLE.value, yearLE.value, "end");
+             var leaseBegin = new Date(monthLB.value +" "+ dayLB.value +" "+ yearLB.value +" 00:00:001");
+             var leaseEnd = new Date(monthLE.value +" "+ dayLE.value +" "+ yearLE.value +" 23:59:999");
+             var earlyTermination = new Date(monthET.value +" "+ dayET.value +" "+ yearET.value +" 23:59:999");
              if (building.value == "216554THSTREE") {
                  newPostTenantRef = leases216554THSTREERef.push();
              }
-             newPostTenantRef.set({//entered by user
+             newPostTenantRef.set({//replaces all data with new data
                  tenantName: tenantName.value,
+                 tenant1: tenant1.value,
                  building: building.value,
                  moveIn: moveIn.value,
                  moveOut: moveOut.value,
-                 leaseBegin: Number(leaseBegin), 
-                 leaseEnd: Number(leaseEnd), 
+                 leaseBegin: Number(leaseBegin), //convert text object date to ms. leaseBegin.valueOf() == Number(leaseBegin)
+                 leaseEnd: Number(leaseEnd),
+                 securityDep: Number(securityDep.value),
+                 rent1mo: Number(rent1mo.value),
                  rent: Number(rent.value),
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
              postTenantID = newPostTenantRef.key();
-             tenantName.value = '';
+             //assign the postIDRef to the new child
+             if (building.value == "216554THSTREE") {
+                 var postTenantIDRef = leases216554THSTREERef.child(postTenantID);
+             }
+             //if user entered data, add to the database
+             if (dayET.value != "") postTenantIDRef.update({'earlyTermination': Number(earlyTermination)});
+             if (tenant2.value != "") postTenantIDRef.update({'tenant2': tenant2.value});
+             if (tenant3.value != "") postTenantIDRef.update({'tenant3': tenant3.value});
+             if (comments.value != "") postTenantIDRef.update({'comments': comments.value});
+             if (petDep.value != "") postTenantIDRef.update({'petDep': Number(petDep.value)});
+             
+             tenantName.value = '';//clear out tenant name field
          });
          
-/************************** END - FOR ADDING NEW TENANTS TO 2165 54TH STREET **************************/       
+/************************** END - FOR ADDING NEW TENANT LEASES TO 2165 54TH STREET **************************/       
+         
+  
          
          
 /************************** FOR ADDING NEW APPLICANTS **************************/
-         /*
-         var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/tenants");
+      /*   
+         var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/applicants");
          
          
-         var date_month = document.getElementById('date_month');
-         var date_day = document.getElementById('date_day');
-         var date_year = document.getElementById('date_year');
+         var dobMonth = document.getElementById('dobMonth');
+         var dobDay = document.getElementById('dobDay');
+         var dobYear = document.getElementById('dobYear');
+         
+         var applyMonth = document.getElementById('applyMonth');
+         var applyDay = document.getElementById('applyDay');
+         var applyYear = document.getElementById('applyYear');
+         
+         var backgroundMonth = document.getElementById('backgroundMonth');
+         var backgroundDay = document.getElementById('backgroundDay');
+         var backgroundYear = document.getElementById('backgroundYear');
          
          var applicantName = document.getElementById('applicantName'); 
          var applicationDate = document.getElementById('applicationDate');
@@ -346,16 +376,19 @@
          var postApplicantID;
          var newPostApplicantRef;
          btnNewApplicant.addEventListener('click', function(){
-             console.log("New Tenant: " + tenantName.value);
-             var dob = new Date(date_month.value +" "+ date_day.value +" "+ date_year.value +" 12:00:00:000");
+             var dob = new Date(dobMonth.value +" "+ dobDay.value +" "+ dobYear.value +" 12:00:00:000");
+             var applicationDate = new Date(applyMonth.value +" "+ applyDay.value +" "+ applyYear.value +" 12:00:00:000");
+             var backgroundCheckDate = new Date(backgroundMonth.value +" "+ backgroundDay.value +" "+ backgroundYear.value +" 12:00:00:000");
              newPostApplicantRef = applicantsRef.push();
              newPostApplicantRef.set({//entered by user
                  applicantName: applicantName.value,
                  dob: dob.getTime(), //convert text date to ms
-                 applicationDate: Number(applicationDate.value),
-                 building: building.value, //for owner draw only
+                 applicationDate: applicationDate.getTime(), //convert text date to ms
+                 backgroundCheckDate: backgroundCheckDate.getTime(), //convert text date to ms
+                 building: building.value, 
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
+             console.log(applicantName.value+" ("+Data.calculateAge(dob.getTime(),applicationDate.getTime())+") applied on " +Data.mdyy(applicationDate));
              postApplicantID = newPostApplicantRef.key();
              applicantName.value = '';
          });

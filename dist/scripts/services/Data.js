@@ -21,18 +21,20 @@
         var portfoliosRef = rootRef.child('portfolios');
         var inspectionsRef = rootRef.child('inspections');
         var accountsRef = rootRef.child('accounts');
-        //var applicantsRef = rootRef.child('applicants');
-        //var leases216554THSTREERef = buildingsRef.child('leases');
+        var applicantsRef = rootRef.child('applicants');
         var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases');
 
 
         //initial values of start and end date range
-        var startRange = 1433131200000; // custom start date is 6/1/15
-        var endRange = 1439697599999; // custom end date is 8/15/15
-        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
 //        var today = new Date().getTime();
+//        var today = new Date("08/17/2015 11:01:20");//kills the function!!!!
+//        var today = new Date("08/28/2015 19:01:20");
+        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
-        var numDays = 30; // used for switching date selection range
+        var numDays = 30; // used for switching date selection range                        
+        var endRange = today; //initial value for switching date selection range 
+        var startRange = endRange - thirtyDays;//initial value for switching date selection range
+        
         var columnToSortBy = "payDate"; //used for switching which column of table data to order
 
         // array used for changeDateRange()
@@ -128,6 +130,9 @@
             },
             myBuildings: function(){
                 return $firebaseArray(buildingsRef);
+            },
+            allApplicants: function(){
+                return $firebaseArray(applicantsRef);
             },
             leases216554THSTREE: function(){
                 return $firebaseArray(leases216554THSTREERef);
@@ -445,6 +450,22 @@
              if (year < 10) {
                  return monthNum+"/"+day+"/0"+year;
              } else return monthNum+"/"+day+"/"+year; 
+        };
+        Data.calculateAge = function(oldDate,newDate){
+            var dateObject1 = new Date(oldDate);
+            var dateObject2 = new Date(newDate);
+            var fullYear1 = dateObject1.getFullYear();
+            var fullYear2 = dateObject2.getFullYear();
+            var monthIndex1 = dateObject1.getMonth();
+            var monthIndex2 = dateObject2.getMonth();
+            var day1 = dateObject1.getDate();
+            var day2 = dateObject2.getDate();
+            var years = fullYear2-fullYear1;
+            if (monthIndex2 < monthIndex1) years--;
+            if (monthIndex2 == monthIndex1) {
+                if (day2 < day1) years--;
+                };
+            return years;
         };
         Data.months = [
             {'monthText': 'January', 'label': '1 - Jan'},
