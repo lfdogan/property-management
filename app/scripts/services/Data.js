@@ -196,46 +196,45 @@
         Data.changeDateRange = function(numDays){
             console.log("running Data.changeDateRange(",numDays,")");
             var text;
-            var element;
+            //"element" now not needed with a select <option>
+            //var element;
              //for original selection bar version
 //            document.querySelector("#last30Days").classList.remove("active");
 //            document.querySelector("#currentYear").classList.remove("active");
 //            document.querySelector("#customDates").classList.remove("active");
              //for <option>'s <select> element
-            document.querySelector("#last30Days").removeAttribute("selected");
-            document.querySelector("#currentYear").removeAttribute("selected");
-            document.querySelector("#customDates").removeAttribute("selected");
+            //document.querySelector("#last30Days").removeAttribute("selected");
+            //document.querySelector("#currentYear").removeAttribute("selected");
+            //document.querySelector("#customDates").removeAttribute("selected");
                 switch(Number(numDays)){
                     case 30: 
                         text = "last 30 days";
-                        element = document.querySelector("#last30Days");
+                        //element = document.querySelector("#last30Days");
                         endRange = today;
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
                         break;
                     case 60: 
                         text = "last 60 days";
-                        element = document.querySelector("#last30Days");
+                        //element = document.querySelector("#last60Days");
                         endRange = today;
                         startRange = endRange - thirtyDays - thirtyDays;
                         break;
                     case 90: 
                         text = "last 90 days";
-                        element = document.querySelector("#last30Days");
+                        //element = document.querySelector("#last90Days");
                         endRange = today;
                         startRange = endRange - thirtyDays - thirtyDays- thirtyDays;
                         break;
                     case 365:
                         text = "current year";
-                        element = document.querySelector("#currentYear");
+                        //element = document.querySelector("#currentYear");
                         var dateObject = new Date("01/01/2015 00:00:00:001");//creates date object
                         startRange = Number(dateObject);//converts date Object to milliseconds
-//                        startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = today;
-                        //endRange = new Date().getTime();
                         break;
                     case 9999:
                         text = "8/14/15-today"; //For simplicity I've assigned the 'custom' dates
-                        element = document.querySelector("#customDates");
+                        //element = document.querySelector("#customDates");
                         startRange = 1439560250009; // 1 ms after last range
                         endRange = today;
                         break;
