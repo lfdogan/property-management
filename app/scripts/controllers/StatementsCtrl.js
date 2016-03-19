@@ -19,6 +19,7 @@
          this.latestStatement = Data.latestStatement();
          this.leases216554THSTREE = Data.leases216554THSTREE();
          this.leases216554THSTREECurrent = Data.leases216554THSTREECurrent();
+         this.allApplicants = Data.allApplicants();
          
          this.Data = Data;
          this.months = Data.months;
@@ -56,108 +57,236 @@
                  toggle.style.display = "table";
              }
          };
+         
+        var getMonthText = function (milliseconds) {
+            var dateObject = new Date(milliseconds);
+            var monthNumber = dateObject.getMonth() + 1;
+            for (var i = 0; i < Data.months.length; i++) {
+                if (monthNumber == Data.months[i].number) return Data.months[i].key; 
+            };
+        };
 
-              
-                  
-         /* Create a chart using CanvasJS Library
-         * chartData creates an array of the data
-         * addColorSet determines each color for dataset
-         * new CanvasJS.Chart creates the new chart with colorSet, title, and data
-         * chart.render() displays the chart on the page
-         */
-         var chartData = function(){
-             var dataPoints = [];
-             dataPoints.push({label: "income", y: 11251.89});
-             dataPoints.push({label: "expenses", y: 2788.01});
-             dataPoints.push({label: "profit", y: 9151.38});
-             return dataPoints;
+
+        
+         var beginMilliseconds = this.beginDateRange;
+         var endMilliseconds = this.endDateRange;
+         
+         var mdyy = function (milliseconds) {
+             var dateObject = new Date(milliseconds);
+             var monthIndex = dateObject.getMonth();
+             var monthNum = monthIndex+1;
+             var day = dateObject.getDate();
+             var fullYear = dateObject.getFullYear();
+             var year = fullYear;
+             if (fullYear > 2000) {
+                 year = year-2000;
+             } else year = year-1900;
+             if (year < 10) {
+                 return monthNum+"/"+day+"/0"+year;
+             } else return monthNum+"/"+day+"/"+year;
+//             var todayMonthText = getMonthText(this.today);
+             
          };
-         var chartIncomeData = function(){
-             var dataPoints = [];
-                dataPoints.unshift({  y: 3378.95 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
-                dataPoints.unshift({  y: 0, label: "7/15/15" });
-                dataPoints.unshift({  y: 1272.97, label: "6/15/15" });
-                dataPoints.unshift({  y: 1312.18, label: "5/15/15" });
-                dataPoints.unshift({  y: 1328.04, label: "4/15/15"});
-                dataPoints.unshift({  y: 1386.42, label: "3/13/15"});
-                dataPoints.unshift({  y: 1250, label: "2/13/15"});
-                dataPoints.unshift({  y: 1323.33, label: "1/15/15"});
-             return dataPoints;
-         };
-         var chartExpenseData = function(){
-             var dataPoints = [];
-                dataPoints.unshift({  y: 1322.50 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
-                dataPoints.unshift({  y: 538.10, label: "7/15/15" });
-                dataPoints.unshift({  y: 261.45, label: "6/15/15" });
-                dataPoints.unshift({  y: 100, label: "5/15/15" });
-                dataPoints.unshift({  y: 100, label: "4/15/15"});
-                dataPoints.unshift({  y: 100, label: "3/13/15"});
-                dataPoints.unshift({  y: 100, label: "2/13/15"});
-                dataPoints.unshift({  y: 265.96, label: "1/15/15"});
-             return dataPoints;
-         };
-         var chartProfitData = function(){ //.push adds to end of array, .unshift adds to beginning
-             var dataPoints = [];
-                dataPoints.unshift({  y: 2205.85 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
-                dataPoints.unshift({  y: 0, label: "7/15/15" });
-                dataPoints.unshift({  y: 1011.52, label: "6/15/15" });
-                dataPoints.unshift({  y: 1212.18, label: "5/15/15" });
-                dataPoints.unshift({  y: 1228.04, label: "4/15/15"});
-                dataPoints.unshift({  y: 1286.42, label: "3/13/15"});
-                dataPoints.unshift({  y: 1150.00, label: "2/13/15"});
-                dataPoints.unshift({  y: 1057.37, label: "1/15/15"});
-             return dataPoints;
-         };
-         CanvasJS.addColorSet("inc-exp-pro",
+         /********************** variables for do_a and do_b *******************************/
+         var chartIncomeData = [];
+         var chartExpenseData = [];
+         var chartProfitData = [];
+         var profitChartTitle = mdyy(beginMilliseconds) + "-"+mdyy(endMilliseconds)+" Profit Overview";
+         /********************** END variables for do_a and do_b *******************************/
+         
+        /********************** function do_a *******************************/
+        function do_a (callback){
+            setTimeout(function(){
+                //console.log( '`do_a`: this takes longer than `do_b`' );
+                 /*
+                 * cycles through each statement date range, 
+                 * for each statement it cycles through all transactions
+                 * adds each transaction to profit, income, or expense
+                 */
+                 var statementsRef = new Firebase('https://property-management-lfdogan.firebaseio.com/statements');
+                 statementsRef.once("value", function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {//cycle through all statements
+                        var key = childSnapshot.key();
+                        var childData = childSnapshot.val();
+                        var periodEnd = childData.endDate;
+                        var periodBegin = childData.beginDate;
+                        if (beginMilliseconds < periodEnd && periodEnd < endMilliseconds) {
+                            var chartDataLabel = mdyy(periodEnd);
+                            var profit = 0;
+                            var income = 0;
+                            var expenses = 0;
+                            var transactionsRef = new Firebase('https://property-management-lfdogan.firebaseio.com/bills');
+                            transactionsRef.once("value", function(snapshot) {
+                                snapshot.forEach(function(childSnapshot) {//cycle through all transactions/statements
+                                    var transactionkey = childSnapshot.key();
+                                    var transactionchildData = childSnapshot.val();
+                                    if (periodBegin < transactionchildData.payDate && transactionchildData.payDate < periodEnd){
+                                        var account = transactionchildData.account;
+                                        switch (true) {
+                                            case (account == 1000): 
+                                                profit = profit + transactionchildData.amountPaid;
+                                                break;
+                                            case (account == 1050):
+                                                profit = profit - transactionchildData.amountPaid;
+                                                break;
+                                            case (4000 <= account && account <= 4999):
+                                                income = income + transactionchildData.amountPaid;
+                                                break;
+                                            case (5000 <= account && account <= 5999):
+                                                expenses = expenses + transactionchildData.amountPaid;
+                                                break;
+                                            default: 
+                                                console.log("error! "+transactionchildData.account+" not in Firebase account table");
+                                                break;
+                                        };
+                                    };
+                                });//end forEach of bills/transactions
+                            });
+                            var incomeObject = { 'y': income, 'label': chartDataLabel};
+                            var expenseObject = { 'y': expenses, 'label': chartDataLabel};
+                            var profitObject = { 'y': profit, 'label': chartDataLabel};
+                            chartIncomeData.push(incomeObject); //use .unshift(incomeObject) to add to beginning of array
+                            chartExpenseData.push(expenseObject);
+                            chartProfitData.push(profitObject);
+                            //console.log("incomeObject",incomeObject,"expenseObject",expenseObject,"profitObject",profitObject);
+                        };
+                    });//end forEach of statements
+                });
+
+
+
+                 /* Create a chart using CanvasJS Library
+                 * chartData creates an array of the data
+                 * addColorSet determines each color for dataset
+                 * new CanvasJS.Chart creates the new chart with colorSet, title, and data
+                 * chart.render() displays the chart on the page
+                 */
+                 /*
+                 //Original static overall numbers 
+                 var chartData = function(){
+                     var dataPoints = [];
+                     dataPoints.push({label: "income", y: 11251.89});
+                     dataPoints.push({label: "expenses", y: 2788.01});
+                     dataPoints.push({label: "profit", y: 9151.38});
+                     return dataPoints;
+                 };
+                 */
+                 /*
+                 //Static data for each month to have three columns income, expenses, and profit
+                 var chartIncomeData = function(){
+                     var chartIncome = [];
+                        chartIncome.unshift({  y: 3378.95 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                        chartIncome.unshift({  y: 0, label: "7/15/15" });
+                        chartIncome.unshift({  y: 1272.97, label: "6/15/15" });
+                        chartIncome.unshift({  y: 1312.18, label: "5/15/15" });
+                        chartIncome.unshift({  y: 1328.04, label: "4/15/15"});
+                        chartIncome.unshift({  y: 1386.42, label: "3/13/15"});
+                        chartIncome.unshift({  y: 1250, label: "2/13/15"});
+                        chartIncome.unshift({  y: 1323.33, label: "1/15/15"});
+                     return chartIncome;
+                 };
+                 var chartExpenseData = function(){
+                     var chartExpenses = [];
+                        chartExpenses.unshift({  y: 1322.50 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                        chartExpenses.unshift({  y: 538.10, label: "7/15/15" });
+                        chartExpenses.unshift({  y: 261.45, label: "6/15/15" });
+                        chartExpenses.unshift({  y: 100, label: "5/15/15" });
+                        chartExpenses.unshift({  y: 100, label: "4/15/15"});
+                        chartExpenses.unshift({  y: 100, label: "3/13/15"});
+                        chartExpenses.unshift({  y: 100, label: "2/13/15"});
+                        chartExpenses.unshift({  y: 265.96, label: "1/15/15"});
+                     return chartExpenses;
+                 };
+                 var chartProfitData = function(){ //.push adds to end of array, .unshift adds to beginning
+                     var chartProfit = [];
+                        chartProfit.unshift({  y: 2205.85 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
+                        chartProfit.unshift({  y: 0, label: "7/15/15" });
+                        chartProfit.unshift({  y: 1011.52, label: "6/15/15" });
+                        chartProfit.unshift({  y: 1212.18, label: "5/15/15" });
+                        chartProfit.unshift({  y: 1228.04, label: "4/15/15"});
+                        chartProfit.unshift({  y: 1286.42, label: "3/13/15"});
+                        chartProfit.unshift({  y: 1150.00, label: "2/13/15"});
+                        chartProfit.unshift({  y: 1057.37, label: "1/15/15"});
+                     return chartProfit;
+                 };
+                 */
+    callback && callback();
+  }, 500 ); //do_a() gathers data. wait # of milliseconds to begin do_b() (creating chart from gathered data)
+}
+ /********************** END function do_a *******************************/        
+         
+/********************** function do_b *******************************/
+        function do_b () {
+            //console.log( '`do_b`: now we can make sure `do_b` comes out after `do_a`' );
+                     
+            /* Create a chart using CanvasJS Library
+            * chartData creates an array of the data
+            * addColorSet determines each color for dataset
+            * new CanvasJS.Chart creates the new chart with colorSet, title, and data
+            * chart.render() displays the chart on the page
+            */
+            CanvasJS.addColorSet("inc-exp-pro",
                 [//colorSet Array
                 "blue",
                 "red",
                 "green"               
                 ]);
-         /*
-         var chart = new CanvasJS.Chart("chartContainer", {
-             colorSet: "inc-exp-pro",
-             title: {text: "Profit Overview"},
-             data: [{
-                 type: "bar",
-                 dataPoints: chartData()
-             }]
-         });
-         */
-        var chart = new CanvasJS.Chart("chartContainer", {
-            colorSet: "inc-exp-pro",
-            title:{	text: "2015 Profit Overview"		},
-            axisY:{
-                //title:"Coal (bn tonnes)",
-                valueFormatString: "$#,###,###",
-            },
-            data: [
-                {
-                    type: "column",
-                    legendText: "Income",
-                    showInLegend: "true",
-                    yValueFormatString: "Income $#,###,###.##",
-                    dataPoints: chartIncomeData()
+             /*
+             var chart = new CanvasJS.Chart("chartContainer", {
+                 colorSet: "inc-exp-pro",
+                 title: {text: "Profit Overview"},
+                 data: [{
+                     type: "bar",
+                     dataPoints: chartData()
+                 }]
+             });
+             */
+            var chart = new CanvasJS.Chart("chartContainer", {
+                colorSet: "inc-exp-pro",
+                title:{	text: 	profitChartTitle	},
+                axisY:{
+                    //title:"Coal (bn tonnes)", //written sideways to the left of values
+                    valueFormatString: "$#,###,###",
                 },
-                {
-                    type: "column",
-                    legendText: "Expenses",
-                    showInLegend: "true",
-                    yValueFormatString: "Expenses $#,###,###.##",
-                    dataPoints: chartExpenseData()
-                },  
-                {
-                    type: "column",
-                    legendText: "Profit",
-                    showInLegend: "true",
-                    //indexLabel: "#total",
-                    yValueFormatString: "Profit $#,###,###.##",
-                    //indexLabelPlacement: "outside",
-                    dataPoints: chartProfitData()
-                }
-            ]
+                data: [
+                    {
+                        type: "column",
+                        legendText: "Income",
+                        showInLegend: "true",
+                        yValueFormatString: "Income $#,###,###.##",
+                        //dataPoints: chartIncomeData()
+                        dataPoints: chartIncomeData
+                    },
+                    {
+                        type: "column",
+                        legendText: "Expenses",
+                        showInLegend: "true",
+                        yValueFormatString: "Expenses $#,###,###.##",
+                        //dataPoints: chartExpenseData()
+                        dataPoints: chartExpenseData
+                    },  
+                    {
+                        type: "column",
+                        legendText: "Profit",
+                        showInLegend: "true",
+                        //indexLabel: "#total",
+                        yValueFormatString: "Profit $#,###,###.##",
+                        //indexLabelPlacement: "outside",
+    //                    dataPoints: chartProfitData()
+                        dataPoints: chartProfitData
+                    }
+                ]
+        });     
+             
+         chart.render();    
+     };
+ /********************** END function do_b *******************************/    
+
+
+
+        do_a( function(){
+            do_b();
         });
-         chart.render();
          
 
 
@@ -209,11 +338,14 @@
 /************************** END - FOR ADDING NEW STATEMENTS **************************/
 
 /************************** FOR ADDING NEW TENANTS TO 2165 54TH STREET **************************/
-         /*
+        /*
 
-         var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/leases");
+         var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases");
          
          var tenantName = document.getElementById('tenantName');
+         var tenant1 = document.getElementById('tenant1');
+         var tenant2 = document.getElementById('tenant2');
+         var tenant3 = document.getElementById('tenant3');
          var building = document.getElementById('building');
          var monthLB = document.getElementById('monthLB');
          var dayLB = document.getElementById('dayLB');
@@ -221,9 +353,16 @@
          var monthLE = document.getElementById('monthLE');
          var dayLE = document.getElementById('dayLE');
          var yearLE = document.getElementById('yearLE');
+         var monthET = document.getElementById('monthLB');
+         var dayET = document.getElementById('dayLB');
+         var yearET = document.getElementById('yearLB');
+         var rent1mo = document.getElementById('rent1mo');
          var rent = document.getElementById('rent');
+         var securityDep = document.getElementById('securityDep');
+         var petDep = document.getElementById('petDep');
          var moveIn = document.getElementById('moveIn');
          var moveOut = document.getElementById('moveOut');
+         var comments = document.getElementById('comments');
          
          var btnNewTenant = document.getElementById('btnNewTenant'); //add button for NewStatement
          var postTenantID;
@@ -241,16 +380,25 @@
              };
              var leaseBegin = convertDateInputs(monthLB.value, dayLB.value, yearLB.value, "begin");
              var leaseEnd = convertDateInputs(monthLE.value, dayLE.value, yearLE.value, "end");
+             var earlyTermination = convertDateInputs(monthET.value, dayET.value, yearET.value, "end");
              if (building.value == "216554THSTREE") {
                  newPostTenantRef = leases216554THSTREERef.push();
              }
              newPostTenantRef.set({//entered by user
                  tenantName: tenantName.value,
+                 tenant1: tenant1.value,
+                 tenant2: tenant2.value,
+                 tenant3: tenant3.value,
                  building: building.value,
+                 comments: comments.value,
                  moveIn: moveIn.value,
                  moveOut: moveOut.value,
                  leaseBegin: Number(leaseBegin), 
                  leaseEnd: Number(leaseEnd), 
+                 earlyTermination: Number(earlyTermination),
+                 securityDep: Number(securityDep.value),
+                 petDep: Number(petDep.value),
+                 rent1mo: Number(rent1mo.value),
                  rent: Number(rent.value),
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
@@ -263,7 +411,7 @@
          
 /************************** FOR ADDING NEW APPLICANTS **************************/
          /*
-         var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/tenants");
+         var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/applicants");
          
          
          var date_month = document.getElementById('date_month');
@@ -277,14 +425,15 @@
          var postApplicantID;
          var newPostApplicantRef;
          btnNewApplicant.addEventListener('click', function(){
-             console.log("New Tenant: " + tenantName.value);
+             console.log(applicantName.value+" applied on " +applyDay.value +"-"+ applyMonth.value +"-"+ applyYear.value);
              var dob = new Date(date_month.value +" "+ date_day.value +" "+ date_year.value +" 12:00:00:000");
+             var applyDate = new Date(applyMonth.value +" "+ applyDay.value +" "+ applyYear.value +" 12:00:00:000");
              newPostApplicantRef = applicantsRef.push();
              newPostApplicantRef.set({//entered by user
                  applicantName: applicantName.value,
                  dob: dob.getTime(), //convert text date to ms
-                 applicationDate: Number(applicationDate.value),
-                 building: building.value, //for owner draw only
+                 applicationDate: applyDate.getTime(),
+                 building: building.value, 
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
              postApplicantID = newPostApplicantRef.key();

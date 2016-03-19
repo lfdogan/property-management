@@ -20,8 +20,6 @@
 
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("transactions");
-         
-         
 
          
          
