@@ -78,7 +78,64 @@
 /********************** function do_a *******************************/
          function do_a (callback){
              setTimeout(function(){
-                 console.log( '`do_a`: this takes longer than `do_b`' );
+                 //console.log( '`do_a`: this takes longer than `do_b`' );
+                 
+/*
+                 * cycles through each statement date range, 
+                 * for each statement it cycles through all transactions
+                 * adds each transaction to profit, income, or expense
+                 */
+                 var statementsRef = new Firebase('https://property-management-lfdogan.firebaseio.com/statements');
+                 statementsRef.once("value", function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {//cycle through all statements
+                        var key = childSnapshot.key();
+                        var childData = childSnapshot.val();
+                        var periodEnd = childData.endDate;
+                        var periodBegin = childData.beginDate;
+                        if (Data.beginDateRange < periodEnd && periodEnd < Data.endDateRange) {
+                            var chartDataLabel = Data.mdyy(periodEnd);
+                            var profit = 0;
+                            var income = 0;
+                            var expenses = 0;
+                            var transactionsRef = new Firebase('https://property-management-lfdogan.firebaseio.com/bills');
+                            transactionsRef.once("value", function(snapshot) {
+                                snapshot.forEach(function(childSnapshot) {//cycle through all transactions/statements
+                                    var transactionkey = childSnapshot.key();
+                                    var transactionchildData = childSnapshot.val();
+                                    if (periodBegin < transactionchildData.payDate && transactionchildData.payDate < periodEnd){
+                                        var account = transactionchildData.account;
+                                        switch (true) {
+                                            case (account == 1000): 
+                                                profit = profit + transactionchildData.amountPaid;
+                                                break;
+                                            case (account == 1050):
+                                                profit = profit - transactionchildData.amountPaid;
+                                                break;
+                                            case (4000 <= account && account <= 4999):
+                                                income = income + transactionchildData.amountPaid;
+                                                break;
+                                            case (5000 <= account && account <= 5999):
+                                                expenses = expenses + transactionchildData.amountPaid;
+                                                break;
+                                            default: 
+                                                console.log("error! "+transactionchildData.account+" not in Firebase account table");
+                                                break;
+                                        };
+                                    };
+                                });//end forEach of bills/transactions
+                            });
+                            var incomeObject = { 'y': income, 'label': chartDataLabel};
+                            var expenseObject = { 'y': expenses, 'label': chartDataLabel};
+                            var profitObject = { 'y': profit, 'label': chartDataLabel};
+                            chartIncomeData.push(incomeObject); //use .unshift(incomeObject) to add to beginning of array
+                            chartExpenseData.push(expenseObject);
+                            chartProfitData.push(profitObject);
+                            //console.log("incomeObject",incomeObject,"expenseObject",expenseObject,"profitObject",profitObject);
+                        };
+                    });//end forEach of statements
+                });                 
+                 
+                 /*//original static data
                  chartIncomeData.unshift({  y: 3378.95 , label: "8/14/15" });//label: new Date(2015, 07, 14)});//"8/14/15"
                  chartIncomeData.unshift({  y: 0, label: "7/15/15" });
                  chartIncomeData.unshift({  y: 1272.97, label: "6/15/15" });
@@ -103,6 +160,7 @@
                  chartProfitData.unshift({  y: 1286.42, label: "3/13/15"});
                  chartProfitData.unshift({  y: 1150.00, label: "2/13/15"});
                  chartProfitData.unshift({  y: 1057.37, label: "1/15/15"});
+                 */
                  callback && callback();
              }, 500 ); //do_a() gathers data. wait # of milliseconds to begin do_b() (creating chart from gathered data)
          }
