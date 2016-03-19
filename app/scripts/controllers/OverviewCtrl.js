@@ -8,6 +8,7 @@
          this.Data = Data;
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
+         this.today = Data.globalToday;
          
          this.allBills = Data.allBills();
          this.billsOwnerDraw = Data.billsOwnerDraw();
@@ -28,7 +29,49 @@
          
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("overview");
+
+        /*
+        * local function getMonthText
+        * accepts a date in millisecond format
+        * converts milliseconds date to date string object
+        * gets month index# then add 1
+        * searches Data.months array for the text of the particular month
+        * returns a string ("January", "February", "March", etc.)
+        */
+        var getMonthText = function (milliseconds) {
+            var dateObject = new Date(milliseconds);
+            var monthNumber = dateObject.getMonth() + 1;
+            for (var i = 0; i < Data.months.length; i++) {
+                if (monthNumber == Data.months[i].number) return Data.months[i].key; 
+            };
+        };
          
+        var todayMonthIndex = new Date(this.today).getMonth();
+        var todayYearIndex = new Date(this.today).getFullYear();
+        var todayMonthText = getMonthText(this.today);
+        var todayMilliseconds = this.today;
+         
+        var mdyy = function (milliseconds) {
+             var dateObject = new Date(milliseconds);
+             var monthIndex = dateObject.getMonth();
+             var monthNum = monthIndex+1;
+             var day = dateObject.getDate();
+             var fullYear = dateObject.getFullYear();
+             var year = fullYear;
+             if (fullYear > 2000) {
+                 year = year-2000;
+             } else year = year-1900;
+             if (year < 10) {
+                 return monthNum+"/"+day+"/0"+year;
+             } else return monthNum+"/"+day+"/"+year;
+         };
+         
+         
+         
+//         var chartReceivedData = [];//used in `do_b` chart render
+//         var chartOweData = [];//used in `do_b` chart render
+         var chartReceivedData = [  {  y: 1375, label: "2165 54th St"}  ];
+         var chartOweData = [   {  y: 0, label: "2165 54th St"}   ];
          
          /* Create a chart using CanvasJS Library
          * chartData creates an array of the data
@@ -57,9 +100,8 @@
                      indexLabelPlacement: "inside",
                      indexLabelFontColor: "white",
                      yValueFormatString: "$#,###,###",
-                     dataPoints: [
-                         {  y: 1375, label: "2165 54th St"}
-                     ]
+                     dataPoints: chartReceivedData
+//                                [  {  y: 1375, label: "2165 54th St"}  ]
                  },
                  {
                      type: "stackedColumn100",
@@ -69,9 +111,8 @@
                      indexLabelPlacement: "inside",
                      indexLabelFontColor: "white",
                      yValueFormatString: "$#,###,###",
-                     dataPoints: [
-                         {  y: 0, label: "2165 54th St"}
-                     ]
+                     dataPoints: chartOweData
+//                                [   {  y: 0, label: "2165 54th St"}   ]
                  }
              ]
          });
