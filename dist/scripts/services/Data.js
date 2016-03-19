@@ -153,6 +153,7 @@
         Data.endDateRange = endRange;
         Data.globalNumDays = numDays;
         Data.globalcolumnToSortBy = columnToSortBy;
+        Data.globalToday = today;
 
         
         
@@ -420,18 +421,18 @@
         
               
         Data.months = [
-            {'key': 'January', 'label': '1 - Jan'},
-            {'key': 'February', 'label': '2 - Feb'},
-            {'key': 'March', 'label': '3 - Mar'},
-            {'key': 'April', 'label': '4 - Apr'},
-            {'key': 'May', 'label': '5 - May'},
-            {'key': 'June', 'label': '6 - Jun'},
-            {'key': 'July', 'label': '7 - Jul'},
-            {'key': 'August', 'label': '8 - Aug'},
-            {'key': 'September', 'label': '9 - Sep'},
-            {'key': 'October', 'label': '10 - Oct'},
-            {'key': 'November', 'label': '11 - Nov'},
-            {'key': 'December', 'label': '12 - Dec'}
+            {'monthText': 'January', 'label': '1 - Jan'},
+            {'monthText': 'February', 'label': '2 - Feb'},
+            {'monthText': 'March', 'label': '3 - Mar'},
+            {'monthText': 'April', 'label': '4 - Apr'},
+            {'monthText': 'May', 'label': '5 - May'},
+            {'monthText': 'June', 'label': '6 - Jun'},
+            {'monthText': 'July', 'label': '7 - Jul'},
+            {'monthText': 'August', 'label': '8 - Aug'},
+            {'monthText': 'September', 'label': '9 - Sep'},
+            {'monthText': 'October', 'label': '10 - Oct'},
+            {'monthText': 'November', 'label': '11 - Nov'},
+            {'monthText': 'December', 'label': '12 - Dec'}
         ];
         
 
