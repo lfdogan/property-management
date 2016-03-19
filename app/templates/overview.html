@@ -70,11 +70,13 @@
     <div class="overview-right">
     <a ui-sref="statements"><h2 class="center">Current Leases</h2></a>
     <div class="white-box">
-        <div ng-repeat="lease in overview.leases216554THSTREECurrent">
-            <span style="background-color: #06538F; color: white">{{lease.building | buildingNickname}}</span>
-            <br/>{{lease.tenantName}}
-            <br/>Lease: {{lease.leaseBegin | date: 'MM/dd/yyyy'}} to {{lease.leaseEnd | date: 'MM/dd/yyyy'}}
-            <br/>Rent: {{lease.rent | currency}} (Monthly)
+        <div>
+            <span style="background-color: #06538F; color: white">2165 54th St</span>
+            <br/>Matthew Maroney
+            <br/>Julie Miller
+            <br/>Lease: 07/15/2015 to 07/31/2016
+            <br/>Rent: $1,375 (Monthly)
+
         </div>
     </div>
 </div>

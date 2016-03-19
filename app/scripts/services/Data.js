@@ -21,16 +21,14 @@
         var portfoliosRef = rootRef.child('portfolios');
         var inspectionsRef = rootRef.child('inspections');
         var accountsRef = rootRef.child('accounts');
-        var applicantsRef = rootRef.child('applicants');
-        var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases');
+        var tenantsRef = rootRef.child('tenants');
+        var leases216554THSTREERef = buildingsRef.child('leases');
 
 
         //initial values of start and end date range
-//        var startRange = new Date("01/01/2015 00:00:001");
-        var startRange = 1433131200000; // custom start date is 6/1/15 for viewing data in table
-        var endRange = 1439697599999; // custom end date is 8/15/15 for viewing data in table
-        var today = new Date("08/17/2015 11:01:20");//saved as 1439823680000
-//        var today = new Date("08/28/2015 19:01:20");
+        var startRange = 1433131200000; // custom start date is 6/1/15
+        var endRange = 1439697599999; // custom end date is 8/15/15
+        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
 //        var today = new Date().getTime();
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range
@@ -131,20 +129,22 @@
                 return $firebaseArray(buildingsRef);
             },
             leases216554THSTREE: function(){
-                return $firebaseArray(leases216554THSTREERef
-                                      .orderByChild("leaseBegin"));
+                return $firebaseArray(leases216554THSTREERef);
             },
             leases216554THSTREECurrent: function(){
                 return $firebaseArray(leases216554THSTREERef
                                       .orderByChild("moveOut")
-                                      .equalTo("No"));
+                                      .equalTo("No")
+                                     );
             },
             accountLabels: function(){
                 return $firebaseArray(accountsRef
                                      .orderByValue());
             },
-            allApplicants: function(){
-                return $firebaseArray(applicantsRef);
+            allTenants: function(){
+                return $firebaseArray(tenantsRef
+                              //       .orderByValue()
+                                     );
             }
 
          };   
@@ -157,7 +157,6 @@
         Data.endDateRange = endRange;
         Data.globalNumDays = numDays;
         Data.globalcolumnToSortBy = columnToSortBy;
-        Data.globalToday = today;
 
         
         
@@ -294,7 +293,7 @@
            //console.log("run Data.onTableViewChange()");
         };
         
-         
+        
         
         
         /* for overview.html page
@@ -425,20 +424,21 @@
         
               
         Data.months = [
-            {'key': 'January', 'label': '1 - Jan', 'number': 1},
-            {'key': 'February', 'label': '2 - Feb', 'number': 2},
-            {'key': 'March', 'label': '3 - Mar', 'number': 3},
-            {'key': 'April', 'label': '4 - Apr', 'number': 4},
-            {'key': 'May', 'label': '5 - May', 'number': 5},
-            {'key': 'June', 'label': '6 - Jun', 'number': 6},
-            {'key': 'July', 'label': '7 - Jul', 'number': 7},
-            {'key': 'August', 'label': '8 - Aug', 'number': 8},
-            {'key': 'September', 'label': '9 - Sep', 'number': 9},
-            {'key': 'October', 'label': '10 - Oct', 'number': 10},
-            {'key': 'November', 'label': '11 - Nov', 'number': 11},
-            {'key': 'December', 'label': '12 - Dec', 'number': 12}
+            {'key': 'January', 'label': '1 - Jan'},
+            {'key': 'February', 'label': '2 - Feb'},
+            {'key': 'March', 'label': '3 - Mar'},
+            {'key': 'April', 'label': '4 - Apr'},
+            {'key': 'May', 'label': '5 - May'},
+            {'key': 'June', 'label': '6 - Jun'},
+            {'key': 'July', 'label': '7 - Jul'},
+            {'key': 'August', 'label': '8 - Aug'},
+            {'key': 'September', 'label': '9 - Sep'},
+            {'key': 'October', 'label': '10 - Oct'},
+            {'key': 'November', 'label': '11 - Nov'},
+            {'key': 'December', 'label': '12 - Dec'}
         ];
         
+
         
         return Data; // return the object for this factory service
         
