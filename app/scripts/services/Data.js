@@ -26,10 +26,9 @@
 
 
         //initial values of start and end date range
-//        var today = new Date().getTime();
-//        var today = new Date("08/17/2015 11:01:20");//kills the function!!!!
-//        var today = new Date("08/28/2015 19:01:20");
-        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
+        var todayObject = new Date("08/17/2015 11:01:20:001");//creates date object
+        var today = Number(todayObject);//converts date Object to milliseconds
+//        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range                        
         var endRange = today; //initial value for switching date selection range 
@@ -211,60 +210,28 @@
                         text = "last 30 days";
                         element = document.querySelector("#last30Days");
                         endRange = today;
-                        //endRange = new Date().getTime();
                         startRange = endRange - thirtyDays; // minus 30 days is 7/18/15 11:01:20
+                        break;
+                    case 60: 
+                        text = "last 60 days";
+                        element = document.querySelector("#last30Days");
+                        endRange = today;
+                        startRange = endRange - thirtyDays - thirtyDays;
+                        break;
+                    case 90: 
+                        text = "last 90 days";
+                        element = document.querySelector("#last30Days");
+                        endRange = today;
+                        startRange = endRange - thirtyDays - thirtyDays- thirtyDays;
                         break;
                     case 365:
                         text = "current year";
                         element = document.querySelector("#currentYear");
-                        startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
+                        var dateObject = new Date("01/01/2015 00:00:00:001");//creates date object
+                        startRange = Number(dateObject);//converts date Object to milliseconds
+//                        startRange = 1420088400000; // 'current' year begin 01/01/2015 0:00:00
                         endRange = today;
                         //endRange = new Date().getTime();
-                        break;
-                    case 1418750767907:
-                        startRange = 1418750767907;
-                        endRange = 1421342767907;
-                        text = "12/16/2014-1/15/15";
-                        break;
-                    case 1421342767908:
-                        text = "1/15/15-2/13/15";
-                        startRange = 1421342767908;
-                        endRange = 1423852608970;
-                        break;
-                    case 1423852608971:
-                        startRange = 1423852608971;
-                        endRange = 1426252608970;
-                        text = "2/13/15-3/13/15";
-                        break;
-                    case 1426252608971:
-                        startRange = 1426252608971;
-                        endRange = 1429131508997;
-                        text = "3/13/15-4/15/15";
-                        break;
-                    case 1429131508998:
-                        startRange = 1429131508998;
-                        endRange = 1431710767907;
-                        text = "4/15/15-5/15/15";
-                        break;
-                    case 1431710767908:
-                        startRange = 1431710767908;
-                        endRange = 1434389167907;
-                        text = "5/15/15-6/15/15";
-                        break;
-                    case 1434389167908:
-                        startRange = 1434389167908;
-                        endRange = 1436981167907;
-                        text = "6/15/15-7/15/15";
-                        break;
-                    case 1436981167908:
-                        startRange = 1436981167908;
-                        endRange = 1439560250008;
-                        text = "7/15/15-8/14/15";
-                        break;
-                    case 1420088400000:
-                        startRange = 1420088400000;
-                        endRange = today;
-                        text = "01/01/15-Today";
                         break;
                     case 9999:
                         text = "8/14/15-today"; //For simplicity I've assigned the 'custom' dates

@@ -29,17 +29,10 @@ setting ng-model="Ctrl.setNumDays" doesn't set initial selected value
 <div ng-controller="SelectDateRangeCtrl as Ctrl"> 
     <select id="date-selector" name="date-selector" ng-model="Ctrl.setNumDays" ng-change="Ctrl.my_change()">
         <option id="last30Days" value=30>Last 30 Days</option>
+        <option id="last60Days" value=60>Last 60 Days</option>
+        <option id="last90Days" value=90>Last 90 Days</option>
         <option id="currentYear" value=365>Current Year</option>
-        <option value=1420088400000>01/01/15-Today</option>
         <option id="customDates" value=9999>8/14/15-Today</option>
-        <option value=1436981167908>7/15/15-8/14/15</option>
-        <option value=1434389167908>6/15/15-7/15/15</option>
-        <option value=1431710767908>5/15/15-6/15/15</option>
-        <option value=1429131508998>4/15/15-5/15/15</option>
-        <option value=1426252608971>3/13/15-4/15/15</option>
-        <option value=1423852608971>2/13/15-3/13/15</option>
-        <option value=1421342767908>1/15/15-2/13/15</option>
-        <option value=1418750767907>12/16/2014-1/15/15</option>
     </select>
 </div>
 
