@@ -20,6 +20,7 @@
          this.allClosedMaintenance = Data.allClosedMaintenance();
          
          this.latestStatement = Data.latestStatement();
+         this.leases216554THSTREECurrent = Data.leases216554THSTREECurrent();
 
          Data.followMyAccountLink();
          
