@@ -418,8 +418,34 @@
             document.querySelector("#nav-"+page).classList.add("active");
         };
         
-        
-              
+        /*
+        * function getMonthText()
+        * accepts a date in millisecond format
+        * converts milliseconds date to date string object
+        * gets month index# then add 1
+        * searches Data.months array for the text of the particular month
+        * returns a string ("January", "February", "March", etc.)
+        */
+        Data.getMonthText = function (milliseconds) {
+            var monthIndex = new Date(milliseconds).getMonth();
+            return months[monthIndex].monthText;
+        };
+        Data.todayMonthIndex = new Date(today).getMonth();
+        Data.todayYearIndex = new Date(today).getFullYear();        
+        Data.mdyy = function (milliseconds) {
+             var dateObject = new Date(milliseconds);
+             var monthIndex = dateObject.getMonth();
+             var monthNum = monthIndex+1;
+             var day = dateObject.getDate();
+             var fullYear = dateObject.getFullYear();
+             var year = fullYear;
+             if (fullYear > 2000) {
+                 year = year-2000;
+             } else year = year-1900;
+             if (year < 10) {
+                 return monthNum+"/"+day+"/0"+year;
+             } else return monthNum+"/"+day+"/"+year; 
+        };
         Data.months = [
             {'monthText': 'January', 'label': '1 - Jan'},
             {'monthText': 'February', 'label': '2 - Feb'},

@@ -19,6 +19,7 @@
          this.latestStatement = Data.latestStatement();
          this.leases216554THSTREE = Data.leases216554THSTREE();
          this.leases216554THSTREECurrent = Data.leases216554THSTREECurrent();
+         //this.allApplicants = Data.allApplicants();
          
          this.Data = Data;
          this.months = Data.months;

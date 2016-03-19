@@ -10,6 +10,8 @@
          this.endDateRange = Data.endDateRange;
          months = Data.months;
          today = Data.globalToday;
+         todayMonthIndex = Data.todayMonthIndex;
+         todayYearIndex = Data.todayYearIndex;
          
          this.allBills = Data.allBills();
          this.billsOwnerDraw = Data.billsOwnerDraw();
@@ -30,41 +32,8 @@
          
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("overview");
-
-        /*
-        * local function getMonthText
-        * accepts a date in millisecond format
-        * converts milliseconds date to date string object
-        * gets month index# then add 1
-        * searches Data.months array for the text of the particular month
-        * returns a string ("January", "February", "March", etc.)
-        */
-        var getMonthText = function (milliseconds) {
-            var monthIndex = new Date(milliseconds).getMonth();
-            return months[monthIndex].monthText;
-        };
          
         
-         var todayMonthIndex = new Date(today).getMonth();
-         var todayYearIndex = new Date(today).getFullYear();
-         
-        var mdyy = function (milliseconds) {
-             var dateObject = new Date(milliseconds);
-             var monthIndex = dateObject.getMonth();
-             var monthNum = monthIndex+1;
-             var day = dateObject.getDate();
-             var fullYear = dateObject.getFullYear();
-             var year = fullYear;
-             if (fullYear > 2000) {
-                 year = year-2000;
-             } else year = year-1900;
-             if (year < 10) {
-                 return monthNum+"/"+day+"/0"+year;
-             } else return monthNum+"/"+day+"/"+year;
-         };
-         
-         
-         
          var chartReceivedData = [];//used in `do_b` chart render
          var chartOweData = [];//used in `do_b` chart render
 /********************** function do_a *******************************/
@@ -88,12 +57,12 @@ var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.f
                 * ovverride received amount ($0) with rental income
                 * push the building object into the building data array
                 */
-                console.log("today is",mdyy(today));
+                console.log("today is",Data.mdyy(today));
                 leases216554THSTREERef.once("value", function(snapshot) {
                     snapshot.forEach(function(childSnapshot) {
                         var key = childSnapshot.key();
                         var childData = childSnapshot.val();
-                        //console.log("lease "+mdyy(childData.leaseBegin)+"-"+mdyy(childData.leaseEnd));
+                        //console.log("lease "+Data.mdyy(childData.leaseBegin)+"-"+Data.mdyy(childData.leaseEnd));
                         //check for current lease 
                         if (childData.leaseBegin < today && today < childData.leaseEnd){
                             //if lease has an early termination date, check that it hasn't occurred yet
@@ -102,7 +71,7 @@ var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.f
                                 //console.log("buildingObject",buildingObject);
                                 //check if current month is leaseBegin month. if yes then use 'rent1mo' instead of 'rent'
                                 if (todayMonthIndex == new Date(childData.leaseBegin).getMonth() && todayYearIndex == new Date(childData.leaseBegin).getFullYear()) {
-                                    console.log("first month of lease - began " + mdyy(childData.leaseBegin) + " owes $" + childData.rent1mo);
+                                    console.log("first month of lease - began " + Data.mdyy(childData.leaseBegin) + " owes $" + childData.rent1mo);
                                     buildingObject.rent = childData.rent1mo;
                                     //console.log("buildingObject",buildingObject);
                                 };
@@ -137,7 +106,7 @@ var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.f
                 * cycle through the chartDueData array for and match up buildings.
                 */
                 for (var i=0; i < buildingData.length; i++) {
-                    //console.log("received as of "+mdyy(today)+": $"+buildingData[i].received);
+                    //console.log("received as of "+Data.mdyy(today)+": $"+buildingData[i].received);
                     var stillOwe = buildingData[i].rent - buildingData[i].received;
                     var oweObject = {'y': stillOwe, 'label': buildingData[i].building};
                     chartOweData.push(oweObject);
@@ -175,7 +144,7 @@ var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.f
                     ]);
              var chart = new CanvasJS.Chart("chartContainer", {
                  colorSet: "inc-exp-pro",
-                 title:{text: getMonthText(today) + " Rent Received"},
+                 title:{text: Data.getMonthText(today) + " Rent Received"},
                  axisY:{
                     title: "percentage",
                     //valueFormatString: "#0.#,.",
