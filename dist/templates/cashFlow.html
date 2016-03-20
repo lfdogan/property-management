@@ -88,65 +88,61 @@ class="td-medium-plus"
 <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">{{ bill.billNumber }} {{bill.cost | currency }}</span>
 -->    
 
-<!-- ***To add more transactions*** -->
-<!-- 
+<!-- ----------------- FOR ADDING MORE TRANSACTIONS ----------------- -->
+<!--
 <br/>
 <div>
     <table>
         <tr>
             <th style="text-align: right">Add a new:</th>
-            <th><button id="btnNewItemUpdate" class="btn btn-primary">Bill</button></th>
+            <th><button id="btnNewBillUpdate" class="btn btn-primary">Bill</button></th>
             <th><button id="btnNewOwnerDraw" class="btn btn-primary">Owner Draw</button></th>
             <th><button id="btnNewIncome" class="btn btn-primary">Rent/Other Income</button></th>
         </tr>
         <tr>
-            <td>Bill#:<input type="number" id="billNumber" placeholder="bill number"></td>
+            <td>Bill#:<input type="number" class="input50" id="billNumber" placeholder="bill number"></td>
             <td>X</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Bill Date:
-                <select id="billDate" name="billDate">
-                    <option ng-repeat="date in cashflow.datesInMS" value={{date.value}}>{{date.label}}</option>
-                </select></td>
+                <select id="BDmonth" name="BDmonth">
+                    <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" class="input30" id="BDday" placeholder="day (1-31)">
+                <input type="number" class="input50" id="BDyear" placeholder="year">
+                <input type="number" class="input30" id="BDhours" placeholder="hours (0-23)">
+                <input type="number" class="input30" id="BDminutes" placeholder="minutes (0-59)">
+            </td>
             <td>X</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Due Date:
-                <select id="date_month_dueDate" name="date_month_dueDate">
-                    <option value="January">1 - Jan</option>
-                    <option value="February">2 - Feb</option>
-                    <option value="March">3 - Mar</option>
-                    <option value="April">4 - Apr</option>
-                    <option value="May">5 - May</option>
-                    <option value="June">6 - Jun</option>
-                    <option value="July">7 - Jul</option>
-                    <option value="August">8 - Aug</option>
-                    <option value="September">9 - Sep</option>
-                    <option value="October">10 - Oct</option>
-                    <option value="November">11 - Nov</option>
-                    <option value="December">12 - Dec</option>
+                <select id="DDmonth" name="DDmonth">
+                    <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
-                <input type="number" id="date_day_dueDate" placeholder="day_dueDate">
-                <input type="number" id="date_year_dueDate" placeholder="year_dueDate">
+                <input type="number" class="input30" id="DDday" placeholder="day (1-31)">
+                <input type="number" class="input50" id="DDyear" placeholder="year">
             </td>
             <td>X</td>
             <td>X</td>
             <td>X</td>
         </tr>
         <tr>
-            <td>Description:<input type="text" id="description" placeholder="description"></td>
+            <td>Description:<input type="text" class="input300" id="description" placeholder="description"></td>
             <td>X</td>
             <td>X</td>
             <td>X</td>
         </tr>
         <tr>
-            <td>Building:<select id="building" name="building">
-            <option ng-repeat="building in cashflow.myBuildings" value={{building.$key}}>{{building.building_name}}</option>
-        </select></td>
+            <td>Building:
+                <select id="building" name="building">
+                    <option ng-repeat="building in cashflow.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
+                </select>
+            </td>
             <td>X</td>
             <td></td>
             <td>X</td>
@@ -166,53 +162,69 @@ class="td-medium-plus"
             <td></td>
         </tr>
         <tr>
-            <td>Pay Date:<select id="payDate" name="payDate">
-            <option ng-repeat="date in cashflow.datesInMS" value={{date.value}}>{{date.label}}</option>
-        </select></td>
+            <td>Pay Date:
+                <select id="PDmonth" name="PDmonth">
+                    <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" class="input30" id="PDday" placeholder="day (1-31)">
+                <input type="number" class="input50" id="PDyear" placeholder="year">
+                <input type="number" class="input30" id="PDhours" placeholder="hours (0-23)">
+                <input type="number" class="input30" id="PDminutes" placeholder="minutes (0-59)">
+            </td>
             <td>X</td>
             <td>X</td>
             <td>X</td>
         </tr>
         <tr>
-            <td>Amount Paid:<input type="number" id="amountPaid" placeholder="amountPaid"></td>
+            <td>Amount Paid:<input type="number" id="amountPaid" placeholder="$"></td>
             <td>X</td>
             <td>X</td>
             <td>X</td>
         </tr>
         <tr>
-            <td>Status:<select id="status" name="status">
-            <option value="Paid">Paid</option>
-            <option value="Unpaid">Unpaid</option>
-        </select></td>
+            <td>Status:
+                <select id="status" name="status">
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+            </td>
             <td>X</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>Vendor:<input type="text" id="vendor" placeholder="vendor"></td>
+            <td>Vendor:<input type="text" id="vendor" placeholder="vendor name"></td>
             <td>X</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>WorkOrder#:<input type="number" id="workOrderNumber" placeholder="workOrderNumber"></td>
+            <td>WorkOrder#:
+                <select id="workOrderNumber" name="workOrderNumber">
+                    <option value="">n/a</option>
+                    <option ng-repeat="workOrder in cashflow.allMaintenance | orderBy: '-dateCreated'" value={{workOrder.workOrderNumber}}>{{workOrder.workOrderNumber}} {{workOrder.dateCreated | date: 'MM/dd/yy'}} {{workOrder.description  | limitTo:20 }}</option>
+                </select>
+            </td>
             <td>X</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>Portfolio:<select id="portfolio" name="portfolio">
-            <option value="CLARKKENT">Clark Kent</option>
-            <option value="">n/a</option>
-        </select></td>
+            <td>Portfolio:
+                <select id="portfolio" name="portfolio">
+                    <option value="CLARKKENT">Clark Kent</option>
+                </select>
+            </td>
             <td></td>
             <td>X</td>
             <td></td>
         </tr>
         <tr>
-            <td>Paid by Tenant:<select id="tenant" name="account">
-            <option ng-repeat="tenant in cashflow.allTenants" value={{tenant.$id}}>{{tenant.$value}}</option>
-        </select></td>
+            <td>Paid by Tenant:
+                <select id="paidByTenantID" name="account">
+                    <option ng-repeat="tenants in cashflow.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'yyyy'}}</option>
+                </select>
+            </td>
             <td></td>
             <td></td>
             <td>X</td>
@@ -224,6 +236,5 @@ class="td-medium-plus"
             <td></td>
         </tr>
     </table>
- -->
-
 </div>
+<!-- ----------------- end FOR ADDING MORE TRANSACTIONS ----------------- -->

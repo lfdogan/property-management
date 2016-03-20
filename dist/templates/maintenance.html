@@ -37,7 +37,7 @@
                         <span ng-show="{{bill.workOrderNumber}}">
                             <span ng-show="maintenance.Data.showBills( {{item.workOrderNumber}} , maintenance.Data.getWorkOrderNumber(bill) )">
                                 <a ui-sref="bill( {billNumber: '{{ bill.billNumber }}' } )">
-                                    {{ bill.billNumber  |billNumber}}</a>
+                                    {{ bill.billNumber | billNumber}}</a>
                                 {{bill.cost | currency }} &nbsp;
                             </span>
                         </span>

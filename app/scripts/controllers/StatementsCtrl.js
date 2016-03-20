@@ -41,6 +41,10 @@
              StatementsCtrl.endDateRange = Data.endDateRange;  //updates end date on html after changing selection
              StatementsCtrl.setRange = Data.globalNumDays;
              StatementsCtrl.setColumnSort = Data.globalcolumnToSortBy;
+             chartIncomeData = [];
+             chartExpenseData = [];
+             chartProfitData = [];
+             do_a( function(){               do_b();           });
          } );
          
          //on page load set tables as hidden
@@ -72,19 +76,14 @@
          var chartExpenseData = [];
          var chartProfitData = [];
          //profit chart title doesn't update when statement period is changed
-         var profitChartTitle = Data.mdyy(Data.beginDateRange) + "-" + Data.mdyy(this.endDateRange)+" Profit Overview";
+         var profitChartTitle = "Profit Overview";
 /********************** END variables for do_a and do_b *******************************/
          
-/********************** function do_a *******************************/
-         function do_a (callback){
-             setTimeout(function(){
-                 //console.log( '`do_a`: this takes longer than `do_b`' );
-                 
-/*
-                 * cycles through each statement date range, 
+         /* cycles through each statement date range, 
                  * for each statement it cycles through all transactions
                  * adds each transaction to profit, income, or expense
                  */
+             var getChartData = function(){
                  var statementsRef = new Firebase('https://property-management-lfdogan.firebaseio.com/statements');
                  statementsRef.once("value", function(snapshot) {
                     snapshot.forEach(function(childSnapshot) {//cycle through all statements
@@ -161,9 +160,16 @@
                  chartProfitData.unshift({  y: 1150.00, label: "2/13/15"});
                  chartProfitData.unshift({  y: 1057.37, label: "1/15/15"});
                  */
+                     };
+         
+/********************** function do_a *******************************/
+         function do_a (callback){
+             setTimeout(function(){
+                 //console.log( '`do_a`: this takes longer than `do_b`' );
+                 getChartData();
                  callback && callback();
              }, 1000 ); //do_a() gathers data. wait # of milliseconds to begin do_b() (creating chart from gathered data)
-         }
+         };
  /********************** END function do_a *******************************/        
          
 /********************** function do_b *******************************/
@@ -223,12 +229,13 @@
  /********************** END function do_b *******************************/    
 
 
-
+/* 
+//call function ONLY on Data.onTableViewChange(function () {}
         do_a( function(){
             do_b();
         });
          
-         
+         */
 
 
 /************************** FOR ADDING NEW STATEMENTS **************************/

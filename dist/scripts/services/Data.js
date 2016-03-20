@@ -26,9 +26,8 @@
 
 
         //initial values of start and end date range
-        var todayObject = new Date("08/17/2015 11:01:20:001");//creates date object
+        var todayObject = new Date("08/15/2015 20:01:20:001");//creates date object
         var today = Number(todayObject);//converts date Object to milliseconds
-//        var today = 1439823680000; // 'current' date is 08/17/2015 11:01:20
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range                        
         var endRange = today; //initial value for switching date selection range 
@@ -233,9 +232,10 @@
                         endRange = today;
                         break;
                     case 9999:
-                        text = "8/14/15-today"; //For simplicity I've assigned the 'custom' dates
+                        text = "All Dates";
                         //element = document.querySelector("#customDates");
-                        startRange = 1439560250009; // 1 ms after last range
+                        var dateObject = new Date("01/01/2000 00:00:00:001");//creates date object
+                        startRange = Number(dateObject);//converts date Object to milliseconds
                         endRange = today;
                         break;
                     default: 

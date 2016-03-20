@@ -50,7 +50,15 @@ table {
     border-collapse: collapse; /* single rather than double interior borders */
     max-width: 1200px; /* will not grow past 1200px wide */
 }
-
+.input300 {
+    width: 300px;
+}
+.input30 {
+    width: 30px;
+}
+.input50 {
+    width: 50px;
+}
 /*Body Subheading labels*/
 th {
     background-color: #06538F;
