@@ -81,10 +81,14 @@ th.amountPaid {
     min-width: 50px;
 }
 .half-column {
-    display: inline-block;
-    width: 49%;
+    display: block;
 }
-
+@media (min-width: 700px) {
+    .half-column {
+        display: inline-block;
+        width: 49%;
+    }
+}
 
 .maintenance-button-approve {
     background-color: #50b373;

@@ -25,7 +25,7 @@
             <tr ng-repeat="item in statements.filteredStatements | orderBy: '-endDate'">
                 <td class="center">
                     <a>{{ item.beginDate | date: 'MM/dd/yyyy' }} - {{ item.endDate | date: 'MM/dd/yyyy' }}</a>
-                    <a class="ion-ios-download-outline"></a>
+                    <i class="fa fa-file-pdf-o"></i>
                 </td>
                 <td>
                     <span ng-repeat="bill in statements.allBills "> 
@@ -329,7 +329,8 @@
                 <th>Location</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'">{{item.propertyAddress | buildingNickname }}</td>
             </tr>
             <tr>
-                <th>Download PDF</th><td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'"><a>{{item.documentName }}</a></td>
+                <th>Download PDF</th>
+                <td ng-repeat="item in statements.inspections_two | orderBy: '-inspectionDate'"><i class="fa fa-file-pdf-o"></i></td>
             </tr>
             <tr>
                 <th>Entry</th>
