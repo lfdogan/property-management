@@ -89,7 +89,7 @@ class="td-medium-plus"
 -->    
 
 <!-- ----------------- FOR ADDING MORE TRANSACTIONS ----------------- -->
-<!--
+
 <br/>
 <div>
     <table>
@@ -202,7 +202,7 @@ class="td-medium-plus"
             <td>WorkOrder#:
                 <select id="workOrderNumber" name="workOrderNumber">
                     <option value="">n/a</option>
-                    <option ng-repeat="workOrder in cashflow.allMaintenance | orderBy: '-dateCreated'" value={{workOrder.workOrderNumber}}>{{workOrder.workOrderNumber}} {{workOrder.dateCreated | date: 'MM/dd/yy'}} {{workOrder.description  | limitTo:20 }}</option>
+                    <option ng-repeat="workOrder in cashflow.allMaintenance | orderBy: '-dateCreated'" value={{workOrder.workOrderNumber}}>{{workOrder.workOrderNumber}} {{workOrder.dateCreated | date: 'M/d/yy'}} {{workOrder.description  | limitTo:40 }}</option>
                 </select>
             </td>
             <td>X</td>

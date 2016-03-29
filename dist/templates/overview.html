@@ -70,6 +70,7 @@
     <div class="overview-right">
     <a ui-sref="documents"><h2 class="center">Current Leases</h2></a>
     <div class="white-box">
+        <div ng-show='overview.leases216554THSTREECurrent.length == 0'>All units are currently vacant.</div>
         <div ng-repeat="lease in overview.leases216554THSTREECurrent">
             <span style="background-color: #06538F; color: white">{{lease.building | buildingNickname}}</span>
             <br/>{{lease.tenantName}}

@@ -87,7 +87,7 @@
 
          
          /************************** FOR ADDING NEW DATA **************************/
-         /*
+         
          var billsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/bills");
         
          var account = document.getElementById('account'); 
@@ -135,6 +135,15 @@
                 applicants.push(person);
             });
          });
+         var resetValues = function (){
+             billNumber.value = "";
+             cost.value = "";
+             amountPaid.value = "";
+             vendor.value = "";
+             description.value = "";
+             vendor.value = "";
+             referenceNum.value = "";
+         };
                         
          
          //when user clicks on update button... save to firebase:
@@ -146,7 +155,6 @@
          var newPostRef;
          //Add new bill
          btnNewBillUpdate.addEventListener('click', function(){
-             console.log("New Bill");
              var dueDate = new Date(DDmonth.value +" "+ DDday.value +" "+ DDyear.value +" 23:59:59:999");
              var billDate = new Date(BDmonth.value +" "+ BDday.value +" "+ BDyear.value +" "+BDhours.value+":"+BDminutes.value+":00:001");
              var payDate = new Date(PDmonth.value +" "+ PDday.value +" "+ PDyear.value +" "+PDhours.value+":"+PDminutes.value+":00:001");
@@ -166,13 +174,15 @@
              postID = newPostRef.key();
              var postIDRef = billsRef.child(postID);//assign the postIDRef to the new child
              //if user entered data, add to the database
-             if (description.value != "") postID.update({'description': description.value});
-             if (workOrderNumber.value != "") postID.update({'workOrderNumber': Number(workOrderNumber.value)});
-             if (vendor.value != "") postID.update({'vendor': vendor.value});
+             if (description.value != "") postIDRef.update({'description': description.value});
+             if (workOrderNumber.value != "") postIDRef.update({'workOrderNumber': Number(workOrderNumber.value)});
+             if (vendor.value != "") postIDRef.update({'vendor': vendor.value});
+             console.log("New Bill $"+amountPaid.value);
+             resetValues();
          });
          //Add new Owner Draw
          btnNewOwnerDraw.addEventListener('click', function(){
-             console.log("Add new Owner Draw");
+             var payDate = new Date(PDmonth.value +" "+ PDday.value +" "+ PDyear.value +" "+PDhours.value+":"+PDminutes.value+":00:001");
              newPostRef = billsRef.push();
              newPostRef.set({//entered by user
                  account: Number(account.value), // "Owner Draw" is 1000
@@ -186,7 +196,9 @@
              postID = newPostRef.key();
              var postIDRef = billsRef.child(postID);//assign the postIDRef to the new child
              //if user entered data, add to the database
-             if (description.value != "") postID.update({'description': "Owner Draw "+Data.mdyy(payDate)+" "+description.value});
+             if (description.value != "") postIDRef.update({'description': "Owner Draw "+Data.mdyy(payDate)+" "+description.value});
+             console.log("Add new Owner Draw");
+             resetValues();
          });
          //Add new income
          btnNewIncome.addEventListener('click', function(){
@@ -198,7 +210,6 @@
                      paidByName = applicants[i].name;
                  };
              };
-             console.log("New Income from "+paidByName);
              newPostRef = billsRef.push();
              newPostRef.set({//entered by user
                  account: Number(account.value), 
@@ -211,6 +222,8 @@
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
              });
              postID = newPostRef.key();
+             console.log("New Income from "+paidByName);
+             resetValues();
          });
          /* ************************************************************* */
          

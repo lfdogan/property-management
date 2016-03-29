@@ -269,8 +269,9 @@
              }
              stripMS(beginDate);
              range = range + " - ";
-             var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":000"); //format is Jan 17 2016 09:51:201
-             endDate = stringED.valueOf(); // Return the primitive value of a Date object (in milliseconds)
+//             console.log("date fields",monthED.value,dayED.value,yearED.value,hourED.value,minuteED.value);
+             var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":00:000"); //format is Jan 17 2016 09:51:201
+             var endDate = stringED.valueOf(); // Return the primitive value of a Date object (in milliseconds)
              stripMS(endDate);
              newPostStatementRef = statementsRef.push();
              newPostStatementRef.set({//entered by user

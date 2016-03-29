@@ -27,6 +27,7 @@
 <div class="overview-right">
     <h2 class="center">Ongoing Work Orders</h2>
     <div class="white-box">
+        <div ng-show='maintenance.allOpenMaintenance.length == 0'>There are no ongoing work orders.</div>
         <div ng-repeat="item in maintenance.allOpenMaintenance">
             <span><a ui-sref="workorder( {workOrderNumber: '{{ item.workOrderNumber }}' } )">WO#{{item.workOrderNumber}}</a>
                 <br/>Created: {{ item.dateCreated | date: 'MM/dd/yyyy' }}
@@ -121,41 +122,126 @@
 
 
 
-
-<!--
-<div>
-    <input type="number" id="workOrderNumber" placeholder="workOrderNumber">
-    <select id="status" name="status">
-        <option value="Open">Open</option>
-        <option value="Closed">Closed</option>
-        <option value="Pending Approval">Pending Approval</option>
-    </select>
-    <select id="approved" name="approved">
-        <option value="Pending">Pending</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-    </select>
-    <select id="building" name="building">
-        <option value="216554THSTREE">2165 54th St</option>
-    </select>
-    <input type="text" id="description" placeholder="description">
-    <select id="dateCreated" name="dateCreated">
-        <option value=1439560250000>08/14/2015 9:50:50 </option>
-        <option value=1439560260000>08/14/2015 9:51:00 </option>
-    </select>
-    <select id="dateStarted" name="dateStarted">
-        <option value=1439560250000>08/14/2015 9:50:50 </option>
-        <option value=1439560260000>08/14/2015 9:51:00 </option>
-    </select>
-    <select id="dateCompleted" name="dateCompleted">
-        <option value=1439560250000>08/14/2015 9:50:50 </option>
-        <option value=1439560260000>08/14/2015 9:51:00 </option>
-    </select>
-    <input type="number" id="estimatedCost" placeholder="estimatedCost">
-    <input type="text" id="closingComments" placeholder="closingComments">
-    <button id="btnNewItemUpdate" class="btn btn-primary">Update</button>
-</div>
--->
+<!-- ------------------ ADDING NEW WORK ORDERS --------------------- -->
+    <!--
+<br/>
+<table>
+    <tr>
+        <th style="text-align: right">Add New</th>
+        <th style="text-align: left ">Work Order</th>
+    </tr>
+    <tr>
+        <th>Work Order #</th>
+        <td><input type="number" id="workOrderNumber"></td>
+    </tr>
+    <tr>
+        <th>Approved?</th>
+        <td>
+            <select id="approved" name="approved">
+                <option value="Pending">Pending</option>
+                <option value="Yes">Approved</option>
+                <option value="No">Rejected</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>
+            <select id="status" name="status">
+                <option value="Open">Open</option>
+                <option value="Closed">Closed</option>
+                <option value="Pending">Pending Approval</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Location</th>
+        <td><select id="building" name="building">
+            <option ng-repeat="building in maintenance.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td><input type="text" id="description"></td>
+    </tr>
+    <tr>
+        <th>Specific Location in Unit</th>
+        <td><input type="text" id="specificLocation" placeholder="Kitchen, Basement, Bedroom #1, etc."></td>
+    </tr>
+    <tr>
+        <th>Preferred Time to Enter</th>
+        <td><input type="text" id="preferEntry"></td>
+    </tr>
+    <tr>
+        <th>Date Created</th>
+        <td>
+            <select id="monthDC" name="monthDC">
+                <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+            <input type="number" id="dayDC" class="input30" placeholder="day (1-31)">
+            <input type="number" id="yearDC" class="input50" placeholder="year">
+            <br/>
+            <input type="number" id="hourDC" class="input30" placeholder="hour (0-24)">:
+            <input type="number" id="minuteDC" class="input30" placeholder="minute (0-59)">
+        </td>
+    </tr>
+    <tr>
+        <th>Start Date</th>
+        <td>
+            <select id="monthDS" name="monthDS">
+                <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+            <input type="number" id="dayDS" class="input30" placeholder="day (1-31)">
+            <input type="number" id="yearDS" class="input50" placeholder="year">
+            <br/>
+            <input type="number" id="hourDS" class="input30" placeholder="hour (0-24)">:
+            <input type="number" id="minuteDS" class="input30" placeholder="minute (0-59)">
+        </td>
+    </tr>
+    <tr>
+        <th>Completed Date</th>
+        <td>
+            <select id="monthDF" name="monthDF">
+                <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+            <input type="number" id="dayDF" class="input30" placeholder="day (1-31)">
+            <input type="number" id="yearDF" class="input50" placeholder="year">
+            <br/>
+            <input type="number" id="hourDF" class="input30" placeholder="hour (0-24)">:
+            <input type="number" id="minuteDF" class="input30" placeholder="minute (0-59)">
+        </td>
+    </tr>
+    <tr>
+        <th>Estimated Cost</th>
+        <td><input type="number" id="estimatedCost" placeholder="$"></td>
+    </tr>
+    <tr>
+        <th>Required Materials</th>
+        <td><input type="text" id="requiredMaterials"></td>
+    </tr>
+    <tr>
+        <th>Managed By</th>
+        <td><input type="text" id="manager"></td>
+    </tr>
+    <tr>
+        <th>Closing Comments</th>
+        <td><input type="text" id="closingComments"></td>
+    </tr>
+    <tr>
+        <th>Work Completed-Description</th>
+        <td><input type="text" id="completeDescription"></td>
+    </tr>
+    <tr>
+        <th>Work Remaining</th>
+        <td><input type="text" id="workRemaining"></td>
+    </tr>
+    <tr>
+        <th style="text-align: right">Click to submit</th>
+        <th style="text-align: left"><button id="btnNewWorkOrder" class="btn btn-primary">New Maintenance Request</button></th>
+    </tr>
+</table>
+<!-- ------------------ end ADDING NEW WORK ORDERS --------------------- -->
     
     
     </section>

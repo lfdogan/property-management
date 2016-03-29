@@ -1,6 +1,6 @@
 
 <div class="white-box" id="maintenance-pending" ng-controller="MaintenancePendingCtrl as maintenance">
-    
+    <div ng-show='maintenance.allPendingMaintenance.length == 0'>There are no pending work orders.</div>
     <div ng-repeat="item in maintenance.allPendingMaintenance">
         <div>
             <div class="half-column">

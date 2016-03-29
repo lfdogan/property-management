@@ -60,7 +60,7 @@
         </td>
         <td>
             <select id="monthED" name="monthED">
-                <option ng-repeat="date in statements.months" value={{date.key}}>{{date.label}}</option>
+                <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
             <input type="number" id="dayED" placeholder="day (1-31)">
             <input type="number" id="yearED" placeholder="year">

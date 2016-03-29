@@ -5,7 +5,7 @@
 //variables accessed by the html page as completed.<variable> where it is defined here as this.<variable>         
          this.title = "Maintenance";
 
-         this.Data = Data;
+
          this.beginDateRange = Data.beginDateRange;
          this.endDateRange = Data.endDateRange;
          
@@ -19,7 +19,10 @@
 
          Data.followMyAccountLink();
 
+         this.Data = Data;
+         this.months = Data.months;
          
+         this.myBuildings = Data.myBuildings();
          
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("maintenance");
@@ -67,24 +70,37 @@
              return sum;
          };
                  
-          /******** FOR ADDING NEW DATA ********/
+/************************** FOR ADDING NEW Work Order Requests **************************/
 /*
-        var workOrderNumber = document.getElementById('workOrderNumber'); 
-        var dateCreated = document.getElementById('dateCreated');
-        var dateStarted = document.getElementById('dateStarted');
-        var dateCompleted = document.getElementById('dateCompleted');
-        var building = document.getElementById('building'); 
-        var estimatedCost = document.getElementById('estimatedCost'); 
-        var invoicedCost = document.getElementById('invoicedCost'); 
-        var status = document.getElementById('status'); 
-        var approved = document.getElementById('approved'); 
-        var description = document.getElementById('description');
-        var closingComments = document.getElementById('closingComments');
-        var billsListing = document.getElementById('billsListing');
-       
+         var maintenanceRef = new Firebase("https://property-management-lfdogan.firebaseio.com/maintenance");
         
-        
-        var btnNewItemUpdate = document.getElementById('btnNewItemUpdate'); //update button for new bill
+         var workOrderNumber = document.getElementById('workOrderNumber');
+         var status = document.getElementById('status');
+         var approved = document.getElementById('approved');
+         var building = document.getElementById('building');
+         var description = document.getElementById('description');
+         var specificLocation = document.getElementById('specificLocation');
+         //Date Created
+         var monthDC = document.getElementById('monthDC');
+         var dayDC = document.getElementById('dayDC');
+         var yearDC = document.getElementById('yearDC');
+         var hourDC = document.getElementById('hourDC');
+         var minuteDC = document.getElementById('minuteDC');
+         //Date Started
+         var monthDS = document.getElementById('monthDS');
+         var dayDS = document.getElementById('dayDS');
+         var yearDS = document.getElementById('yearDS');
+         var hourDS = document.getElementById('hourDS');
+         var minuteDS = document.getElementById('minuteDS');
+         //Date Finished
+         var monthDF = document.getElementById('monthDF');
+         var dayDF = document.getElementById('dayDF');
+         var yearDF = document.getElementById('yearDF');
+         var hourDF = document.getElementById('hourDF');
+         var minuteDF = document.getElementById('minuteDF');
+         var estimatedCost = document.getElementById('estimatedCost');
+         var closingComments = document.getElementById('closingComments');
+         var btnNewWorkOrder = document.getElementById('btnNewWorkOrder'); //button to submit new maintenance request
     
          
          
@@ -95,40 +111,43 @@
          // Clear out value of input textbox to empty to prepare for next entry     
          var postID;
          var newPostRef;
-         btnNewItemUpdate.addEventListener('click', function(){
-             console.log("UPDATE");
-             //newPostRef = billsRef.push();
-             newPostRef = maintenanceRef.push();
-             newPostRef.set({
-                 workOrderNumber: workOrderNumber.value, //entered by user
-                 dateCreated: dateCreated.value, //entered by user
-                 dateStarted: dateStarted.value, //entered by user
-                 dateCompleted: dateCompleted.value, //entered by user
-                 building: "2165 54th St", //entered by user
-                 estimatedCost: estimatedCost.value, //entered by user
-                 invoicedCost: invoicedCost.value, //entered by user
-                 status: "Closed",
-                 approved: approved.value, //entered by user
-                 description: description.value, //entered by user
-                 closingComments: closingComments.value, //entered by user
-                 billsListing: billsListing.value, //entered by user
-                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+         btnNewWorkOrder.addEventListener('click', function(){
+             var dateCreated = new Date(monthDC.value +" "+ dayDC.value +" "+ yearDC.value +" "+ hourDC.value +":"+ minuteDC.value +":00:001");
+             var dateStarted = new Date(monthDS.value +" "+ dayDS.value +" "+ yearDS.value +" "+ hourDS.value +":"+ minuteDS.value +":00:001");
+             var dateFinished = new Date(monthDF.value +" "+ dayDF.value +" "+ yearDF.value +" "+ hourDF.value +":"+ minuteDF.value +":00:001");
+             if (building.value == "216554THSTREE") {
+                 newPostRef = maintenanceRef.push();
+             };
+             newPostRef.set({//replaces all data with new data
+                 workOrderNumber: Number(workOrderNumber.value),
+                 status: status.value,
+                 approved: approved.value,
+                 building: building.value,
+                 description: description.value,
+                 dateCreated: Number(dateCreated), //convert text object date to ms. leaseBegin.valueOf() == Number(leaseBegin)
+                 estimatedCost: Number(estimatedCost.value),
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when request was saved
              });
              postID = newPostRef.key();
+             var postIDRef = maintenanceRef.child(postID);//assign the postIDRef to the new child
+             //if user entered data, add to the database
+             if (specificLocation.value != "") postIDRef.update({'specificLocation': specificLocation.value});
+             if (approved.value != "Pending") {
+                 postIDRef.update({'dateStarted': Number(dateStarted)});
+             };
+             if (status.value = "Closed") {
+                 postIDRef.update({'dateCompleted:': Number(dateFinished)});
+                 if (closingComments.value != "") postIDRef.update({'closingComments': closingComments.value});
+             };
+             console.log("New Maintenance Request "+dateCreated);
              workOrderNumber.value = '';
-             dateCreated.value = '';
-             building.value = '2165 54th St';
              estimatedCost.value = '';
-             invoicedCost.value = '';
-             status.value = 'Closed';
-             approved.value = '';
              description.value = '';
+             estimatedCost.value = '';
+             specificLocation.value = '';
+             closingComments.value = '';
          });
-         
-    */
-        
-         
-         /******************/
+/************************** FOR ADDING NEW Work Order Requests **************************/
          
          
          
