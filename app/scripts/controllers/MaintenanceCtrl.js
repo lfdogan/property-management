@@ -71,7 +71,7 @@
          };
                  
 /************************** FOR ADDING NEW Work Order Requests **************************/
-/*
+
          var maintenanceRef = new Firebase("https://property-management-lfdogan.firebaseio.com/maintenance");
         
          var workOrderNumber = document.getElementById('workOrderNumber');

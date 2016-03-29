@@ -8,6 +8,10 @@
          this.myPortfolio = Data.myPortfolio();
          this.myBuildings = Data.myBuildings();
          this.billsOwnerDraw = Data.billsOwnerDraw();
+         this.allEmployees = Data.allEmployees();
+         
+         
+         this.title = "My Profile";
 
          
 
@@ -30,25 +34,15 @@
              this.setColumnSort = setColumnSort;
          };
 
-          /******** FOR ADDING NEW DATA ********/
+/************************** FOR ADDING NEW PROPERTY MANAGEMENT TEAM MEMBER **************************/
 /*
-        var workOrderNumber = document.getElementById('workOrderNumber'); 
-        var dateCreated = document.getElementById('dateCreated');
-        var dateStarted = document.getElementById('dateStarted');
-        var dateCompleted = document.getElementById('dateCompleted');
-        var building = document.getElementById('building'); 
-        var estimatedCost = document.getElementById('estimatedCost'); 
-        var invoicedCost = document.getElementById('invoicedCost'); 
-        var status = document.getElementById('status'); 
-        var approved = document.getElementById('approved'); 
-        var description = document.getElementById('description');
-        var closingComments = document.getElementById('closingComments');
-        var billsListing = document.getElementById('billsListing');
-       
+         var employeesRef = new Firebase("https://property-management-lfdogan.firebaseio.com/employees");
         
-        
-        var btnNewItemUpdate = document.getElementById('btnNewItemUpdate'); //update button for new bill
-    
+         var teamName = document.getElementById('teamName');
+         var teamRole = document.getElementById('teamRole');
+         var teamPhoneExt = document.getElementById('teamPhoneExt');
+         var teamEmail = document.getElementById('teamEmail');
+   
          
          
          //when user clicks on update button... save to firebase:
@@ -58,40 +52,23 @@
          // Clear out value of input textbox to empty to prepare for next entry     
          var postID;
          var newPostRef;
-         btnNewItemUpdate.addEventListener('click', function(){
-             console.log("UPDATE");
-             //newPostRef = billsRef.push();
-             newPostRef = maintenanceRef.push();
-             newPostRef.set({
-                 workOrderNumber: workOrderNumber.value, //entered by user
-                 dateCreated: dateCreated.value, //entered by user
-                 dateStarted: dateStarted.value, //entered by user
-                 dateCompleted: dateCompleted.value, //entered by user
-                 building: "2165 54th St", //entered by user
-                 estimatedCost: estimatedCost.value, //entered by user
-                 invoicedCost: invoicedCost.value, //entered by user
-                 status: "Closed",
-                 approved: approved.value, //entered by user
-                 description: description.value, //entered by user
-                 closingComments: closingComments.value, //entered by user
-                 billsListing: billsListing.value, //entered by user
-                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
+         this.addNew = function () {
+             newPostRef = employeesRef.push();
+             newPostRef.set({//replaces all data with new data
+                 teamName: teamName.value,
+                 teamRole: teamRole.value,
+                 teamPhoneExt: Number(teamPhoneExt.value),
+                 teamEmail: teamEmail.value,
+                 dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when request was saved
              });
              postID = newPostRef.key();
-             workOrderNumber.value = '';
-             dateCreated.value = '';
-             building.value = '2165 54th St';
-             estimatedCost.value = '';
-             invoicedCost.value = '';
-             status.value = 'Closed';
-             approved.value = '';
-             description.value = '';
-         });
-         
-    */
-        
-         
-         /******************/
+             var postIDRef = employeesRef.child(postID);//assign the postIDRef to the new child
+             console.log("New Employee "+ teamName.value);
+             teamName.value = '';
+             teamPhoneExt.value = '';
+             teamEmail.value = '';
+         };
+/************************** end FOR ADDING NEW PROPERTY MANAGEMENT TEAM MEMBER **************************/
          
      }
  

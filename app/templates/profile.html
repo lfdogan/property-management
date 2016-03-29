@@ -1,86 +1,81 @@
-<h1 class="center">My Profile</h1>
-
-
+<h1 class="center">{{ profile.title }}</h1>
 
         
 <a id="myteam"></a>
-<section>
-        <h2 class="center">My Property Management Team</h2>
-        <p class="center">53 Harvey St, My City ST 13000
-            <br/>(231) 555-5531 / (888) 555-5531</p>
-        <div  class="wide">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Phone</th>
-                <th>Email</th>
-            </tr>
-            <tr>
-                <td>Anne Miller</td>
-                <td>Leasing</td>
-                <td>(231) 555-5531, 112</td>
-                <td>amiller@pm.com</td>
-            </tr>
-            <tr>
-                <td>Derek Williams</td>
-                <td>Lease Renewals and Utility Reimbursements</td>
-                <td>(231) 555-5531, 117</td>
-                <td>dwilliams@pm.com</td>
-            </tr>
-            <tr>
-                <td>Eric Johnson</td>
-                <td>Maintenance Coordination</td>
-                <td>(231) 555-5531, 110</td>
-                <td>ejohnson@pm.com</td>
-            </tr>
-            <tr>
-                <td>Michael Smith</td>
-                <td>Company Owner and President</td>
-                <td>(231) 555-5531, 101</td>
-                <td>msmith@pm.com</td>
-            </tr>
-            <tr>
-                <td>Mitchell Watson</td>
-                <td>Maintenance</td>
-                <td>(231) 555-5531, 121</td>
-                <td>mwatson@pm.com</td>
-            </tr>
-        </table></div>
-        <div class="narrow"><table>
-            <tr>
-                <th>Name, Role
-                    <br/>Phone
-                    <br/>Email
-                </th>
-            </tr>
-            <tr>
-                <td>Anne Miller, Leasing
-                    <br/>(231) 555-5531, 112
-                    <br/>amiller@pm.com</td>
-            </tr>
-            <tr>
-                <td>Derek Williams, Lease Renewals and Utility Reimbursements
-                    <br/>(231) 555-5531, 117
-                    <br/>dwilliams@pm.com</td>
-            </tr>
-            <tr>
-                <td>Eric Johnson, Maintenance Coordination
-                    <br/>(231) 555-5531, 110
-                    <br/>ejohnson@pm.com</td>
-            </tr>
-            <tr>
-                <td>Michael Smith, Company Owner and President
-                    <br/>(231) 555-5531, 101
-                    <br/>msmith@pm.com</td>
-            </tr>
-            <tr>
-                <td>Mitchell Watson, Maintenance
-                    <br/>(231) 555-5531, 121
-                    <br/>mwatson@pm.com</td>
-            </tr>
-        </table></div>
-    </section>
+<h2 class="center">My Property Management Team</h2>
+<p class="center">53 Harvey St, My City ST 13000
+    <br/>(231) 555-5531 / (888) 555-5531</p>
+<div class="wide">
+    <table id="team-wide">
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+        <tr ng-repeat="employee in profile.allEmployees">
+            <td>{{employee.teamName}}</td>
+            <td>{{employee.teamRole}}</td>
+            <td>(231) 555-5531, {{employee.teamPhoneExt}}</td>
+            <td>{{employee.teamEmail}}</td>
+        </tr>
+    </table>
+</div>    
+<div class="narrow">
+    <table id="team-narrow">
+        <tr>
+            <th>Name, Role
+                <br/>Phone
+                <br/>Email
+            </th>
+        </tr>
+        <tr ng-repeat="employee in profile.allEmployees">
+            <td>{{employee.teamName}}, {{employee.teamRole}}
+                <br/>(231) 555-5531, {{employee.teamPhoneExt}}
+                <br/>{{employee.teamEmail}}
+            </td>
+        </tr>
+    </table>
+</div>
+    
+<!-- ------------------ end ADDING NEW MANAGEMENT TEAM MEMBER --------------------- -->
+    <!--
+<br/>
+<table id="addNew">
+    <tr>
+        <th style="text-align: right">Add New</th>
+        <th style="text-align: left ">Management Member</th>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td><input type="text" id="teamName"></td>
+    </tr>
+    <tr>
+        <th>Role</th>
+        <td>
+            <select id="teamRole" name="teamRole">
+                <option value="Company Owner and President">Company Owner and President</option>
+                <option value="Maintenance Coordination">Maintenance Coordination</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Leasing">Leasing</option>
+                <option value="Leasing Renewals and Utility Reimbursements">Leasing Renewals and Utility Reimbursements</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Office Phone Extension</th>
+        <td><input type="number" id="teamPhoneExt" placeholder="152"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><input type="email" id="teamEmail" placeholder="@pm.com"></td>
+    </tr>
+    <tr>
+        <th style="text-align: right">Click to submit</th>
+        <th style="text-align: left"><button id="btnNewEmployee" class="btn btn-primary" ng-click="profile.addNew()">New Maintenance Request</button></th>
+    </tr>
+</table>
+<!-- ------------------ end ADDING NEW MANAGEMENT TEAM MEMBER --------------------- -->    
     
 
 
@@ -89,17 +84,15 @@
 
 
 <a id="aboutme"></a>
-<section>
-        <span ng-repeat="me in profile.myPortfolio">
-            <h2 class="center">{{me.name}}'s Contact Information</h2>
-                Home Phone: {{me.homePhone}}<br/>
-                Work Phone: {{me.workPhone}}<br/>
-                Mobile Phone: {{me.mobilePhone}}<br/>
-                Email: {{me.email}}<br/>
-                Second Contact: {{me.name2}}<br/>
-                <a>Edit</a>
-        </span>
-    </section>
+<span ng-repeat="me in profile.myPortfolio">
+    <h2 class="center">{{me.name}}'s Contact Information</h2>
+        Home Phone: {{me.homePhone}}<br/>
+        Work Phone: {{me.workPhone}}<br/>
+        Mobile Phone: {{me.mobilePhone}}<br/>
+        Email: {{me.email}}<br/>
+        Second Contact: {{me.name2}}<br/>
+        <a>Edit</a>
+</span>
     
 
 
@@ -107,48 +100,42 @@
 
 
 <a id="mybuildings"></a>
-    <section>
-        <h2 class="center">My Buildings</h2>
-        <div class="wide">
-            <table>
-                <tr>
-                    <th>Building Abbreviation</th>
-                    <th>Building Name</th>
-                    <th class="td-medium-plus">Building Address</th>
-                    <th>Unit</th>
-                    <th class="td-wide-only">sqft</th>
-                    <th class="td-wide-only">Beds</th>
-                    <th class="td-wide-only">Baths</th>
-                    <th>Nickname</th>
-                </tr>
-                <tr ng-repeat="location in profile.myBuildings">
-                    <td>{{location.$id}}</td>
-                    <td>{{location.building_name}}</td>
-                    <td class="td-medium-plus">{{location.street_address}}, {{location.city}} {{location.state}} {{location.zipcode}}</td>
-                    <td>{{location.unit}}</td>
-                    <td class="td-wide-only">{{location.sqft}}</td>
-                    <td class="td-wide-only">{{location.bedrooms}}</td>
-                    <td class="td-wide-only">{{location.bathrooms}}</td>
-                    <td>{{location.nickname}} <a>Edit</a></td>
-                </tr>
-            </table>
-        </div>
-        <div class="narrow">
-            <table>
-                <tr>
-                    <th>Building Abbreviation,
-                    <br/>Building Name / Unit,
-                    <br/>Nickname</th>
-                </tr>
-                <tr ng-repeat="location in profile.myBuildings">
-                    <td>{{location.$id}},
-                        <br/>{{location.building_name}} <span ng-show="{{location.unit}}">Unit {{location.unit}}</span>,
-                    <br/>{{location.nickname}} <a>Edit</a></td>
-                </tr>
-            </table>
-        </div>
-
-
-
-    
-</section>
+<h2 class="center">My Buildings</h2>
+<div class="wide">
+    <table>
+        <tr>
+            <th>Building Abbreviation</th>
+            <th>Building Name</th>
+            <th class="td-medium-plus">Building Address</th>
+            <th>Unit</th>
+            <th class="td-wide-only">sqft</th>
+            <th class="td-wide-only">Beds</th>
+            <th class="td-wide-only">Baths</th>
+            <th>Nickname</th>
+        </tr>
+        <tr ng-repeat="location in profile.myBuildings">
+            <td>{{location.$id}}</td>
+            <td>{{location.building_name}}</td>
+            <td class="td-medium-plus">{{location.street_address}}, {{location.city}} {{location.state}} {{location.zipcode}}</td>
+            <td>{{location.unit}}</td>
+            <td class="td-wide-only">{{location.sqft}}</td>
+            <td class="td-wide-only">{{location.bedrooms}}</td>
+            <td class="td-wide-only">{{location.bathrooms}}</td>
+            <td>{{location.nickname}} <a>Edit</a></td>
+        </tr>
+    </table>
+</div>
+<div class="narrow">
+    <table>
+        <tr>
+            <th>Building Abbreviation,
+            <br/>Building Name / Unit,
+            <br/>Nickname</th>
+        </tr>
+        <tr ng-repeat="location in profile.myBuildings">
+            <td>{{location.$id}},
+                <br/>{{location.building_name}} <span ng-show="{{location.unit}}">Unit {{location.unit}}</span>,
+            <br/>{{location.nickname}} <a>Edit</a></td>
+        </tr>
+    </table>
+</div>

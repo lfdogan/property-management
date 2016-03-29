@@ -22,6 +22,7 @@
         var inspectionsRef = rootRef.child('inspections');
         var accountsRef = rootRef.child('accounts');
         var applicantsRef = rootRef.child('applicants');
+        var employeesRef = rootRef.child('employees');
         var leases216554THSTREERef = new Firebase('https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases');
 
 
@@ -141,6 +142,10 @@
                                       .orderByChild("moveOut")
                                       .equalTo("No")
                                      );
+            },
+            allEmployees: function() {
+                return $firebaseArray(employeesRef
+                                      .orderByChild("dateAdded"));
             },
             accountLabels: function(){
                 return $firebaseArray(accountsRef
