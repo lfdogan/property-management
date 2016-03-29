@@ -16,13 +16,14 @@
          this.allPendingMaintenance = Data.allPendingMaintenance();
          this.allOpenMaintenance = Data.allOpenMaintenance();
          this.allClosedMaintenance = Data.allClosedMaintenance();
+         
 
          Data.followMyAccountLink();
 
          this.Data = Data;
          this.months = Data.months;
-         
          this.myBuildings = Data.myBuildings();
+         this.allEmployees = Data.allEmployees();
          
          //sets top navigation link styling on page load
          Data.setNavLinkStyling("maintenance");
@@ -71,7 +72,7 @@
          };
                  
 /************************** FOR ADDING NEW Work Order Requests **************************/
-
+/*
          var maintenanceRef = new Firebase("https://property-management-lfdogan.firebaseio.com/maintenance");
         
          var workOrderNumber = document.getElementById('workOrderNumber');
@@ -80,6 +81,7 @@
          var building = document.getElementById('building');
          var description = document.getElementById('description');
          var specificLocation = document.getElementById('specificLocation');
+         var employee = document.getElementById('employee');
          //Date Created
          var monthDC = document.getElementById('monthDC');
          var dayDC = document.getElementById('dayDC');
@@ -111,7 +113,8 @@
          // Clear out value of input textbox to empty to prepare for next entry     
          var postID;
          var newPostRef;
-         btnNewWorkOrder.addEventListener('click', function(){
+//         btnNewWorkOrder.addEventListener('click', function(){
+         this.addNewWorkOrder = function() {
              var dateCreated = new Date(monthDC.value +" "+ dayDC.value +" "+ yearDC.value +" "+ hourDC.value +":"+ minuteDC.value +":00:001");
              var dateStarted = new Date(monthDS.value +" "+ dayDS.value +" "+ yearDS.value +" "+ hourDS.value +":"+ minuteDS.value +":00:001");
              var dateFinished = new Date(monthDF.value +" "+ dayDF.value +" "+ yearDF.value +" "+ hourDF.value +":"+ minuteDF.value +":00:001");
@@ -132,11 +135,12 @@
              var postIDRef = maintenanceRef.child(postID);//assign the postIDRef to the new child
              //if user entered data, add to the database
              if (specificLocation.value != "") postIDRef.update({'specificLocation': specificLocation.value});
-             if (approved.value != "Pending") {
+             if (employee.value != "") postIDRef.update({'employee': employee.value});
+             if (dayDS.value != "") {
                  postIDRef.update({'dateStarted': Number(dateStarted)});
              };
              if (status.value = "Closed") {
-                 postIDRef.update({'dateCompleted:': Number(dateFinished)});
+                 postIDRef.update({'dateCompleted': Number(dateFinished)});
                  if (closingComments.value != "") postIDRef.update({'closingComments': closingComments.value});
              };
              console.log("New Maintenance Request "+dateCreated);
@@ -146,7 +150,7 @@
              estimatedCost.value = '';
              specificLocation.value = '';
              closingComments.value = '';
-         });
+         };
 /************************** FOR ADDING NEW Work Order Requests **************************/
          
          

@@ -89,15 +89,15 @@ class="td-medium-plus"
 -->    
 
 <!-- ----------------- FOR ADDING MORE TRANSACTIONS ----------------- -->
-
+<!--
 <br/>
 <div>
     <table>
         <tr>
-            <th style="text-align: right">Add a new:</th>
-            <th><button id="btnNewBillUpdate" class="btn btn-primary">Bill</button></th>
-            <th><button id="btnNewOwnerDraw" class="btn btn-primary">Owner Draw</button></th>
-            <th><button id="btnNewIncome" class="btn btn-primary">Rent/Other Income</button></th>
+            <th style="text-align: right">Add a new:<button id="btnNewTransaction" class="btn btn-primary">Transaction</button></th>
+            <th>bill</th>
+            <th>owner draw</th>
+            <th>rent/income</th>
         </tr>
         <tr>
             <td>Bill#:<input type="number" class="input50" id="billNumber" placeholder="bill number"></td>
@@ -107,13 +107,13 @@ class="td-medium-plus"
         </tr>
         <tr>
             <td>Bill Date:
-                <select id="BDmonth" name="BDmonth">
+                <select id="monthBD" name="monthBD">
                     <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
-                <input type="number" class="input30" id="BDday" placeholder="day (1-31)">
-                <input type="number" class="input50" id="BDyear" placeholder="year">
-                <input type="number" class="input30" id="BDhours" placeholder="hours (0-23)">
-                <input type="number" class="input30" id="BDminutes" placeholder="minutes (0-59)">
+                <input type="number" class="input30" id="dayBD" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearBD" placeholder="2016">
+                <input type="number" class="input30" id="hoursBD" placeholder="hours (0-23)">
+                <input type="number" class="input30" id="minutesBD" placeholder="minutes (0-59)">
             </td>
             <td>X</td>
             <td></td>
@@ -121,11 +121,11 @@ class="td-medium-plus"
         </tr>
         <tr>
             <td>Due Date:
-                <select id="DDmonth" name="DDmonth">
+                <select id="monthDD" name="monthDD">
                     <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
-                <input type="number" class="input30" id="DDday" placeholder="day (1-31)">
-                <input type="number" class="input50" id="DDyear" placeholder="year">
+                <input type="number" class="input30" id="dayDD" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearDD" placeholder="2016">
             </td>
             <td>X</td>
             <td>X</td>
@@ -163,13 +163,13 @@ class="td-medium-plus"
         </tr>
         <tr>
             <td>Pay Date:
-                <select id="PDmonth" name="PDmonth">
+                <select id="monthPD" name="monthPD">
                     <option ng-repeat="date in cashflow.months" value={{date.monthText}}>{{date.label}}</option>
                 </select>
-                <input type="number" class="input30" id="PDday" placeholder="day (1-31)">
-                <input type="number" class="input50" id="PDyear" placeholder="year">
-                <input type="number" class="input30" id="PDhours" placeholder="hours (0-23)">
-                <input type="number" class="input30" id="PDminutes" placeholder="minutes (0-59)">
+                <input type="number" class="input30" id="dayPD" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearPD" placeholder="2016">
+                <input type="number" class="input30" id="hoursPD" placeholder="hours (0-23)">
+                <input type="number" class="input30" id="minutesPD" placeholder="minutes (0-59)">
             </td>
             <td>X</td>
             <td>X</td>

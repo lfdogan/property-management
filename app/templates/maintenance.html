@@ -123,7 +123,7 @@
 
 
 <!-- ------------------ ADDING NEW WORK ORDERS --------------------- -->
-
+<!--
 <br/>
 <table>
     <tr>
@@ -178,7 +178,7 @@
         <td>
             <select id="monthDC" name="monthDC">
                 <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
+            </select>
             <input type="number" id="dayDC" class="input30" placeholder="day (1-31)">
             <input type="number" id="yearDC" class="input50" placeholder="year">
             <br/>
@@ -191,7 +191,7 @@
         <td>
             <select id="monthDS" name="monthDS">
                 <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
+            </select>
             <input type="number" id="dayDS" class="input30" placeholder="day (1-31)">
             <input type="number" id="yearDS" class="input50" placeholder="year">
             <br/>
@@ -204,7 +204,7 @@
         <td>
             <select id="monthDF" name="monthDF">
                 <option ng-repeat="date in maintenance.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
+            </select>
             <input type="number" id="dayDF" class="input30" placeholder="day (1-31)">
             <input type="number" id="yearDF" class="input50" placeholder="year">
             <br/>
@@ -222,7 +222,12 @@
     </tr>
     <tr>
         <th>Managed By</th>
-        <td><input type="text" id="manager"></td>
+        <td>
+            <select id="employee" name="employee">
+                <option value="">unknown</option>
+                <option ng-repeat="employee in maintenance.allEmployees" value={{employee.$id}}>{{employee.teamName}} - {{employee.teamRole | limitTo:10}}</option>
+            </select>
+        </td>
     </tr>
     <tr>
         <th>Closing Comments</th>
@@ -238,7 +243,7 @@
     </tr>
     <tr>
         <th style="text-align: right">Click to submit</th>
-        <th style="text-align: left"><button id="btnNewWorkOrder" class="btn btn-primary">New Maintenance Request</button></th>
+        <th style="text-align: left"><button ng-click="maintenance.addNewWorkOrder()" id="btnNewWorkOrder" class="btn btn-primary">New Maintenance Request</button></th>
     </tr>
 </table>
 <!-- ------------------ end ADDING NEW WORK ORDERS --------------------- -->

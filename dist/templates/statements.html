@@ -43,7 +43,7 @@
 
 
 <!-- ------------------ ADDING NEW STATEMENTS --------------------- -->
-<!--
+<!-- 
 <br/>
 <table>
     <tr>
@@ -88,115 +88,6 @@
 
 
 <section class="lease">
-<!-- ------------------ FOR ADDING NEW TENANTS TO 2165 54TH STREET! --------------------- -->
-<!--
-    <br/>
-    <table>
-        <tr>
-            <th style="text-align: right">Add a new Lease:</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>Tenant1:</td>
-            <td><select id="tenant1" name="tenant1">
-                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Tenant2:</td>
-            <td><select id="tenant2" name="tenant1">
-                <option value="">n/a</option>
-                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Tenant3:</td>
-            <td><select id="tenant3" name="tenant1">
-                <option value="">n/a</option>
-                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Name(s):</td>
-            <td><input type="text" id="tenantName" ></td>
-        </tr>
-        <tr>
-            <td>Building/Unit:</td>
-            <td><select id="building" name="building">
-                <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Deposits:</td>
-            <td>security:<input type="number" id="securityDep" placeholder="$">
-                pet: <input type="number" id="petDep" placeholder="$"></td>
-        </tr>
-        <tr>
-            <td>Monthly Rent:</td>
-            <td><input type="number" id="rent" placeholder="$" >1st month:<input type="number" id="rent1mo" placeholder="$" ></td>
-        </tr>
-        <tr>
-            <td>lease begin:</td>
-            <td>
-                <select id="monthLB" name="monthLB">
-                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
-                <input type="number" id="dayLB" placeholder="day (1-31)">
-                <input type="number" id="yearLB" placeholder="2016">
-            </td>
-        </tr>
-        <tr>
-            <td>lease end:</td>
-            <td>
-                <select id="monthLE" name="monthLE">
-                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
-                <input type="number" id="dayLE" placeholder="day (1-31)">
-                <input type="number" id="yearLE" placeholder="2016">
-            </td>
-        </tr>
-        <tr>
-            <td>Move In:</td>
-            <td><select id="moveIn" name="moveIn">
-                <option value='No'>No</option>
-                <option value='Yes'>Yes</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Move Out:</td>
-            <td><select id="moveOut" name="moveOut">
-                <option value='No'>No</option>
-                <option value='Yes'>Yes</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>early termination:</td>
-            <td>
-                <select id="monthET" name="monthET">
-                    <option value="">n/a</option>
-                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
-                </select>
-                <input type="number" id="dayET" placeholder="day (1-31)">
-                <input type="number" id="yearET" placeholder="2016">
-            </td>
-        </tr>
-        <tr>
-            <td>comments:</td>
-            <td><input type="text" id="comments" ></td>
-        </tr>
-        <tr>
-            <th></th>
-            <th><button id="btnNewTenant" class="btn btn-primary">Add Lease</button></th>
-        </tr>
-
-
-    </table>
-    <br/>
-
-<!-- ------------------ END FOR ADDING NEW TENANTS TO 2165 54TH STREET! --------------------- -->
 
 <!-- ------------------ FOR ADDING NEW APPLICANTS --------------------- -->
     <!--
@@ -255,6 +146,134 @@
     </table>
     <br/>
 <!-- ------------------ end FOR ADDING NEW APPLICANTS --------------------- -->
+<!-- ------------------ FOR ADDING NEW TENANTS TO 2165 54TH STREET! --------------------- -->
+<!--
+    <br/>
+    <table>
+        <tr>
+            <th style="text-align: right">Add a new Lease:</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Tenant1:</td>
+            <td><select id="tenant1" name="tenant1">
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Tenant2:</td>
+            <td><select id="tenant2" name="tenant1">
+                <option value="">n/a</option>
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Tenant3:</td>
+            <td><select id="tenant3" name="tenant1">
+                <option value="">n/a</option>
+                <option ng-repeat="tenants in statements.allApplicants | orderBy: '-applicationDate'" value={{tenants.$id}}>{{tenants.applicantName}}, {{tenants.applicationDate | date: 'MM/dd/yyyy'}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Name(s):</td>
+            <td><input type="text" id="tenantName" ></td>
+        </tr>
+        <tr>
+            <td>Building/Unit:</td>
+            <td><select id="building" name="building">
+                <option ng-repeat="building in statements.myBuildings" value={{building.$id}}>{{building.building_name}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>New Lease or Renewal?</td>
+            <td>
+                <select id="newRenew" name="newRenew">
+                    <option value="New">New Lease</option>
+                    <option value="Renewal">Renewal</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Deposits:</td>
+            <td>security:<input type="number" id="securityDep" placeholder="$">
+                pet: <input type="number" id="petDep" placeholder="$"></td>
+        </tr>
+        <tr>
+            <td>Monthly Rent:</td>
+            <td><input type="number" id="rent" placeholder="$" >1st month:<input type="number" id="rent1mo" placeholder="$" ></td>
+        </tr>
+        <tr>
+            <td>lease signed:</td>
+            <td>
+                <select id="monthLS" name="monthLS">
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" class="input30" id="dayLS" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearLS" placeholder="2016">
+            </td>
+        </tr>
+        <tr>
+            <td>lease begin:</td>
+            <td>
+                <select id="monthLB" name="monthLB">
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" class="input30" id="dayLB" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearLB" placeholder="2016">
+            </td>
+        </tr>
+        <tr>
+            <td>lease end:</td>
+            <td>
+                <select id="monthLE" name="monthLE">
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" class="input30" id="dayLE" placeholder="day (1-31)">
+                <input type="number" class="input50" id="yearLE" placeholder="2016">
+            </td>
+        </tr>
+        <tr>
+            <td>Move In:</td>
+            <td><select id="moveIn" name="moveIn">
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Move Out:</td>
+            <td><select id="moveOut" name="moveOut">
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>early termination:</td>
+            <td>
+                <select id="monthET" name="monthET">
+                    <option value="">n/a</option>
+                    <option ng-repeat="date in statements.months" value={{date.monthText}}>{{date.label}}</option>
+                </select>
+                <input type="number" id="dayET" placeholder="day (1-31)">
+                <input type="number" id="yearET" placeholder="2016">
+            </td>
+        </tr>
+        <tr>
+            <td>comments:</td>
+            <td><input type="text" id="comments" ></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th><button id="btnNewTenant" class="btn btn-primary">Add Lease</button></th>
+        </tr>
+
+
+    </table>
+    <br/>
+
+<!-- ------------------ END FOR ADDING NEW TENANTS TO 2165 54TH STREET! --------------------- -->
 
     
     <div class="title">

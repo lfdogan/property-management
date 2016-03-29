@@ -28,7 +28,7 @@
 
         //initial values of start and end date range
 //         var todayObject = new Date();
-        var todayObject = new Date("11/15/2015 23:01:20:001");//creates date object
+        var todayObject = new Date("03/29/2016 16:01:20:001");//creates date object
         var today = Number(todayObject);//converts date Object to milliseconds
         var thirtyDays = 1000 * 60 * 60 * 24 * 30;// 1000ms/sec * 60sec/min * 60min/hr * 24hr/day * 30days
         var numDays = 30; // used for switching date selection range                        

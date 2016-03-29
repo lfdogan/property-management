@@ -9,12 +9,11 @@
 
             <table>
                 <tr><th>Work Order #</th><td>{{ item.workOrderNumber }}</td></tr>
+                <tr><th>Location</th><td>{{ item.building | buildingNickname }}</td></tr>
                 <tr><th>Date Created</th><td>{{ item.dateCreated | date: 'MM/dd/yyyy' }}</td></tr>
-                <tr><th>Building/Unit</th><td>{{ item.building | buildingNickname }}</td></tr>
-                <tr ng-show="'{{ item.managedBy }}'"><th>Managed By</th><td> {{ item.managedBy }}</td></tr>
+                <tr><th>Status</th><td>{{ item.status }}</td></tr>
+                <tr ng-show="'{{ item.specificLocation }}'"><th>Specific Location</th><td>{{ item.specificLocation }}</td></tr>
                 <tr><th>Description</th><td>{{ item.description }}</td></tr>
-                <tr><th>Estimated Cost</th><td>{{ item.estimatedCost | currency }}</td></tr>
-                <tr><th>Specific Location</th><td>{{ item.specificLocation }}</td></tr>
                 <tr><th>Approved</th><td>{{ item.approved }}
                         <span class="center" ng-show=" '{{ item.approved }}'=='Pending' ">
                             <div class="maintenance-button-approve" 
@@ -22,13 +21,16 @@
                             <div class="maintenance-button-reject" 
                                  ng-click="ctrl.Data.decideWorkOrder(item,false)">Reject</div>
                         </span>
-                    </td></tr>
+                    </td>
+                </tr>
+                <tr ng-show="'{{ item.employee }}'"><th>Managed By</th><td> {{ item.employee | employeeName }}</td></tr>
+                <tr><th>Estimated Cost</th><td>{{ item.estimatedCost | currency }}</td></tr>
                 <tr><th>Date Started</th><td>{{ item.dateStarted | date: 'MM/dd/yyyy' }}</td></tr>
-                <tr><th>Status</th><td>{{ item.status }}</td></tr>
+                
                 <tr ng-show="'{{ item.closingComments }}'"><th>Closing Comments</th><td> {{ item.closingComments }}</td></tr>
-                <tr><th>Date Completed</th><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
+                <tr ng-show="'{{ item.dateCompleted }}'"><th>Date Completed</th><td>{{ item.dateCompleted | date: 'MM/dd/yyyy' }}</td></tr>
 <!--                <tr><th>Total Cost</th><td>{{ ctrl.getSum( '{{workOrderNumber}}' ) | currency }}</td></td></tr>-->
-                <tr>
+                <tr ng-show="'{{ item.dateStarted }}'">
                     <th>Bills</th>
 
                     <td class="td-narrow-only">

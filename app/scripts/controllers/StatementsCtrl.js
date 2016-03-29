@@ -104,16 +104,16 @@
                                     if (periodBegin < transactionchildData.payDate && transactionchildData.payDate < periodEnd){
                                         var account = transactionchildData.account;
                                         switch (true) {
-                                            case (account == 1000): 
+                                            case (account == 1000): //Owner Draw
                                                 profit = profit + transactionchildData.amountPaid;
                                                 break;
-                                            case (account == 1050):
+                                            case (account == 1050): //Owner Contribution
                                                 profit = profit - transactionchildData.amountPaid;
                                                 break;
-                                            case (4000 <= account && account <= 4999):
+                                            case (4000 <= account && account <= 4999): //Leasing Fee Income (4003), Utilities
                                                 income = income + transactionchildData.amountPaid;
                                                 break;
-                                            case (5000 <= account && account <= 5999):
+                                            case (5000 <= account && account <= 5999): //Repairs, Supplies
                                                 expenses = expenses + transactionchildData.amountPaid;
                                                 break;
                                             default: 
@@ -270,7 +270,7 @@
              stripMS(beginDate);
              range = range + " - ";
 //             console.log("date fields",monthED.value,dayED.value,yearED.value,hourED.value,minuteED.value);
-             var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":00:000"); //format is Jan 17 2016 09:51:201
+             var stringED = new Date(monthED.value +" "+ dayED.value +" "+ yearED.value +" "+ hourED.value +":"+minuteED.value+":00:500"); //format is Jan 17 2016 09:51:201
              var endDate = stringED.valueOf(); // Return the primitive value of a Date object (in milliseconds)
              stripMS(endDate);
              newPostStatementRef = statementsRef.push();
@@ -288,14 +288,15 @@
 
 
 /************************** FOR ADDING NEW TENANT LEASES TO 2165 54TH STREET **************************/
-        
-/*
+        /*
+
          var leases216554THSTREERef = new Firebase("https://property-management-lfdogan.firebaseio.com/buildings/216554THSTREE/leases");
          
          var tenantName = document.getElementById('tenantName');
          var tenant1 = document.getElementById('tenant1');
          var tenant2 = document.getElementById('tenant2');
          var tenant3 = document.getElementById('tenant3');
+         var newRenew = document.getElementById('newRenew');
          var building = document.getElementById('building');
          var rent1mo = document.getElementById('rent1mo');
          var rent = document.getElementById('rent');
@@ -304,6 +305,10 @@
          var moveIn = document.getElementById('moveIn');
          var moveOut = document.getElementById('moveOut');
          var comments = document.getElementById('comments');
+         //lease signed
+         var monthLS = document.getElementById('monthLS');
+         var dayLS = document.getElementById('dayLS');
+         var yearLS = document.getElementById('yearLS');
          //lease begin
          var monthLB = document.getElementById('monthLB');
          var dayLB = document.getElementById('dayLB');
@@ -321,9 +326,10 @@
          var postTenantID;
          var newPostTenantRef;
          btnNewTenant.addEventListener('click', function(){
-             var leaseBegin = new Date(monthLB.value +" "+ dayLB.value +" "+ yearLB.value +" 00:00:001");
-             var leaseEnd = new Date(monthLE.value +" "+ dayLE.value +" "+ yearLE.value +" 23:59:999");
-             var earlyTermination = new Date(monthET.value +" "+ dayET.value +" "+ yearET.value +" 23:59:999");
+             var leaseSigned = new Date(monthLB.value +" "+ dayLB.value +" "+ yearLB.value +" 07:00:00:001");
+             var leaseBegin = new Date(monthLB.value +" "+ dayLB.value +" "+ yearLB.value +" 12:00:00:001");//after 12pm
+             var leaseEnd = new Date(monthLE.value +" "+ dayLE.value +" "+ yearLE.value +" 10:00:00:000");//by 10am
+             var earlyTermination = new Date(monthET.value +" "+ dayET.value +" "+ yearET.value +" 10:00:00:000");//by 10am
              if (building.value == "216554THSTREE") {
                  newPostTenantRef = leases216554THSTREERef.push();
              }
@@ -335,7 +341,7 @@
                  moveOut: moveOut.value,
                  leaseBegin: Number(leaseBegin), //convert text object date to ms. leaseBegin.valueOf() == Number(leaseBegin)
                  leaseEnd: Number(leaseEnd),
-                 securityDep: Number(securityDep.value),
+                 leaseSigned: Number(leaseSigned),
                  rent1mo: Number(rent1mo.value),
                  rent: Number(rent.value),
                  dateAdded: Firebase.ServerValue.TIMESTAMP // record the time when task was entered
@@ -346,12 +352,14 @@
                  var postTenantIDRef = leases216554THSTREERef.child(postTenantID);
              }
              //if user entered data, add to the database
+             if (newRenew.value = "New") {
+                 postTenantIDRef.update({'securityDep': Number(securityDep.value)});
+                 if (petDep.value != "") postTenantIDRef.update({'petDep': Number(petDep.value)});
+             };
              if (dayET.value != "") postTenantIDRef.update({'earlyTermination': Number(earlyTermination)});
              if (tenant2.value != "") postTenantIDRef.update({'tenant2': tenant2.value});
              if (tenant3.value != "") postTenantIDRef.update({'tenant3': tenant3.value});
              if (comments.value != "") postTenantIDRef.update({'comments': comments.value});
-             if (petDep.value != "") postTenantIDRef.update({'petDep': Number(petDep.value)});
-             
              tenantName.value = '';//clear out tenant name field
          });
          
@@ -361,7 +369,7 @@
          
          
 /************************** FOR ADDING NEW APPLICANTS **************************/
-      /*   
+         /*
          var applicantsRef = new Firebase("https://property-management-lfdogan.firebaseio.com/applicants");
          
          
